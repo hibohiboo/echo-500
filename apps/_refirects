@@ -1,0 +1,4 @@
+# /rurlebook/ の全てのサブパスを rurlebook/index.html にリライト（SPAフォールバック）
+/rurlebook/* /rurlebook/index.html 200
+
+/scenario-editor/* /scenario-editor/index.html 200
