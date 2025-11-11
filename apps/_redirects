@@ -7,5 +7,5 @@
 # --- SPAフォールバックルール ---
 
 # /rurlebook/ の全てのサブパスを rurlebook/index.html にリライト（SPAフォールバック）
-/rurlebook/* /rurlebook/index.html 200
-/scenario-editor/* /scenario-editor/index.html 200
+/rurlebook/:path /rurlebook/index.html 200
+/editor/:path /editor/index.html 200
