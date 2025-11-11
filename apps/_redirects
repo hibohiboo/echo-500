@@ -1,0 +1,10 @@
+# Rurlebook の静的アセットを除外（リライトしない）
+# これで /rurlebook/assets/main.js へのリクエストは、/rurlebook/assets/main.js ファイルとして処理される
+/rurlebook/assets/* /rurlebook/:splat 200!
+/scenario-editor/assets/* /scenario-editor/:splat 200!
+
+# --- SPAフォールバックルール ---
+
+# /rurlebook/ の全てのサブパスを rurlebook/index.html にリライト（SPAフォールバック）
+/rurlebook/* /rurlebook/index.html 200
+/scenario-editor/* /scenario-editor/index.html 200
