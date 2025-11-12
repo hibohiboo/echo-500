@@ -262,6 +262,8 @@ const Navigation = () => {
           .nav-summary:hover {
             color: var(--color-nature-accent);
             background: rgba(107, 156, 66, 0.05);
+            outline: 2px solid var(--color-cyber-primary);
+            outline-offset: 2px;
           }
 
           .nav-section-icon {
