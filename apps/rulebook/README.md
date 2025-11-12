@@ -36,10 +36,14 @@ rulebook/
 │   │   │   ├── Variants.tsx      # バリアントルール
 │   │   │   └── Customization.tsx # カスタマイズ
 │   │   │
-│   │   └── reference/             # リファレンス
-│   │       ├── QuickReference.tsx # クイックリファレンス
-│   │       ├── Tables.tsx         # 各種表一覧
-│   │       └── FAQ.tsx            # よくある質問
+│   │   ├── reference/             # リファレンス
+│   │   │   ├── QuickReference.tsx # クイックリファレンス
+│   │   │   ├── Tables.tsx         # 各種表一覧
+│   │   │   └── FAQ.tsx            # よくある質問
+│   │   │
+│   │   └── legal/                 # 法的文書
+│   │       ├── PrivacyPolicy.tsx  # プライバシーポリシー
+│   │       └── TermsOfService.tsx # 利用規約
 │   │
 │   └── app/
 │       ├── Router.tsx             # ルーティング設定
@@ -55,6 +59,7 @@ rulebook/
 4. **scenarios/** - セッション運用ガイド
 5. **advanced/** - 経験者向け応用ルール
 6. **reference/** - 逆引き・クイックリファレンス
+7. **legal/** - プライバシーポリシー、利用規約
 
 ### ファイル命名規則
 - PascalCase（例: `WhatIsTRPG.tsx`）
