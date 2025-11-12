@@ -1,0 +1,10 @@
+# Global headers for all paths
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+
+# Additional headers for kuzu-wasm resources if needed
+/*.wasm
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Content-Type: application/wasm
