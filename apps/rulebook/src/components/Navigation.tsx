@@ -143,6 +143,7 @@ const Navigation = () => {
         </ul>
 
         <style>{`
+          @scope {
           .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -345,6 +346,7 @@ const Navigation = () => {
               left: 0;
               box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
             }
+          }
           }
         `}</style>
       </nav>

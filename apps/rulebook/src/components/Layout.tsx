@@ -57,11 +57,12 @@ const Layout: ParentComponent = (props) => {
       </div>
 
       <style>{`
-        .app-container {
-          position: relative;
-          min-height: 100vh;
-          width: 100%;
-        }
+        @scope {
+          .app-container {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+          }
 
         .layout-background {
           position: fixed;
@@ -301,6 +302,7 @@ const Layout: ParentComponent = (props) => {
             flex-wrap: wrap;
             justify-content: center;
           }
+        }
         }
       `}</style>
     </div>

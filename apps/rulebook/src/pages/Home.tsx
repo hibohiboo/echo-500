@@ -110,6 +110,7 @@ function Home() {
       </div>
 
       <style>{`
+        @scope {
         .home-container {
           width: 100%;
         }
@@ -373,6 +374,7 @@ function Home() {
           .quick-links {
             grid-template-columns: 1fr;
           }
+        }
         }
       `}</style>
     </div>
