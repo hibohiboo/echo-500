@@ -47,7 +47,7 @@
     "autoprefixer": "^10.4.22",
     "eslint": "catalog:testing",
     "eslint-plugin-storybook": "10.0.7",
-    "jsdom": "^27.1.0",
+    "jsdom": "^27.2.0",
     "playwright": "^1.56.1",
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",
