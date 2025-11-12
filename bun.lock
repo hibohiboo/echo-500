@@ -29,7 +29,10 @@
       },
       "devDependencies": {
         "@storybook/addon-docs": "10.0.7",
+        "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
+        "@trpg-scenario-maker/tsconfig": "workspace:*",
         "@types/node": "^24.10.0",
+        "eslint": "catalog:testing",
         "eslint-plugin-storybook": "10.0.7",
         "storybook": "10.0.7",
         "storybook-solidjs-vite": "10.0.5",

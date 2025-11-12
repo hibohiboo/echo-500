@@ -1,62 +1,61 @@
 import type { ParentComponent } from 'solid-js';
 
-const Layout: ParentComponent = (props) => {
-  return (
-    <div class="app-container">
-      <div class="layout-background">
-        <div class="ivy-overlay"></div>
-        <div class="ruin-texture"></div>
-      </div>
+const Layout: ParentComponent = (props) => (
+  <div class="app-container">
+    <div class="layout-background">
+      <div class="ivy-overlay"></div>
+      <div class="ruin-texture"></div>
+    </div>
 
-      <div class="layout-content">
-        <header class="site-header">
-          <div class="header-content">
-            <div class="header-left">
-              <a href="/" class="site-logo">
-                <span class="logo-text">Echo:</span>
-                <span class="logo-number">500</span>
+    <div class="layout-content">
+      <header class="site-header">
+        <div class="header-content">
+          <div class="header-left">
+            <a href="/" class="site-logo">
+              <span class="logo-text">Echo:</span>
+              <span class="logo-number">500</span>
+            </a>
+            <div class="site-subtitle">Post-Apocalyptic TRPG Rulebook</div>
+          </div>
+          <div class="header-right">
+            <div class="status-indicator">
+              <span class="status-dot"></span>
+              <span class="status-text">SYSTEM ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="site-main">{props.children}</main>
+
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-left">
+            <p class="footer-text">
+              Echo:500 - A world where synthetic beings explore the ruins of
+              civilization
+            </p>
+          </div>
+          <div class="footer-right">
+            <nav class="footer-nav">
+              <a href="/privacy">Privacy Policy</a>
+              <span class="separator">|</span>
+              <a href="/terms">Terms of Service</a>
+              <span class="separator">|</span>
+              <a
+                href="https://x.com/hibohiboo"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact
               </a>
-              <div class="site-subtitle">Post-Apocalyptic TRPG Rulebook</div>
-            </div>
-            <div class="header-right">
-              <div class="status-indicator">
-                <span class="status-dot"></span>
-                <span class="status-text">SYSTEM ACTIVE</span>
-              </div>
-            </div>
+            </nav>
           </div>
-        </header>
+        </div>
+      </footer>
+    </div>
 
-        <main class="site-main">{props.children}</main>
-
-        <footer class="site-footer">
-          <div class="footer-content">
-            <div class="footer-left">
-              <p class="footer-text">
-                Echo:500 - A world where synthetic beings explore the ruins of
-                civilization
-              </p>
-            </div>
-            <div class="footer-right">
-              <nav class="footer-nav">
-                <a href="/privacy">Privacy Policy</a>
-                <span class="separator">|</span>
-                <a href="/terms">Terms of Service</a>
-                <span class="separator">|</span>
-                <a
-                  href="https://x.com/hibohiboo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Contact
-                </a>
-              </nav>
-            </div>
-          </div>
-        </footer>
-      </div>
-
-      <style>{`
+    <style>{`
         @scope {
           .app-container {
             position: relative;
@@ -305,8 +304,7 @@ const Layout: ParentComponent = (props) => {
         }
         }
       `}</style>
-    </div>
-  );
-};
+  </div>
+);
 
 export default Layout;

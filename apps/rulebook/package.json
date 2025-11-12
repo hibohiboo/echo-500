@@ -16,9 +16,12 @@
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
+    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
+    "@trpg-scenario-maker/tsconfig": "workspace:*",
     "@storybook/addon-docs": "10.0.7",
     "@types/node": "^24.10.0",
     "eslint-plugin-storybook": "10.0.7",
+    "eslint": "catalog:testing",
     "storybook": "10.0.7",
     "storybook-solidjs-vite": "10.0.5",
     "typescript": "~5.9.3",
