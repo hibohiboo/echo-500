@@ -1,6 +1,6 @@
 import { Router, Route } from '@solidjs/router';
-import App from '@/pages/App';
-import Test from '@/pages/Test';
+import Layout from '@/components/Layout';
+import Home from '@/pages/Home';
 import PrivacyPolicy from '@/pages/legal/PrivacyPolicy';
 import TermsOfService from '@/pages/legal/TermsOfService';
 
@@ -8,15 +8,9 @@ function AppRouter() {
   return (
     <Router
       base={`/${BASE_PATH}`}
-      root={(props) => (
-        <>
-          <h1>Site Title</h1>
-          {props.children}
-        </>
-      )}
+      root={(props) => <Layout>{props.children}</Layout>}
     >
-      <Route path="/" component={App} />
-      <Route path="/users" component={Test} />
+      <Route path="/" component={Home} />
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />
     </Router>
