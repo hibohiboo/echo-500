@@ -243,6 +243,12 @@ const Navigation = () => {
             transition: all var(--transition-fast);
             list-style: none;
             user-select: none;
+            outline: none;
+          }
+
+          .nav-summary:focus-visible {
+            outline: 2px solid var(--color-cyber-primary);
+            outline-offset: 2px;
           }
 
           .nav-summary::-webkit-details-marker {
