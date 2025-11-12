@@ -7,9 +7,6 @@ interface NavItem {
 }
 
 const Navigation = () => {
-  const [expandedSections, setExpandedSections] = createSignal<Set<string>>(
-    new Set()
-  );
   const [isMobileMenuOpen, setIsMobileMenuOpen] = createSignal(false);
 
   const navItems: NavItem[] = [
@@ -66,16 +63,6 @@ const Navigation = () => {
     },
   ];
 
-  const toggleSection = (label: string) => {
-    const newExpanded = new Set(expandedSections());
-    if (newExpanded.has(label)) {
-      newExpanded.delete(label);
-    } else {
-      newExpanded.add(label);
-    }
-    setExpandedSections(newExpanded);
-  };
-
   return (
     <>
       <button
@@ -112,17 +99,11 @@ const Navigation = () => {
                     </a>
                   }
                 >
-                  <button
-                    class="nav-section-toggle"
-                    classList={{
-                      expanded: expandedSections().has(item.label),
-                    }}
-                    onClick={() => toggleSection(item.label)}
-                  >
-                    <span class="nav-section-icon">▶</span>
-                    <span class="nav-section-label">{item.label}</span>
-                  </button>
-                  <Show when={expandedSections().has(item.label)}>
+                  <details class="nav-details">
+                    <summary class="nav-summary">
+                      <span class="nav-section-icon">▶</span>
+                      <span class="nav-section-label">{item.label}</span>
+                    </summary>
                     <ul class="nav-sublist">
                       <For each={item.children}>
                         {(child) => (
@@ -135,7 +116,7 @@ const Navigation = () => {
                         )}
                       </For>
                     </ul>
-                  </Show>
+                  </details>
                 </Show>
               </li>
             )}
@@ -245,23 +226,34 @@ const Navigation = () => {
             padding-left: calc(var(--spacing-md) + 4px);
           }
 
-          .nav-section-toggle {
+          /* details/summary styling */
+          .nav-details {
+            margin: 0;
+          }
+
+          .nav-summary {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-            width: 100%;
             padding: var(--spacing-sm) var(--spacing-md);
-            background: transparent;
-            border: none;
             color: var(--text-primary);
             font-family: var(--font-primary);
             font-size: 0.9rem;
             cursor: pointer;
             transition: all var(--transition-fast);
-            text-align: left;
+            list-style: none;
+            user-select: none;
           }
 
-          .nav-section-toggle:hover {
+          .nav-summary::-webkit-details-marker {
+            display: none;
+          }
+
+          .nav-summary::marker {
+            display: none;
+          }
+
+          .nav-summary:hover {
             color: var(--color-nature-accent);
             background: rgba(107, 156, 66, 0.05);
           }
@@ -273,7 +265,7 @@ const Navigation = () => {
             display: inline-block;
           }
 
-          .nav-section-toggle.expanded .nav-section-icon {
+          .nav-details[open] .nav-section-icon {
             transform: rotate(90deg);
           }
 
