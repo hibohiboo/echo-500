@@ -1,10 +1,10 @@
 import { createSignal, For, type JSX, Show } from 'solid-js';
 import { CommandCard } from '@/shared/ui/command-card';
-import { TutorialSection } from '@/shared/ui/tutorial-section';
 import {
   InventoryPanel,
   type InventoryItem,
 } from '@/shared/ui/inventory-panel';
+import { TutorialSection } from '@/shared/ui/tutorial-section';
 import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 
 interface TutorialStep {
@@ -166,7 +166,8 @@ function TutorialWithInventory() {
         name: '探索者のメモ',
         icon: '📝',
         rarity: 'rare',
-        description: '第7研究所についての手書きのメモ。誰かが残したもののようだ。',
+        description:
+          '第7研究所についての手書きのメモ。誰かが残したもののようだ。',
         details: (
           <>
             <p>メモには以下のような内容が記されている：</p>
@@ -213,13 +214,16 @@ function TutorialWithInventory() {
             <ul>
               <li>音源は地下3階から発生している</li>
               <li>
-                音の周波数から、<strong>冷却システム</strong>が稼働中と推測される
+                音の周波数から、<strong>冷却システム</strong>
+                が稼働中と推測される
               </li>
               <li>
                 定期的なビープ音は、何らかのプロセスが実行中であることを示している
               </li>
             </ul>
-            <p>施設の一部が今も稼働している可能性が高い。慎重に進む必要がある。</p>
+            <p>
+              施設の一部が今も稼働している可能性が高い。慎重に進む必要がある。
+            </p>
           </>
         ),
       },
