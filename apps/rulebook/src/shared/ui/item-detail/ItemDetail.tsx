@@ -97,54 +97,55 @@ export function ItemDetail(props: ItemDetailProps) {
         </div>
 
         <style>{`
+          .item-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+
+          .item-detail {
+            background: rgba(13, 13, 13, 0.95);
+            border: 2px solid var(--color-cyber-primary);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 0 40px var(--color-cyber-glow);
+            position: relative;
+          }
+
+          @keyframes slideUp {
+            from {
+              transform: translateY(100px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
           @scope {
-            .item-detail-overlay {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: rgba(0, 0, 0, 0.8);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              z-index: 1000;
-              animation: fadeIn 0.3s ease;
-              backdrop-filter: blur(4px);
-            }
-
-            @keyframes fadeIn {
-              from {
-                opacity: 0;
-              }
-              to {
-                opacity: 1;
-              }
-            }
-
-            .item-detail {
-              background: rgba(13, 13, 13, 0.95);
-              border: 2px solid var(--color-cyber-primary);
-              border-radius: 12px;
-              max-width: 600px;
-              width: 90%;
-              max-height: 80vh;
-              overflow: hidden;
-              animation: slideUp 0.4s ease;
-              box-shadow: 0 0 40px var(--color-cyber-glow);
-              position: relative;
-            }
-
-            @keyframes slideUp {
-              from {
-                transform: translateY(100px);
-                opacity: 0;
-              }
-              to {
-                transform: translateY(0);
-                opacity: 1;
-              }
-            }
 
             .item-detail__close {
               position: absolute;

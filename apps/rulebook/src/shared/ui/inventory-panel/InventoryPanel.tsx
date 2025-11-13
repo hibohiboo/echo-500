@@ -72,44 +72,45 @@ export function InventoryPanel(props: InventoryPanelProps) {
           </div>
 
           <style>{`
+            .inventory-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.5);
+              z-index: 998;
+              animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+
+            .inventory-panel {
+              position: fixed;
+              bottom: -100%;
+              left: 0;
+              width: 100%;
+              max-height: 70vh;
+              background: rgba(13, 13, 13, 0.98);
+              border-top: 3px solid var(--color-cyber-primary);
+              box-shadow: 0 -10px 40px rgba(0, 255, 204, 0.2);
+              z-index: 999;
+              transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+              backdrop-filter: blur(20px);
+            }
+
+            .inventory-panel.open {
+              bottom: 0;
+            }
+
             @scope {
-              .inventory-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 998;
-                animation: fadeIn 0.3s ease;
-              }
-
-              @keyframes fadeIn {
-                from {
-                  opacity: 0;
-                }
-                to {
-                  opacity: 1;
-                }
-              }
-
-              .inventory-panel {
-                position: fixed;
-                bottom: -100%;
-                left: 0;
-                width: 100%;
-                max-height: 70vh;
-                background: rgba(13, 13, 13, 0.98);
-                border-top: 3px solid var(--color-cyber-primary);
-                box-shadow: 0 -10px 40px rgba(0, 255, 204, 0.2);
-                z-index: 999;
-                transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                backdrop-filter: blur(20px);
-              }
-
-              .inventory-panel.open {
-                bottom: 0;
-              }
 
               .inventory-panel__header {
                 display: flex;

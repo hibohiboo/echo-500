@@ -23,73 +23,73 @@ export function CommandCard(props: CommandCardProps) {
       <p class="command-card__description">{props.description}</p>
 
       <style>{`
+        .command-card {
+          position: relative;
+          background: rgba(26, 26, 26, 0.8);
+          border: 2px solid var(--color-nature-secondary);
+          border-radius: 8px;
+          padding: var(--spacing-lg);
+          cursor: pointer;
+          transition: all var(--transition-normal);
+          text-align: left;
+          width: 100%;
+          backdrop-filter: blur(10px);
+          overflow: hidden;
+        }
+
+        .command-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 255, 204, 0.1),
+            transparent
+          );
+          transition: left var(--transition-normal);
+        }
+
+        .command-card:hover::before {
+          left: 100%;
+        }
+
+        .command-card:hover {
+          border-color: var(--color-cyber-primary);
+          box-shadow: 0 0 20px var(--color-cyber-glow);
+          transform: translateY(-4px);
+        }
+
+        .command-card:active {
+          transform: translateY(-2px);
+        }
+
+        .command-card--selected {
+          border-color: var(--color-cyber-primary);
+          background: rgba(0, 255, 204, 0.1);
+          box-shadow: 0 0 20px var(--color-cyber-glow);
+        }
+
+        .command-card--disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          border-color: var(--color-ruin-steel);
+        }
+
+        .command-card--disabled:hover {
+          transform: none;
+          box-shadow: none;
+          border-color: var(--color-ruin-steel);
+        }
+
+        .command-card--disabled::before {
+          display: none;
+        }
+
         @scope {
-          .command-card {
-            position: relative;
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid var(--color-nature-secondary);
-            border-radius: 8px;
-            padding: var(--spacing-lg);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            text-align: left;
-            width: 100%;
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-          }
-
-          .command-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-              90deg,
-              transparent,
-              rgba(0, 255, 204, 0.1),
-              transparent
-            );
-            transition: left var(--transition-normal);
-          }
-
-          .command-card:hover::before {
-            left: 100%;
-          }
-
-          .command-card:hover {
-            border-color: var(--color-cyber-primary);
-            box-shadow: 0 0 20px var(--color-cyber-glow);
-            transform: translateY(-4px);
-          }
-
-          .command-card:active {
-            transform: translateY(-2px);
-          }
-
-          .command-card--selected {
-            border-color: var(--color-cyber-primary);
-            background: rgba(0, 255, 204, 0.1);
-            box-shadow: 0 0 20px var(--color-cyber-glow);
-          }
-
-          .command-card--disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            border-color: var(--color-ruin-steel);
-          }
-
-          .command-card--disabled:hover {
-            transform: none;
-            box-shadow: none;
-            border-color: var(--color-ruin-steel);
-          }
-
-          .command-card--disabled::before {
-            display: none;
-          }
-
           .command-card__header {
             display: flex;
             align-items: center;

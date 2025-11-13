@@ -16,10 +16,11 @@ export function NavSection(props: NavSectionProps) {
       <ul class="nav-sublist">{props.children}</ul>
 
       <style>{`
+        .nav-details {
+          margin: 0;
+        }
+
         @scope {
-          .nav-details {
-            margin: 0;
-          }
 
           .nav-summary {
             display: flex;

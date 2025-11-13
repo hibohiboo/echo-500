@@ -59,18 +59,19 @@ export function InventoryCard(props: InventoryCardProps) {
       </div>
 
       <style>{`
-        @scope {
-          .inventory-card {
-            background: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: all var(--transition-normal);
-          }
+        .inventory-card {
+          background: transparent;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          transition: all var(--transition-normal);
+        }
 
-          .inventory-card:hover {
-            transform: translateY(-4px);
-          }
+        .inventory-card:hover {
+          transform: translateY(-4px);
+        }
+
+        @scope {
 
           .inventory-card__border {
             background: rgba(13, 13, 13, 0.9);

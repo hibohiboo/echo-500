@@ -27,14 +27,15 @@ const Footer: ParentComponent = () => (
     </div>
     <style>
       {`
-    @scope {
-          /* Footer */
+        /* Footer */
         .site-footer {
           background: rgba(13, 13, 13, 0.9);
           border-top: 1px solid var(--color-nature-secondary);
           padding: var(--spacing-lg);
           backdrop-filter: blur(10px);
         }
+
+        @scope {
 
         .footer-content {
           max-width: var(--content-max-width);
