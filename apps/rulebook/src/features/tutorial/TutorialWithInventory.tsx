@@ -4,6 +4,7 @@ import {
   InventoryPanel,
   type InventoryItem,
 } from '@/shared/ui/inventory-panel';
+import { ItemToast } from '@/shared/ui/item-toast';
 import { TutorialSection } from '@/shared/ui/tutorial-section';
 
 interface TutorialStep {
@@ -66,6 +67,7 @@ export function TutorialWithInventory() {
     },
   ]);
   const [isInventoryOpen, setIsInventoryOpen] = createSignal(false);
+  const [toastQueue, setToastQueue] = createSignal<InventoryItem[]>([]);
 
   const steps: TutorialStep[] = [
     {
@@ -246,15 +248,26 @@ export function TutorialWithInventory() {
     },
   ];
 
+  const addItemWithToast = (item: InventoryItem) => {
+    // トーストキューに追加
+    setToastQueue([...toastQueue(), item]);
+    // インベントリに追加
+    setInventory([...inventory(), item]);
+  };
+
+  const removeToast = (item: InventoryItem) => {
+    setToastQueue(toastQueue().filter((i) => i.id !== item.id));
+  };
+
   const handleContinue = (currentStepId: string) => {
     const currentIndex = steps.findIndex((s) => s.id === currentStepId);
     if (currentIndex < steps.length - 1) {
       const nextStep = steps[currentIndex + 1];
 
-      // アイテム報酬がある場合、インベントリに追加
+      // アイテム報酬がある場合、トーストを表示してインベントリに追加
       const currentStep = steps[currentIndex];
       if (currentStep.itemReward) {
-        setInventory([...inventory(), currentStep.itemReward]);
+        addItemWithToast(currentStep.itemReward);
       }
 
       setVisibleSteps([...visibleSteps(), nextStep.id]);
@@ -267,9 +280,9 @@ export function TutorialWithInventory() {
     const nextStep = steps.find((s) => s.id === nextStepId);
 
     if (nextStep) {
-      // アイテム報酬がある場合、インベントリに追加
+      // アイテム報酬がある場合、トーストを表示してインベントリに追加
       if (nextStep.itemReward) {
-        setInventory([...inventory(), nextStep.itemReward]);
+        addItemWithToast(nextStep.itemReward);
       }
       setVisibleSteps([...visibleSteps(), nextStepId]);
     }
@@ -333,6 +346,13 @@ export function TutorialWithInventory() {
         items={inventory()}
         onClose={() => setIsInventoryOpen(false)}
       />
+
+      {/* アイテム獲得トースト */}
+      <For each={toastQueue()}>
+        {(item) => (
+          <ItemToast item={item} onAnimationEnd={() => removeToast(item)} />
+        )}
+      </For>
 
       <style>{`
         @scope {
