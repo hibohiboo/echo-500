@@ -121,7 +121,6 @@ function Home() {
           gap: var(--spacing-xl);
           max-width: var(--content-max-width);
           margin: 0 auto;
-          margin-top: 350px;
         }
 
         .home-sidebar {
