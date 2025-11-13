@@ -15,7 +15,7 @@ const Navigation = () => {
   const navItems: NavItem[] = [
     {
       label: 'Tutorial',
-      path: `${BASE_PATH}/tutorial`,
+      path: `/${BASE_PATH}/content/tutorial`,
     },
     {
       label: 'Introduction',

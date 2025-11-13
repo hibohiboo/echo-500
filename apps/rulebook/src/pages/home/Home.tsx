@@ -137,6 +137,8 @@ function Home() {
 
         .hero-glitch {
           position: relative;
+          display: flex;
+          justify-content: center;
         }
 
         .hero-title {
