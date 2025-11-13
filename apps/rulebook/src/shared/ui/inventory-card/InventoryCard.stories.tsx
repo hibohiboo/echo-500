@@ -102,7 +102,7 @@ export const CardGrid: Story = {
         name="サイバーチップ"
         icon={
           <img
-            src="https://via.placeholder.com/64/00ffcc/000000?text=CHIP"
+            src="https://doodleipsum.com/300?bg=ddd&shape=circle&sat=-100"
             alt="サイバーチップ"
             style={{ width: '48px', height: '48px', 'border-radius': '4px' }}
           />

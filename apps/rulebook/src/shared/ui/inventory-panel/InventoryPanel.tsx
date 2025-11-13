@@ -1,13 +1,14 @@
 import { createSignal, For, Show } from 'solid-js';
 import { InventoryCard } from '../inventory-card';
 import { ItemDetail } from '../item-detail';
+import type { InventoryIconType } from '../inventory-icon';
 import type { JSX } from 'solid-js';
 
 export interface InventoryItem {
   id: string;
   type: 'command' | 'item' | 'memory';
   name: string;
-  icon?: string | JSX.Element; // 絵文字、または画像のJSXコンポーネント (例: <img src="..." />)
+  icon?: InventoryIconType;
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;

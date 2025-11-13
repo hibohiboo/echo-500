@@ -1,9 +1,9 @@
-import type { JSX } from 'solid-js';
+import { InventoryIcon, type InventoryIconType } from '../inventory-icon';
 
 interface InventoryCardProps {
   type: 'command' | 'item' | 'memory';
   name: string;
-  icon?: string | JSX.Element; // 絵文字、または画像のJSXコンポーネント
+  icon?: InventoryIconType;
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   onClick?: () => void;
 }
@@ -34,7 +34,11 @@ export function InventoryCard(props: InventoryCardProps) {
         <div class="inventory-card__type-badge">{typeLabels[props.type]}</div>
 
         <div class="inventory-card__content">
-          {props.icon && <div class="inventory-card__icon">{props.icon}</div>}
+          {props.icon && (
+            <div class="inventory-card__icon">
+              <InventoryIcon icon={props.icon} size="medium" />
+            </div>
+          )}
           <div class="inventory-card__name">{props.name}</div>
         </div>
 
@@ -110,8 +114,9 @@ export function InventoryCard(props: InventoryCardProps) {
           }
 
           .inventory-card__icon {
-            font-size: 1.5rem;
-            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
 
           .inventory-card__name {

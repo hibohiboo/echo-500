@@ -1,9 +1,10 @@
+import { InventoryIcon, type InventoryIconType } from '../inventory-icon';
 import type { JSX } from 'solid-js';
 
 interface ItemDetailProps {
   type: 'command' | 'item' | 'memory';
   name: string;
-  icon?: string;
+  icon?: InventoryIconType;
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;
@@ -41,7 +42,11 @@ export function ItemDetail(props: ItemDetailProps) {
         >
           <div class="item-detail__type">{typeLabels[props.type]}</div>
           <div class="item-detail__title">
-            {props.icon && <span class="item-detail__icon">{props.icon}</span>}
+            {props.icon && (
+              <span class="item-detail__icon">
+                <InventoryIcon icon={props.icon} size="large" />
+              </span>
+            )}
             <h2>{props.name}</h2>
           </div>
           <div class="item-detail__rarity" style={{ color: rarityColor }}>
@@ -187,8 +192,9 @@ export function ItemDetail(props: ItemDetailProps) {
             }
 
             .item-detail__icon {
-              font-size: 2.5rem;
-              line-height: 1;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
 
             .item-detail__title h2 {
