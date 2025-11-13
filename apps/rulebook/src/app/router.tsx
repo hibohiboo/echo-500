@@ -3,7 +3,7 @@ import { HomePage } from '@/pages/home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy';
 import { TermsOfServicePage } from '@/pages/terms-of-service';
 import { TutorialPage } from '@/pages/tutorial';
-import { Layout } from '@/widgets/layout';
+import { Layout } from '@/shared/ui/layout';
 
 function AppRouter() {
   return (
