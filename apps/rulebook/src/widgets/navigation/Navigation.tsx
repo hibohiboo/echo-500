@@ -1,4 +1,7 @@
 import { createSignal, For, Show } from 'solid-js';
+import { MobileMenuToggle } from '@/shared/ui/mobile-menu-toggle';
+import { NavSection } from '@/shared/ui/nav-section';
+import { NavLink } from '@/shared/ui/nav-link';
 
 interface NavItem {
   label: string;
@@ -65,17 +68,9 @@ const Navigation = () => {
 
   return (
     <>
-      <button
-        class="mobile-menu-toggle"
+      <MobileMenuToggle
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen())}
-        aria-label="Toggle navigation menu"
-      >
-        <span class="hamburger-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-      </button>
+      />
 
       <nav
         class="navigation"
@@ -93,30 +88,20 @@ const Navigation = () => {
               <li class="nav-item">
                 <Show
                   when={item.children}
-                  fallback={
-                    <a href={item.path} class="nav-link">
-                      {item.label}
-                    </a>
-                  }
+                  fallback={<NavLink href={item.path!}>{item.label}</NavLink>}
                 >
-                  <details class="nav-details">
-                    <summary class="nav-summary">
-                      <span class="nav-section-icon">▶</span>
-                      <span class="nav-section-label">{item.label}</span>
-                    </summary>
-                    <ul class="nav-sublist">
-                      <For each={item.children}>
-                        {(child) => (
-                          <li class="nav-subitem">
-                            <a href={child.path} class="nav-sublink">
-                              <span class="nav-sublink-bullet">•</span>
-                              {child.label}
-                            </a>
-                          </li>
-                        )}
-                      </For>
-                    </ul>
-                  </details>
+                  <NavSection label={item.label}>
+                    <For each={item.children}>
+                      {(child) => (
+                        <li class="nav-subitem">
+                          <a href={child.path} class="nav-sublink">
+                            <span class="nav-sublink-bullet">•</span>
+                            {child.label}
+                          </a>
+                        </li>
+                      )}
+                    </For>
+                  </NavSection>
                 </Show>
               </li>
             )}
@@ -125,44 +110,6 @@ const Navigation = () => {
 
         <style>{`
           @scope {
-          .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background: var(--bg-secondary);
-            border: var(--border-cyber);
-            border-radius: 4px;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-          }
-
-          .mobile-menu-toggle:hover {
-            background: var(--bg-tertiary);
-            box-shadow: var(--shadow-cyber);
-          }
-
-          .hamburger-icon {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            width: 100%;
-            height: 100%;
-          }
-
-          .hamburger-icon span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--color-cyber-primary);
-            transition: all var(--transition-fast);
-          }
-
           .navigation {
             position: sticky;
             top: calc(var(--header-height) + var(--spacing-md));
@@ -208,89 +155,6 @@ const Navigation = () => {
             margin-bottom: var(--spacing-sm);
           }
 
-          .nav-link {
-            display: block;
-            padding: var(--spacing-sm) var(--spacing-md);
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-left: 2px solid transparent;
-            transition: all var(--transition-fast);
-            font-family: var(--font-primary);
-            font-size: 0.9rem;
-          }
-
-          .nav-link:hover {
-            color: var(--color-cyber-primary);
-            border-left-color: var(--color-cyber-primary);
-            background: rgba(0, 255, 204, 0.05);
-            padding-left: calc(var(--spacing-md) + 4px);
-          }
-
-          /* details/summary styling */
-          .nav-details {
-            margin: 0;
-          }
-
-          .nav-summary {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
-            color: var(--text-primary);
-            font-family: var(--font-primary);
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            list-style: none;
-            user-select: none;
-            outline: none;
-          }
-
-          .nav-summary:focus-visible {
-            outline: 2px solid var(--color-cyber-primary);
-            outline-offset: 2px;
-          }
-
-          .nav-summary::-webkit-details-marker {
-            display: none;
-          }
-
-          .nav-summary::marker {
-            display: none;
-          }
-
-          .nav-summary:hover {
-            color: var(--color-nature-accent);
-            background: rgba(107, 156, 66, 0.05);
-            outline: 2px solid var(--color-cyber-primary);
-            outline-offset: 2px;
-          }
-
-          .nav-section-icon {
-            font-size: 0.7rem;
-            color: var(--color-nature-accent);
-            transition: transform var(--transition-fast);
-            display: inline-block;
-          }
-
-          .nav-details[open] .nav-section-icon {
-            transform: rotate(90deg);
-          }
-
-          .nav-section-label {
-            flex: 1;
-          }
-
-          .nav-sublist {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            padding-left: var(--spacing-lg);
-            margin-top: var(--spacing-xs);
-            border-left: 1px solid var(--color-nature-secondary);
-            margin-left: var(--spacing-md);
-          }
-
           .nav-subitem {
             margin-bottom: var(--spacing-xs);
           }
@@ -322,10 +186,6 @@ const Navigation = () => {
 
           /* Responsive */
           @media (max-width: 1024px) {
-            .mobile-menu-toggle {
-              display: flex;
-            }
-
             .navigation {
               position: fixed;
               top: 0;
