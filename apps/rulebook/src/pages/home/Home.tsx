@@ -113,6 +113,7 @@ function Home() {
         @scope {
         .home-container {
           width: 100%;
+          
         }
 
         .home-content {

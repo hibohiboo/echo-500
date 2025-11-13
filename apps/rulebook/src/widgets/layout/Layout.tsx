@@ -214,7 +214,7 @@ const Layout: ParentComponent = (props) => (
         /* Main Content */
         .site-main {
           flex: 1;
-          padding: var(--spacing-2xl) var(--spacing-lg);
+          padding: var(--spacing-xl) var(--spacing-lg);
           max-width: var(--content-max-width);
           width: 100%;
           margin: 0 auto;
@@ -269,12 +269,15 @@ const Layout: ParentComponent = (props) => (
           .header-content {
             flex-direction: column;
             height: auto;
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-md);
             gap: var(--spacing-sm);
           }
 
           .site-header {
+            position: sticky;
+            top: 0;
             height: auto;
+            min-height: var(--header-height);
           }
 
           .header-left {
