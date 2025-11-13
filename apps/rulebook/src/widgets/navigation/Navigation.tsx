@@ -14,6 +14,10 @@ const Navigation = () => {
 
   const navItems: NavItem[] = [
     {
+      label: 'Tutorial',
+      path: `${BASE_PATH}/tutorial`,
+    },
+    {
       label: 'Introduction',
       children: [
         { label: 'What is TRPG?', path: '/introduction/what-is-trpg' },
