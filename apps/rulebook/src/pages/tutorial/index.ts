@@ -1,1 +1,1 @@
-export { TutorialPage } from './Tutorial';
+export { TutorialPage } from './ui/Tutorial';

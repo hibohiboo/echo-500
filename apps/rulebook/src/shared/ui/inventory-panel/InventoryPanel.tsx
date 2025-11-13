@@ -20,16 +20,16 @@ interface InventoryPanelProps {
 }
 
 export function InventoryPanel(props: InventoryPanelProps) {
-  const [selectedItem, setSelectedItem] = createSignal<InventoryItem | null>(
-    null,
-  );
+  const [selectedItem, setSelectedItem] = createSignal<
+    InventoryItem | undefined
+  >(undefined);
 
   const handleCardClick = (item: InventoryItem) => {
     setSelectedItem(item);
   };
 
   const handleDetailClose = () => {
-    setSelectedItem(null);
+    setSelectedItem(undefined);
   };
 
   return (

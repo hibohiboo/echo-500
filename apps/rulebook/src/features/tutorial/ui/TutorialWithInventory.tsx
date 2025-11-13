@@ -5,7 +5,7 @@ import {
   type InventoryItem,
 } from '@/shared/ui/inventory-panel';
 import { ItemToast } from '@/shared/ui/item-toast';
-import { TutorialSection } from '@/shared/ui/tutorial-section';
+import { TutorialSection } from './tutorial-section';
 
 interface TutorialStep {
   id: string;

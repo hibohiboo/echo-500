@@ -1,4 +1,4 @@
-import { createEffect, onCleanup, type JSX } from 'solid-js';
+import { createEffect, onCleanup } from 'solid-js';
 import type { InventoryItem } from '../inventory-panel';
 
 interface ItemToastProps {
