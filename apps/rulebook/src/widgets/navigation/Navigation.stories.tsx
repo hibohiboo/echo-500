@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from 'storybook-solidjs';
 import Navigation from './Navigation';
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 
 const meta = {
   title: 'Widgets/Navigation',

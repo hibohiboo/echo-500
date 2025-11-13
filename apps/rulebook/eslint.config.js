@@ -16,17 +16,11 @@ export default defineConfig([
     },
   },
   {
-    files: ['src/**/*.stories.tsx'],
+    files: ['src/**/*.stories.tsx', '.storybook/**/*'],
     extends: [storybook.configs['flat/recommended']],
     rules: {
       'no-shadow': ['off'],
-    },
-  },
-  {
-    files: ['.storybook/**/*'],
-    extends: [storybook.configs['flat/recommended']],
-    rules: {
-      'no-shadow': ['off'],
+      'import/no-extraneous-dependencies': ['off'],
     },
   },
 ]);

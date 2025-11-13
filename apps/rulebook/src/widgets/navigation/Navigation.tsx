@@ -1,7 +1,7 @@
 import { createSignal, For, Show } from 'solid-js';
 import { MobileMenuToggle } from '@/shared/ui/mobile-menu-toggle';
-import { NavSection } from '@/shared/ui/nav-section';
 import { NavLink } from '@/shared/ui/nav-link';
+import { NavSection } from '@/shared/ui/nav-section';
 
 interface NavItem {
   label: string;
@@ -72,10 +72,7 @@ const Navigation = () => {
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen())}
       />
 
-      <nav
-        class="navigation"
-        classList={{ 'mobile-open': isMobileMenuOpen() }}
-      >
+      <nav class="navigation" classList={{ 'mobile-open': isMobileMenuOpen() }}>
         <div class="nav-header">
           <h2 class="nav-title">
             <span class="nav-title-icon">▶</span> Navigation

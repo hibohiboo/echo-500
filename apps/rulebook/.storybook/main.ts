@@ -1,22 +1,15 @@
-import { dirname } from 'path';
+import { defineMain } from 'storybook-solidjs-vite';
 
-import { fileURLToPath } from 'url';
-import type { StorybookConfig } from 'storybook-solidjs-vite';
-
-/**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getAbsolutePath(value: string): any {
-  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
-}
-const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [getAbsolutePath('@storybook/addon-docs')],
+export default defineMain({
   framework: {
-    name: getAbsolutePath('storybook-solidjs-vite'),
-    options: {},
+    name: 'storybook-solidjs-vite',
+    options: {
+      // docgen: {
+      // Enabled by default, but you can configure or disable it:
+      //  see https://github.com/styleguidist/react-docgen-typescript#options
+      // },
+    },
   },
-};
-export default config;
+  addons: [],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+});

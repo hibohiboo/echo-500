@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && cp ../index.html ../dist/ && cp ../_redirects ../dist/ && cp ../_headers ../dist/",
-    "lint": "eslint . && tsc -b ",
+    "lint": "eslint . --fix && tsc -b ",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from 'storybook-solidjs';
 import { NavLink } from './NavLink';
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 
 const meta = {
   title: 'Shared/UI/NavLink',

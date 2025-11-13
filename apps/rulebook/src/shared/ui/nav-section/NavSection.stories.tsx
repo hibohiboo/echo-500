@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from 'storybook-solidjs';
 import { NavSection } from './NavSection';
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 
 const meta = {
   title: 'Shared/UI/NavSection',
@@ -21,20 +21,35 @@ export const Closed: Story = {
     children: (
       <>
         <li>
-          <a href="/basics/dice-rolls" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/basics/dice-rolls"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Dice Rolls
           </a>
         </li>
         <li>
-          <a href="/basics/skill-checks" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/basics/skill-checks"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Skill Checks
           </a>
         </li>
         <li>
-          <a href="/basics/combat" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/basics/combat"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Combat
           </a>
         </li>
@@ -50,20 +65,35 @@ export const Open: Story = {
     children: (
       <>
         <li>
-          <a href="/character/creation" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/character/creation"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Creation Steps
           </a>
         </li>
         <li>
-          <a href="/character/stats" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/character/stats"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Ability Scores
           </a>
         </li>
         <li>
-          <a href="/character/skills" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+          <a
+            href="/character/skills"
+            style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+          >
+            <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+              •
+            </span>
             Skills
           </a>
         </li>
@@ -78,8 +108,13 @@ export const SingleItem: Story = {
     open: false,
     children: (
       <li>
-        <a href="/reference/quick-reference" style="display: block; padding: 0.25rem 0.5rem; color: #808080;">
-          <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">•</span>
+        <a
+          href="/reference/quick-reference"
+          style="display: block; padding: 0.25rem 0.5rem; color: #808080;"
+        >
+          <span style="color: #6b9c42; font-size: 1.2rem; margin-right: 0.5rem;">
+            •
+          </span>
           Quick Reference
         </a>
       </li>

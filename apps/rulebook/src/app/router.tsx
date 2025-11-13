@@ -1,8 +1,8 @@
 import { Router, Route } from '@solidjs/router';
-import { Layout } from '@/widgets/layout';
 import { HomePage } from '@/pages/home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy';
 import { TermsOfServicePage } from '@/pages/terms-of-service';
+import { Layout } from '@/widgets/layout';
 
 function AppRouter() {
   return (

@@ -1,7 +1,13 @@
-import type { Preview } from 'storybook-solidjs-vite';
+import addonDocs from '@storybook/addon-docs';
+import { definePreview } from 'storybook-solidjs-vite';
 
-const preview: Preview = {
+export default definePreview({
+  addons: [addonDocs()],
   parameters: {
+    // automatically create action args for all props that start with 'on'
+    actions: {
+      argTypesRegex: '^on.*',
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -9,6 +15,6 @@ const preview: Preview = {
       },
     },
   },
-};
-
-export default preview;
+  // All components will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
+  // tags: ['autodocs'],
+});
