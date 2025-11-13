@@ -1,5 +1,8 @@
 import addonDocs from '@storybook/addon-docs';
 import { definePreview } from 'storybook-solidjs-vite';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import '../src/styles/theme.css';
 
 export default definePreview({
   addons: [addonDocs()],
@@ -12,6 +15,13 @@ export default definePreview({
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    backgrounds: {
+      default: 'dark',
+      options: {
+        dark: { name: 'dark', value: '#0d0d0d' },
+        light: { name: 'light', value: '#ffffff' },
       },
     },
   },
