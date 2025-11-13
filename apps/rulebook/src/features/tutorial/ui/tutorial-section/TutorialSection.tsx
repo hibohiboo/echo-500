@@ -27,28 +27,42 @@ export function TutorialSection(props: TutorialSectionProps) {
       )}
 
       <style>{`
-        @scope {
-          .tutorial-section {
-            background: rgba(26, 26, 26, 0.6);
-            border-left: 4px solid var(--color-nature-accent);
-            border-radius: 8px;
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-            backdrop-filter: blur(10px);
-            animation: slideIn 0.5s ease-out;
-          }
+ 
+        .tutorial-section {
+          background: rgba(26, 26, 26, 0.6);
+          border-left: 4px solid var(--color-nature-accent);
+          border-radius: 8px;
+          padding: var(--spacing-xl);
+          margin-bottom: var(--spacing-xl);
+          backdrop-filter: blur(10px);
+          animation: slideIn 0.5s ease-out;
+        }
 
-          @keyframes slideIn {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
           }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
+        /* デフォルトで全てのボタンを非表示（DOM上には存在） */
+        .tutorial-section .tutorial-section__footer {
+          visibility: hidden;
+          height: 0;
+          overflow: hidden;
+        }
+
+        /* showContinueButtonがtrueの要素のうち、最後の要素のボタンのみ表示 */
+        .tutorial-section:has(.tutorial-section__footer):last-of-type .tutorial-section__footer {
+          visibility: visible;
+          height: auto;
+        }
+
+       @scope {
           .tutorial-section__content {
             color: var(--text-secondary);
             font-size: 1rem;
@@ -83,6 +97,8 @@ export function TutorialSection(props: TutorialSectionProps) {
             display: flex;
             justify-content: center;
           }
+
+
 
           .tutorial-section__continue-btn {
             font-family: var(--font-heading);
