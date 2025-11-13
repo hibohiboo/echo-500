@@ -1,4 +1,4 @@
-import { createSignal, For, Show } from 'solid-js';
+import { createSignal, For, type JSX, Show } from 'solid-js';
 import { CommandCard } from '@/shared/ui/command-card';
 import { TutorialSection } from '@/shared/ui/tutorial-section';
 import type { Meta, StoryObj } from 'storybook-solidjs-vite';
@@ -17,7 +17,9 @@ interface TutorialStep {
 
 function InteractiveTutorial() {
   const [visibleSteps, setVisibleSteps] = createSignal<string[]>(['step1']);
-  const [selectedCommand, setSelectedCommand] = createSignal<string | null>(null);
+  const [selectedCommand, setSelectedCommand] = createSignal<string | null>(
+    null,
+  );
 
   const steps: TutorialStep[] = [
     {
@@ -46,7 +48,8 @@ function InteractiveTutorial() {
             TRPGでは、あなたの行動の成否を<strong>ダイス</strong>で判定します。
           </p>
           <p>
-            <code>1D100</code>（100面ダイス）を振り、あなたの技能値以下が出れば成功です。
+            <code>1D100</code>
+            （100面ダイス）を振り、あなたの技能値以下が出れば成功です。
           </p>
           <p>例：あなたの「調査」技能が60の場合、1~60が出れば成功です。</p>
         </>
@@ -99,7 +102,9 @@ function InteractiveTutorial() {
             地面には最近のものと思われる足跡が残っています。あなた以外にも、
             この場所を訪れた者がいるようです。
           </p>
-          <p>あなたは<strong>「探索者のメモ」</strong>を手に入れました！</p>
+          <p>
+            あなたは<strong>「探索者のメモ」</strong>を手に入れました！
+          </p>
         </>
       ),
       showButton: true,
@@ -117,7 +122,9 @@ function InteractiveTutorial() {
           <p>
             この施設には、まだ稼働している設備があるようです。電源が生きているのでしょうか？
           </p>
-          <p>あなたは<strong>「音の記録」</strong>を手に入れました！</p>
+          <p>
+            あなたは<strong>「音の記録」</strong>を手に入れました！
+          </p>
         </>
       ),
       showButton: true,
@@ -170,16 +177,17 @@ function InteractiveTutorial() {
             </TutorialSection>
 
             <Show when={step.commands}>
-              <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem;"
-              >
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
                 <For each={step.commands}>
                   {(command) => (
                     <CommandCard
                       title={command.title}
                       description={command.description}
                       selected={selectedCommand() === command.id}
-                      disabled={selectedCommand() !== null && selectedCommand() !== command.id}
+                      disabled={
+                        selectedCommand() !== null &&
+                        selectedCommand() !== command.id
+                      }
                       onClick={() => handleCommandSelect(command.id)}
                     />
                   )}
