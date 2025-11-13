@@ -110,7 +110,6 @@ const Navigation = () => {
         </ul>
 
         <style>{`
-          @scope {
           .navigation {
             position: sticky;
             top: calc(var(--header-height) + var(--spacing-md));
@@ -125,6 +124,31 @@ const Navigation = () => {
             box-shadow: var(--shadow-deep);
           }
 
+          /* Responsive */
+          @media (max-width: 1024px) {
+            .navigation {
+              position: fixed;
+              top: 0;
+              left: -100%;
+              width: 280px;
+              max-height: 100vh;
+              height: 100vh;
+              border-radius: 0;
+              border-right: var(--border-cyber);
+              border-top: none;
+              border-left: none;
+              border-bottom: none;
+              transition: left var(--transition-normal);
+              z-index: 999;
+            }
+
+            .navigation.mobile-open {
+              left: 0;
+              box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
+            }
+          }
+
+          @scope {
           .nav-header {
             margin-bottom: var(--spacing-lg);
             padding-bottom: var(--spacing-md);
@@ -185,29 +209,7 @@ const Navigation = () => {
             line-height: 1;
           }
 
-          /* Responsive */
-          @media (max-width: 1024px) {
-            .navigation {
-              position: fixed;
-              top: 0;
-              left: -100%;
-              width: 280px;
-              max-height: 100vh;
-              height: 100vh;
-              border-radius: 0;
-              border-right: var(--border-cyber);
-              border-top: none;
-              border-left: none;
-              border-bottom: none;
-              transition: left var(--transition-normal);
-              z-index: 999;
-            }
 
-            .navigation.mobile-open {
-              left: 0;
-              box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
-            }
-          }
           }
         `}</style>
       </nav>

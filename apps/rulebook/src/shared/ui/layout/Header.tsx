@@ -19,7 +19,6 @@ const Header: ParentComponent = () => (
     </div>
     <style>
       {`
-    @scope {
         /* Header */
         .site-header {
           height: var(--header-height);
@@ -31,6 +30,8 @@ const Header: ParentComponent = () => (
           top: 0;
           z-index: 100;
         }
+
+       @scope {
 
         .header-content {
           max-width: var(--content-max-width);

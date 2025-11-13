@@ -110,12 +110,10 @@ function Home() {
       </div>
 
       <style>{`
-        @scope {
         .home-container {
           width: 100%;
-          
         }
-
+       @scope {
         .home-content {
           display: flex;
           gap: var(--spacing-xl);
