@@ -7,7 +7,7 @@ export interface InventoryItem {
   id: string;
   type: 'command' | 'item' | 'memory';
   name: string;
-  icon?: string;
+  icon?: string | JSX.Element; // 絵文字、または画像のJSXコンポーネント (例: <img src="..." />)
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;

@@ -1,7 +1,9 @@
+import type { JSX } from 'solid-js';
+
 interface InventoryCardProps {
   type: 'command' | 'item' | 'memory';
   name: string;
-  icon?: string;
+  icon?: string | JSX.Element; // 絵文字、または画像のJSXコンポーネント
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   onClick?: () => void;
 }

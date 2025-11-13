@@ -77,3 +77,26 @@ export const Legendary: Story = {
     onAnimationEnd: () => console.log('Toast animation ended'),
   },
 };
+
+// 画像を使った例
+const imageItem: InventoryItem = {
+  id: 'item-with-image',
+  type: 'item',
+  name: 'サイバーチップ',
+  icon: (
+    <img
+      src="https://doodleipsum.com/300?bg=ddd&shape=circle&sat=-100"
+      alt="サイバーチップ"
+      style={{ width: '32px', height: '32px', 'border-radius': '4px' }}
+    />
+  ),
+  rarity: 'epic',
+  description: '高度な演算処理を可能にする量子チップ。',
+};
+
+export const WithImage: Story = {
+  args: {
+    item: imageItem,
+    onAnimationEnd: () => console.log('Toast animation ended'),
+  },
+};
