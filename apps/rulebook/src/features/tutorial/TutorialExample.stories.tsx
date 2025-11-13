@@ -1,6 +1,6 @@
 import { createSignal, For, Show } from 'solid-js';
-import { TutorialSection } from '@/shared/ui/tutorial-section';
 import { CommandCard } from '@/shared/ui/command-card';
+import { TutorialSection } from '@/shared/ui/tutorial-section';
 import type { Meta, StoryObj } from 'storybook-solidjs-vite';
 
 interface TutorialStep {

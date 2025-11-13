@@ -7,10 +7,9 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 export default defineConfig([
   globalIgnores(['dist', 'vite.config.ts', 'playwright.config.ts', 'tests/**']),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}'],
     extends: [...customConfig],
     rules: {
-      'import/no-absolute-path': ['off'],
       'import/no-absolute-path': ['off'],
       'import/no-unresolved': ['warn'],
     },
@@ -21,6 +20,7 @@ export default defineConfig([
     rules: {
       'no-shadow': ['off'],
       'import/no-extraneous-dependencies': ['off'],
+      'no-underscore-dangle': ['off'],
     },
   },
 ]);
