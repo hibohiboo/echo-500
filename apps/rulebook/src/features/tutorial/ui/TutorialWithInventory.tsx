@@ -451,7 +451,7 @@ export function TutorialWithInventory() {
 
         @media (max-width: 768px) {
           .tutorial-container {
-            padding: 1rem;
+            padding: 0.5rem;
             padding-bottom: 5rem;
           }
         }
