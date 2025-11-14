@@ -74,72 +74,44 @@ export function TutorialWithInventory() {
       id: 'step1',
       content: (
         <>
-          <h2>Echo:500 チュートリアル</h2>
-          <p>
-            ようこそ、探索者。ここは文明が崩壊してから500年が経過した世界です。
-          </p>
-          <p>
-            あなたは<strong>人造人間</strong>
-            として、失われた記憶の断片を探し求めています。
-          </p>
-          <p>
-            右下の<strong>インベントリボタン</strong>
-            から、手持ちのコマンドやアイテムを確認できます。
-          </p>
+          <h2>起動シーケンス</h2>
+          <p>システム再起動中...</p>
+          <p>人造人間■■■■■号。起動完了。</p>
+          <p>あなたは暗闇の中で目を覚ました。</p>
         </>
       ),
       showButton: true,
-      buttonText: '物語を始める',
+      buttonText: '自己診断を行う',
     },
     {
       id: 'step2',
       content: (
         <>
-          <h2>基本ルール：行動判定</h2>
-          <p>
-            TRPGでは、あなたの行動の成否を<strong>ダイス</strong>で判定します。
-          </p>
-          <p>
-            <code>1D100</code>
-            （100面ダイス）を振り、あなたの技能値以下が出れば成功です。
-          </p>
-          <p>例：あなたの「調査」技能が60の場合、1~60が出れば成功です。</p>
+          <h2>自己診断</h2>
+          <p>Boot sequence: Partial....</p>
+          <p>Directive Core...............[CORRUPTED]</p>
+          <p>Available Commands...........[5% RESTORED]</p>
+          <p>Memory Fragments Detected....[7]</p>
+          <p>Purpose: NOT FOUND</p>
+          <p>警告:複数のシステムが機能停止。メモリの大部分が破損している。</p>
+          <p>目的に関するデータが完全に失われている。</p>
+          <p>あなたは何のために生み出されたか思い出せない。</p>
         </>
       ),
       showButton: true,
+      buttonText: '機能復旧',
     },
     {
       id: 'step3',
       content: (
         <>
-          <h2>最初のシーン：廃墟の入り口</h2>
-          <p>
-            あなたは古びた研究施設の前に立っています。建物は緑のツタに覆われ、
-            長い時間が経過したことを物語っています。
-          </p>
+          <p>基本機能の一部が復旧した。</p>
           <p>
             重い金属の扉は半分開いており、中からかすかな機械音が聞こえてきます。
           </p>
           <p>どうしますか？</p>
         </>
       ),
-      commands: [
-        {
-          id: 'investigate',
-          title: '周囲を調査する',
-          description: '施設の外観を詳しく調べます。（調査判定）',
-        },
-        {
-          id: 'listen',
-          title: '機械音を聞く',
-          description: '耳を澄まして、機械音の正体を探ります。（聞き耳判定）',
-        },
-        {
-          id: 'enter',
-          title: 'すぐに中に入る',
-          description: '慎重に扉をくぐり、施設内部へ進みます。',
-        },
-      ],
     },
     {
       id: 'step4-investigate',
