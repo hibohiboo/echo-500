@@ -29,18 +29,18 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.3",
+    "@types/react": "^19.2.4",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/coverage-v8": "^4.0.8",
-    "@vitest/ui": "^4.0.8",
+    "@vitest/coverage-v8": "^4.0.9",
+    "@vitest/ui": "^4.0.9",
     "babel-plugin-react-compiler": "^19.1.0-rc.3",
     "prettier": "^3.6.2",
     "turbo": "^2.6.1",
     "typescript": "^5.9.3",
     "vite": "npm:rolldown-vite@7.2.5",
     "vite-tsconfig-paths": "^6.0.0-beta.4",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.9"
   },
   "workspaces": {
     "packages": [

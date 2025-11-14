@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build && cp ../index.html ../dist/ && cp ../_redirects ../dist/ && cp ../_headers ../dist/",
     "lint": "eslint . --fix && tsc -b ",
     "preview": "vite preview",
+    "ncu": "ncu -u",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -19,16 +20,16 @@
     "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
     "@trpg-scenario-maker/tsconfig": "workspace:*",
     "@storybook/addon-docs": "10.0.7",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "eslint-plugin-storybook": "10.0.7",
     "eslint": "catalog:testing",
     "storybook": "10.0.7",
     "storybook-solidjs-vite": "10.0.5",
     "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.2.4",
+    "vite": "npm:rolldown-vite@7.2.5",
     "vite-plugin-solid": "^2.11.10"
   },
   "overrides": {
-    "vite": "npm:rolldown-vite@7.2.4"
+    "vite": "npm:rolldown-vite@7.2.5"
   }
 }
