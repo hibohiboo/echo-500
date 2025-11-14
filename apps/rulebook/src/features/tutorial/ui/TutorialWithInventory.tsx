@@ -369,15 +369,7 @@ export function TutorialWithInventory() {
   };
 
   return (
-    <div
-      style="
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-        padding-bottom: 5rem;
-        position: relative;
-      "
-    >
+    <div class="tutorial-container">
       <For each={steps}>
         {(step) => (
           <Show when={visibleSteps().includes(step.id)}>
@@ -442,6 +434,21 @@ export function TutorialWithInventory() {
 
       <style>{`
         @scope {
+          .tutorial-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-bottom: 5rem;
+            position: relative;
+          }
+
+          @media (max-width: 768px) {
+            .tutorial-container {
+              padding: 1rem;
+              padding-bottom: 5rem;
+            }
+          }
+
           .inventory-toggle-btn {
             position: fixed;
             bottom: 2rem;
