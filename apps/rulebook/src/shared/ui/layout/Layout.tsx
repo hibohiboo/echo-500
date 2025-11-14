@@ -80,6 +80,13 @@ const Layout: ParentComponent = (props) => (
           margin: 0 auto;
         }
 
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+          .site-main {
+            padding: var(--spacing-md) var(--spacing-sm);
+          }
+        }
+
 
 
 

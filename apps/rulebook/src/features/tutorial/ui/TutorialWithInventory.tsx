@@ -263,7 +263,7 @@ export function TutorialWithInventory() {
       content: (
         <>
           <h2>工房</h2>
-          <p>「見ない顔だな」</p>
+          <p>「見ない顔だな、あんた」</p>
           <p>声をかけると、土木系アンドロイドが金槌を振り下ろす手を止めた。</p>
           <p>
             ここは目的を破損したアンドロイドたちと人類の復活を信じるものたちの村だそうだ。
@@ -272,6 +272,16 @@ export function TutorialWithInventory() {
           <p>
             この村の代表は、そう信じて、帰還する人類への目印にこの塔を高くしつづけているらしい。
           </p>
+          <p>
+            「いわゆるReturnersってやつの村ってことさ。遺伝子研究で人類復活しようってReviversはソリがあわなくてこっちにゃあんまいないな」
+          </p>
+          <p>
+            「ところであんた、まだ目覚めたてなんだろ。何かやりたいことができたら、ここに寄りな。インストールや装備の取り付け、やってやるよ。相互扶助ってやつだ」
+          </p>
+          <p>
+            機能が回復してないあんたじゃ、たいして入れられないだろうが、と豪快に笑う。
+          </p>
+          <p>コマンドを追加したくなったら寄ることにしよう。</p>
         </>
       ),
       showButton: true,
@@ -369,15 +379,7 @@ export function TutorialWithInventory() {
   };
 
   return (
-    <div
-      style="
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-        padding-bottom: 5rem;
-        position: relative;
-      "
-    >
+    <div class="tutorial-container">
       <For each={steps}>
         {(step) => (
           <Show when={visibleSteps().includes(step.id)}>
@@ -441,6 +443,29 @@ export function TutorialWithInventory() {
       </For>
 
       <style>{`
+        .tutorial-container {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 2rem;
+          padding-bottom: 5rem;
+          position: relative;
+        }
+
+        /* 画像のレスポンシブ対応 */
+        .tutorial-container img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+          .tutorial-container {
+            padding: 0.5rem 0.25rem;
+            padding-bottom: 5rem;
+          }
+        }
+
         @scope {
           .inventory-toggle-btn {
             position: fixed;
