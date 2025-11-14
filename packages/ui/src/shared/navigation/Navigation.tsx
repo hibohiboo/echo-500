@@ -40,10 +40,7 @@ export function Navigation({ items, currentPath = '' }: NavigationProps) {
           );
         })}
       </ul>
-      <a
-        href="https://github.com/hibohiboo/trpg-scenario-maker"
-        target="_blank"
-      >
+      <a href="https://github.com/hibohiboo/echo-500" target="_blank">
         <FaGithub size="2em" />
       </a>
     </nav>
