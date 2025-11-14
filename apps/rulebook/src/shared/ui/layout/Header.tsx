@@ -4,7 +4,7 @@ const Header: ParentComponent = () => (
   <header class="site-header">
     <div class="header-content">
       <div class="header-left">
-        <a href="/" class="site-logo">
+        <a href={`/${BASE_PATH}/`} class="site-logo">
           <span class="logo-text">Echo:</span>
           <span class="logo-number">500</span>
         </a>
