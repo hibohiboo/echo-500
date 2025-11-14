@@ -17,7 +17,6 @@ export function MobileMenuToggle(props: MobileMenuToggleProps) {
       </span>
 
       <style>{`
-        @scope {
           .mobile-menu-toggle {
             display: flex;
             position: fixed;
@@ -55,7 +54,7 @@ export function MobileMenuToggle(props: MobileMenuToggleProps) {
             background: var(--color-cyber-primary);
             transition: all var(--transition-fast);
           }
-        }
+        
       `}</style>
     </button>
   );

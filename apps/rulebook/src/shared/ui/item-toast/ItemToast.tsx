@@ -1,4 +1,4 @@
-import { createEffect, onCleanup, type JSX } from 'solid-js';
+import { createEffect, onCleanup } from 'solid-js';
 import type { InventoryItem } from '../inventory-panel';
 
 interface ItemToastProps {
@@ -40,33 +40,34 @@ export function ItemToast(props: ItemToastProps) {
       </div>
 
       <style>{`
-        @scope {
-          .item-toast {
-            position: fixed;
-            bottom: 6rem;
-            right: 2rem;
-            z-index: 950;
-            animation: toast-appear 2.5s ease-out forwards;
-          }
+        .item-toast {
+          position: fixed;
+          bottom: 6rem;
+          right: 2rem;
+          z-index: 950;
+          animation: toast-appear 2.5s ease-out forwards;
+        }
 
-          @keyframes toast-appear {
-            0% {
-              opacity: 0;
-              transform: translateY(-20px) scale(0.8);
-            }
-            10% {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-            70% {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-            100% {
-              opacity: 0;
-              transform: translateY(40px) scale(0.3);
-            }
+        @keyframes toast-appear {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.8);
           }
+          10% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          70% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(40px) scale(0.3);
+          }
+        }
+
+        @scope {
 
           .toast-content {
             display: flex;

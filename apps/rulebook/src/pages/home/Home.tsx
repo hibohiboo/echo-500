@@ -110,12 +110,10 @@ function Home() {
       </div>
 
       <style>{`
-        @scope {
         .home-container {
           width: 100%;
-          
         }
-
+       @scope {
         .home-content {
           display: flex;
           gap: var(--spacing-xl);
@@ -139,6 +137,8 @@ function Home() {
 
         .hero-glitch {
           position: relative;
+          display: flex;
+          justify-content: center;
         }
 
         .hero-title {
