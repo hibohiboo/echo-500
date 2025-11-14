@@ -304,13 +304,15 @@ export function TutorialWithInventory() {
       </For>
 
       {/* インベントリボタン */}
-      <button
-        class="inventory-toggle-btn"
-        onClick={() => setIsInventoryOpen(true)}
-      >
-        <span class="inventory-icon">💾</span>
-        <span class="inventory-count">{inventory().length}</span>
-      </button>
+      <Show when={visibleSteps().includes('step3')}>
+        <button
+          class="inventory-toggle-btn"
+          onClick={() => setIsInventoryOpen(true)}
+        >
+          <span class="inventory-icon">💾</span>
+          <span class="inventory-count">{inventory().length}</span>
+        </button>
+      </Show>
 
       {/* インベントリパネル */}
       <InventoryPanel
