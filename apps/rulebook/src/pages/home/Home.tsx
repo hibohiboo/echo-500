@@ -71,6 +71,10 @@ function Home() {
                 <span class="title-icon">▶</span> Getting Started
               </h2>
               <div class="quick-links">
+                <a class="quick-link" href={`/${BASE_PATH}/content/tutorial`}>
+                  <span class="link-icon">›</span>
+                  <span class="link-text">チュートリアル</span>
+                </a>
                 <a class="quick-link">
                   <span class="link-icon">›</span>
                   <span class="link-text">シナリオ製作者向け</span>
