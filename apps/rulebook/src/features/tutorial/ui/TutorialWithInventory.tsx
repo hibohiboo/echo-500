@@ -155,7 +155,7 @@ export function TutorialWithInventory() {
               隠された情報や手がかりを発見できます。
             </p>
             <p>
-              <strong>判定:</strong> INT × 5 または 調査技能
+              <strong>判定:</strong> INT または 調査技能
             </p>
             <p>
               <strong>判定失敗:</strong> 消耗タグを１つ得る
