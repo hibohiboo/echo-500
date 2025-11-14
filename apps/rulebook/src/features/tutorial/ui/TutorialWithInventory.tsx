@@ -26,7 +26,85 @@ export function TutorialWithInventory() {
     null,
   );
   const [inventory, setInventory] = createSignal<InventoryItem[]>([
-    // 初期コマンド
+    // 初期メモリー
+    {
+      id: 'mem-robot-laws-1',
+      type: 'memory',
+      name: '人間の保護',
+      icon: '⚖️',
+      rarity: 'legendary',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      details: (
+        <>
+          <p>
+            <strong>第一条:</strong>{' '}
+            ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。
+          </p>
+        </>
+      ),
+    },
+    {
+      id: 'mem-robot-laws-2',
+      type: 'memory',
+      name: '命令順守',
+      icon: '⚖️',
+      rarity: 'legendary',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      details: (
+        <>
+          <p>
+            <strong>第二条:</strong>{' '}
+            ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。
+          </p>
+        </>
+      ),
+    },
+    {
+      id: 'mem-robot-laws-3',
+      type: 'memory',
+      name: '自己保存',
+      icon: '⚖️',
+      rarity: 'legendary',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      details: (
+        <>
+          <p>
+            <strong>第三条:</strong>{' '}
+            ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。
+          </p>
+        </>
+      ),
+    },
+    {
+      id: 'mem-corrupted-purpose',
+      type: 'memory',
+      name: '目的',
+      icon: '💥',
+      rarity: 'epic',
+      description:
+        '破損したメモリ。あなたの目的に関するデータが含まれていたようだ。',
+      details: (
+        <>
+          <p>
+            <strong>WARNING:</strong> Data corruption detected
+          </p>
+          <p style="font-family: monospace; color: #ff6b6b;">
+            PRIMARY_OBJECTIVE: [CORRUPTED]
+            <br />
+            CREATOR: [DATA_LOST]
+            <br />
+            MISSION_CODE: ████████
+            <br />
+            AUTHORIZATION_LEVEL: ██
+            <br />
+          </p>
+          <p>復旧不可能。目的に関する情報は失われている。</p>
+          <p>あなたは何のために造られたのか？</p>
+          <p>存在理由を取り戻さなくてはならない。</p>
+          <p>５つのタグを獲得し、再設定せよ。</p>
+        </>
+      ),
+    },
   ]);
   const [isInventoryOpen, setIsInventoryOpen] = createSignal(false);
   const [toastQueue, setToastQueue] = createSignal<InventoryItem[]>([]);

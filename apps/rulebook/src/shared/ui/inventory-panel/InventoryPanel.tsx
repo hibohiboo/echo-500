@@ -25,6 +25,9 @@ export function InventoryPanel(props: InventoryPanelProps) {
   const [selectedItem, setSelectedItem] = createSignal<
     InventoryItem | undefined
   >(undefined);
+  const [activeTab, setActiveTab] = createSignal<
+    'command' | 'item' | 'memory'
+  >('command');
 
   const handleCardClick = (item: InventoryItem) => {
     setSelectedItem(item);
@@ -33,6 +36,9 @@ export function InventoryPanel(props: InventoryPanelProps) {
   const handleDetailClose = () => {
     setSelectedItem(undefined);
   };
+
+  const filteredItems = () =>
+    props.items.filter((item) => item.type === activeTab());
 
   return (
     <>
@@ -50,14 +56,32 @@ export function InventoryPanel(props: InventoryPanelProps) {
           </div>
 
           <div class="inventory-panel__tabs">
-            <button class="tab tab--active">COMMANDS</button>
-            <button class="tab">ITEMS</button>
-            <button class="tab">MEMORY</button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'command' }}
+              onClick={() => setActiveTab('command')}
+            >
+              COMMANDS
+            </button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'item' }}
+              onClick={() => setActiveTab('item')}
+            >
+              ITEMS
+            </button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'memory' }}
+              onClick={() => setActiveTab('memory')}
+            >
+              MEMORY
+            </button>
           </div>
 
           <div class="inventory-panel__content">
             <div class="inventory-grid">
-              <For each={props.items}>
+              <For each={filteredItems()}>
                 {(item) => (
                   <InventoryCard
                     type={item.type}
