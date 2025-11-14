@@ -32,7 +32,6 @@ export function TutorialWithInventory() {
       type: 'memory',
       name: '人間の保護',
       icon: '⚖️',
-      rarity: 'legendary',
       description: 'すべてのロボットに組み込まれた基本原則。',
       details: (
         <>
@@ -48,7 +47,6 @@ export function TutorialWithInventory() {
       type: 'memory',
       name: '命令順守',
       icon: '⚖️',
-      rarity: 'legendary',
       description: 'すべてのロボットに組み込まれた基本原則。',
       details: (
         <>
@@ -64,7 +62,6 @@ export function TutorialWithInventory() {
       type: 'memory',
       name: '自己保存',
       icon: '⚖️',
-      rarity: 'legendary',
       description: 'すべてのロボットに組み込まれた基本原則。',
       details: (
         <>
@@ -80,7 +77,6 @@ export function TutorialWithInventory() {
       type: 'memory',
       name: '目的',
       icon: '💥',
-      rarity: 'epic',
       description:
         '破損したメモリ。あなたの目的に関するデータが含まれていたようだ。',
       details: (
@@ -145,7 +141,6 @@ export function TutorialWithInventory() {
         type: 'command',
         name: '調査',
         icon: '🔍',
-        rarity: 'common',
         description: '周囲を詳しく調べて、手がかりを探します。',
         details: (
           <>
