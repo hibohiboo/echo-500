@@ -27,44 +27,6 @@ export function TutorialWithInventory() {
   );
   const [inventory, setInventory] = createSignal<InventoryItem[]>([
     // 初期コマンド
-    {
-      id: 'cmd-investigate',
-      type: 'command',
-      name: '調査',
-      icon: '🔍',
-      rarity: 'common',
-      description: '周囲を詳しく調べて、手がかりを探します。',
-      details: (
-        <>
-          <p>
-            <strong>効果:</strong>
-            目標値以下でダイスを振ることで、隠された情報や手がかりを発見できます。
-          </p>
-          <p>
-            <strong>判定:</strong> INT × 5 または 調査技能
-          </p>
-          <p>
-            <strong>使用回数:</strong> 制限なし
-          </p>
-        </>
-      ),
-    },
-    {
-      id: 'cmd-listen',
-      type: 'command',
-      name: '聞き耳',
-      icon: '👂',
-      rarity: 'common',
-      description: '耳を澄まして、周囲の音を聞き取ります。',
-      details: (
-        <>
-          <p>小さな音や遠くの音も聞き取れる可能性があります。</p>
-          <p>
-            <strong>判定:</strong> POW × 5 または 聞き耳技能
-          </p>
-        </>
-      ),
-    },
   ]);
   const [isInventoryOpen, setIsInventoryOpen] = createSignal(false);
   const [toastQueue, setToastQueue] = createSignal<InventoryItem[]>([]);
@@ -100,16 +62,36 @@ export function TutorialWithInventory() {
       ),
       showButton: true,
       buttonText: '機能復旧',
+      itemReward: {
+        id: 'cmd-investigate',
+        type: 'command',
+        name: '調査',
+        icon: '🔍',
+        rarity: 'common',
+        description: '周囲を詳しく調べて、手がかりを探します。',
+        details: (
+          <>
+            <p>
+              <strong>効果:</strong>
+              目標値以下でダイスを振ることで、隠された情報や手がかりを発見できます。
+            </p>
+            <p>
+              <strong>判定:</strong> INT × 5 または 調査技能
+            </p>
+            <p>
+              <strong>使用回数:</strong> 制限なし
+            </p>
+          </>
+        ),
+      },
     },
     {
       id: 'step3',
       content: (
         <>
           <p>基本機能の一部が復旧した。</p>
-          <p>
-            重い金属の扉は半分開いており、中からかすかな機械音が聞こえてきます。
-          </p>
-          <p>どうしますか？</p>
+          <p>右下の⚙のアイコンから復旧した機能を確認できる。</p>
+          <p>実行すると周囲のスキャンを行える。</p>
         </>
       ),
     },
@@ -309,7 +291,7 @@ export function TutorialWithInventory() {
           class="inventory-toggle-btn"
           onClick={() => setIsInventoryOpen(true)}
         >
-          <span class="inventory-icon">💾</span>
+          <span class="inventory-icon">⚙</span>
           <span class="inventory-count">{inventory().length}</span>
         </button>
       </Show>
@@ -319,6 +301,10 @@ export function TutorialWithInventory() {
         isOpen={isInventoryOpen()}
         items={inventory()}
         onClose={() => setIsInventoryOpen(false)}
+        onExecute={() => {
+          handleContinue('step3');
+          setIsInventoryOpen(false);
+        }}
       />
 
       {/* アイテム獲得トースト */}
@@ -361,9 +347,10 @@ export function TutorialWithInventory() {
           }
 
           .inventory-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
             line-height: 1;
             animation: float 3s ease-in-out infinite;
+            color: #ddd;
           }
 
           @keyframes float {

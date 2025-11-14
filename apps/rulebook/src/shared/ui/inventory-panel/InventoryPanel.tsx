@@ -18,6 +18,7 @@ interface InventoryPanelProps {
   isOpen: boolean;
   items: InventoryItem[];
   onClose: () => void;
+  onExecute: (item: InventoryItem) => void;
 }
 
 export function InventoryPanel(props: InventoryPanelProps) {
@@ -40,8 +41,8 @@ export function InventoryPanel(props: InventoryPanelProps) {
         <div class="inventory-panel" classList={{ open: props.isOpen }}>
           <div class="inventory-panel__header">
             <h2 class="inventory-panel__title">
-              <span class="title-icon">💾</span>
-              INVENTORY
+              <span class="title-icon">⚙</span>
+              Core Monitor
             </h2>
             <button class="inventory-panel__close" onClick={props.onClose}>
               ✕
@@ -49,8 +50,7 @@ export function InventoryPanel(props: InventoryPanelProps) {
           </div>
 
           <div class="inventory-panel__tabs">
-            <button class="tab tab--active">ALL</button>
-            <button class="tab">COMMANDS</button>
+            <button class="tab tab--active">COMMANDS</button>
             <button class="tab">ITEMS</button>
             <button class="tab">MEMORY</button>
           </div>
@@ -65,6 +65,11 @@ export function InventoryPanel(props: InventoryPanelProps) {
                     icon={item.icon}
                     rarity={item.rarity}
                     onClick={() => handleCardClick(item)}
+                    onExecute={
+                      item.type === 'command'
+                        ? () => props.onExecute(item)
+                        : undefined
+                    }
                   />
                 )}
               </For>
