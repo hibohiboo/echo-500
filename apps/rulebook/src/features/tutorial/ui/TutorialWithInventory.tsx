@@ -33,6 +33,7 @@ export function TutorialWithInventory() {
       name: '人間の保護',
       icon: '⚖️',
       description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：最高'],
       details: (
         <>
           <p>
@@ -48,6 +49,7 @@ export function TutorialWithInventory() {
       name: '命令順守',
       icon: '⚖️',
       description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：高'],
       details: (
         <>
           <p>
@@ -63,6 +65,7 @@ export function TutorialWithInventory() {
       name: '自己保存',
       icon: '⚖️',
       description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：中'],
       details: (
         <>
           <p>
@@ -79,6 +82,7 @@ export function TutorialWithInventory() {
       icon: '💥',
       description:
         '破損したメモリ。あなたの目的に関するデータが含まれていたようだ。',
+      tags: ['破損データ', '要復旧', 'クリティカル'],
       details: (
         <>
           <p>
@@ -141,15 +145,19 @@ export function TutorialWithInventory() {
         type: 'command',
         name: '調査',
         icon: '🔍',
+        tags: ['調査', '基本機能'],
         description: '周囲を詳しく調べて、手がかりを探します。',
         details: (
           <>
             <p>
               <strong>効果:</strong>
-              目標値以下でダイスを振ることで、隠された情報や手がかりを発見できます。
+              隠された情報や手がかりを発見できます。
             </p>
             <p>
               <strong>判定:</strong> INT × 5 または 調査技能
+            </p>
+            <p>
+              <strong>判定失敗:</strong> 消耗タグを１つ得る
             </p>
             <p>
               <strong>使用回数:</strong> 制限なし

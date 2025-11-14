@@ -12,6 +12,7 @@ export interface InventoryItem {
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;
+  tags?: string[];
 }
 
 interface InventoryPanelProps {
@@ -275,6 +276,7 @@ export function InventoryPanel(props: InventoryPanelProps) {
           rarity={selectedItem()!.rarity}
           description={selectedItem()!.description}
           details={selectedItem()!.details}
+          tags={selectedItem()!.tags}
           onClose={handleDetailClose}
         />
       </Show>

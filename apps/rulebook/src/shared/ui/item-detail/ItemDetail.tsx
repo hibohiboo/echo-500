@@ -1,3 +1,4 @@
+import { For, Show } from 'solid-js';
 import { InventoryIcon, type InventoryIconType } from '../inventory-icon';
 import type { JSX } from 'solid-js';
 
@@ -8,6 +9,7 @@ interface ItemDetailProps {
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;
+  tags?: string[];
   onClose: () => void;
 }
 
@@ -55,17 +57,28 @@ export function ItemDetail(props: ItemDetailProps) {
         </div>
 
         <div class="item-detail__body">
+          <Show when={props.tags && props.tags.length > 0}>
+            <div class="item-detail__section">
+              <h3>タグ</h3>
+              <div class="item-detail__tags">
+                <For each={props.tags}>
+                  {(tag) => <span class="item-detail__tag">{tag}</span>}
+                </For>
+              </div>
+            </div>
+          </Show>
+
           <div class="item-detail__section">
             <h3>概要</h3>
             <div class="item-detail__description">{props.description}</div>
           </div>
 
-          {props.details && (
+          <Show when={props.details}>
             <div class="item-detail__section">
               <h3>詳細</h3>
               <div class="item-detail__details">{props.details}</div>
             </div>
-          )}
+          </Show>
         </div>
 
         <div class="item-detail__footer">
@@ -232,6 +245,30 @@ export function ItemDetail(props: ItemDetailProps) {
               color: var(--color-nature-accent);
               margin-bottom: var(--spacing-md);
               text-shadow: 0 0 8px rgba(107, 156, 66, 0.5);
+            }
+
+            .item-detail__tags {
+              display: flex;
+              flex-wrap: wrap;
+              gap: var(--spacing-xs);
+            }
+
+            .item-detail__tag {
+              display: inline-block;
+              padding: 4px 12px;
+              font-family: var(--font-primary);
+              font-size: 0.75rem;
+              color: var(--color-cyber-primary);
+              background: rgba(0, 255, 204, 0.1);
+              border: 1px solid var(--color-cyber-primary);
+              border-radius: 12px;
+              letter-spacing: 0.05em;
+              transition: all var(--transition-fast);
+            }
+
+            .item-detail__tag:hover {
+              background: rgba(0, 255, 204, 0.2);
+              box-shadow: 0 0 8px rgba(0, 255, 204, 0.3);
             }
 
             .item-detail__description,
