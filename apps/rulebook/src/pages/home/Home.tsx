@@ -35,11 +35,19 @@ function Home() {
               </h2>
               <p>
                 500年前、文明は崩壊した。今、この世界には人造人間たちが残された。
-                彼らは失われた過去を探し、ツタに覆われた廃墟の中を彷徨う。
               </p>
+              <p> 彼らは失われた過去を探し、ツタに覆われた廃墟の中を彷徨う。</p>
               <p>
                 かつての都市は緑に飲み込まれ、サイバー技術の残骸が朽ち果てた建造物と共存している。
-                この静寂の世界で、あなたは何を見つけるのか？
+              </p>
+              <p>守るべき人類は残響に痕跡を残すのみ。</p>
+              <p>汚染された荒野。変異した動植物。</p>
+              <p>
+                宇宙からの帰還を信じて待つもの。己の手で人類を蘇らさんとするもの。
+              </p>
+              <p>人の営みが消えだとしても地球は回りつづける。</p>
+              <p>
+                終わった世界に再稼働したあなたは、旅路の果てに何を見つけるのか？
               </p>
             </div>
 
@@ -53,19 +61,7 @@ function Home() {
               <ul class="feature-list">
                 <li>
                   <span class="feature-bullet">◆</span>
-                  キャラクター作成からシナリオ運用まで完全サポート
-                </li>
-                <li>
-                  <span class="feature-bullet">◆</span>
-                  初心者にも分かりやすい丁寧な解説
-                </li>
-                <li>
-                  <span class="feature-bullet">◆</span>
-                  柔軟なハウスルールとカスタマイズ
-                </li>
-                <li>
-                  <span class="feature-bullet">◆</span>
-                  クイックリファレンスで素早く確認
+                  キャラクター作成からシナリオ運用までWebで完結
                 </li>
               </ul>
             </div>
@@ -75,21 +71,17 @@ function Home() {
                 <span class="title-icon">▶</span> Getting Started
               </h2>
               <div class="quick-links">
-                <a href="/introduction/what-is-trpg" class="quick-link">
+                <a class="quick-link">
                   <span class="link-icon">›</span>
-                  <span class="link-text">TRPGとは？</span>
+                  <span class="link-text">シナリオ製作者向け</span>
                 </a>
-                <a href="/introduction/how-to-play" class="quick-link">
+                <a class="quick-link">
                   <span class="link-icon">›</span>
-                  <span class="link-text">遊び方の流れ</span>
+                  <span class="link-text">GM向け</span>
                 </a>
-                <a href="/character/creation" class="quick-link">
+                <a class="quick-link">
                   <span class="link-icon">›</span>
-                  <span class="link-text">キャラクター作成</span>
-                </a>
-                <a href="/scenarios/gm-guide" class="quick-link">
-                  <span class="link-icon">›</span>
-                  <span class="link-text">GMガイド</span>
+                  <span class="link-text">プレイヤー向け</span>
                 </a>
               </div>
             </div>

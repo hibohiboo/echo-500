@@ -20,52 +20,63 @@ const Navigation = () => {
     {
       label: 'Introduction',
       children: [
-        { label: 'What is TRPG?', path: '/introduction/what-is-trpg' },
-        { label: 'How to Play', path: '/introduction/how-to-play' },
-        { label: 'Terminology', path: '/introduction/terminology' },
+        { label: 'はじめに', path: '' },
+        { label: 'あそびかた', path: '' },
+        { label: '用語', path: '' },
       ],
     },
     {
       label: 'Basic Rules',
       children: [
-        { label: 'Dice Rolls', path: '/basics/dice-rolls' },
-        { label: 'Skill Checks', path: '/basics/skill-checks' },
-        { label: 'Combat', path: '/basics/combat' },
-        { label: 'Sanity Check', path: '/basics/sanity-check' },
+        { label: 'コマンドカード', path: '' },
+        { label: '判定', path: '' },
+        { label: '戦闘', path: '' },
       ],
     },
     {
       label: 'Character Creation',
       children: [
-        { label: 'Creation Steps', path: '/character/creation' },
-        { label: 'Ability Scores', path: '/character/stats' },
-        { label: 'Skills', path: '/character/skills' },
-        { label: 'Background', path: '/character/background' },
+        { label: '作成手順', path: '' },
+        { label: 'タグ', path: '' },
+        { label: 'コマンド', path: '' },
+        { label: '背景', path: '' },
       ],
     },
     {
       label: 'Scenario Management',
       children: [
-        { label: 'GM Guide', path: '/scenarios/gm-guide' },
-        { label: 'Player Guide', path: '/scenarios/player-guide' },
-        { label: 'Session Prep', path: '/scenarios/session-prep' },
-        { label: 'Troubleshooting', path: '/scenarios/trouble' },
+        { label: 'Scripter Guide', path: '' },
+        { label: 'GM Guide', path: '' },
+        { label: 'Player Guide', path: '' },
+        { label: 'Session Prep', path: '' },
+        { label: 'Troubleshooting', path: '' },
       ],
     },
     {
       label: 'Advanced Rules',
       children: [
-        { label: 'House Rules', path: '/advanced/house-rules' },
-        { label: 'Variants', path: '/advanced/variants' },
-        { label: 'Customization', path: '/advanced/customization' },
+        { label: 'House Rules', path: '' },
+        { label: 'Variants', path: '' },
+        { label: 'Customization', path: '' },
       ],
     },
     {
       label: 'Reference',
       children: [
-        { label: 'Quick Reference', path: '/reference/quick-reference' },
-        { label: 'Tables', path: '/reference/tables' },
-        { label: 'FAQ', path: '/reference/faq' },
+        { label: 'Quick Reference', path: '' },
+        { label: 'Tables', path: '' },
+        { label: 'FAQ', path: '' },
+      ],
+    },
+    {
+      label: 'World',
+      children: [
+        {
+          label: 'Returners～人の帰還を信じ、彼らが戻るための環境を守るもの～',
+          path: '',
+        },
+        { label: 'Revivers～積極的に人類復活を試みるもの～', path: '' },
+        { label: '神錆びた塔の村～ビーコン・ヴィレッジ～', path: '' },
       ],
     },
   ];
