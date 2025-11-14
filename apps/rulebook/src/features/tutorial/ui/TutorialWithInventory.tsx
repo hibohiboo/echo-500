@@ -181,7 +181,7 @@ export function TutorialWithInventory() {
       ),
     },
     {
-      id: 'step4-investigate',
+      id: 'step4',
       content: (
         <>
           <h2>スキャン完了</h2>
@@ -221,20 +221,20 @@ export function TutorialWithInventory() {
       buttonText: '塔に向かう',
     },
     {
-      id: 'step4-listen',
+      id: 'step5',
       content: (
         <>
           <p>森を抜ければ荒野だった。</p>
           <p>
-            地平線の先に錆びついた高い塔が見える。塔の頂上から規則的に光が放たれている。まるで誰かを呼んでいるように。あなたは塔へ向かうことにした。
+            地平線の先に錆びついた高い塔が見える。塔の頂上から規則的に光が放たれている。まるで誰かを呼んでいるように。
           </p>
         </>
       ),
       showButton: true,
-      buttonText: '施設に入る',
+      buttonText: '塔へ向かう',
     },
     {
-      id: 'step4-enter',
+      id: 'step6',
       content: (
         <>
           <h2>錆びた塔のたもと</h2>
@@ -244,7 +244,76 @@ export function TutorialWithInventory() {
         </>
       ),
       showButton: true,
-      buttonText: 'チュートリアル完了',
+      commands: [
+        {
+          id: 'junk',
+          title: '修理工房へ',
+          description: '煙をたなびかせた建物。金槌の音や溶接の音が響く。',
+        },
+        {
+          id: 'tower',
+          title: '塔へ',
+          description: '鉄骨構造の高い塔。屋上には篝火と巨大な鏡が置かれている',
+        },
+      ],
+    },
+    {
+      id: 'step7-junk',
+      content: (
+        <>
+          <h2>工房</h2>
+          <p>「見ない顔だな」</p>
+          <p>声をかけると、土木系アンドロイドが金槌を振り下ろす手を止めた。</p>
+          <p>
+            ここは目的を破損したアンドロイドたちと人類の復活を信じるものたちの村だそうだ。
+          </p>
+          <p>地球の人類は滅んだようだ。宇宙からいつか帰還するかもしれない。</p>
+          <p>
+            この村の代表は、そう信じて、帰還する人類への目印にこの塔を高くしつづけているらしい。
+          </p>
+        </>
+      ),
+      showButton: true,
+      buttonText: 'チュートリアル終了',
+    },
+    {
+      id: 'step7-tower',
+      content: (
+        <>
+          <h2>塔のてっぺん</h2>
+          <p>
+            塔の上からは、荒野と、深い森と、原色の沼といった風景がよく見えた。
+          </p>
+
+          <p>世界は終わったようだ。 </p>
+          <p>「ようこそ、はじめまして」</p>
+          <p>
+            鉄骨のふちで、足をぶらぶらさせている女性型アンドロイドが声をかけてきた。
+          </p>
+          <p>「私はこの未来を予見できませんでした」</p>
+          <p>この村の代表を名乗る彼女は気象予報用アンドロイドだったという。</p>
+          <p>
+            津波や台風をはじめとする人類の脅威を警告する使命を果たせなかったのだと。
+          </p>
+          <p>使命を保っている彼女を羨ましいと感じるかもしれない。</p>
+          <p>
+            「目的を破損している方は多いです。あなたが目的を復旧するまでのあいだ、わたしの手伝いをしてくれませんか。もっと高くしたいのです」
+          </p>
+          <p>
+            住居やメンテナンスの面倒を見る代わりに、建材集めを依頼したいのだと。
+          </p>
+        </>
+      ),
+      showButton: true,
+      buttonText: 'チュートリアル終了',
+    },
+    {
+      id: 'step8',
+      content: (
+        <>
+          <p>こんな感じのTRPGがつくりたいなぁ</p>
+        </>
+      ),
     },
   ];
 
@@ -276,7 +345,7 @@ export function TutorialWithInventory() {
 
   const handleCommandSelect = (commandId: string) => {
     setSelectedCommand(commandId);
-    const nextStepId = `step4-${commandId}`;
+    const nextStepId = `step7-${commandId}`;
     const nextStep = steps.find((s) => s.id === nextStepId);
 
     if (nextStep) {
