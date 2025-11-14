@@ -125,31 +125,33 @@ const Header: ParentComponent = () => (
         /* Responsive */
         @media (max-width: 768px) {
           .header-content {
-            flex-direction: column;
-            height: auto;
-            padding: var(--spacing-md) var(--spacing-md);
-            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
           }
 
           .site-header {
-            position: sticky;
-            top: 0;
-            height: auto;
-            min-height: var(--header-height);
+            height: var(--header-height);
           }
 
           .header-left {
-            flex-direction: column;
-            gap: var(--spacing-xs);
-            align-items: flex-start;
+            gap: 0;
           }
 
+          .site-logo {
+            font-size: 1.5rem;
+          }
+
+          /* スマホ時は非表示 */
           .site-subtitle {
-            font-size: 0.65rem;
+            display: none;
           }
 
           .status-indicator {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
+          }
+
+          .status-dot {
+            width: 6px;
+            height: 6px;
           }
       }
 }`}
