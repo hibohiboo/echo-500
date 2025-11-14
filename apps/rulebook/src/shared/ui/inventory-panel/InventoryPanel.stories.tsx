@@ -71,9 +71,7 @@ const sampleItems: InventoryItem[] = [
     rarity: 'epic',
     description: '施設から聞こえる機械音を記録したメモリチップ。',
     details: (
-      <p>
-        音源は地下3階から発生している。冷却システムが稼働中と推測される。
-      </p>
+      <p>音源は地下3階から発生している。冷却システムが稼働中と推測される。</p>
     ),
   },
   {
@@ -84,7 +82,9 @@ const sampleItems: InventoryItem[] = [
     rarity: 'epic',
     description: '500年前の映像が記録されたメモリチップ。',
     details: (
-      <p>大災厄の瞬間が記録されている。真実を知る手がかりになるかもしれない。</p>
+      <p>
+        大災厄の瞬間が記録されている。真実を知る手がかりになるかもしれない。
+      </p>
     ),
   },
   {
@@ -138,6 +138,7 @@ function InteractiveInventory() {
         isOpen={isOpen()}
         items={sampleItems}
         onClose={() => setIsOpen(false)}
+        onExecute={() => {}}
       />
     </div>
   );

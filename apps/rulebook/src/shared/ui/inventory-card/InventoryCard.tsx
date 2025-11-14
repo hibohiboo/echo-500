@@ -6,29 +6,68 @@ interface InventoryCardProps {
   icon?: InventoryIconType;
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   onClick?: () => void;
+  onExecute?: () => void;
+  onDetails?: () => void;
+}
+
+const rarityColors = {
+  common: '#6b9c42',
+  rare: '#00d4ff',
+  epic: '#9d4edd',
+  legendary: '#ffd700',
+};
+
+const typeLabels = {
+  command: 'CMD',
+  item: 'ITEM',
+  memory: 'MEM',
+};
+
+function ActionButtons(props: {
+  onExecute?: () => void;
+  onDetails?: () => void;
+}) {
+  if (!props.onExecute && !props.onDetails) return null;
+
+  return (
+    <div class="inventory-card__actions">
+      {props.onExecute && (
+        <button
+          class="inventory-card__action-btn inventory-card__action-btn--execute"
+          onClick={(e) => {
+            e.stopPropagation();
+            props.onExecute?.();
+          }}
+        >
+          実行
+        </button>
+      )}
+      {props.onDetails && (
+        <button
+          class="inventory-card__action-btn inventory-card__action-btn--details"
+          onClick={(e) => {
+            e.stopPropagation();
+            props.onDetails?.();
+          }}
+        >
+          詳細
+        </button>
+      )}
+    </div>
+  );
 }
 
 export function InventoryCard(props: InventoryCardProps) {
-  const rarityColors = {
-    common: '#6b9c42',
-    rare: '#00d4ff',
-    epic: '#9d4edd',
-    legendary: '#ffd700',
-  };
-
-  const typeLabels = {
-    command: 'CMD',
-    item: 'ITEM',
-    memory: 'MEM',
-  };
+  const rarity = props.rarity || 'common';
+  const borderColor = rarityColors[rarity];
 
   return (
-    <button class="inventory-card" onClick={props.onClick}>
+    <div class="inventory-card" onClick={props.onClick}>
       <div
         class="inventory-card__border"
         style={{
-          'border-color': rarityColors[props.rarity || 'common'],
-          'box-shadow': `0 0 10px ${rarityColors[props.rarity || 'common']}40`,
+          'border-color': borderColor,
+          'box-shadow': `0 0 10px ${borderColor}40`,
         }}
       >
         <div class="inventory-card__type-badge">{typeLabels[props.type]}</div>
@@ -56,6 +95,11 @@ export function InventoryCard(props: InventoryCardProps) {
             <circle cx="85" cy="10" r="2" fill="currentColor" opacity="0.5" />
           </svg>
         </div>
+
+        <ActionButtons
+          onExecute={props.onExecute}
+          onDetails={props.onDetails}
+        />
       </div>
 
       <style>{`
@@ -135,6 +179,44 @@ export function InventoryCard(props: InventoryCardProps) {
             opacity: 0.6;
           }
 
+          .inventory-card__actions {
+            display: flex;
+            gap: var(--spacing-xs);
+            margin-top: var(--spacing-sm);
+          }
+
+          .inventory-card__action-btn {
+            flex: 1;
+            padding: 6px 12px;
+            font-family: var(--font-primary);
+            font-size: 0.75rem;
+            border: 1px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: rgba(0, 0, 0, 0.5);
+          }
+
+          .inventory-card__action-btn--execute {
+            color: var(--color-cyber-primary);
+            border-color: var(--color-cyber-primary);
+          }
+
+          .inventory-card__action-btn--execute:hover {
+            background: rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+          }
+
+          .inventory-card__action-btn--details {
+            color: var(--color-nature-accent);
+            border-color: var(--color-nature-accent);
+          }
+
+          .inventory-card__action-btn--details:hover {
+            background: rgba(139, 211, 70, 0.2);
+            box-shadow: 0 0 10px rgba(139, 211, 70, 0.3);
+          }
+
           /* Scan line animation */
           .inventory-card__border::after {
             content: '';
@@ -165,6 +247,6 @@ export function InventoryCard(props: InventoryCardProps) {
           }
         }
       `}</style>
-    </button>
+    </div>
   );
 }

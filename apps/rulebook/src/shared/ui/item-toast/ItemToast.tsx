@@ -32,7 +32,7 @@ export function ItemToast(props: ItemToastProps) {
       <div class="toast-content">
         <div class="toast-icon">{props.item.icon}</div>
         <div class="toast-info">
-          <div class="toast-label">アイテム獲得</div>
+          <div class="toast-label">フラグメント獲得</div>
           <div class="toast-name" style={{ color: rarityColor }}>
             {props.item.name}
           </div>

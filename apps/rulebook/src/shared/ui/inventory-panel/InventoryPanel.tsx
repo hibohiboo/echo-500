@@ -12,18 +12,23 @@ export interface InventoryItem {
   rarity?: 'common' | 'rare' | 'epic' | 'legendary';
   description: JSX.Element | string;
   details?: JSX.Element | string;
+  tags?: string[];
 }
 
 interface InventoryPanelProps {
   isOpen: boolean;
   items: InventoryItem[];
   onClose: () => void;
+  onExecute: (item: InventoryItem) => void;
 }
 
 export function InventoryPanel(props: InventoryPanelProps) {
   const [selectedItem, setSelectedItem] = createSignal<
     InventoryItem | undefined
   >(undefined);
+  const [activeTab, setActiveTab] = createSignal<
+    'command' | 'item' | 'memory'
+  >('command');
 
   const handleCardClick = (item: InventoryItem) => {
     setSelectedItem(item);
@@ -33,6 +38,9 @@ export function InventoryPanel(props: InventoryPanelProps) {
     setSelectedItem(undefined);
   };
 
+  const filteredItems = () =>
+    props.items.filter((item) => item.type === activeTab());
+
   return (
     <>
       <Show when={props.isOpen}>
@@ -40,8 +48,8 @@ export function InventoryPanel(props: InventoryPanelProps) {
         <div class="inventory-panel" classList={{ open: props.isOpen }}>
           <div class="inventory-panel__header">
             <h2 class="inventory-panel__title">
-              <span class="title-icon">💾</span>
-              INVENTORY
+              <span class="title-icon">⚙</span>
+              Core Monitor
             </h2>
             <button class="inventory-panel__close" onClick={props.onClose}>
               ✕
@@ -49,15 +57,32 @@ export function InventoryPanel(props: InventoryPanelProps) {
           </div>
 
           <div class="inventory-panel__tabs">
-            <button class="tab tab--active">ALL</button>
-            <button class="tab">COMMANDS</button>
-            <button class="tab">ITEMS</button>
-            <button class="tab">MEMORY</button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'command' }}
+              onClick={() => setActiveTab('command')}
+            >
+              COMMANDS
+            </button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'item' }}
+              onClick={() => setActiveTab('item')}
+            >
+              ITEMS
+            </button>
+            <button
+              class="tab"
+              classList={{ 'tab--active': activeTab() === 'memory' }}
+              onClick={() => setActiveTab('memory')}
+            >
+              MEMORY
+            </button>
           </div>
 
           <div class="inventory-panel__content">
             <div class="inventory-grid">
-              <For each={props.items}>
+              <For each={filteredItems()}>
                 {(item) => (
                   <InventoryCard
                     type={item.type}
@@ -65,6 +90,11 @@ export function InventoryPanel(props: InventoryPanelProps) {
                     icon={item.icon}
                     rarity={item.rarity}
                     onClick={() => handleCardClick(item)}
+                    onExecute={
+                      item.type === 'command'
+                        ? () => props.onExecute(item)
+                        : undefined
+                    }
                   />
                 )}
               </For>
@@ -246,6 +276,7 @@ export function InventoryPanel(props: InventoryPanelProps) {
           rarity={selectedItem()!.rarity}
           description={selectedItem()!.description}
           details={selectedItem()!.details}
+          tags={selectedItem()!.tags}
           onClose={handleDetailClose}
         />
       </Show>

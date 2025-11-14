@@ -12,6 +12,7 @@ interface TutorialStep {
   content: JSX.Element;
   showButton?: boolean;
   buttonText?: string;
+  nextStepId?: string;
   commands?: Array<{
     id: string;
     title: string;
@@ -26,42 +27,82 @@ export function TutorialWithInventory() {
     null,
   );
   const [inventory, setInventory] = createSignal<InventoryItem[]>([
-    // 初期コマンド
+    // 初期メモリー
     {
-      id: 'cmd-investigate',
-      type: 'command',
-      name: '調査',
-      icon: '🔍',
-      rarity: 'common',
-      description: '周囲を詳しく調べて、手がかりを探します。',
+      id: 'mem-robot-laws-1',
+      type: 'memory',
+      name: '人間の保護',
+      icon: '⚖️',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：最高'],
       details: (
         <>
           <p>
-            <strong>効果:</strong>
-            目標値以下でダイスを振ることで、隠された情報や手がかりを発見できます。
-          </p>
-          <p>
-            <strong>判定:</strong> INT × 5 または 調査技能
-          </p>
-          <p>
-            <strong>使用回数:</strong> 制限なし
+            <strong>第一条:</strong>{' '}
+            ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。
           </p>
         </>
       ),
     },
     {
-      id: 'cmd-listen',
-      type: 'command',
-      name: '聞き耳',
-      icon: '👂',
-      rarity: 'common',
-      description: '耳を澄まして、周囲の音を聞き取ります。',
+      id: 'mem-robot-laws-2',
+      type: 'memory',
+      name: '命令順守',
+      icon: '⚖️',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：高'],
       details: (
         <>
-          <p>小さな音や遠くの音も聞き取れる可能性があります。</p>
           <p>
-            <strong>判定:</strong> POW × 5 または 聞き耳技能
+            <strong>第二条:</strong>{' '}
+            ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。
           </p>
+        </>
+      ),
+    },
+    {
+      id: 'mem-robot-laws-3',
+      type: 'memory',
+      name: '自己保存',
+      icon: '⚖️',
+      description: 'すべてのロボットに組み込まれた基本原則。',
+      tags: ['ロボット工学三原則', 'システムコア', '優先度：中'],
+      details: (
+        <>
+          <p>
+            <strong>第三条:</strong>{' '}
+            ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。
+          </p>
+        </>
+      ),
+    },
+    {
+      id: 'mem-corrupted-purpose',
+      type: 'memory',
+      name: '目的',
+      icon: '💥',
+      description:
+        '破損したメモリ。あなたの目的に関するデータが含まれていたようだ。',
+      tags: ['破損データ', '要復旧', 'クリティカル'],
+      details: (
+        <>
+          <p>
+            <strong>WARNING:</strong> Data corruption detected
+          </p>
+          <p style="font-family: monospace; color: #ff6b6b;">
+            PRIMARY_OBJECTIVE: [CORRUPTED]
+            <br />
+            CREATOR: [DATA_LOST]
+            <br />
+            MISSION_CODE: ████████
+            <br />
+            AUTHORIZATION_LEVEL: ██
+            <br />
+          </p>
+          <p>復旧不可能。目的に関する情報は失われている。</p>
+          <p>あなたは何のために造られたのか？</p>
+          <p>存在理由を取り戻さなくてはならない。</p>
+          <p>５つのタグを獲得し、再設定せよ。</p>
         </>
       ),
     },
@@ -100,6 +141,31 @@ export function TutorialWithInventory() {
       ),
       showButton: true,
       buttonText: '機能復旧',
+      itemReward: {
+        id: 'cmd-investigate',
+        type: 'command',
+        name: 'スキャン',
+        icon: '🔍',
+        tags: ['調査', '基本機能'],
+        description: '周囲を詳しく調べて、手がかりを探します。',
+        details: (
+          <>
+            <p>
+              <strong>効果:</strong>
+              隠された情報や手がかりを発見できます。
+            </p>
+            <p>
+              <strong>判定:</strong> INT × 5 または 調査技能
+            </p>
+            <p>
+              <strong>判定失敗:</strong> 消耗タグを１つ得る
+            </p>
+            <p>
+              <strong>使用回数:</strong> 制限なし
+            </p>
+          </>
+        ),
+      },
     },
     {
       id: 'step3',
@@ -107,116 +173,151 @@ export function TutorialWithInventory() {
         <>
           <p>基本機能の一部が復旧した。</p>
           <p>
-            重い金属の扉は半分開いており、中からかすかな機械音が聞こえてきます。
+            <strong>右下の⚙のアイコン</strong>から復旧した機能を確認できる。
           </p>
-          <p>どうしますか？</p>
+          <p>
+            <strong>スキャン</strong>を実行すると周囲の調査を行える。
+          </p>
         </>
       ),
     },
     {
-      id: 'step4-investigate',
+      id: 'step4',
       content: (
         <>
-          <h2>調査の結果</h2>
+          <h2>スキャン完了</h2>
           <p>
-            あなたは施設の周囲を注意深く観察しました。壁には古い文字で
-            <strong>「第7研究所」</strong>と刻まれています。
+            <img
+              src={`/${BASE_PATH}/images/tutorial-1.png`}
+              alt="苔むした休眠ポッド"
+            />
           </p>
+          <p>休眠ポッドは苔むしている。人類の痕跡は見当たらない。</p>
           <p>
-            地面には最近のものと思われる足跡が残っています。あなた以外にも、
-            この場所を訪れた者がいるようです。
+            風化が激しいが、かろうじて文字が判別できるプレートを発見した。
+            <strong>「第7研究所」</strong>
+            と刻まれている。
           </p>
+
           <p>
-            あなたは<strong>「探索者のメモ」</strong>を手に入れました！
+            立ち上がり、周りを見渡す。視覚センサが木々の向こうに高い塔をとらえた。
           </p>
         </>
       ),
-      showButton: true,
-      buttonText: '施設に入る',
       itemReward: {
         id: 'item-memo',
         type: 'item',
-        name: '探索者のメモ',
+        name: '研究所のプレート',
         icon: '📝',
-        rarity: 'rare',
-        description:
-          '第7研究所についての手書きのメモ。誰かが残したもののようだ。',
+        description: '第7研究所と書かれた金属のプレート',
         details: (
           <>
-            <p>メモには以下のような内容が記されている：</p>
-            <p>
-              「第7研究所は人造人間の製造施設だった。しかし500年前の
-              <strong>大災厄</strong>により全てが停止した。
-              中央制御室には重要なデータが残されているはずだ。」
-            </p>
-            <p>このメモは、施設内部の構造を理解する手がかりになりそうだ。</p>
+            <p>未知の合金だ。自分が休眠している間に開発されたのだろうか。</p>
+            <p>あるいは金属に関するデータが破損しているだけかもしれない。</p>
+            <p>むしろ、その可能性のほうが高い。</p>
           </>
         ),
       },
+      showButton: true,
+      buttonText: '塔に向かう',
     },
     {
-      id: 'step4-listen',
+      id: 'step5',
       content: (
         <>
-          <h2>聞き耳の結果</h2>
+          <p>森を抜ければ荒野だった。</p>
           <p>
-            耳を澄ますと、規則的な機械音が聞こえてきます。まるで何かが
-            <strong>起動している</strong>ような音です。
-          </p>
-          <p>
-            この施設には、まだ稼働している設備があるようです。電源が生きているのでしょうか？
-          </p>
-          <p>
-            あなたは<strong>「音の記録」</strong>を手に入れました！
+            地平線の先に錆びついた高い塔が見える。塔の頂上から規則的に光が放たれている。まるで誰かを呼んでいるように。
           </p>
         </>
       ),
       showButton: true,
-      buttonText: '施設に入る',
-      itemReward: {
-        id: 'mem-sound',
-        type: 'memory',
-        name: '音の記録',
-        icon: '💾',
-        rarity: 'epic',
-        description:
-          '施設から聞こえる機械音を記録したメモリチップ。解析することで何かがわかるかもしれない。',
-        details: (
-          <>
-            <p>音声解析の結果、以下の情報が判明した：</p>
-            <ul>
-              <li>音源は地下3階から発生している</li>
-              <li>
-                音の周波数から、<strong>冷却システム</strong>
-                が稼働中と推測される
-              </li>
-              <li>
-                定期的なビープ音は、何らかのプロセスが実行中であることを示している
-              </li>
-            </ul>
-            <p>
-              施設の一部が今も稼働している可能性が高い。慎重に進む必要がある。
-            </p>
-          </>
-        ),
-      },
+      buttonText: '塔へ向かう',
     },
     {
-      id: 'step4-enter',
+      id: 'step6',
       content: (
         <>
-          <h2>施設内部</h2>
+          <h2>錆びた塔のたもと</h2>
           <p>
-            慎重に扉をくぐると、薄暗い廊下が続いています。床には埃が積もり、
-            足跡ひとつありません。
-          </p>
-          <p>
-            廊下の奥からは青白い光が漏れており、何かが動いているような気配がします。
+            塔のふもとには小さな村が形成されていた。様々な型式のロボットやアンドロイドが行き交っている。
           </p>
         </>
       ),
       showButton: true,
-      buttonText: 'チュートリアル完了',
+      commands: [
+        {
+          id: 'junk',
+          title: '修理工房へ',
+          description: '煙をたなびかせた建物。金槌の音や溶接の音が響く。',
+        },
+        {
+          id: 'tower',
+          title: '塔へ',
+          description: '鉄骨構造の高い塔。屋上には篝火と巨大な鏡が置かれている',
+        },
+      ],
+    },
+    {
+      id: 'step7-junk',
+      content: (
+        <>
+          <h2>工房</h2>
+          <p>「見ない顔だな」</p>
+          <p>声をかけると、土木系アンドロイドが金槌を振り下ろす手を止めた。</p>
+          <p>
+            ここは目的を破損したアンドロイドたちと人類の復活を信じるものたちの村だそうだ。
+          </p>
+          <p>地球の人類は滅んだようだ。宇宙からいつか帰還するかもしれない。</p>
+          <p>
+            この村の代表は、そう信じて、帰還する人類への目印にこの塔を高くしつづけているらしい。
+          </p>
+        </>
+      ),
+      showButton: true,
+      buttonText: 'チュートリアル終了',
+      nextStepId: 'step8',
+    },
+    {
+      id: 'step7-tower',
+      content: (
+        <>
+          <h2>塔のてっぺん</h2>
+          <p>
+            塔の上からは、荒野と、深い森と、原色の沼といった風景がよく見えた。
+          </p>
+
+          <p>世界は終わったようだ。 </p>
+          <p>「ようこそ、はじめまして」</p>
+          <p>
+            鉄骨のふちで、足をぶらぶらさせている女性型アンドロイドが声をかけてきた。
+          </p>
+          <p>「私はこの未来を予見できませんでした」</p>
+          <p>この村の代表を名乗る彼女は気象予報用アンドロイドだったという。</p>
+          <p>
+            津波や台風をはじめとする人類の脅威を警告する使命を果たせなかったのだと。
+          </p>
+          <p>使命を保っている彼女を羨ましいと感じるかもしれない。</p>
+          <p>
+            「目的を破損している方は多いです。あなたが目的を復旧するまでのあいだ、わたしの手伝いをしてくれませんか。もっと高くしたいのです」
+          </p>
+          <p>
+            住居やメンテナンスの面倒を見る代わりに、建材集めを依頼したいのだと。
+          </p>
+        </>
+      ),
+      showButton: true,
+      buttonText: 'チュートリアル終了',
+      nextStepId: 'step8',
+    },
+    {
+      id: 'step8',
+      content: (
+        <>
+          <h2>まだこのTRPGは生まれていません</h2>
+          <p>こんな感じのTRPGがつくりたいなぁって構想中のイメージです。</p>
+        </>
+      ),
     },
   ];
 
@@ -233,22 +334,29 @@ export function TutorialWithInventory() {
 
   const handleContinue = (currentStepId: string) => {
     const currentIndex = steps.findIndex((s) => s.id === currentStepId);
-    if (currentIndex < steps.length - 1) {
-      const nextStep = steps[currentIndex + 1];
+    const currentStep = steps[currentIndex];
 
-      // アイテム報酬がある場合、トーストを表示してインベントリに追加
-      const currentStep = steps[currentIndex];
-      if (currentStep.itemReward) {
-        addItemWithToast(currentStep.itemReward);
-      }
+    // アイテム報酬がある場合、トーストを表示してインベントリに追加
+    if (currentStep?.itemReward) {
+      addItemWithToast(currentStep.itemReward);
+    }
 
+    // nextStepIdが指定されている場合はそのステップへ、なければ次のステップへ
+    let nextStep: TutorialStep | undefined;
+    if (currentStep?.nextStepId) {
+      nextStep = steps.find((s) => s.id === currentStep.nextStepId);
+    } else if (currentIndex < steps.length - 1) {
+      nextStep = steps[currentIndex + 1];
+    }
+
+    if (nextStep) {
       setVisibleSteps([...visibleSteps(), nextStep.id]);
     }
   };
 
   const handleCommandSelect = (commandId: string) => {
     setSelectedCommand(commandId);
-    const nextStepId = `step4-${commandId}`;
+    const nextStepId = `step7-${commandId}`;
     const nextStep = steps.find((s) => s.id === nextStepId);
 
     if (nextStep) {
@@ -304,19 +412,25 @@ export function TutorialWithInventory() {
       </For>
 
       {/* インベントリボタン */}
-      <button
-        class="inventory-toggle-btn"
-        onClick={() => setIsInventoryOpen(true)}
-      >
-        <span class="inventory-icon">💾</span>
-        <span class="inventory-count">{inventory().length}</span>
-      </button>
+      <Show when={visibleSteps().includes('step3')}>
+        <button
+          class="inventory-toggle-btn"
+          onClick={() => setIsInventoryOpen(true)}
+        >
+          <span class="inventory-icon">⚙</span>
+          <span class="inventory-count">{inventory().length}</span>
+        </button>
+      </Show>
 
       {/* インベントリパネル */}
       <InventoryPanel
         isOpen={isInventoryOpen()}
         items={inventory()}
         onClose={() => setIsInventoryOpen(false)}
+        onExecute={() => {
+          handleContinue('step3');
+          setIsInventoryOpen(false);
+        }}
       />
 
       {/* アイテム獲得トースト */}
@@ -359,9 +473,10 @@ export function TutorialWithInventory() {
           }
 
           .inventory-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
             line-height: 1;
             animation: float 3s ease-in-out infinite;
+            color: #ddd;
           }
 
           @keyframes float {
