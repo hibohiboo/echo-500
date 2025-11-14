@@ -433,22 +433,30 @@ export function TutorialWithInventory() {
       </For>
 
       <style>{`
-        @scope {
+        .tutorial-container {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 2rem;
+          padding-bottom: 5rem;
+          position: relative;
+        }
+
+        /* 画像のレスポンシブ対応 */
+        .tutorial-container img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
           .tutorial-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             padding-bottom: 5rem;
-            position: relative;
           }
+        }
 
-          @media (max-width: 768px) {
-            .tutorial-container {
-              padding: 1rem;
-              padding-bottom: 5rem;
-            }
-          }
-
+        @scope {
           .inventory-toggle-btn {
             position: fixed;
             bottom: 2rem;
