@@ -12,6 +12,7 @@ interface TutorialStep {
   content: JSX.Element;
   showButton?: boolean;
   buttonText?: string;
+  nextStepId?: string;
   commands?: Array<{
     id: string;
     title: string;
@@ -275,6 +276,7 @@ export function TutorialWithInventory() {
       ),
       showButton: true,
       buttonText: 'チュートリアル終了',
+      nextStepId: 'step8',
     },
     {
       id: 'step7-tower',
@@ -306,12 +308,14 @@ export function TutorialWithInventory() {
       ),
       showButton: true,
       buttonText: 'チュートリアル終了',
+      nextStepId: 'step8',
     },
     {
       id: 'step8',
       content: (
         <>
-          <p>こんな感じのTRPGがつくりたいなぁ</p>
+          <h2>まだこのTRPGは生まれていません</h2>
+          <p>こんな感じのTRPGがつくりたいなぁって構想中のイメージです。</p>
         </>
       ),
     },
@@ -330,15 +334,22 @@ export function TutorialWithInventory() {
 
   const handleContinue = (currentStepId: string) => {
     const currentIndex = steps.findIndex((s) => s.id === currentStepId);
-    if (currentIndex < steps.length - 1) {
-      const nextStep = steps[currentIndex + 1];
+    const currentStep = steps[currentIndex];
 
-      // アイテム報酬がある場合、トーストを表示してインベントリに追加
-      const currentStep = steps[currentIndex];
-      if (currentStep.itemReward) {
-        addItemWithToast(currentStep.itemReward);
-      }
+    // アイテム報酬がある場合、トーストを表示してインベントリに追加
+    if (currentStep?.itemReward) {
+      addItemWithToast(currentStep.itemReward);
+    }
 
+    // nextStepIdが指定されている場合はそのステップへ、なければ次のステップへ
+    let nextStep: TutorialStep | undefined;
+    if (currentStep?.nextStepId) {
+      nextStep = steps.find((s) => s.id === currentStep.nextStepId);
+    } else if (currentIndex < steps.length - 1) {
+      nextStep = steps[currentIndex + 1];
+    }
+
+    if (nextStep) {
       setVisibleSteps([...visibleSteps(), nextStep.id]);
     }
   };
