@@ -1,5 +1,6 @@
 import { Router, Route } from '@solidjs/router';
 import { BattleCommandsPage } from '@/pages/battle-commands';
+import SimpleBattleRulePage from '@/pages/battle-rules/SimpleBattleRulePage';
 import { HomePage } from '@/pages/home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy';
 import { TermsOfServicePage } from '@/pages/terms-of-service';
@@ -18,6 +19,7 @@ function AppRouter() {
         <Route path="/battle-commands" component={BattleCommandsPage} />
         <Route path="/privacy" component={PrivacyPolicyPage} />
         <Route path="/terms" component={TermsOfServicePage} />
+        <Route path="/simple-battle-rule" component={SimpleBattleRulePage} />
       </Route>
     </Router>
   );
