@@ -9,15 +9,15 @@ export function BattleCommandCardList() {
     <div class="battle-command-card-list">
       <div class="battle-command-card-list__header">
         <h2 class="battle-command-card-list__title">戦闘用コマンド一覧</h2>
-        <Show when={cards.length > 0}>
+        <Show when={cards() && cards()!.length > 0}>
           <span class="battle-command-card-list__count">
-            {cards.length} cards
+            {cards()!.length} cards
           </span>
         </Show>
       </div>
 
       <Show
-        when={cards.length > 0}
+        when={!cards.loading && cards()}
         fallback={
           <div class="battle-command-card-list__loading">
             <div class="battle-command-card-list__spinner" />
@@ -26,7 +26,7 @@ export function BattleCommandCardList() {
         }
       >
         <div class="battle-command-card-list__grid">
-          <For each={cards}>
+          <For each={cards()}>
             {(card) => (
               <BattleCommandCard
                 name={card.name}

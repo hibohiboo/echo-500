@@ -1,12 +1,6 @@
-import useSWR from 'swr';
+import { createResource } from 'solid-js';
 
 const baseUrl = 'https://sheets.googleapis.com/v4/spreadsheets/';
-
-interface GetSpreadSheetDataProps {
-  spreadSheetId: string;
-  sheetName: string;
-  range: string;
-}
 
 interface SpreadSheetResponse {
   majorDimension: 'Rows';
@@ -27,57 +21,70 @@ const fetcher = async (url: string): Promise<SpreadSheetResponse> => {
 
 const apiKey = import.meta.env.VITE_SPREAD_SHEET_API_KEY;
 
-const useSpreadSheetData = ({
-  spreadSheetId,
-  sheetName,
-  range,
-}: GetSpreadSheetDataProps) => {
+interface BattleSkillData {
+  class: string;
+  name: string;
+  cp: number;
+  timing: string;
+  cost: string;
+  range: string;
+  effect: string;
+  target: string;
+  flavor: string;
+  tags: string[];
+  details: string;
+}
+
+const parseTags = (tagsString: string): string[] => {
+  if (!tagsString) return [];
+  return tagsString.split(',').map((t) => t.trim());
+};
+
+const safeString = (value: string | undefined): string => value || '';
+const safeNumber = (value: string | undefined): number => Number(value) || 0;
+
+const mapRowToBattleSkill = (row: string[]): BattleSkillData => {
+  const [
+    className,
+    name,
+    cp,
+    timing,
+    target,
+    range,
+    cost,
+    effect,
+    flavor,
+    tags,
+    details,
+  ] = row;
+
+  return {
+    class: safeString(className),
+    name: safeString(name),
+    cp: safeNumber(cp),
+    timing: safeString(timing),
+    cost: safeString(cost),
+    range: safeString(range),
+    effect: safeString(effect),
+    target: safeString(target),
+    flavor: safeString(flavor),
+    tags: parseTags(tags),
+    details: safeString(details),
+  };
+};
+
+export const useSpreadSheetBattleSkillData = () => {
   if (!apiKey) {
     throw new Error('Google Sheets API key is not set.');
   }
 
-  const url = `${baseUrl}${spreadSheetId}/values/${sheetName}!${range}?key=${apiKey}`;
+  const spreadSheetId = import.meta.env.VITE_SPREAD_SHEET_ID!;
+  const url = `${baseUrl}${spreadSheetId}/values/戦闘用モジュール!A2:K200?key=${apiKey}`;
 
-  return useSWR<SpreadSheetResponse>(url, fetcher, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    dedupingInterval: 600000, // 600秒間は同じリクエストを重複排除
+  const [data] = createResource<BattleSkillData[]>(async () => {
+    const response = await fetcher(url);
+    return response.values?.map(mapRowToBattleSkill) || [];
   });
-};
-export const useSpreadSheetBattleSkillData = () => {
-  const result = useSpreadSheetData({
-    spreadSheetId: import.meta.env.VITE_SPREAD_SHEET_ID!,
-    sheetName: '戦闘用モジュール',
-    range: 'A2:I200',
-  });
-  return (
-    result.data?.values.map((row) => {
-      const [
-        className,
-        name,
-        cp,
-        timing,
-        target,
-        range,
-        cost,
-        effect,
-        flavor,
-        tags,
-        details,
-      ] = row;
-      return {
-        class: className,
-        name,
-        cp: Number(cp),
-        timing,
-        cost,
-        range,
-        effect,
-        target,
-        flavor,
-        tags: tags.split(','),
-        details,
-      };
-    }) || []
-  );
+
+  return data;
 };
