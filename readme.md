@@ -13,7 +13,8 @@ Reboot ... OK.
 
 # 開発
 
-| 項目       | 値                                                            |
-| ---------- | ------------------------------------------------------------- |
-| リポジトリ | https://github.com/hibohiboo/echo-500                         |
-| サイト     | https://echo-500.hibohiboo66-cloudflare.workers.dev/rulebook/ |
+| 項目       | 値                                                                                                   |
+| ---------- | ---------------------------------------------------------------------------------------------------- |
+| リポジトリ | https://github.com/hibohiboo/echo-500                                                                |
+| サイト     | https://echo-500.hibohiboo66-cloudflare.workers.dev/rulebook/                                        |
+| データ     | https://docs.google.com/spreadsheets/d/1C_pwOg-PsipE95OCX0Tk4NJL_o5ha1NsbZD1ZFzAcPM/edit?gid=0#gid=0 |
