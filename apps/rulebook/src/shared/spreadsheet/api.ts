@@ -47,7 +47,7 @@ const useSpreadSheetData = ({
 export const useSpreadSheetBattleSkillData = () => {
   const result = useSpreadSheetData({
     spreadSheetId: import.meta.env.VITE_SPREAD_SHEET_ID!,
-    sheetName: '戦闘用コマンド',
+    sheetName: '戦闘用モジュール',
     range: 'A2:I200',
   });
   return (
