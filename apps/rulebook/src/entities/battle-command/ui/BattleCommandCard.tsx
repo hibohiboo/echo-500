@@ -25,8 +25,6 @@ export function BattleCommandCard(props: BattleCommandCardProps) {
   return (
     <div class="battle-command-card" onClick={props.onClick}>
       <div class="battle-command-card__border">
-        <div class="battle-command-card__type-badge">CMD</div>
-
         <div class="battle-command-card__header">
           <h3 class="battle-command-card__name">{props.name}</h3>
           <span class="battle-command-card__cp">CP {props.cp}</span>
