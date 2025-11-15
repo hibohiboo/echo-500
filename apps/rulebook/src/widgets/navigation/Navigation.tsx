@@ -29,6 +29,7 @@ const Navigation = () => {
       label: 'Basic Rules',
       children: [
         { label: 'コマンドカード', path: '' },
+        { label: '戦闘用モジュール', path: `/${BASE_PATH}/battle-commands` },
         { label: '判定', path: '' },
         { label: '戦闘', path: '' },
       ],

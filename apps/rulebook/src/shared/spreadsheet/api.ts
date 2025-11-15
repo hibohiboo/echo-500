@@ -63,6 +63,7 @@ export const useSpreadSheetBattleSkillData = () => {
         effect,
         flavor,
         tags,
+        details,
       ] = row;
       return {
         class: className,
@@ -75,6 +76,7 @@ export const useSpreadSheetBattleSkillData = () => {
         target,
         flavor,
         tags: tags.split(','),
+        details,
       };
     }) || []
   );
