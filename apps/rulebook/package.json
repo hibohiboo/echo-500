@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.15.4",
-    "solid-js": "^1.9.10"
+    "solid-js": "^1.9.10",
+    "swr": "^2.3.6"
   },
   "devDependencies": {
     "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
