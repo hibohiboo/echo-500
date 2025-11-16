@@ -12,6 +12,7 @@ export default defineConfig([
     rules: {
       'import/no-absolute-path': ['off'],
       'import/no-unresolved': ['warn'],
+      'react-hooks/refs': ['off'],
     },
   },
   {
