@@ -19,33 +19,59 @@ function SimpleBattleRulePage() {
         <li>先に「目標値未満」を出した側が敗北。</li>
       </ol>
 
-      <h2>2. 判定の詳細</h2>
+      <h2>2. 判定（3パターン）</h2>
 
-      <h3>● A. 目標値未満 → 敗北</h3>
-      <p>
-        後手（または手番側）の出目が <strong>目標値より小さい</strong> 場合、
-        <br />
-        その時点で敗北。
-      </p>
+      <div
+        style={{
+          display: 'grid',
+          gap: '15px',
+          'margin-top': '20px',
+        }}
+      >
+        <div
+          style={{
+            background: '#ffe6e6',
+            padding: '15px',
+            'border-radius': '8px',
+            border: '2px solid #ff6b6b',
+          }}
+        >
+          <h3 style={{ margin: '0 0 10px 0', color: '#c92a2a' }}>
+            ❌ 目標値未満 → 敗北
+          </h3>
+          <p style={{ margin: 0 }}>その時点で敗北</p>
+        </div>
 
-      <h3>● B. 上回る → 目標値更新 & 手番交代</h3>
-      <p>
-        出目が <strong>目標値より大きい</strong> 場合、
-      </p>
-      <ul>
-        <li>その出目が新しい目標値になる</li>
-        <li>手番が 相手に移る</li>
-      </ul>
+        <div
+          style={{
+            background: '#e7f5ff',
+            padding: '15px',
+            'border-radius': '8px',
+            border: '2px solid #4dabf7',
+          }}
+        >
+          <h3 style={{ margin: '0 0 10px 0', color: '#1971c2' }}>
+            🔄 目標値より大きい → 攻守交代
+          </h3>
+          <p style={{ margin: 0 }}>出目が新しい目標値になり、相手の手番へ</p>
+        </div>
 
-      <h3>● C. 同値 → 特殊処理</h3>
-      <p>
-        出目が <strong>目標値と同じ</strong> の場合：
-      </p>
-      <ul>
-        <li>現在の手番側が もう一度 2D6 を振り直す</li>
-        <li>その出目が新しい目標値として設定される</li>
-        <li>手番は相手に移る</li>
-      </ul>
+        <div
+          style={{
+            background: '#fff3bf',
+            padding: '15px',
+            'border-radius': '8px',
+            border: '2px solid #ffd43b',
+          }}
+        >
+          <h3 style={{ margin: '0 0 10px 0', color: '#e67700' }}>
+            ⚡ 同値 → 振り直し
+          </h3>
+          <p style={{ margin: 0 }}>
+            もう一度2D6を振り、その出目が新しい目標値になり相手の手番へ
+          </p>
+        </div>
+      </div>
 
       <h2>3. 流れを図で見る</h2>
       <div
