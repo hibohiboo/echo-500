@@ -17,14 +17,14 @@ const Navigation = () => {
       label: 'Tutorial',
       path: `/${BASE_PATH}/content/tutorial`,
     },
-    {
-      label: 'Introduction',
-      children: [
-        { label: 'はじめに', path: '' },
-        { label: 'あそびかた', path: '' },
-        { label: '用語', path: '' },
-      ],
-    },
+    // {
+    //   label: 'Introduction',
+    //   children: [
+    //     { label: 'はじめに', path: '' },
+    //     { label: 'あそびかた', path: '' },
+    //     { label: '用語', path: '' },
+    //   ],
+    // },
     {
       label: 'Basic Rules',
       children: [
