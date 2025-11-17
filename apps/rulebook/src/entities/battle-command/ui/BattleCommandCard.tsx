@@ -329,7 +329,7 @@ export function BattleCommandCard(props: BattleCommandCardProps) {
               var(--color-cyber-primary),
               transparent
             );
-            animation: scan 3s ease-in-out infinite;
+            /* animation: scan 3s ease-in-out infinite; */
           }
 
           @keyframes scan {
