@@ -3,10 +3,9 @@ import { BattleCommandCardList } from '@/entities/battle-command';
 function BattleCommands() {
   return (
     <div class="battle-commands-page">
-      <p>戦闘ミッションの前には戦闘のためのモジュールを用意する。</p>
-      <p>
-        戦闘スタイルごとを３つまで選び、選んだスタイルのモジュールをCPを使ってインストールする。
-      </p>
+      <p>戦闘シナリオの前には戦闘モジュールをCPを使って取得する。</p>
+      <p>使用できるCPはシナリオに記載されている。</p>
+      <p>最初に遊ぶ場合は100点を推奨。</p>
       <BattleCommandCardList />
 
       <style>{`
