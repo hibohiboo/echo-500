@@ -3,6 +3,7 @@ import { BattleCommandsPage } from '@/pages/battle-commands';
 import SimpleBattleRulePage from '@/pages/battle-rules/SimpleBattleRulePage';
 import { HomePage } from '@/pages/home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy';
+import { ScenarioCreatorsPage } from '@/pages/scenario-creators';
 import { TermsOfServicePage } from '@/pages/terms-of-service';
 import { TutorialPage } from '@/pages/tutorial';
 import { Layout } from '@/shared/ui/layout';
@@ -16,6 +17,7 @@ function AppRouter() {
         component={(props) => <Layout>{props.children}</Layout>}
       >
         <Route path="/tutorial" component={TutorialPage} />
+        <Route path="/scenario-creators" component={ScenarioCreatorsPage} />
         <Route path="/battle-commands" component={BattleCommandsPage} />
         <Route path="/privacy" component={PrivacyPolicyPage} />
         <Route path="/terms" component={TermsOfServicePage} />
