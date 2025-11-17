@@ -1,20 +1,4 @@
-import { Mermaid } from '@/shared/ui/mermaid';
-
 function SimpleBattleRulePage() {
-  const flowchartDiagram = `flowchart TD
-    A[戦闘開始<br/>先手が2D6を振る] --> B[最初の目標値を設定]
-    B --> C[後手が2D6を振る]
-
-    C --> D{後手の出目は？}
-
-    D -->|未満| X[後手 敗北]
-    D -->|上回る| E[後手の出目が新しい目標値]
-    E --> F[先手の手番へ<br/>2D6を振る]
-    F --> C
-
-    D -->|同値| G[後手が2D6振り直し<br/>新しい目標値を設定]
-    G --> F`;
-
   return (
     <div style={{ 'max-width': '800px', margin: '0 auto', padding: '20px' }}>
       <h1>簡易戦闘ルール</h1>
@@ -42,6 +26,7 @@ function SimpleBattleRulePage() {
           display: 'grid',
           gap: '15px',
           'margin-top': '20px',
+          'margin-bottom': '20px',
         }}
       >
         <div
@@ -81,7 +66,7 @@ function SimpleBattleRulePage() {
           }}
         >
           <h3 style={{ margin: '0 0 10px 0', color: '#e67700' }}>
-            ⚡ 同値 → 振り直し
+            ⚡ 同値 → 目標値を振り直して攻守交替
           </h3>
           <p style={{ margin: 0 }}>
             もう一度2D6を振り、その出目が新しい目標値になり相手の手番へ
@@ -89,19 +74,7 @@ function SimpleBattleRulePage() {
         </div>
       </div>
 
-      <h2>3. 流れを図で見る</h2>
-      <div
-        style={{
-          background: '#f5f5f5',
-          padding: '20px',
-          'border-radius': '8px',
-          'margin-bottom': '20px',
-        }}
-      >
-        <Mermaid chart={flowchartDiagram} />
-      </div>
-
-      <h2>4. 短いプレイ例</h2>
+      <h2>4. 例</h2>
 
       <div style={{ background: '#f9f9f9', padding: '15px', margin: '10px 0' }}>
         <h3>例1：すぐ決着するケース</h3>
