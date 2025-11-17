@@ -54,9 +54,12 @@ const Navigation = () => {
     {
       label: 'Scenario Management',
       children: [
-        { label: 'Scripter Guide', path: '' },
-        { label: 'GM Guide', path: '' },
-        { label: 'Player Guide', path: '' },
+        {
+          label: 'Scenario Creators Guide',
+          path: `/${BASE_PATH}/content/scenario-creators`,
+        },
+        { label: 'Game Masters Guide', path: '' },
+        { label: 'Players Guide', path: '' },
         { label: 'Session Prep', path: '' },
         { label: 'Troubleshooting', path: '' },
       ],

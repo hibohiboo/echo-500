@@ -78,7 +78,7 @@ function Home() {
                   <span class="link-icon">›</span>
                   <span class="link-text">チュートリアル</span>
                 </a>
-                <a class="quick-link">
+                <a class="quick-link" href={`/${BASE_PATH}/content/scenario-creators`}>
                   <span class="link-icon">›</span>
                   <span class="link-text">シナリオ製作者向け</span>
                 </a>
