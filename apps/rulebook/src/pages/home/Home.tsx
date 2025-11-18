@@ -78,13 +78,16 @@ function Home() {
                   <span class="link-icon">›</span>
                   <span class="link-text">チュートリアル</span>
                 </a>
-                <a class="quick-link" href={`/${BASE_PATH}/content/scenario-creators`}>
+                <a
+                  class="quick-link"
+                  href={`/${BASE_PATH}/content/scenario-creators`}
+                >
                   <span class="link-icon">›</span>
                   <span class="link-text">シナリオ製作者向け</span>
                 </a>
-                <a class="quick-link">
+                <a class="quick-link" href={`/${BASE_PATH}/content/game-master`}>
                   <span class="link-icon">›</span>
-                  <span class="link-text">GM向け</span>
+                  <span class="link-text">ゲームマスター向け</span>
                 </a>
                 <a class="quick-link">
                   <span class="link-icon">›</span>
