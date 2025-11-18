@@ -31,7 +31,7 @@ function GameMaster() {
               <h3 class="flow-title">シナリオ選択</h3>
               <p class="flow-description">
                 シナリオ一覧から、自分が遊びたい、またはプレイヤーに体験してもらいたいシナリオを選ぶ。
-                シナリオの内容を事前に読み込み、理解を深めておく。
+                シナリオの内容を事前に読み込み、セッションの楽しい風景を想像しよう。
               </p>
             </div>
 
@@ -105,16 +105,6 @@ function GameMaster() {
               <p>
                 セッションをより楽しくするため、ルールを変更・調整する権限を持つ。
                 ただし、変更はセッション開始前、または適切なタイミングで明示する。
-              </p>
-            </div>
-
-            <div class="authority-card">
-              <h3 class="authority-title">
-                <span class="authority-icon">◆</span> 状況判定
-              </h3>
-              <p>
-                プレイヤーの行動が成功するか、どのような結果をもたらすかを判定する。
-                ルールに書かれていない状況でも、公平かつ物語的に判断を下す。
               </p>
             </div>
           </div>
