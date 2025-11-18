@@ -17,14 +17,14 @@ const Navigation = () => {
       label: 'Tutorial',
       path: `/${BASE_PATH}/content/tutorial`,
     },
-    // {
-    //   label: 'Introduction',
-    //   children: [
-    //     { label: 'はじめに', path: '' },
-    //     { label: 'あそびかた', path: '' },
-    //     { label: '用語', path: '' },
-    //   ],
-    // },
+    {
+      label: 'Introduction',
+      children: [
+        { label: 'はじめに', path: '' },
+        { label: 'あそびかた', path: '' },
+        { label: '用語', path: `/${BASE_PATH}/content/glossary` },
+      ],
+    },
     {
       label: 'Basic Rules',
       children: [
@@ -58,7 +58,10 @@ const Navigation = () => {
           label: 'Scenario Creators Guide',
           path: `/${BASE_PATH}/content/scenario-creators`,
         },
-        { label: 'Game Masters Guide', path: '' },
+        {
+          label: 'Game Masters Guide',
+          path: `/${BASE_PATH}/content/game-master`,
+        },
         { label: 'Players Guide', path: '' },
         { label: 'Session Prep', path: '' },
         { label: 'Troubleshooting', path: '' },

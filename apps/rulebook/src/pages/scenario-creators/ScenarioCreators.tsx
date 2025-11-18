@@ -82,15 +82,15 @@ function ScenarioCreators() {
             </div>
 
             <div class="archetype-card">
-              <h3 class="archetype-title">リアクト</h3>
+              <h3 class="archetype-title">モーメント</h3>
               <div class="archetype-meta">
                 <span class="meta-item">戦闘: なし</span>
                 <span class="meta-item">重点: キャラクター表現</span>
               </div>
               <p class="archetype-description">
-                発生するイベントに対して、キャラクターがどう反応するかを楽しむ。
-                釣り表や採取表など、ランダムイベントとキャラクターのリアクションを軸にした構造だ。
-                戦闘はなく、キャラクター表現を最優先する。
+                発生する小さなイベントに、キャラクターがどう反応するかを楽しむ。
+                釣り表・採取表などのランダム要素を中心に、戦闘は発生しない。
+                積み重なる “一瞬” が、キャラクターの輪郭を描き出す。
               </p>
             </div>
 

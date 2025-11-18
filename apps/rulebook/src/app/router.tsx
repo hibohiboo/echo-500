@@ -2,6 +2,7 @@ import { Router, Route } from '@solidjs/router';
 import { BattleCommandsPage } from '@/pages/battle-commands';
 import SimpleBattleRulePage from '@/pages/battle-rules/SimpleBattleRulePage';
 import { GameMasterPage } from '@/pages/game-master';
+import { GlossaryPage } from '@/pages/glossary';
 import { HomePage } from '@/pages/home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy';
 import { ScenarioCreatorsPage } from '@/pages/scenario-creators';
@@ -18,6 +19,7 @@ function AppRouter() {
         component={(props) => <Layout>{props.children}</Layout>}
       >
         <Route path="/tutorial" component={TutorialPage} />
+        <Route path="/glossary" component={GlossaryPage} />
         <Route path="/scenario-creators" component={ScenarioCreatorsPage} />
         <Route path="/game-master" component={GameMasterPage} />
         <Route path="/battle-commands" component={BattleCommandsPage} />
