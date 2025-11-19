@@ -1,6 +1,9 @@
 import { Router, Route } from '@solidjs/router';
 import { BattleCommandsPage } from '@/pages/battle-commands';
-import SimpleBattleRulePage from '@/pages/battle-rules/SimpleBattleRulePage';
+import {
+  BattleRulesPage,
+  SimpleBattleRulePage,
+} from '@/pages/battle-rules';
 import { GameMasterPage } from '@/pages/game-master';
 import { GlossaryPage } from '@/pages/glossary';
 import { HomePage } from '@/pages/home';
@@ -22,6 +25,7 @@ function AppRouter() {
         <Route path="/glossary" component={GlossaryPage} />
         <Route path="/scenario-creators" component={ScenarioCreatorsPage} />
         <Route path="/game-master" component={GameMasterPage} />
+        <Route path="/battle-rules" component={BattleRulesPage} />
         <Route path="/battle-commands" component={BattleCommandsPage} />
         <Route path="/privacy" component={PrivacyPolicyPage} />
         <Route path="/terms" component={TermsOfServicePage} />

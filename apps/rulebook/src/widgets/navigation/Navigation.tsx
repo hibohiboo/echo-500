@@ -32,7 +32,7 @@ const Navigation = () => {
           label: '簡易戦闘ルール',
           path: `/${BASE_PATH}/content/simple-battle-rule`,
         },
-        { label: '戦闘ルール', path: '' },
+        { label: '戦闘ルール', path: `/${BASE_PATH}/content/battle-rules` },
 
         {
           label: '戦闘用モジュール',
