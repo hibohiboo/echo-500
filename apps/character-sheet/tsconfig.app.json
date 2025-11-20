@@ -1,0 +1,10 @@
+{
+  "extends": "@trpg-scenario-maker/tsconfig/tsconfig.frontend",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"]
+}
