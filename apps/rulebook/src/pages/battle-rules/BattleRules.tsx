@@ -278,58 +278,6 @@ function BattleRules() {
             </ul>
           </div>
         </section>
-
-        <section class="tips-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> 戦闘のポイント
-          </h2>
-
-          <div class="tips-grid">
-            <div class="tip-card">
-              <h3 class="tip-title">
-                <span class="tip-icon">›</span> コスト管理
-              </h3>
-              <p class="tip-text">
-                コストが小さいコマンドは早く次の手番が回ってくるが、効果も控えめだ。
-                コストが大きいコマンドは強力だが、次の手番まで時間がかかる。
-                状況に応じた使い分けが勝利への鍵となる。
-              </p>
-            </div>
-
-            <div class="tip-card">
-              <h3 class="tip-title">
-                <span class="tip-icon">›</span> 位置取り
-              </h3>
-              <p class="tip-text">
-                戦闘エリアでの位置は戦術的に重要だ。
-                射程、移動力、地形効果などを考慮し、有利な位置を確保する。
-                包囲、遮蔽、挟撃など、位置関係を活用した戦術が有効だ。
-              </p>
-            </div>
-
-            <div class="tip-card">
-              <h3 class="tip-title">
-                <span class="tip-icon">›</span> 手番順の予測
-              </h3>
-              <p class="tip-text">
-                カウンターボードを見れば、誰がいつ動くかが一目瞭然だ。
-                敵の行動タイミングを予測し、先手を打つか後手で対応するか、
-                考えよう。
-              </p>
-            </div>
-
-            <div class="tip-card">
-              <h3 class="tip-title">
-                <span class="tip-icon">›</span> 連携プレイ
-              </h3>
-              <p class="tip-text">
-                複数のPCが協力することで、強大な敵にも対抗できる。
-                手番順を調整し、コンボを狙い、互いをサポートする。
-                チームワークが戦闘の勝敗を分ける。
-              </p>
-            </div>
-          </div>
-        </section>
       </article>
 
       <style>{`
