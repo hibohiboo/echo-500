@@ -20,6 +20,24 @@
         "vitest": "^4.0.11",
       },
     },
+    "apps/character-sheet": {
+      "name": "character-sheet",
+      "version": "0.0.0",
+      "dependencies": {
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "react-router": "catalog:",
+      },
+      "devDependencies": {
+        "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
+        "@trpg-scenario-maker/tsconfig": "workspace:*",
+        "@types/node": "catalog:",
+        "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "^9.38.0",
+        "typescript": "^5.9.3",
+        "vite": "^6.0.0",
+      },
+    },
     "apps/rulebook": {
       "name": "rulebook",
       "version": "0.0.0",
@@ -938,6 +956,8 @@
     "character-entities-legacy": ["character-entities-legacy@3.0.0", "", {}, "sha512-RpPp0asT/6ufRm//AJVwpViZbGM/MkjQFxJccQRHmISF/22NBtsHqAWmL+/pmkPWoIUJdWyeVleTl1wydHATVQ=="],
 
     "character-reference-invalid": ["character-reference-invalid@2.0.1", "", {}, "sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw=="],
+
+    "character-sheet": ["character-sheet@workspace:apps/character-sheet"],
 
     "check-error": ["check-error@2.1.1", "", {}, "sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw=="],
 
@@ -2303,6 +2323,10 @@
 
     "chalk/supports-color": ["supports-color@7.2.0", "", { "dependencies": { "has-flag": "^4.0.0" } }, "sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw=="],
 
+    "character-sheet/@types/node": ["@types/node@24.10.0", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-qzQZRBqkFsYyaSWXuEHc2WR9c0a0CXwiE5FWUvn7ZM+vdy1uZLfCunD38UzhuB7YN/J11ndbDBcTmOdxJo9Q7A=="],
+
+    "character-sheet/@vitejs/plugin-react": ["@vitejs/plugin-react@4.7.0", "", { "dependencies": { "@babel/core": "^7.28.0", "@babel/plugin-transform-react-jsx-self": "^7.27.1", "@babel/plugin-transform-react-jsx-source": "^7.27.1", "@rolldown/pluginutils": "1.0.0-beta.27", "@types/babel__core": "^7.20.5", "react-refresh": "^0.17.0" }, "peerDependencies": { "vite": "^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0" } }, "sha512-gUu9hwfWvvEDBBmgtAowQCojwZmJ5mcLn3aufeCsitijs3+f2NsrPtlAWIR6OPiqljl96GVCUbLe0HyqIpVaoA=="],
+
     "cytoscape-fcose/cose-base": ["cose-base@2.2.0", "", { "dependencies": { "layout-base": "^2.0.0" } }, "sha512-AzlgcsCbUMymkADOJtQm3wO9S3ltPfYOFD5033keQn9NJzIbtnZj+UdBJe7DYml/8TdbtHJW3j58SOnKhWY/5g=="],
 
     "d3-dsv/commander": ["commander@7.2.0", "", {}, "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="],
@@ -2480,6 +2504,10 @@
     "@vitest/browser/@vitest/mocker/@vitest/spy": ["@vitest/spy@4.0.10", "", {}, "sha512-AsY6sVS8OLb96GV5RoG8B6I35GAbNrC49AO+jNRF9YVGb/g9t+hzNm1H6kD0NDp8tt7VJLs6hb7YMkDXqu03iw=="],
 
     "@vitest/browser/@vitest/utils/@vitest/pretty-format": ["@vitest/pretty-format@4.0.10", "", { "dependencies": { "tinyrainbow": "^3.0.3" } }, "sha512-99EQbpa/zuDnvVjthwz5bH9o8iPefoQZ63WV8+bsRJZNw3qQSvSltfut8yu1Jc9mqOYi7pEbsKxYTi/rjaq6PA=="],
+
+    "character-sheet/@vitejs/plugin-react/@rolldown/pluginutils": ["@rolldown/pluginutils@1.0.0-beta.27", "", {}, "sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA=="],
+
+    "character-sheet/@vitejs/plugin-react/react-refresh": ["react-refresh@0.17.0", "", {}, "sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ=="],
 
     "cytoscape-fcose/cose-base/layout-base": ["layout-base@2.0.1", "", {}, "sha512-dp3s92+uNI1hWIpPGH3jK2kxE2lMjdXdr+DH8ynZHpd6PUlH6x6cbuXnoMmiNumznqaNO31xu9e79F0uuZ0JFg=="],
 

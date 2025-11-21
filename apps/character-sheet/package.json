@@ -1,0 +1,26 @@
+{
+  "name": "character-sheet",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint . --fix && tsc -b ",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "devDependencies": {
+    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
+    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "catalog:testing"
+  }
+}
