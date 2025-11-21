@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CharacterDetail from './pages/CharacterDetail';
 import CharacterForm from './pages/CharacterForm';
 import CharacterList from './pages/CharacterList';
 import {
@@ -10,11 +11,13 @@ import {
 } from './store/mockBackend';
 import type { Character } from './types';
 
-type View = 'list' | 'create' | 'edit';
+type View = 'list' | 'create' | 'edit' | 'detail';
 
 function App() {
   const [view, setView] = useState<View>('list');
-  const [characters, setCharacters] = useState<Character[]>(() => getCharacters());
+  const [characters, setCharacters] = useState<Character[]>(() =>
+    getCharacters(),
+  );
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const loadCharacters = () => {
@@ -23,6 +26,11 @@ function App() {
 
   const handleCreateNew = () => {
     setView('create');
+  };
+
+  const handleViewDetail = (id: string) => {
+    setEditingId(id);
+    setView('detail');
   };
 
   const handleEdit = (id: string) => {
@@ -34,7 +42,16 @@ function App() {
     if (window.confirm('Are you sure you want to delete this character?')) {
       deleteCharacter(id);
       loadCharacters();
+      if (view === 'detail') {
+        setView('list');
+        setEditingId(null);
+      }
     }
+  };
+
+  const handleBack = () => {
+    setView('list');
+    setEditingId(null);
   };
 
   const handleSave = (name: string) => {
@@ -61,8 +78,17 @@ function App() {
         <CharacterList
           characters={characters}
           onCreateNew={handleCreateNew}
+          onViewDetail={handleViewDetail}
           onEdit={handleEdit}
           onDelete={handleDelete}
+        />
+      )}
+      {view === 'detail' && editingCharacter && (
+        <CharacterDetail
+          character={editingCharacter}
+          onEdit={() => handleEdit(editingCharacter.id)}
+          onDelete={() => handleDelete(editingCharacter.id)}
+          onBack={handleBack}
         />
       )}
       {(view === 'create' || view === 'edit') && (

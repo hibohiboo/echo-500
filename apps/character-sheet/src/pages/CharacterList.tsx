@@ -3,6 +3,7 @@ import type { Character } from '../types';
 interface CharacterListProps {
   characters: Character[];
   onCreateNew: () => void;
+  onViewDetail: (id: string) => void;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
 }
@@ -10,6 +11,7 @@ interface CharacterListProps {
 export default function CharacterList({
   characters,
   onCreateNew,
+  onViewDetail,
   onEdit,
   onDelete,
 }: CharacterListProps) {
@@ -35,7 +37,12 @@ export default function CharacterList({
           <div className="character-list">
             {characters.map((character) => (
               <div key={character.id} className="character-item">
-                <span className="character-name">{character.name}</span>
+                <button
+                  className="character-name-button"
+                  onClick={() => onViewDetail(character.id)}
+                >
+                  <span className="character-name">{character.name}</span>
+                </button>
                 <div className="character-actions">
                   <button
                     className="btn btn-secondary"
