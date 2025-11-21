@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { Character } from '../types';
 
 interface CharacterFormProps {
@@ -14,12 +14,6 @@ export default function CharacterForm({
 }: CharacterFormProps) {
   const [name, setName] = useState(character?.name || '');
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (character) {
-      setName(character.name);
-    }
-  }, [character]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +52,12 @@ export default function CharacterForm({
               autoFocus
             />
             {error && (
-              <p style={{ color: 'var(--color-cyber-accent)', marginTop: 'var(--spacing-sm)' }}>
+              <p
+                style={{
+                  color: 'var(--color-cyber-accent)',
+                  marginTop: 'var(--spacing-sm)',
+                }}
+              >
                 {error}
               </p>
             )}
@@ -68,7 +67,11 @@ export default function CharacterForm({
             <button type="submit" className="btn btn-primary">
               {character ? 'Update' : 'Create'}
             </button>
-            <button type="button" className="btn btn-secondary" onClick={onCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={onCancel}
+            >
               Cancel
             </button>
           </div>

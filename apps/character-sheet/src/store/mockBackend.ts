@@ -3,6 +3,8 @@ import type { Character } from '../types';
 const STORAGE_KEY = 'characters';
 
 function generateId(): string {
+  // Using Date.now() + random for demo purposes - not cryptographically secure
+  // eslint-disable-next-line sonarjs/pseudo-random
   return `char_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 }
 

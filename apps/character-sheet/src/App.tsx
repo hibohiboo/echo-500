@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CharacterForm from './pages/CharacterForm';
 import CharacterList from './pages/CharacterList';
 import {
@@ -14,16 +14,12 @@ type View = 'list' | 'create' | 'edit';
 
 function App() {
   const [view, setView] = useState<View>('list');
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[]>(() => getCharacters());
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const loadCharacters = () => {
     setCharacters(getCharacters());
   };
-
-  useEffect(() => {
-    loadCharacters();
-  }, []);
 
   const handleCreateNew = () => {
     setView('create');
