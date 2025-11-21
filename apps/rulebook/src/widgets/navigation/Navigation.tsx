@@ -45,7 +45,10 @@ const Navigation = () => {
     {
       label: 'Character Creation',
       children: [
-        { label: '作成手順', path: '' },
+        {
+          label: 'キャラクターの作成',
+          path: `/${BASE_PATH}/content/character-creation`,
+        },
         { label: 'タグ', path: '' },
         { label: 'コマンド', path: '' },
         { label: '背景', path: '' },
