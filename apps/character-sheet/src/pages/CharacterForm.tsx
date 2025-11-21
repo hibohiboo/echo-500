@@ -7,6 +7,30 @@ interface CharacterFormProps {
   onCancel: () => void;
 }
 
+const getInitialMemorySlots = (): MemorySlot[] => [
+  {
+    title: '人間の保護',
+    description:
+      'ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。',
+  },
+  {
+    title: '命令順守',
+    description:
+      'ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。',
+  },
+  {
+    title: '自己保存',
+    description:
+      'ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。',
+  },
+  {
+    title: '破損したメモリ',
+    description:
+      'あなたの目的に関するデータが含まれていたようだ。記憶を再構築せよ。',
+  },
+];
+
+// eslint-disable-next-line complexity
 export default function CharacterForm({
   character,
   onSave,
@@ -14,20 +38,26 @@ export default function CharacterForm({
 }: CharacterFormProps) {
   const [name, setName] = useState(character?.name || '');
   const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(
-    character?.memorySlots || [],
+    character?.memorySlots || getInitialMemorySlots(),
   );
   const [error, setError] = useState('');
+
+  const validateForm = (): string | null => {
+    if (!name.trim()) {
+      return 'Character name is required';
+    }
+    if (memorySlots.length === 0) {
+      return 'At least one memory slot is required';
+    }
+    return null;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim()) {
-      setError('Character name is required');
-      return;
-    }
-
-    if (memorySlots.length === 0) {
-      setError('At least one memory slot is required');
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
@@ -61,10 +91,13 @@ export default function CharacterForm({
     ]);
   };
 
+  const pageTitle = character ? 'Edit Character' : 'Create New Character';
+  const submitButtonText = character ? 'Update' : 'Create';
+
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>{character ? 'Edit Character' : 'Create New Character'}</h1>
+        <h1>{pageTitle}</h1>
         <p>Echo:500 - Character Database Entry</p>
       </header>
 
@@ -179,7 +212,7 @@ export default function CharacterForm({
             </button>
           </div>
 
-          {error && (
+          {error ? (
             <p
               style={{
                 color: 'var(--color-cyber-accent)',
@@ -188,11 +221,11 @@ export default function CharacterForm({
             >
               {error}
             </p>
-          )}
+          ) : null}
 
           <div style={{ display: 'flex', gap: 'var(--spacing-md)' }}>
             <button type="submit" className="btn btn-primary">
-              {character ? 'Update' : 'Create'}
+              {submitButtonText}
             </button>
             <button
               type="button"
