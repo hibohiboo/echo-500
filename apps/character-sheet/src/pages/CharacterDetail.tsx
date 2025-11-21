@@ -117,6 +117,152 @@ export default function CharacterDetail({
               ))}
             </div>
           </div>
+
+          {character.battleFrame && (
+            <div className="detail-section">
+              <h2 className="detail-label">
+                <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
+                戦闘フレーム
+              </h2>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                  gap: 'var(--spacing-md)',
+                  padding: 'var(--spacing-md)',
+                  background: 'var(--bg-tertiary)',
+                  border: '2px solid var(--color-nature-accent)',
+                  borderRadius: '4px',
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    HP
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.hp}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    回避値
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.evasion}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    装甲値
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.armor}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    初期カウント
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.initialCount}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    移動力
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.movement}
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.8rem',
+                      color: 'var(--text-tertiary)',
+                      marginBottom: 'var(--spacing-xs)',
+                    }}
+                  >
+                    サイズ
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: 'var(--color-cyber-primary)',
+                    }}
+                  >
+                    {character.battleFrame.size === 1 ? '1x1' : '2x2'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="character-actions" style={{ gap: 'var(--spacing-md)' }}>

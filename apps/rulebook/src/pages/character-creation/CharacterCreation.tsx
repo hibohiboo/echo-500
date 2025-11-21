@@ -128,6 +128,79 @@ function CharacterCreation() {
               </p>
             </div>
           </div>
+
+          <div class="content-card">
+            <h2 class="section-title">
+              <span class="section-icon">◆</span> 戦闘モジュール
+            </h2>
+            <div class="section-content">
+              <p>
+                <strong>戦闘モジュール</strong>が必要なシナリオ
+                に参加する場合は、戦闘用のステータスである
+                <strong>戦闘フレーム</strong>を設定する必要がある。
+              </p>
+
+              <div class="battle-frame-box">
+                <h3 class="subsection-title">
+                  <span class="subsection-icon">⚔️</span> 戦闘フレームの項目
+                </h3>
+
+                <div class="stat-grid">
+                  <div class="stat-item">
+                    <h4 class="stat-name">HP</h4>
+                    <p class="stat-description">
+                      Hazard Buffer
+                      Partition「危険吸収領域」。キャラクターが戦闘を継続するための余裕。
+                      0になると戦闘不能になる。
+                    </p>
+                  </div>
+
+                  <div class="stat-item">
+                    <h4 class="stat-name">回避値</h4>
+                    <p class="stat-description">
+                      攻撃を回避する能力。攻撃時に2d6を振り、この値未満なら攻撃は失敗となる。
+                    </p>
+                  </div>
+
+                  <div class="stat-item">
+                    <h4 class="stat-name">装甲値</h4>
+                    <p class="stat-description">
+                      受けるダメージをこの値分だけ減少させる防御力。
+                    </p>
+                  </div>
+
+                  <div class="stat-item">
+                    <h4 class="stat-name">初期カウント</h4>
+                    <p class="stat-description">
+                      戦闘開始時にカウンターボード上に配置される位置。数値が小さいほど早く行動できる。
+                    </p>
+                  </div>
+
+                  <div class="stat-item">
+                    <h4 class="stat-name">移動力</h4>
+                    <p class="stat-description">
+                      移動モジュールで移動できる戦闘エリアのマス数。
+                    </p>
+                  </div>
+
+                  <div class="stat-item">
+                    <h4 class="stat-name">サイズ</h4>
+                    <p class="stat-description">
+                      戦闘エリアで占有するマスの大きさ。1は1×1マス、2は2×2マスを占有する。
+                    </p>
+                  </div>
+                </div>
+
+                <div class="note-box">
+                  <span class="note-icon">※</span>
+                  <p class="note-text">
+                    戦闘フレームの各項目は、選択するフレームによって決定される。
+                    100CPを使用してモジュールを追加購入することで、これらの値を強化できる。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </article>
 
@@ -426,6 +499,87 @@ function CharacterCreation() {
           background: rgba(255, 165, 0, 0.2);
           border: 1px solid #ffa500;
           color: #ffa500;
+        }
+
+        /* Battle Frame */
+        .battle-frame-box {
+          background: rgba(107, 156, 66, 0.05);
+          border: 2px solid var(--color-nature-accent);
+          border-radius: 8px;
+          padding: var(--spacing-lg);
+          margin-top: var(--spacing-lg);
+        }
+
+        .subsection-title {
+          font-family: var(--font-heading);
+          font-size: 1.2rem;
+          color: var(--color-nature-accent);
+          margin: 0 0 var(--spacing-lg) 0;
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+        }
+
+        .subsection-icon {
+          font-size: 1.3rem;
+        }
+
+        .stat-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--spacing-lg);
+          margin-bottom: var(--spacing-lg);
+        }
+
+        .stat-item {
+          background: var(--bg-tertiary);
+          border: 1px solid var(--color-nature-secondary);
+          border-radius: 4px;
+          padding: var(--spacing-md);
+        }
+
+        .stat-name {
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          color: var(--color-cyber-secondary);
+          margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        .stat-description {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        .note-box {
+          display: flex;
+          align-items: flex-start;
+          gap: var(--spacing-sm);
+          background: rgba(0, 255, 204, 0.05);
+          border-left: 3px solid var(--color-cyber-primary);
+          padding: var(--spacing-md);
+          border-radius: 4px;
+        }
+
+        .note-icon {
+          color: var(--color-cyber-primary);
+          font-size: 1.2rem;
+          font-weight: bold;
+          flex-shrink: 0;
+        }
+
+        .note-text {
+          color: var(--text-tertiary);
+          font-size: 0.9rem;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        @media (max-width: 768px) {
+          .stat-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
     </div>

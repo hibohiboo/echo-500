@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Character, MemorySlot } from '../types';
+import type { Character, MemorySlot, BattleFrame } from '../types';
 
 interface CharacterFormProps {
   character?: Character;
@@ -44,6 +44,9 @@ export default function CharacterForm({
   const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(
     character?.memorySlots || getInitialMemorySlots(),
   );
+  const [battleFrame, setBattleFrame] = useState<BattleFrame | null>(
+    character?.battleFrame || null,
+  );
   const [error, setError] = useState('');
 
   const validateForm = (): string | null => {
@@ -68,6 +71,7 @@ export default function CharacterForm({
     onSave({
       name: name.trim(),
       memorySlots,
+      battleFrame: battleFrame || undefined,
     });
   };
 
@@ -115,6 +119,26 @@ export default function CharacterForm({
         tags: [],
       },
     ]);
+  };
+
+  const createBattleFrame = () => {
+    setBattleFrame({
+      hp: 10,
+      evasion: 7,
+      armor: 0,
+      initialCount: 10,
+      movement: 3,
+      size: 1,
+    });
+  };
+
+  const updateBattleFrame = (field: keyof BattleFrame, value: number) => {
+    if (!battleFrame) return;
+    setBattleFrame({ ...battleFrame, [field]: value });
+  };
+
+  const removeBattleFrame = () => {
+    setBattleFrame(null);
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -307,6 +331,255 @@ export default function CharacterForm({
             >
               + 記憶スロットを追加
             </button>
+          </div>
+
+          {/* Battle Frame */}
+          <div className="form-group">
+            <label className="form-label">
+              <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
+              戦闘フレーム (バスターシナリオ用)
+            </label>
+            <p
+              style={{
+                fontSize: '0.85rem',
+                color: 'var(--text-tertiary)',
+                marginBottom: 'var(--spacing-md)',
+              }}
+            >
+              バスターシナリオに参加する場合は戦闘フレームを設定してください
+            </p>
+
+            {battleFrame ? (
+              <div
+                style={{
+                  padding: 'var(--spacing-md)',
+                  background: 'var(--bg-tertiary)',
+                  border: '2px solid var(--color-nature-accent)',
+                  borderRadius: '4px',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: 'var(--spacing-md)',
+                    marginBottom: 'var(--spacing-md)',
+                  }}
+                >
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      HP (ヒットポイント)
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      0になると戦闘不能
+                    </p>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={battleFrame.hp}
+                      onChange={(e) =>
+                        updateBattleFrame('hp', Number(e.target.value))
+                      }
+                      min="1"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      回避値
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      2d6がこの値未満なら攻撃失敗
+                    </p>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={battleFrame.evasion}
+                      onChange={(e) =>
+                        updateBattleFrame('evasion', Number(e.target.value))
+                      }
+                      min="2"
+                      max="12"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      装甲値
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      ダメージをこの値分減少
+                    </p>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={battleFrame.armor}
+                      onChange={(e) =>
+                        updateBattleFrame('armor', Number(e.target.value))
+                      }
+                      min="0"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      初期カウント
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      カウンターボードの配置位置
+                    </p>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={battleFrame.initialCount}
+                      onChange={(e) =>
+                        updateBattleFrame(
+                          'initialCount',
+                          Number(e.target.value),
+                        )
+                      }
+                      min="0"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      移動力
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      1ターンに移動できるマス数
+                    </p>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={battleFrame.movement}
+                      onChange={(e) =>
+                        updateBattleFrame('movement', Number(e.target.value))
+                      }
+                      min="0"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      サイズ
+                    </label>
+                    <p
+                      style={{
+                        fontSize: '0.7rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      占有マスの大きさ (1=1x1, 2=2x2)
+                    </p>
+                    <select
+                      className="form-input"
+                      value={battleFrame.size}
+                      onChange={(e) =>
+                        updateBattleFrame(
+                          'size',
+                          Number(e.target.value) as 1 | 2,
+                        )
+                      }
+                    >
+                      <option value={1}>1 (1x1マス)</option>
+                      <option value={2}>2 (2x2マス)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={removeBattleFrame}
+                  style={{ width: '100%' }}
+                >
+                  戦闘フレームを削除
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={createBattleFrame}
+                style={{ width: '100%' }}
+              >
+                + 戦闘フレームを追加
+              </button>
+            )}
           </div>
 
           {error ? (
