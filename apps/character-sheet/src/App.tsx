@@ -54,15 +54,15 @@ function App() {
     setEditingId(null);
   };
 
-  const handleSave = (name: string) => {
+  const handleSave = (character: Omit<Character, 'id'>) => {
     if (view === 'create') {
-      createCharacter(name);
+      createCharacter(character);
     } else if (view === 'edit' && editingId) {
-      updateCharacter(editingId, name);
+      updateCharacter(editingId, character);
     }
+    loadCharacters();
     setView('list');
     setEditingId(null);
-    loadCharacters();
   };
 
   const handleCancel = () => {

@@ -62,26 +62,38 @@ export function getCharacter(id: string): Character | undefined {
   return characters.find((char) => char.id === id);
 }
 
-export function createCharacter(name: string): Character {
+export function createCharacter(
+  characterData: Omit<Character, 'id'>,
+): Character {
   const characters = getStoredCharacters();
   const newCharacter: Character = {
     id: generateId(),
-    name,
-    robotLaws: createInitialRobotLaws(),
-    corruptedPurpose: createInitialCorruptedPurpose(),
+    ...characterData,
   };
   characters.push(newCharacter);
   setStoredCharacters(characters);
   return newCharacter;
 }
 
-export function updateCharacter(id: string, name: string): Character | null {
+// Legacy function for backward compatibility
+export function createCharacterWithDefaults(name: string): Character {
+  return createCharacter({
+    name,
+    robotLaws: createInitialRobotLaws(),
+    corruptedPurpose: createInitialCorruptedPurpose(),
+  });
+}
+
+export function updateCharacter(
+  id: string,
+  updatedCharacter: Omit<Character, 'id'>,
+): Character | null {
   const characters = getStoredCharacters();
   const index = characters.findIndex((char) => char.id === id);
   if (index === -1) {
     return null;
   }
-  characters[index].name = name;
+  characters[index] = { ...updatedCharacter, id };
   setStoredCharacters(characters);
   return characters[index];
 }
