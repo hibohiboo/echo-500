@@ -12,12 +12,12 @@ function CharacterCreation() {
         <section class="intro-section">
           <div class="intro-card">
             <p>
-              Echo:500では、あなたは<strong>人造人間（アンドロイド）</strong>
-              として物語を体験します。
+              Echo:500では、<strong>人造人間</strong>
+              のプレイヤーキャラクター(以降PC)として物語を体験する。
             </p>
             <p>
-              すべての人造人間は、かつて人類のために働いていました。
-              しかし文明の崩壊から500年が経過し、多くの記憶とデータが失われています。
+              すべての人造人間は、かつて人類のために働いていた。
+              しかし文明の崩壊から500年が経過し、多くの記憶とデータが失われてしまっている。
             </p>
           </div>
         </section>
@@ -25,12 +25,12 @@ function CharacterCreation() {
         <section class="content-section">
           <div class="content-card">
             <h2 class="section-title">
-              <span class="section-icon">◆</span> 手順1: 名前を決める
+              <span class="section-icon">◆</span> 名前を決める
             </h2>
             <div class="section-content">
               <p>
                 あなたのキャラクターの名前を決めます。後で変更もできるので、
-                空欄で進んでも構いません。ただし、保存するまでには決めてください。
+                空欄で進んでも構わない。
               </p>
               <div class="example-box">
                 <p class="example-title">例：</p>
@@ -46,12 +46,11 @@ function CharacterCreation() {
 
           <div class="content-card">
             <h2 class="section-title">
-              <span class="section-icon">◆</span> 手順2: 初期メモリーの確認
+              <span class="section-icon">◆</span> 初期メモリーの確認
             </h2>
             <div class="section-content">
               <p>
-                すべての人造人間は、作成時点で以下の初期メモリーを所持しています。
-                これらは削除できません。
+                すべての人造人間は、作成時点で以下の初期メモリーを所持している。
               </p>
 
               <div class="memory-box robot-laws">
@@ -95,13 +94,13 @@ function CharacterCreation() {
                     <strong>WARNING:</strong> Data corruption detected
                   </p>
                   <pre class="corrupted-display">
-PRIMARY_OBJECTIVE: [CORRUPTED]
-CREATOR: [DATA_LOST]
-MISSION_CODE: ████████
-AUTHORIZATION_LEVEL: ██
+                    PRIMARY_OBJECTIVE: [CORRUPTED] CREATOR: [DATA_LOST]
+                    MISSION_CODE: ████████ AUTHORIZATION_LEVEL: ██
                   </pre>
                   <p>復旧不可能。目的に関する情報は失われている。</p>
-                  <p class="purpose-question">あなたは何のために造られたのか？</p>
+                  <p class="purpose-question">
+                    あなたは何のために造られたのか？
+                  </p>
                   <p class="purpose-quest">
                     存在理由を取り戻さなくてはならない。
                     <br />
@@ -120,12 +119,12 @@ AUTHORIZATION_LEVEL: ██
 
           <div class="content-card">
             <h2 class="section-title">
-              <span class="section-icon">◆</span> 手順3: 初期タグの選択
+              <span class="section-icon">◆</span> 初期タグの選択
             </h2>
             <div class="section-content">
               <p>
-                キャラクター作成では、追加のタグやコマンドを選択できます。
-                詳細は次の章で説明します。
+                キャラクター作成では、追加のタグやコマンドを選択できる。
+                詳細は次の章で説明する。
               </p>
             </div>
           </div>
