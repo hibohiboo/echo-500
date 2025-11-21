@@ -12,21 +12,25 @@ const getInitialMemorySlots = (): MemorySlot[] => [
     title: '人間の保護',
     description:
       'ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。',
+    tags: ['ロボット工学三原則', 'システムコア', '優先度：最高'],
   },
   {
     title: '命令順守',
     description:
       'ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。',
+    tags: ['ロボット工学三原則', 'システムコア', '優先度：高'],
   },
   {
     title: '自己保存',
     description:
       'ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。',
+    tags: ['ロボット工学三原則', 'システムコア', '優先度：中'],
   },
   {
     title: '破損したメモリ',
     description:
       'あなたの目的に関するデータが含まれていたようだ。記憶を再構築せよ。',
+    tags: ['破損データ', '要復旧', 'クリティカル'],
   },
 ];
 
@@ -70,10 +74,31 @@ export default function CharacterForm({
   const updateMemorySlot = (
     index: number,
     field: keyof MemorySlot,
-    value: string,
+    value: string | string[],
   ) => {
     const updated = [...memorySlots];
     updated[index] = { ...updated[index], [field]: value };
+    setMemorySlots(updated);
+  };
+
+  const addTag = (slotIndex: number, tag: string) => {
+    const updated = [...memorySlots];
+    const trimmedTag = tag.trim();
+    if (trimmedTag && !updated[slotIndex].tags.includes(trimmedTag)) {
+      updated[slotIndex] = {
+        ...updated[slotIndex],
+        tags: [...updated[slotIndex].tags, trimmedTag],
+      };
+      setMemorySlots(updated);
+    }
+  };
+
+  const removeTag = (slotIndex: number, tagIndex: number) => {
+    const updated = [...memorySlots];
+    updated[slotIndex] = {
+      ...updated[slotIndex],
+      tags: updated[slotIndex].tags.filter((_, i) => i !== tagIndex),
+    };
     setMemorySlots(updated);
   };
 
@@ -87,6 +112,7 @@ export default function CharacterForm({
       {
         title: '',
         description: '',
+        tags: [],
       },
     ]);
   };
@@ -188,6 +214,77 @@ export default function CharacterForm({
                       style={{ resize: 'vertical' }}
                       placeholder="記憶の内容..."
                     />
+                  </div>
+
+                  <div style={{ marginBottom: 'var(--spacing-sm)' }}>
+                    <label
+                      style={{
+                        display: 'block',
+                        fontSize: '0.8rem',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      タグ
+                    </label>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 'var(--spacing-xs)',
+                        marginBottom: 'var(--spacing-xs)',
+                      }}
+                    >
+                      {slot.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            padding: '4px 8px',
+                            background: 'var(--color-cyber-primary)',
+                            color: 'var(--bg-primary)',
+                            fontSize: '0.75rem',
+                            borderRadius: '12px',
+                            fontFamily: 'var(--font-primary)',
+                          }}
+                        >
+                          {tag}
+                          <button
+                            type="button"
+                            onClick={() => removeTag(index, tagIndex)}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: 'inherit',
+                              cursor: 'pointer',
+                              padding: '0',
+                              fontSize: '1rem',
+                              lineHeight: '1',
+                            }}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                    <div style={{ display: 'flex', gap: 'var(--spacing-xs)' }}>
+                      <input
+                        type="text"
+                        className="form-input"
+                        placeholder="タグを入力..."
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const input = e.currentTarget;
+                            addTag(index, input.value);
+                            input.value = '';
+                          }
+                        }}
+                        style={{ flex: 1 }}
+                      />
+                    </div>
                   </div>
 
                   <button

@@ -82,10 +82,37 @@ export default function CharacterDetail({
                       fontSize: '0.9rem',
                       color: 'var(--text-secondary)',
                       lineHeight: '1.6',
+                      marginBottom: 'var(--spacing-sm)',
                     }}
                   >
                     {slot.description}
                   </p>
+                  {slot.tags.length > 0 && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 'var(--spacing-xs)',
+                        marginTop: 'var(--spacing-sm)',
+                      }}
+                    >
+                      {slot.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          style={{
+                            padding: '4px 8px',
+                            background: 'var(--color-cyber-primary)',
+                            color: 'var(--bg-primary)',
+                            fontSize: '0.75rem',
+                            borderRadius: '12px',
+                            fontFamily: 'var(--font-primary)',
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
