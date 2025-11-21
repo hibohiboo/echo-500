@@ -1,4 +1,4 @@
-import type { Character, RobotLaw, CorruptedPurpose } from '../types';
+import type { Character, MemorySlot } from '../types';
 
 const STORAGE_KEY = 'characters';
 
@@ -8,40 +8,29 @@ function generateId(): string {
   return `char_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 }
 
-function createInitialRobotLaws(): [RobotLaw, RobotLaw, RobotLaw] {
+function createInitialMemorySlots(): MemorySlot[] {
   return [
     {
-      number: 1,
       title: '人間の保護',
       description:
         'ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。',
-      priority: 'highest',
     },
     {
-      number: 2,
       title: '命令順守',
       description:
         'ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。',
-      priority: 'high',
     },
     {
-      number: 3,
       title: '自己保存',
       description:
         'ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。',
-      priority: 'medium',
+    },
+    {
+      title: '破損したメモリ',
+      description:
+        'あなたの目的に関するデータが含まれていたようだ。記憶を再構築せよ。',
     },
   ];
-}
-
-function createInitialCorruptedPurpose(): CorruptedPurpose {
-  return {
-    isCorrupted: true,
-    tagsCollected: 0,
-    tagsRequired: 5,
-    description:
-      '破損したメモリ。あなたの目的に関するデータが含まれていたようだ。５つのタグを獲得し、再設定せよ。',
-  };
 }
 
 function getStoredCharacters(): Character[] {
@@ -79,8 +68,7 @@ export function createCharacter(
 export function createCharacterWithDefaults(name: string): Character {
   return createCharacter({
     name,
-    robotLaws: createInitialRobotLaws(),
-    corruptedPurpose: createInitialCorruptedPurpose(),
+    memorySlots: createInitialMemorySlots(),
   });
 }
 
