@@ -121,15 +121,35 @@ export default function CharacterForm({
     ]);
   };
 
-  const createBattleFrame = () => {
-    setBattleFrame({
-      hp: 10,
+  const battleFramePresets = {
+    basic: {
+      hp: 20,
+      evasion: 5,
+      armor: 2,
+      initialCount: 5,
+      movement: 3,
+      size: 1 as const,
+    },
+    light: {
+      hp: 15,
       evasion: 7,
       armor: 0,
-      initialCount: 10,
-      movement: 3,
-      size: 1,
-    });
+      initialCount: 3,
+      movement: 5,
+      size: 1 as const,
+    },
+    heavy: {
+      hp: 30,
+      evasion: 3,
+      armor: 5,
+      initialCount: 8,
+      movement: 2,
+      size: 1 as const,
+    },
+  };
+
+  const createBattleFrame = (preset: 'basic' | 'light' | 'heavy' = 'basic') => {
+    setBattleFrame({ ...battleFramePresets[preset] });
   };
 
   const updateBattleFrame = (field: keyof BattleFrame, value: number) => {
@@ -571,14 +591,85 @@ export default function CharacterForm({
                 </button>
               </div>
             ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={createBattleFrame}
-                style={{ width: '100%' }}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--spacing-md)',
+                }}
               >
-                + 戦闘フレームを追加
-              </button>
+                <p
+                  style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--text-tertiary)',
+                    marginBottom: 'var(--spacing-xs)',
+                  }}
+                >
+                  フレームタイプを選択してください：
+                </p>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                    gap: 'var(--spacing-sm)',
+                  }}
+                >
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => createBattleFrame('basic')}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: 'var(--spacing-md)',
+                    }}
+                  >
+                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                      ベーシック
+                    </span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
+                      バランス型
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => createBattleFrame('light')}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: 'var(--spacing-md)',
+                    }}
+                  >
+                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                      ライト
+                    </span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
+                      高機動型
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => createBattleFrame('heavy')}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: 'var(--spacing-md)',
+                    }}
+                  >
+                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+                      ヘビー
+                    </span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
+                      重装甲型
+                    </span>
+                  </button>
+                </div>
+              </div>
             )}
           </div>
 

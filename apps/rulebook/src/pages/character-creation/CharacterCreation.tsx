@@ -170,6 +170,48 @@ function CharacterCreation() {
                   </div>
                 </div>
 
+                <h3 class="subsection-title" style="margin-top: var(--spacing-xl)">
+                  <span class="subsection-icon">🤖</span> フレームタイプ
+                </h3>
+
+                <div class="frame-types-grid">
+                  <div class="frame-type-card">
+                    <h4 class="frame-type-name">ベーシック（バランス型）</h4>
+                    <div class="frame-type-stats">
+                      <p>HP: 20 / 回避値: 5 / 装甲値: 2</p>
+                      <p>初期カウント: 5 / 移動力: 3 / サイズ: 1×1</p>
+                    </div>
+                    <p class="frame-type-desc">
+                      標準的な性能を持つバランス型のフレーム。
+                      回避値5は2d6で約83%の命中率となり、HP20で2～3発の攻撃に耐えられる。
+                    </p>
+                  </div>
+
+                  <div class="frame-type-card">
+                    <h4 class="frame-type-name">ライト（高機動型）</h4>
+                    <div class="frame-type-stats">
+                      <p>HP: 15 / 回避値: 7 / 装甲値: 0</p>
+                      <p>初期カウント: 3 / 移動力: 5 / サイズ: 1×1</p>
+                    </div>
+                    <p class="frame-type-desc">
+                      高い回避値と移動力を持つ高機動型。
+                      装甲は薄いが、攻撃を避けることに特化している。
+                    </p>
+                  </div>
+
+                  <div class="frame-type-card">
+                    <h4 class="frame-type-name">ヘビー（重装甲型）</h4>
+                    <div class="frame-type-stats">
+                      <p>HP: 30 / 回避値: 3 / 装甲値: 5</p>
+                      <p>初期カウント: 8 / 移動力: 2 / サイズ: 1×1</p>
+                    </div>
+                    <p class="frame-type-desc">
+                      高いHPと装甲値を持つ重装甲型。
+                      機動力は低いが、前線で耐え続けることができる。
+                    </p>
+                  </div>
+                </div>
+
                 <div class="note-box">
                   <span class="note-icon">※</span>
                   <p class="note-text">
@@ -549,6 +591,55 @@ function CharacterCreation() {
           margin: 0;
         }
 
+        /* Frame Types */
+        .frame-types-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: var(--spacing-md);
+          margin-bottom: var(--spacing-lg);
+        }
+
+        .frame-type-card {
+          background: var(--bg-tertiary);
+          border: 2px solid var(--color-nature-secondary);
+          border-radius: 8px;
+          padding: var(--spacing-md);
+          transition: border-color 0.2s;
+        }
+
+        .frame-type-card:hover {
+          border-color: var(--color-nature-accent);
+        }
+
+        .frame-type-name {
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          color: var(--color-cyber-primary);
+          margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        .frame-type-stats {
+          margin-bottom: var(--spacing-sm);
+          padding: var(--spacing-xs);
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 4px;
+        }
+
+        .frame-type-stats p {
+          font-family: var(--font-primary);
+          font-size: 0.75rem;
+          color: var(--color-nature-accent);
+          margin: var(--spacing-xs) 0;
+          line-height: 1.4;
+        }
+
+        .frame-type-desc {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin: 0;
+        }
+
         .note-box {
           display: flex;
           align-items: flex-start;
@@ -575,6 +666,10 @@ function CharacterCreation() {
 
         @media (max-width: 768px) {
           .stat-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .frame-types-grid {
             grid-template-columns: 1fr;
           }
         }
