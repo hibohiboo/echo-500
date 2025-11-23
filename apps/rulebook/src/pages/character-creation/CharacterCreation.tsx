@@ -25,24 +25,6 @@ function CharacterCreation() {
         <section class="content-section">
           <div class="content-card">
             <h2 class="section-title">
-              <span class="section-icon">◆</span> 名前を決める
-            </h2>
-            <div class="section-content">
-              <p>最後にキャラクターの名前を決める。</p>
-              <div class="example-box">
-                <p class="example-title">例：</p>
-                <ul>
-                  <li>7号（シンプルな番号）</li>
-                  <li>アルファ-237（型式番号）</li>
-                  <li>ユキ（人間風の名前）</li>
-                  <li>ウォッチャー（役割を示す名前）</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="content-card">
-            <h2 class="section-title">
               <span class="section-icon">◆</span> 初期メモリーの確認
             </h2>
             <div class="section-content">
@@ -195,6 +177,24 @@ function CharacterCreation() {
                     100CPを使用してモジュールを追加購入することで、これらの値を強化できる。
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <h2 class="section-title">
+              <span class="section-icon">◆</span> 名前を決める
+            </h2>
+            <div class="section-content">
+              <p>最後にキャラクターの名前を決める。</p>
+              <div class="example-box">
+                <p class="example-title">例：</p>
+                <ul>
+                  <li>7号（シンプルな番号）</li>
+                  <li>アルファ-237（型式番号）</li>
+                  <li>ユキ（人間風の名前）</li>
+                  <li>ウォッチャー（役割を示す名前）</li>
+                </ul>
               </div>
             </div>
           </div>
