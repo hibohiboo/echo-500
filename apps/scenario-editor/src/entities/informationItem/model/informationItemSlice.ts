@@ -16,13 +16,13 @@ import {
   readSceneInformationConnectionsByScenarioIdConnectionsAction,
   updateInformationItemAction,
 } from '../actions/informationItemActions';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
   InformationItem,
   InformationItemConnection,
   InformationToSceneConnection,
   SceneInformationConnection,
 } from '@echo-500/ui';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface InformationItemState {
   items: InformationItem[];

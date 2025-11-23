@@ -1,5 +1,5 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { generateUUID } from '@echo-500/utility';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
 import { characterGraphApi } from '../api/characterGraphApi';
 import type { Character } from '@echo-500/schema';

@@ -5,8 +5,8 @@ import {
   deleteCharacterAction,
   readCharacterListAction,
 } from '../actions/characterActions';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Character } from '@echo-500/schema';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface CharacterState {
   characters: Character[];

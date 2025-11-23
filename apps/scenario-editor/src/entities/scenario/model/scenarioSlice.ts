@@ -1,13 +1,13 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { stringToScenario } from '@echo-500/schema';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import {
   updateScenarioAction,
   readScenarioAction,
   deleteScenarioAction,
   createScenarioAction,
 } from '../actions/scenarioActions';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type { SerializableScenario } from '@echo-500/schema';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface ScenarioState {
   scenarios: SerializableScenario[];

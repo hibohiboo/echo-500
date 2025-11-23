@@ -6,8 +6,8 @@ import {
   deleteEventAction,
   updateEventOrderAction,
 } from '../actions/sceneEventActions';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type { SceneEvent } from '@echo-500/ui';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface SceneEventState {
   eventsBySceneId: Record<string, SceneEvent[]>;
