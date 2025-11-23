@@ -1,4 +1,4 @@
-import { sceneGraphRepository } from '@trpg-scenario-maker/graphdb';
+import { sceneGraphRepository } from '@echo-500/graphdb';
 import {
   parseGetScenesByScenarioIdPayload,
   parseGetConnectionsByScenarioIdPayload,
@@ -8,8 +8,8 @@ import {
   parseCreateConnectionPayload,
   parseDeleteConnectionPayload,
   parseSceneListSchema,
-} from '@trpg-scenario-maker/schema';
-import { parseSceneConnectionListSchema } from '@trpg-scenario-maker/schema/scene';
+} from '@echo-500/schema';
+import { parseSceneConnectionListSchema } from '@echo-500/schema/scene';
 
 /**
  * シーンのグラフDB操作ハンドラー

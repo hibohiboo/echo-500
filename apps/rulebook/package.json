@@ -14,14 +14,14 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.15.4",
-    "@trpg-scenario-maker/frontend-common": "workspace:*",
-    "@trpg-scenario-maker/schema": "workspace:*",
+    "@echo-500/frontend-common": "workspace:*",
+    "@echo-500/schema": "workspace:*",
     "mermaid": "^11.12.1",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "@storybook/addon-docs": "10.0.8",
     "@types/node": "^24.10.1",
     "eslint-plugin-storybook": "10.0.8",

@@ -22,7 +22,7 @@ import type {
   InformationItemConnection,
   InformationToSceneConnection,
   SceneInformationConnection,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 
 export interface InformationItemState {
   items: InformationItem[];

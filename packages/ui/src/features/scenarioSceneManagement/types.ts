@@ -7,8 +7,8 @@ import type {
 import type {
   SceneEvent,
   SceneEventType as SchemaSceneEventType,
-} from '@trpg-scenario-maker/schema';
-import type { SceneConnection, Scene } from '@trpg-scenario-maker/schema/scene';
+} from '@echo-500/schema';
+import type { SceneConnection, Scene } from '@echo-500/schema/scene';
 
 export type { SceneConnection, Scene, SceneEvent };
 

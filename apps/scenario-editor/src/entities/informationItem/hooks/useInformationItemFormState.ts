@@ -5,7 +5,7 @@ import {
   openInformationItemForm,
   setEditingItem,
 } from '../model/informationItemSlice';
-import type { InformationItem } from '@trpg-scenario-maker/ui';
+import type { InformationItem } from '@echo-500/ui';
 
 /**
  * 情報項目フォームの状態を管理するカスタムフック

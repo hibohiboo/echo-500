@@ -1,4 +1,4 @@
-import type { BattleFramePreset } from '@trpg-scenario-maker/schema';
+import type { BattleFramePreset } from '@echo-500/schema';
 
 /**
  * 戦闘フレームのプリセットデータ

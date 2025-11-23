@@ -17,7 +17,7 @@ import type {
   InformationItemConnection,
   InformationToSceneConnection,
   SceneInformationConnection,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 
 /**
  * 情報項目操作（追加・更新・削除）を行うカスタムフック

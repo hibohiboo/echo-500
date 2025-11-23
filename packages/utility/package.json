@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/utility",
+  "name": "@echo-500/utility",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
@@ -18,8 +18,8 @@
     "valibot": "^1.1.0"
   },
   "devDependencies": {
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "eslint": "catalog:testing",
     "typescript": "catalog:building"
   }

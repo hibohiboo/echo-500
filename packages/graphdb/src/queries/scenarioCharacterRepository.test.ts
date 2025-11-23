@@ -1,8 +1,8 @@
 import {
   parseToScenarioCharacterList,
   parseToScenarioCharacterRelationshipList,
-} from '@trpg-scenario-maker/schema';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+} from '@echo-500/schema';
+import { generateUUID } from '@echo-500/utility';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { initializeDatabase, closeDatabase, executeQuery } from '../db';
 import { graphDbSchemas } from '../schemas';

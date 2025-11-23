@@ -7,7 +7,7 @@ import {
   updateEventOrderAction,
 } from '../actions/sceneEventActions';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { SceneEvent } from '@trpg-scenario-maker/ui';
+import type { SceneEvent } from '@echo-500/ui';
 
 export interface SceneEventState {
   eventsBySceneId: Record<string, SceneEvent[]>;

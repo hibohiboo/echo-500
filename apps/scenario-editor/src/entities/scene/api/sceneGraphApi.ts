@@ -1,7 +1,7 @@
-import { parseSceneConnectionSchema } from '@trpg-scenario-maker/schema/scene';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { parseSceneConnectionSchema } from '@echo-500/schema/scene';
+import { generateUUID } from '@echo-500/utility';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
-import type { Scene, SceneConnection } from '@trpg-scenario-maker/ui';
+import type { Scene, SceneConnection } from '@echo-500/ui';
 
 /**
  * シーンのグラフDB操作API

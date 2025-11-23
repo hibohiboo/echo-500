@@ -1,4 +1,4 @@
-import { parseImportData } from '@trpg-scenario-maker/schema';
+import { parseImportData } from '@echo-500/schema';
 import {
   BlobReader,
   ZipReader,

@@ -3,7 +3,7 @@ import type {
   InformationItemConnection,
   InformationToSceneConnection,
   SceneInformationConnection,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 export type {
   InformationItem,

@@ -1,5 +1,5 @@
 import { BlobWriter, BlobReader, ZipWriter, ZipReader } from '@zip.js/zip.js';
-import type { ExportData } from '@trpg-scenario-maker/schema';
+import type { ExportData } from '@echo-500/schema';
 
 /**
  * エクスポートデータをZIP形式に圧縮

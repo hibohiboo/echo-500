@@ -1,4 +1,4 @@
-import { scenarioGraphRepository } from '@trpg-scenario-maker/graphdb';
+import { scenarioGraphRepository } from '@echo-500/graphdb';
 
 /**
  * シナリオのグラフDB操作ハンドラー

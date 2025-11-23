@@ -5,7 +5,7 @@ import { scenarioCharacterRelationGraphApi } from '../api/scenarioCharacterRelat
 import type {
   ScenarioCharacter,
   ScenarioCharacterRelationship,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * キャラクターをシナリオに追加

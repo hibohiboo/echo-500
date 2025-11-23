@@ -8,7 +8,7 @@ import {
   sceneEventSlice,
 } from '@/entities/sceneEvent';
 import { useAppSelector } from '@/shared/lib/store';
-import type { SceneEventType } from '@trpg-scenario-maker/ui';
+import type { SceneEventType } from '@echo-500/ui';
 
 /**
  * シナリオ詳細ページのシーン管理機能

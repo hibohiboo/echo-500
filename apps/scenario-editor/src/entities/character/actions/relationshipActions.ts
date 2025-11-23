@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { generateUUID } from '@echo-500/utility';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
 import { characterRelationGraphApi } from '../api/characterRelationGraphApi';
-import type { Relationship } from '@trpg-scenario-maker/schema';
+import type { Relationship } from '@echo-500/schema';
 
 /**
  * 関係性作成アクション

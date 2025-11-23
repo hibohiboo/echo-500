@@ -7,7 +7,7 @@ import {
   readAllRelationshipsAction,
 } from '../actions/relationshipActions';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Relationship } from '@trpg-scenario-maker/schema';
+import type { Relationship } from '@echo-500/schema';
 
 export interface RelationshipState {
   relationships: Relationship[];

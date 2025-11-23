@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/eslint-config-custom",
+  "name": "@echo-500/eslint-config-custom",
   "type": "module",
   "private": true,
   "devDependencies": {

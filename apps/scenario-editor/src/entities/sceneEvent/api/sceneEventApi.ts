@@ -1,6 +1,6 @@
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { generateUUID } from '@echo-500/utility';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
-import type { SceneEvent } from '@trpg-scenario-maker/ui';
+import type { SceneEvent } from '@echo-500/ui';
 
 /**
  * シーンイベントのグラフDB操作API

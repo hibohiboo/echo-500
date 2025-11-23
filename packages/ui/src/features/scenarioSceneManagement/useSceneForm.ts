@@ -5,7 +5,7 @@ import type {
   InformationItem,
   SceneInformationConnection,
 } from '../../entities/informationItem/types';
-import type { SceneEvent, SceneEventType } from '@trpg-scenario-maker/schema';
+import type { SceneEvent, SceneEventType } from '@echo-500/schema';
 
 export interface SceneFormProps {
   scene?: Scene;

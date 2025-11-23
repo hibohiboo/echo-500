@@ -9,7 +9,7 @@ import {
   deleteConnectionAction,
 } from '../actions/sceneActions';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Scene, SceneConnection } from '@trpg-scenario-maker/ui';
+import type { Scene, SceneConnection } from '@echo-500/ui';
 
 export interface SceneState {
   scenes: Scene[];

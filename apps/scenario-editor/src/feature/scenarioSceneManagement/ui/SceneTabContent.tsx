@@ -1,4 +1,4 @@
-import { SceneEditor } from '@trpg-scenario-maker/ui';
+import { SceneEditor } from '@echo-500/ui';
 import { useInformationItemList } from '@/entities/informationItem';
 import { useSceneManagement } from '../hooks/useSceneManagement';
 

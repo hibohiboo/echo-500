@@ -18,7 +18,7 @@ import type {
   SceneInformationConnection,
 } from '../../../entities/informationItem/types';
 import type { Scene, SceneConnection } from '../types';
-import type { SceneEvent } from '@trpg-scenario-maker/schema';
+import type { SceneEvent } from '@echo-500/schema';
 
 export interface SceneFlowCanvasProps {
   scenes: Scene[];

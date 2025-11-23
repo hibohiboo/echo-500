@@ -10,15 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@trpg-scenario-maker/frontend-common": "workspace:*",
-    "@trpg-scenario-maker/schema": "workspace:*",
+    "@echo-500/frontend-common": "workspace:*",
+    "@echo-500/schema": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
   },
   "devDependencies": {
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "typescript": "^5.9.3",
     "vite": "^6.0.0",

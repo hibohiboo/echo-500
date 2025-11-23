@@ -1,11 +1,11 @@
-import { imageRepository } from '@trpg-scenario-maker/rdb';
+import { imageRepository } from '@echo-500/rdb';
 import {
   parseCreateImagePayload,
   parseImageIdRdbPayload,
   parseImageIdsPayload,
   parseToImage,
   parseToImageList,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * 画像のRDB操作ハンドラー

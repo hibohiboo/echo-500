@@ -7,7 +7,7 @@ import {
   updateEventOrderAction,
   readEventsAction,
 } from '../actions/sceneEventActions';
-import type { SceneEvent, SceneEventType } from '@trpg-scenario-maker/schema';
+import type { SceneEvent, SceneEventType } from '@echo-500/schema';
 
 export interface UseSceneEventOperationsResult {
   /**

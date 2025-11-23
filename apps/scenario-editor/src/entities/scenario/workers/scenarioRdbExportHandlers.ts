@@ -2,12 +2,12 @@ import {
   createExportRepository,
   createImportRepository,
   db,
-} from '@trpg-scenario-maker/rdb';
+} from '@echo-500/rdb';
 import {
   parseRDBData,
   parseRDBExportPayload,
   type RDBData,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * RDBエクスポート/インポートハンドラー

@@ -1,7 +1,7 @@
 import {
   CharacterImageGallery,
   CharacterImageUploadModal,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 import { useState } from 'react';
 import { useCharacterImages } from '../hooks/useCharacterImages';
 

@@ -4,7 +4,7 @@ import {
   DeleteRelationshipModal,
   RelationshipForm,
   RelationshipList,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 import { useCharacterRelationshipPage } from '../hooks/useCharacterRelationshipPage';
 
 export const CharacterRelationshipPage = () => {

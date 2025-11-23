@@ -12,7 +12,7 @@ import {
 import type {
   ScenarioCharacter,
   ScenarioCharacterRelationship,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 export interface ScenarioCharacterState {
   // シナリオ別のキャラクター一覧（キー: scenarioId）
