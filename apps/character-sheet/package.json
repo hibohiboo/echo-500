@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@trpg-scenario-maker/frontend-common": "workspace:*",
+    "@trpg-scenario-maker/schema": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"

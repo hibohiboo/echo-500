@@ -24,6 +24,8 @@
       "name": "character-sheet",
       "version": "0.0.0",
       "dependencies": {
+        "@trpg-scenario-maker/frontend-common": "workspace:*",
+        "@trpg-scenario-maker/schema": "workspace:*",
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-router": "catalog:",
@@ -33,7 +35,7 @@
         "@trpg-scenario-maker/tsconfig": "workspace:*",
         "@types/node": "catalog:",
         "@vitejs/plugin-react": "^4.3.4",
-        "eslint": "^9.38.0",
+        "eslint": "catalog:testing",
         "typescript": "^5.9.3",
         "vite": "^6.0.0",
       },
@@ -43,6 +45,8 @@
       "version": "0.0.0",
       "dependencies": {
         "@solidjs/router": "^0.15.4",
+        "@trpg-scenario-maker/frontend-common": "workspace:*",
+        "@trpg-scenario-maker/schema": "workspace:*",
         "mermaid": "^11.12.1",
         "solid-js": "^1.9.10",
       },
@@ -106,6 +110,18 @@
         "eslint-plugin-unused-imports": "^4.3.0",
         "globals": "^16.5.0",
         "typescript-eslint": "^8.47.0",
+      },
+    },
+    "packages/frontend-common": {
+      "name": "@trpg-scenario-maker/frontend-common",
+      "dependencies": {
+        "@trpg-scenario-maker/schema": "workspace:*",
+      },
+      "devDependencies": {
+        "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
+        "@trpg-scenario-maker/tsconfig": "workspace:*",
+        "eslint": "catalog:testing",
+        "typescript": "catalog:building",
       },
     },
     "packages/graphdb": {
@@ -610,6 +626,8 @@
     "@trpg-scenario-maker/eslint-config-custom": ["@trpg-scenario-maker/eslint-config-custom@workspace:packages/eslint-config-custom"],
 
     "@trpg-scenario-maker/frontend": ["@trpg-scenario-maker/frontend@workspace:apps/scenario-editor"],
+
+    "@trpg-scenario-maker/frontend-common": ["@trpg-scenario-maker/frontend-common@workspace:packages/frontend-common"],
 
     "@trpg-scenario-maker/graphdb": ["@trpg-scenario-maker/graphdb@workspace:packages/graphdb"],
 
