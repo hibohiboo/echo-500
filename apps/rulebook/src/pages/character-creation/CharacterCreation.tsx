@@ -28,10 +28,7 @@ function CharacterCreation() {
               <span class="section-icon">◆</span> 名前を決める
             </h2>
             <div class="section-content">
-              <p>
-                あなたのキャラクターの名前を決めます。後で変更もできるので、
-                空欄で進んでも構わない。
-              </p>
+              <p>最後にキャラクターの名前を決める。</p>
               <div class="example-box">
                 <p class="example-title">例：</p>
                 <ul>
