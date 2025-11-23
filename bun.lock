@@ -221,6 +221,7 @@
     "packages/utility": {
       "name": "@echo-500/utility",
       "dependencies": {
+        "@echo-500/schema": "workspace:*",
         "@zip.js/zip.js": "^2.8.10",
         "uuid": "^13.0.0",
         "valibot": "^1.1.0",

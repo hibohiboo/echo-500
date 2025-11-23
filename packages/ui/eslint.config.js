@@ -1,4 +1,4 @@
-import customConfig from '@trpg-scenario-maker/eslint-config-custom/frontend.js';
+import customConfig from '@echo-500/eslint-config-custom/frontend.js';
 import { defineConfig } from 'eslint/config';
 import storybook from 'eslint-plugin-storybook';
 
