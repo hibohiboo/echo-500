@@ -166,12 +166,6 @@ export default function CharacterForm({
     setSelectedFrameType(null);
   };
 
-  const getFrameTypeName = (type: 'basic' | 'light' | 'heavy'): string => {
-    if (type === 'basic') return 'ベーシック (バランス型)';
-    if (type === 'light') return 'ライト (高機動型)';
-    return 'ヘビー (重装甲型)';
-  };
-
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
   const submitButtonText = character ? 'Update' : 'Create';
 
@@ -380,6 +374,166 @@ export default function CharacterForm({
               バスターシナリオに参加する場合は戦闘フレームを設定してください
             </p>
 
+            {/* Frame Type Selection */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--spacing-sm)',
+                marginBottom: 'var(--spacing-md)',
+                padding: 'var(--spacing-md)',
+                background: 'var(--bg-tertiary)',
+                borderRadius: '4px',
+              }}
+            >
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    selectedFrameType === null
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    selectedFrameType === null
+                      ? '2px solid var(--color-cyber-secondary)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={selectedFrameType === null}
+                  onChange={() => {
+                    setSelectedFrameType(null);
+                    removeBattleFrame();
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>なし</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (戦闘フレームを使用しない)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    selectedFrameType === 'basic'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    selectedFrameType === 'basic'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={selectedFrameType === 'basic'}
+                  onChange={() => createBattleFrame('basic')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ベーシック</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (バランス型)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    selectedFrameType === 'light'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    selectedFrameType === 'light'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={selectedFrameType === 'light'}
+                  onChange={() => createBattleFrame('light')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ライト</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (高機動型)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    selectedFrameType === 'heavy'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    selectedFrameType === 'heavy'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={selectedFrameType === 'heavy'}
+                  onChange={() => createBattleFrame('heavy')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ヘビー</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (重装甲型)
+                </span>
+              </label>
+            </div>
+
             {battleFrame ? (
               <div
                 style={{
@@ -389,26 +543,6 @@ export default function CharacterForm({
                   borderRadius: '4px',
                 }}
               >
-                {selectedFrameType ? (
-                  <div
-                    style={{
-                      marginBottom: 'var(--spacing-md)',
-                      padding: 'var(--spacing-sm)',
-                      background: 'var(--bg-secondary)',
-                      borderLeft: '3px solid var(--color-nature-accent)',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--color-nature-accent)',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      選択中のフレーム: {getFrameTypeName(selectedFrameType)}
-                    </span>
-                  </div>
-                ) : null}
                 <div
                   style={{
                     display: 'grid',
@@ -611,97 +745,8 @@ export default function CharacterForm({
                     </select>
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={removeBattleFrame}
-                  style={{ width: '100%' }}
-                >
-                  戦闘フレームを削除
-                </button>
               </div>
-            ) : (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 'var(--spacing-md)',
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--text-tertiary)',
-                    marginBottom: 'var(--spacing-xs)',
-                  }}
-                >
-                  フレームタイプを選択してください：
-                </p>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                    gap: 'var(--spacing-sm)',
-                  }}
-                >
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => createBattleFrame('basic')}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: 'var(--spacing-md)',
-                    }}
-                  >
-                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-                      ベーシック
-                    </span>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
-                      バランス型
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => createBattleFrame('light')}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: 'var(--spacing-md)',
-                    }}
-                  >
-                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-                      ライト
-                    </span>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
-                      高機動型
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => createBattleFrame('heavy')}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: 'var(--spacing-md)',
-                    }}
-                  >
-                    <span style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-                      ヘビー
-                    </span>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>
-                      重装甲型
-                    </span>
-                  </button>
-                </div>
-              </div>
-            )}
+            ) : null}
           </div>
 
           {error ? (
