@@ -37,3 +37,9 @@ export interface BattleFramePreset {
   stats: BattleFrameStats;
 }
 
+export const battleFrameTypeToString = (type: string) => {
+  if (type === 'basic') return 'ベーシック (バランス型)';
+  if (type === 'light') return 'ライト (高機動型)';
+  if (type === 'heavy') return 'ヘビー (重装甲型)';
+  return '';
+};

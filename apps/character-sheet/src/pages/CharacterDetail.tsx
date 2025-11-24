@@ -1,3 +1,4 @@
+import { battleFrameTypeToString } from '@echo-500/schema';
 import type { Character } from '../types';
 
 interface CharacterDetailProps {
@@ -123,11 +124,7 @@ export default function CharacterDetail({
               <h2 className="detail-label">
                 <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
                 戦闘フレーム -{' '}
-                {character.battleFrame.type === 'basic'
-                  ? 'ベーシック (バランス型)'
-                  : character.battleFrame.type === 'light'
-                    ? 'ライト (高機動型)'
-                    : 'ヘビー (重装甲型)'}
+                {battleFrameTypeToString(character.battleFrame.type)}
               </h2>
               <div
                 style={{
