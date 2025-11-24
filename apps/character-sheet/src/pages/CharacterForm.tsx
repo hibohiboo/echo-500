@@ -47,6 +47,9 @@ export default function CharacterForm({
   const [battleFrame, setBattleFrame] = useState<BattleFrame | null>(
     character?.battleFrame || null,
   );
+  const [selectedFrameType, setSelectedFrameType] = useState<
+    'basic' | 'light' | 'heavy' | null
+  >(null);
   const [error, setError] = useState('');
 
   const validateForm = (): string | null => {
@@ -150,6 +153,7 @@ export default function CharacterForm({
 
   const createBattleFrame = (preset: 'basic' | 'light' | 'heavy' = 'basic') => {
     setBattleFrame({ ...battleFramePresets[preset] });
+    setSelectedFrameType(preset);
   };
 
   const updateBattleFrame = (field: keyof BattleFrame, value: number) => {
@@ -159,6 +163,13 @@ export default function CharacterForm({
 
   const removeBattleFrame = () => {
     setBattleFrame(null);
+    setSelectedFrameType(null);
+  };
+
+  const getFrameTypeName = (type: 'basic' | 'light' | 'heavy'): string => {
+    if (type === 'basic') return 'ベーシック (バランス型)';
+    if (type === 'light') return 'ライト (高機動型)';
+    return 'ヘビー (重装甲型)';
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -378,6 +389,26 @@ export default function CharacterForm({
                   borderRadius: '4px',
                 }}
               >
+                {selectedFrameType ? (
+                  <div
+                    style={{
+                      marginBottom: 'var(--spacing-md)',
+                      padding: 'var(--spacing-sm)',
+                      background: 'var(--bg-secondary)',
+                      borderLeft: '3px solid var(--color-nature-accent)',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '0.9rem',
+                        color: 'var(--color-nature-accent)',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      選択中のフレーム: {getFrameTypeName(selectedFrameType)}
+                    </span>
+                  </div>
+                ) : null}
                 <div
                   style={{
                     display: 'grid',
