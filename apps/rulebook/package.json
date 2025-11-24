@@ -12,6 +12,7 @@
     "ncu": "ncu -u"
   },
   "dependencies": {
+    "@echo-500/frontend-common": "workspace:*",
     "@echo-500/ui": "workspace:*",
     "@echo-500/schema": "workspace:*",
     "mermaid": "^11.12.1",

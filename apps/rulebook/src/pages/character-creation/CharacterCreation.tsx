@@ -282,6 +282,47 @@ export function CharacterCreationPage() {
                     ステータス補正は全スタイルの合計値が適用される。
                   </p>
                 </div>
+
+                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
+                  <span className="subsection-icon">💾</span> 戦闘モジュールの取得
+                </h3>
+
+                <p>
+                  戦闘スタイルを習得すると、そのスタイルに対応したタグを持つ
+                  <strong>戦闘モジュール</strong>を取得できるようになる。
+                  戦闘モジュールはCPを消費して取得し、戦闘中に使用できる特殊なアクションとなる。
+                </p>
+
+                <div className="module-acquisition-box">
+                  <h4 className="acquisition-title">取得可能なモジュール</h4>
+                  <ul className="acquisition-list">
+                    <li>
+                      <strong>セイバー</strong>のタグを持つ戦闘モジュール
+                      → 近接攻撃系のアクション
+                    </li>
+                    <li>
+                      <strong>ガンナー</strong>のタグを持つ戦闘モジュール
+                      → 遠距離攻撃系のアクション
+                    </li>
+                    <li>
+                      <strong>ウィザード</strong>のタグを持つ戦闘モジュール
+                      → 支援・妨害系のアクション
+                    </li>
+                  </ul>
+                  <p className="acquisition-note">
+                    各戦闘モジュールには<strong>CP(コストポイント)</strong>が設定されており、
+                    そのCPを消費することで取得できる。キャラクター作成時には
+                    <strong>100CP</strong>が与えられる。
+                  </p>
+                </div>
+
+                <div className="note-box">
+                  <span className="note-icon">※</span>
+                  <p className="note-text">
+                    戦闘モジュールの詳細な一覧は、次のページで確認できる。
+                    各モジュールには、タイミング、対象、射程、コスト、効果などの情報が記載されている。
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -792,6 +833,52 @@ export function CharacterCreationPage() {
           margin: 0;
           text-align: right;
           font-weight: bold;
+        }
+
+        /* Module Acquisition */
+        .module-acquisition-box {
+          background: rgba(0, 255, 204, 0.05);
+          border: 1px solid var(--color-cyber-primary);
+          border-radius: 8px;
+          padding: var(--spacing-lg);
+          margin: var(--spacing-lg) 0;
+        }
+
+        .acquisition-title {
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          color: var(--color-cyber-secondary);
+          margin: 0 0 var(--spacing-md) 0;
+        }
+
+        .acquisition-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 var(--spacing-md) 0;
+        }
+
+        .acquisition-list li {
+          color: var(--text-secondary);
+          padding: var(--spacing-xs) 0;
+          padding-left: var(--spacing-md);
+          position: relative;
+          line-height: 1.6;
+        }
+
+        .acquisition-list li::before {
+          content: '▸';
+          position: absolute;
+          left: 0;
+          color: var(--color-cyber-primary);
+        }
+
+        .acquisition-note {
+          color: var(--text-tertiary);
+          font-size: 0.9rem;
+          line-height: 1.6;
+          margin: var(--spacing-md) 0 0 0;
+          padding-top: var(--spacing-md);
+          border-top: 1px solid var(--color-ruin-steel);
         }
 
         @media (max-width: 768px) {
