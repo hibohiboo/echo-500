@@ -1,16 +1,16 @@
+import { Layout } from '@echo-500/ui/rulebook/layout';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { HomePage } from '@/pages/home/Home';
-import { TutorialPage } from '@/pages/tutorial/Tutorial';
-import { GlossaryPage } from '@/pages/glossary/Glossary';
-import { CharacterCreationPage } from '@/pages/character-creation/CharacterCreation';
-import { ScenarioCreatorsPage } from '@/pages/scenario-creators/ScenarioCreators';
-import { GameMasterPage } from '@/pages/game-master/GameMaster';
+import { BattleCommandsPage } from '@/pages/battle-commands/BattleCommands';
 import { BattleRulesPage } from '@/pages/battle-rules/BattleRules';
 import { SimpleBattleRulePage } from '@/pages/battle-rules/SimpleBattleRulePage';
-import { BattleCommandsPage } from '@/pages/battle-commands/BattleCommands';
+import { CharacterCreationPage } from '@/pages/character-creation/CharacterCreation';
+import { GameMasterPage } from '@/pages/game-master/GameMaster';
+import { GlossaryPage } from '@/pages/glossary/Glossary';
+import { HomePage } from '@/pages/home/Home';
 import { PrivacyPolicyPage } from '@/pages/privacy-policy/PrivacyPolicy';
+import { ScenarioCreatorsPage } from '@/pages/scenario-creators/ScenarioCreators';
 import { TermsOfServicePage } from '@/pages/terms-of-service/TermsOfService';
-import { Layout } from '@echo-500/ui/rulebook/layout';
+import { TutorialPage } from '@/pages/tutorial/Tutorial';
 
 export function AppRouter() {
   return (
