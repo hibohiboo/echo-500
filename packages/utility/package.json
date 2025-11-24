@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@echo-500/schema": "workspace:*",
-    "@zip.js/zip.js": "^2.8.10",
+    "@zip.js/zip.js": "^2.8.11",
     "uuid": "^13.0.0",
     "valibot": "^1.1.0"
   },

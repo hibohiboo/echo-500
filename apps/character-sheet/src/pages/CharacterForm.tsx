@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { useState } from 'react';
 import { BATTLE_STYLES } from '../types';
 import type {
@@ -40,7 +41,6 @@ const getInitialMemorySlots = (): MemorySlot[] => [
   },
 ];
 
-// eslint-disable-next-line complexity
 export default function CharacterForm({
   character,
   onSave,

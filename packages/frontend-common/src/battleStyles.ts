@@ -33,6 +33,7 @@ export const BATTLE_STYLES = {
     cpCost: 30,
     modifier: {
       movement: 1,
+      evasion: undefined,
     },
   },
   gunner: {
@@ -40,7 +41,10 @@ export const BATTLE_STYLES = {
     nameEn: 'Gunner',
     description: '遠距離攻撃を主とするスタイル',
     cpCost: 30,
-    modifier: {},
+    modifier: {
+      movement: undefined,
+      evasion: undefined,
+    },
   },
   wizard: {
     name: 'ウィザード',

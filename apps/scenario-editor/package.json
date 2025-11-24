@@ -15,13 +15,13 @@
     "codegen": "playwright codegen"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.10.1",
+    "@reduxjs/toolkit": "^2.11.0",
     "@echo-500/graphdb": "workspace:*",
     "@echo-500/rdb": "workspace:*",
     "@echo-500/schema": "workspace:*",
     "@echo-500/ui": "workspace:*",
     "@echo-500/utility": "workspace:*",
-    "@zip.js/zip.js": "^2.8.10",
+    "@zip.js/zip.js": "^2.8.11",
     "date-fns": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

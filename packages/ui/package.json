@@ -17,7 +17,7 @@
     "build-storybook": "storybook build -o ../../apps/frontend/dist/tsm-components-catalog"
   },
   "dependencies": {
-    "@dagrejs/dagre": "^1.1.8",
+    "@dagrejs/dagre": "^2.0.0",
     "@echo-500/schema": "workspace:*",
     "@echo-500/utility": "workspace:*",
     "@types/cytoscape": "^3.31.0",
@@ -43,7 +43,7 @@
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
     "@vitest/browser": "catalog:testing",
-    "@vitest/browser-playwright": "^4.0.11",
+    "@vitest/browser-playwright": "^4.0.13",
     "autoprefixer": "^10.4.22",
     "eslint": "catalog:testing",
     "eslint-plugin-storybook": "10.0.8",
