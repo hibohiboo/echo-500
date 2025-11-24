@@ -1,0 +1,29 @@
+{
+  "name": "@echo-500/rulebook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "type-check": "tsc -b",
+    "lint": "eslint . --fix && tsc -b",
+    "preview": "vite preview",
+    "ncu": "ncu -u"
+  },
+  "dependencies": {
+    "@echo-500/ui": "workspace:*",
+    "@echo-500/schema": "workspace:*",
+    "mermaid": "^11.12.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:testing"
+  }
+}
