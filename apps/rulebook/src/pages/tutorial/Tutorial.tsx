@@ -1,8 +1,9 @@
+import { TutorialWithInventory } from '@/features/tutorial';
+
 export function TutorialPage() {
   return (
-    <div>
-      <h1>Tutorial</h1>
-      <p>チュートリアルページ（準備中）</p>
+    <div className="tutorial-page">
+      <TutorialWithInventory />
     </div>
   );
 }
