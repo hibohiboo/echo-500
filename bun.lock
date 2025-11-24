@@ -198,7 +198,7 @@
     "packages/ui": {
       "name": "@echo-500/ui",
       "dependencies": {
-        "@dagrejs/dagre": "^2.0.0",
+        "@dagrejs/dagre": "1.0.4",
         "@echo-500/schema": "workspace:*",
         "@echo-500/utility": "workspace:*",
         "@types/cytoscape": "^3.31.0",
@@ -389,9 +389,9 @@
 
     "@cucumber/tag-expressions": ["@cucumber/tag-expressions@6.2.0", "", {}, "sha512-KIF0eLcafHbWOuSDWFw0lMmgJOLdDRWjEL1kfXEWrqHmx2119HxVAr35WuEd9z542d3Yyg+XNqSr+81rIKqEdg=="],
 
-    "@dagrejs/dagre": ["@dagrejs/dagre@2.0.0", "", { "dependencies": { "@dagrejs/graphlib": "2.2.4" } }, "sha512-L87v5pFRQDjTSXULl5HbJyMfGZRS2fqvbQsmROt9pmy7CeoC54n7kRBsYs4AmvVnNdChIWuE1F9EEWAL+ZJNGw=="],
+    "@dagrejs/dagre": ["@dagrejs/dagre@1.0.4", "", { "dependencies": { "@dagrejs/graphlib": "2.1.13" } }, "sha512-jrEore+HhW1yg1Rsd9H1PPMcoEOD4bVh0WCXc6GqzyzubnJj4GaWGg8ETOrskTd/3n/g5LOzumGM4CCgpNLJNw=="],
 
-    "@dagrejs/graphlib": ["@dagrejs/graphlib@2.2.4", "", {}, "sha512-mepCf/e9+SKYy1d02/UkvSy6+6MoyXhVxP8lLDfA7BPE1X1d4dR0sZznmbM8/XVJ1GPM+Svnx7Xj6ZweByWUkw=="],
+    "@dagrejs/graphlib": ["@dagrejs/graphlib@2.1.13", "", {}, "sha512-calbMa7Gcyo+/t23XBaqQqon8LlgE9regey4UVoikoenKBXvUnCUL3s9RP6USCxttfr0XWVICtYUuKMdehKqMw=="],
 
     "@drizzle-team/brocli": ["@drizzle-team/brocli@0.10.2", "", {}, "sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w=="],
 

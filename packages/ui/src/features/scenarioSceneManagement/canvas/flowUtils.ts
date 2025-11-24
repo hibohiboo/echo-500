@@ -1,5 +1,4 @@
-import './dagre.d.ts'; // 一時的な型エラーに対応 . https://github.com/dagrejs/dagre/issues/492
-import dagre from '@dagrejs/dagre';
+import dagre from '@dagrejs/dagre'; // v2.0.0ではエラーがでているので 1.0.4 固定。 https://github.com/dagrejs/dagre/issues/492
 import type { Scene } from '../types';
 import type { SceneEvent } from '@echo-500/schema';
 import type { Edge, Node } from '@xyflow/react';
