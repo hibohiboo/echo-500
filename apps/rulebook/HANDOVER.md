@@ -6,6 +6,14 @@
 1. ✅ **TutorialPage** - インベントリシステム統合（8ステップ、インタラクティブ）
 2. ✅ **GlossaryPage** - 用語集（6用語の詳細解説）
 3. ✅ **ScenarioCreatorsPage** - シナリオ製作者向けガイド（7つのアーキタイプ）
+4. ✅ **GameMasterPage** - ゲームマスター向けガイド（4つのフロー、権限と責任、ヒント）
+5. ✅ **PrivacyPolicyPage** - プライバシーポリシー（10条、法的文書）
+6. ✅ **TermsOfServicePage** - 利用規約（14条、法的文書）
+7. ✅ **BattleRulesPage** - 戦闘ルール（5ステップの準備、4ステップの流れ、10×10グリッド座標系）
+8. ✅ **CharacterCreationPage** - キャラクター作成（ロボット工学三原則、3フレームタイプ、3戦闘スタイル）
+
+### 未完了ページ
+- ⏳ **BattleCommandsPage** - battle-commandエンティティの移行が必要（21行 + entity依存）
 
 ### 1. 新規作成したUIコンポーネント（packages/ui/src/rulebook/）
 
