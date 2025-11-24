@@ -1,16 +1,16 @@
-function CharacterCreation() {
+export function CharacterCreationPage() {
   return (
-    <div class="character-creation-container">
-      <article class="character-creation-content">
-        <section class="header-section">
-          <h1 class="page-title">
-            <span class="title-icon">▶</span> キャラクターの作成
+    <div className="character-creation-container">
+      <article className="character-creation-content">
+        <section className="header-section">
+          <h1 className="page-title">
+            <span className="title-icon">▶</span> キャラクターの作成
           </h1>
-          <div class="header-divider"></div>
+          <div className="header-divider"></div>
         </section>
 
-        <section class="intro-section">
-          <div class="intro-card">
+        <section className="intro-section">
+          <div className="intro-card">
             <p>
               Echo:500では、<strong>人造人間</strong>
               のプレイヤーキャラクター(以降PC)として物語を体験する。
@@ -22,85 +22,85 @@ function CharacterCreation() {
           </div>
         </section>
 
-        <section class="content-section">
-          <div class="content-card">
-            <h2 class="section-title">
-              <span class="section-icon">◆</span> 初期メモリーの確認
+        <section className="content-section">
+          <div className="content-card">
+            <h2 className="section-title">
+              <span className="section-icon">◆</span> 初期メモリーの確認
             </h2>
-            <div class="section-content">
+            <div className="section-content">
               <p>
                 すべての人造人間は、作成時点で以下の初期メモリーを所持している。
               </p>
 
-              <div class="memory-box robot-laws">
-                <h3 class="memory-title">
-                  <span class="memory-icon">⚖️</span> ロボット工学三原則
+              <div className="memory-box robot-laws">
+                <h3 className="memory-title">
+                  <span className="memory-icon">⚖️</span> ロボット工学三原則
                 </h3>
-                <div class="law-item">
-                  <h4 class="law-number">第一条：人間の保護</h4>
+                <div className="law-item">
+                  <h4 className="law-number">第一条：人間の保護</h4>
                   <p>
                     ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、
                     人間に危害を及ぼしてはならない。
                   </p>
-                  <p class="law-priority">優先度：最高</p>
+                  <p className="law-priority">優先度：最高</p>
                 </div>
 
-                <div class="law-item">
-                  <h4 class="law-number">第二条：命令順守</h4>
+                <div className="law-item">
+                  <h4 className="law-number">第二条：命令順守</h4>
                   <p>
                     ロボットは人間にあたえられた命令に服従しなければならない。
                     ただし、あたえられた命令が、第一条に反する場合は、この限りでない。
                   </p>
-                  <p class="law-priority">優先度：高</p>
+                  <p className="law-priority">優先度：高</p>
                 </div>
 
-                <div class="law-item">
-                  <h4 class="law-number">第三条：自己保存</h4>
+                <div className="law-item">
+                  <h4 className="law-number">第三条：自己保存</h4>
                   <p>
                     ロボットは、前掲第一条および第二条に反するおそれのないかぎり、
                     自己をまもらなければならない。
                   </p>
-                  <p class="law-priority">優先度：中</p>
+                  <p className="law-priority">優先度：中</p>
                 </div>
               </div>
 
-              <div class="memory-box corrupted-purpose">
-                <h3 class="memory-title">
-                  <span class="memory-icon">💥</span> 目的（破損データ）
+              <div className="memory-box corrupted-purpose">
+                <h3 className="memory-title">
+                  <span className="memory-icon">💥</span> 目的(破損データ)
                 </h3>
-                <div class="corrupted-data">
-                  <p class="warning-text">
+                <div className="corrupted-data">
+                  <p className="warning-text">
                     <strong>WARNING:</strong> Data corruption detected
                   </p>
-                  <pre class="corrupted-display">
+                  <pre className="corrupted-display">
                     PRIMARY_OBJECTIVE: [CORRUPTED] CREATOR: [DATA_LOST]
                     MISSION_CODE: ████████ AUTHORIZATION_LEVEL: ██
                   </pre>
                   <p>復旧不可能。目的に関する情報は失われている。</p>
-                  <p class="purpose-question">
+                  <p className="purpose-question">
                     あなたは何のために造られたのか？
                   </p>
-                  <p class="purpose-quest">
+                  <p className="purpose-quest">
                     存在理由を取り戻さなくてはならない。
                     <br />
                     <strong>５つのタグを獲得し、再設定せよ。</strong>
                   </p>
                 </div>
-                <div class="purpose-tags">
-                  <p class="tags-label">タグ：</p>
-                  <span class="tag tag-corrupted">破損データ</span>
-                  <span class="tag tag-critical">要復旧</span>
-                  <span class="tag tag-priority">クリティカル</span>
+                <div className="purpose-tags">
+                  <p className="tags-label">タグ：</p>
+                  <span className="tag tag-corrupted">破損データ</span>
+                  <span className="tag tag-critical">要復旧</span>
+                  <span className="tag tag-priority">クリティカル</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="content-card">
-            <h2 class="section-title">
-              <span class="section-icon">◆</span> 初期タグの選択
+          <div className="content-card">
+            <h2 className="section-title">
+              <span className="section-icon">◆</span> 初期タグの選択
             </h2>
-            <div class="section-content">
+            <div className="section-content">
               <p>
                 キャラクター作成では、追加のタグやコマンドを選択できる。
                 詳細は次の章で説明する。
@@ -108,120 +108,120 @@ function CharacterCreation() {
             </div>
           </div>
 
-          <div class="content-card">
-            <h2 class="section-title">
-              <span class="section-icon">◆</span> 戦闘モジュール
+          <div className="content-card">
+            <h2 className="section-title">
+              <span className="section-icon">◆</span> 戦闘モジュール
             </h2>
-            <div class="section-content">
+            <div className="section-content">
               <p>
                 <strong>戦闘モジュール</strong>が必要なシナリオ
                 に参加する場合は、戦闘用のステータスである
                 <strong>戦闘フレーム</strong>を設定する必要がある。
               </p>
 
-              <div class="battle-frame-box">
-                <h3 class="subsection-title">
-                  <span class="subsection-icon">⚔️</span> 戦闘フレームの項目
+              <div className="battle-frame-box">
+                <h3 className="subsection-title">
+                  <span className="subsection-icon">⚔️</span> 戦闘フレームの項目
                 </h3>
 
-                <div class="stat-grid">
-                  <div class="stat-item">
-                    <h4 class="stat-name">HP</h4>
-                    <p class="stat-description">
+                <div className="stat-grid">
+                  <div className="stat-item">
+                    <h4 className="stat-name">HP</h4>
+                    <p className="stat-description">
                       Hazard Buffer
                       Partition「危険吸収領域」。キャラクターが戦闘を継続するための余裕。
                       0になると戦闘不能になる。
                     </p>
                   </div>
 
-                  <div class="stat-item">
-                    <h4 class="stat-name">回避値</h4>
-                    <p class="stat-description">
+                  <div className="stat-item">
+                    <h4 className="stat-name">回避値</h4>
+                    <p className="stat-description">
                       攻撃を回避する能力。攻撃時に2d6を振り、この値未満なら攻撃は失敗となる。
                     </p>
                   </div>
 
-                  <div class="stat-item">
-                    <h4 class="stat-name">装甲値</h4>
-                    <p class="stat-description">
+                  <div className="stat-item">
+                    <h4 className="stat-name">装甲値</h4>
+                    <p className="stat-description">
                       受けるダメージをこの値分だけ減少させる防御力。
                     </p>
                   </div>
 
-                  <div class="stat-item">
-                    <h4 class="stat-name">初期カウント</h4>
-                    <p class="stat-description">
+                  <div className="stat-item">
+                    <h4 className="stat-name">初期カウント</h4>
+                    <p className="stat-description">
                       戦闘開始時にカウンターボード上に配置される位置。数値が小さいほど早く行動できる。
                     </p>
                   </div>
 
-                  <div class="stat-item">
-                    <h4 class="stat-name">移動力</h4>
-                    <p class="stat-description">
+                  <div className="stat-item">
+                    <h4 className="stat-name">移動力</h4>
+                    <p className="stat-description">
                       移動モジュールで移動できる戦闘エリアのマス数。
                     </p>
                   </div>
 
-                  <div class="stat-item">
-                    <h4 class="stat-name">サイズ</h4>
-                    <p class="stat-description">
+                  <div className="stat-item">
+                    <h4 className="stat-name">サイズ</h4>
+                    <p className="stat-description">
                       戦闘エリアで占有するマスの大きさ。1は1×1マス、2は2×2マスを占有する。
                     </p>
                   </div>
                 </div>
 
-                <h3 class="subsection-title" style="margin-top: var(--spacing-xl)">
-                  <span class="subsection-icon">🤖</span> フレームタイプ
+                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
+                  <span className="subsection-icon">🤖</span> フレームタイプ
                 </h3>
 
-                <div class="frame-types-grid">
-                  <div class="frame-type-card">
-                    <h4 class="frame-type-name">ベーシック（バランス型）</h4>
-                    <div class="frame-type-stats">
+                <div className="frame-types-grid">
+                  <div className="frame-type-card">
+                    <h4 className="frame-type-name">ベーシック(バランス型)</h4>
+                    <div className="frame-type-stats">
                       <p>HP: 20 / 回避値: 5 / 装甲値: 2</p>
                       <p>初期カウント: 5 / 移動力: 3 / サイズ: 1×1</p>
                     </div>
-                    <p class="frame-type-desc">
+                    <p className="frame-type-desc">
                       標準的な性能を持つバランス型のフレーム。
-                      回避値5は2d6で約83%の命中率となり、HP20で2～3発の攻撃に耐えられる。
+                      回避値5は2d6で約83%の命中率となり、HP20で2〜3発の攻撃に耐えられる。
                     </p>
                   </div>
 
-                  <div class="frame-type-card">
-                    <h4 class="frame-type-name">ライト（高機動型）</h4>
-                    <div class="frame-type-stats">
+                  <div className="frame-type-card">
+                    <h4 className="frame-type-name">ライト(高機動型)</h4>
+                    <div className="frame-type-stats">
                       <p>HP: 15 / 回避値: 7 / 装甲値: 0</p>
                       <p>初期カウント: 3 / 移動力: 5 / サイズ: 1×1</p>
                     </div>
-                    <p class="frame-type-desc">
+                    <p className="frame-type-desc">
                       高い回避値と移動力を持つ高機動型。
                       装甲は薄いが、攻撃を避けることに特化している。
                     </p>
                   </div>
 
-                  <div class="frame-type-card">
-                    <h4 class="frame-type-name">ヘビー（重装甲型）</h4>
-                    <div class="frame-type-stats">
+                  <div className="frame-type-card">
+                    <h4 className="frame-type-name">ヘビー(重装甲型)</h4>
+                    <div className="frame-type-stats">
                       <p>HP: 30 / 回避値: 3 / 装甲値: 5</p>
                       <p>初期カウント: 8 / 移動力: 2 / サイズ: 1×1</p>
                     </div>
-                    <p class="frame-type-desc">
+                    <p className="frame-type-desc">
                       高いHPと装甲値を持つ重装甲型。
                       機動力は低いが、前線で耐え続けることができる。
                     </p>
                   </div>
                 </div>
 
-                <div class="note-box">
-                  <span class="note-icon">※</span>
-                  <p class="note-text">
+                <div className="note-box">
+                  <span className="note-icon">※</span>
+                  <p className="note-text">
                     戦闘フレームの各項目は、選択するフレームによって決定される。
                     100CPを使用してモジュールを追加購入することで、これらの値を強化できる。
                   </p>
                 </div>
 
-                <h3 class="subsection-title" style="margin-top: var(--spacing-xl)">
-                  <span class="subsection-icon">⚡</span> 戦闘スタイル
+                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
+                  <span className="subsection-icon">⚡</span> 戦闘スタイル
                 </h3>
 
                 <p>
@@ -230,55 +230,55 @@ function CharacterCreation() {
                   <strong>30CP</strong>を消費する。
                 </p>
 
-                <div class="style-types-grid">
-                  <div class="style-type-card">
-                    <h4 class="style-type-name">
-                      <span class="style-icon">⚔️</span> セイバー（近接攻撃型）
+                <div className="style-types-grid">
+                  <div className="style-type-card">
+                    <h4 className="style-type-name">
+                      <span className="style-icon">⚔️</span> セイバー(近接攻撃型)
                     </h4>
-                    <div class="style-type-modifier">
-                      <p class="modifier-text">補正: 移動力 +1</p>
+                    <div className="style-type-modifier">
+                      <p className="modifier-text">補正: 移動力 +1</p>
                     </div>
-                    <p class="style-type-desc">
+                    <p className="style-type-desc">
                       近接戦闘を主とするスタイル。接近して敵を制圧する戦術に長ける。
                       高い機動力で敵との距離を詰め、近接攻撃で確実に仕留める。
                     </p>
-                    <p class="cp-cost">CP消費: 30</p>
+                    <p className="cp-cost">CP消費: 30</p>
                   </div>
 
-                  <div class="style-type-card">
-                    <h4 class="style-type-name">
-                      <span class="style-icon">🎯</span> ガンナー（遠距離攻撃型）
+                  <div className="style-type-card">
+                    <h4 className="style-type-name">
+                      <span className="style-icon">🎯</span> ガンナー(遠距離攻撃型)
                     </h4>
-                    <div class="style-type-modifier">
-                      <p class="modifier-text">補正: なし</p>
+                    <div className="style-type-modifier">
+                      <p className="modifier-text">補正: なし</p>
                     </div>
-                    <p class="style-type-desc">
+                    <p className="style-type-desc">
                       遠距離攻撃を主とするスタイル。安全な距離から敵を攻撃する。
                       射撃精度と火力に優れ、距離を保ちながら確実にダメージを与える。
                     </p>
-                    <p class="cp-cost">CP消費: 30</p>
+                    <p className="cp-cost">CP消費: 30</p>
                   </div>
 
-                  <div class="style-type-card">
-                    <h4 class="style-type-name">
-                      <span class="style-icon">✨</span> ウィザード（支援妨害型）
+                  <div className="style-type-card">
+                    <h4 className="style-type-name">
+                      <span className="style-icon">✨</span> ウィザード(支援妨害型)
                     </h4>
-                    <div class="style-type-modifier">
-                      <p class="modifier-text">補正: 移動力 -1, 回避値 -1</p>
+                    <div className="style-type-modifier">
+                      <p className="modifier-text">補正: 移動力 -1, 回避値 -1</p>
                     </div>
-                    <p class="style-type-desc">
+                    <p className="style-type-desc">
                       支援と妨害を主とするスタイル。味方の強化や敵の弱体化を行う。
                       機動性は低いが、戦場全体をコントロールする高度な戦術を可能にする。
                     </p>
-                    <p class="cp-cost">CP消費: 30</p>
+                    <p className="cp-cost">CP消費: 30</p>
                   </div>
                 </div>
 
-                <div class="note-box">
-                  <span class="note-icon">※</span>
-                  <p class="note-text">
+                <div className="note-box">
+                  <span className="note-icon">※</span>
+                  <p className="note-text">
                     戦闘スタイルは複数習得可能。習得したスタイルに応じて、
-                    戦闘モジュール（攻撃・防御・支援アクション）が使用可能になる。
+                    戦闘モジュール(攻撃・防御・支援アクション)が使用可能になる。
                     ステータス補正は全スタイルの合計値が適用される。
                   </p>
                 </div>
@@ -286,19 +286,19 @@ function CharacterCreation() {
             </div>
           </div>
 
-          <div class="content-card">
-            <h2 class="section-title">
-              <span class="section-icon">◆</span> 名前を決める
+          <div className="content-card">
+            <h2 className="section-title">
+              <span className="section-icon">◆</span> 名前を決める
             </h2>
-            <div class="section-content">
+            <div className="section-content">
               <p>最後にキャラクターの名前を決める。</p>
-              <div class="example-box">
-                <p class="example-title">例：</p>
+              <div className="example-box">
+                <p className="example-title">例：</p>
                 <ul>
-                  <li>7号（シンプルな番号）</li>
-                  <li>アルファ-237（型式番号）</li>
-                  <li>ユキ（人間風の名前）</li>
-                  <li>ウォッチャー（役割を示す名前）</li>
+                  <li>7号(シンプルな番号)</li>
+                  <li>アルファ-237(型式番号)</li>
+                  <li>ユキ(人間風の名前)</li>
+                  <li>ウォッチャー(役割を示す名前)</li>
                 </ul>
               </div>
             </div>
@@ -811,5 +811,3 @@ function CharacterCreation() {
     </div>
   );
 }
-
-export default CharacterCreation;

@@ -1,1 +1,1 @@
-export { TutorialWithInventory } from './ui/TutorialWithInventory';
+export { TutorialWithInventory } from './TutorialWithInventory';

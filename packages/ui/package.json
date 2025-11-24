@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/*.ts",
+    "./*": "./src/*",
     "./tailwind.css": "./src/styles/tailwind.css"
   },
   "scripts": {
@@ -17,7 +17,7 @@
     "build-storybook": "storybook build -o ../../apps/frontend/dist/tsm-components-catalog"
   },
   "dependencies": {
-    "@dagrejs/dagre": "^2.0.0",
+    "@dagrejs/dagre": "1.0.4",
     "@echo-500/schema": "workspace:*",
     "@echo-500/utility": "workspace:*",
     "@types/cytoscape": "^3.31.0",

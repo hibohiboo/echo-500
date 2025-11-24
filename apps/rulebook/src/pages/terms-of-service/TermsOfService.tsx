@@ -1,19 +1,19 @@
-function TermsOfService() {
+export function TermsOfServicePage() {
   return (
-    <div class="legal-document">
+    <div className="legal-document">
       <h1>利用規約</h1>
-      <p class="last-updated">最終更新日: 2025年11月12日</p>
+      <p className="last-updated">最終更新日: 2025年11月12日</p>
 
       <section>
-        <h2>第1条（適用）</h2>
+        <h2>第1条(適用)</h2>
         <p>
-          本規約は、Echo:500（以下「本サービス」）の利用に関する条件を定めるものです。
+          本規約は、Echo:500(以下「本サービス」)の利用に関する条件を定めるものです。
           ユーザーは、本サービスを利用することにより、本規約に同意したものとみなされます。
         </p>
       </section>
 
       <section>
-        <h2>第2条（定義）</h2>
+        <h2>第2条(定義)</h2>
         <p>本規約において使用する用語の定義は、以下のとおりとします：</p>
         <ul>
           <li>
@@ -35,7 +35,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第3条（アカウント登録）</h2>
+        <h2>第3条(アカウント登録)</h2>
         <ol>
           <li>
             ユーザーは、本サービスの利用にあたり、正確かつ最新の情報を登録する必要があります。
@@ -50,7 +50,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第4条（サービスの提供）</h2>
+        <h2>第4条(サービスの提供)</h2>
         <ol>
           <li>本サービスは、以下の機能を提供します：</li>
           <ul>
@@ -69,7 +69,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第5条（禁止事項）</h2>
+        <h2>第5条(禁止事項)</h2>
         <p>
           ユーザーは、本サービスの利用にあたり、以下の行為を行ってはなりません：
         </p>
@@ -94,7 +94,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第6条（コンテンツの権利）</h2>
+        <h2>第6条(コンテンツの権利)</h2>
         <ol>
           <li>
             ユーザーが作成したコンテンツの著作権は、ユーザーに帰属します。
@@ -111,7 +111,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第7条（データのバックアップ）</h2>
+        <h2>第7条(データのバックアップ)</h2>
         <ol>
           <li>
             本サービスは、ユーザーのコンテンツのバックアップを行いますが、
@@ -125,7 +125,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第8条（アカウントの停止・削除）</h2>
+        <h2>第8条(アカウントの停止・削除)</h2>
         <ol>
           <li>
             本サービスは、ユーザーが以下のいずれかに該当する場合、
@@ -145,7 +145,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第9条（免責事項）</h2>
+        <h2>第9条(免責事項)</h2>
         <ol>
           <li>
             本サービスは、サービスの正確性、完全性、有用性、安全性について保証しません。
@@ -166,7 +166,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第10条（損害賠償）</h2>
+        <h2>第10条(損害賠償)</h2>
         <p>
           ユーザーが本規約に違反し、本サービス又は第三者に損害を与えた場合、
           ユーザーは当該損害を賠償する責任を負うものとします。
@@ -174,7 +174,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第11条（サービスの変更・終了）</h2>
+        <h2>第11条(サービスの変更・終了)</h2>
         <ol>
           <li>
             本サービスは、事前の通知なく、サービス内容を変更、追加、削除することができます。
@@ -191,7 +191,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第12条（規約の変更）</h2>
+        <h2>第12条(規約の変更)</h2>
         <ol>
           <li>
             本サービスは、法令の変更やサービス内容の変更に伴い、
@@ -206,7 +206,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第13条（準拠法・管轄裁判所）</h2>
+        <h2>第13条(準拠法・管轄裁判所)</h2>
         <ol>
           <li>本規約の解釈及び適用は、日本法に準拠するものとします。</li>
           <li>
@@ -217,7 +217,7 @@ function TermsOfService() {
       </section>
 
       <section>
-        <h2>第14条（お問い合わせ）</h2>
+        <h2>第14条(お問い合わせ)</h2>
         <p>本規約に関するお問い合わせは、以下の連絡先までお願いします：</p>
         <p>https://x.com/hibohiboo</p>
       </section>
@@ -285,5 +285,3 @@ function TermsOfService() {
     </div>
   );
 }
-
-export default TermsOfService;

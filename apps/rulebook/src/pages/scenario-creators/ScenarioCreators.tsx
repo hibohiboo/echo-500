@@ -1,17 +1,17 @@
-function ScenarioCreators() {
+export function ScenarioCreatorsPage() {
   return (
-    <div class="scenario-creators-container">
-      <article class="scenario-creators-content">
-        <section class="header-section">
-          <h1 class="page-title">
-            <span class="title-icon">▶</span> シナリオ製作者向け
+    <div className="scenario-creators-container">
+      <article className="scenario-creators-content">
+        <section className="header-section">
+          <h1 className="page-title">
+            <span className="title-icon">▶</span> シナリオ製作者向け
           </h1>
-          <div class="header-divider"></div>
+          <div className="header-divider"></div>
         </section>
 
-        <section class="intro-section">
-          <div class="intro-card">
-            <h2 class="section-title">製作者の負担を軽減する設計</h2>
+        <section className="intro-section">
+          <div className="intro-card">
+            <h2 className="section-title">製作者の負担を軽減する設計</h2>
             <p>
               Echo:500は、シナリオ製作者の負担をできるだけ少なくするための工夫を施している。
               タグ駆動のイベントシステムとモジュール構造により、シナリオの骨格を素早く構築でき、
@@ -20,10 +20,10 @@ function ScenarioCreators() {
           </div>
         </section>
 
-        <section class="methods-section">
-          <div class="method-card">
-            <h2 class="section-title">
-              <span class="title-icon">◆</span> コンストラクション
+        <section className="methods-section">
+          <div className="method-card">
+            <h2 className="section-title">
+              <span className="title-icon">◆</span> コンストラクション
             </h2>
             <p>
               あらかじめ用意されたシナリオアーキタイプをベースに、文言やイベントを差し替えてシナリオを作成する手法だ。
@@ -32,9 +32,9 @@ function ScenarioCreators() {
             </p>
           </div>
 
-          <div class="method-card">
-            <h2 class="section-title">
-              <span class="title-icon">◆</span> フルスクラッチ
+          <div className="method-card">
+            <h2 className="section-title">
+              <span className="title-icon">◆</span> フルスクラッチ
             </h2>
             <p>
               制約なく自由にシナリオを作成するスタイルだ。
@@ -45,23 +45,23 @@ function ScenarioCreators() {
           </div>
         </section>
 
-        <section class="archetypes-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> シナリオアーキタイプ
+        <section className="archetypes-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> シナリオアーキタイプ
           </h2>
-          <p class="section-description">
+          <p className="section-description">
             コンストラクション用に用意されたアーキタイプの一覧だ。
             シナリオの方向性に合わせて選択し、カスタマイズすることで効率的にシナリオを構築できる。
           </p>
 
-          <div class="archetypes-grid">
-            <div class="archetype-card">
-              <h3 class="archetype-title">ソロジャーナル</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">人数: 1人</span>
-                <span class="meta-item">戦闘: なし / 簡易</span>
+          <div className="archetypes-grid">
+            <div className="archetype-card">
+              <h3 className="archetype-title">ソロジャーナル</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">人数: 1人</span>
+                <span className="meta-item">戦闘: なし / 簡易</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 一人のPCが荒廃した世界を歩き、記録し、思索するためのアーキタイプ。
                 静謐な情景描写や内省的な物語表現に向いている。
                 戦闘は控えめで、発見と心の動きを丁寧に描く構造だ。
@@ -69,78 +69,78 @@ function ScenarioCreators() {
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">アドベンチャー</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">戦闘: なし / 簡易</span>
-                <span class="meta-item">重点: 選択肢</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">アドベンチャー</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">戦闘: なし / 簡易</span>
+                <span className="meta-item">重点: 選択肢</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 PCの選択が物語の行方を大きく変えていくアーキタイプ。
                 分岐が多く、プレイヤーの判断が直接結末に影響する。
                 戦闘よりも意思決定とその余波を体験することに重きを置く。
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">モーメント</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">戦闘: なし</span>
-                <span class="meta-item">重点: キャラクター表現</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">モーメント</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">戦闘: なし</span>
+                <span className="meta-item">重点: キャラクター表現</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 発生する小さなイベントに、キャラクターがどう反応するかを楽しむ。
                 釣り表・採取表などのランダム要素を中心に、戦闘は発生しない。
-                積み重なる “一瞬” が、キャラクターの輪郭を描き出す。
+                積み重なる "一瞬" が、キャラクターの輪郭を描き出す。
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">バスター</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">モジュール: 戦闘</span>
-                <span class="meta-item">構成: シンプル</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">バスター</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">モジュール: 戦闘</span>
+                <span className="meta-item">構成: シンプル</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 オープニング（状況説明）→戦闘→エンディングという明快な三幕構成。
                 戦闘モジュールを用い、タクティカルな戦いと緊張感を前面に押し出す。
                 物語性よりも戦術と決断の一瞬にフォーカスしたアーキタイプだ。
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">ジャーニー</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">テーマ: 旅</span>
-                <span class="meta-item">モジュール: 探索</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">ジャーニー</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">テーマ: 旅</span>
+                <span className="meta-item">モジュール: 探索</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 目的地を目指す旅路そのものを描くアーキタイプ。
                 探索モジュールを使用し、道中での発見・交流・寄り道が物語を形作る。
                 移動と探索のプロセスが体験の中心となる。
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">ハック&スラッシュ</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">モジュール: 探索 + 戦闘</span>
-                <span class="meta-item">重点: リソース管理</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">ハック&スラッシュ</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">モジュール: 探索 + 戦闘</span>
+                <span className="meta-item">重点: リソース管理</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 閉鎖空間の踏破に特化したアーキタイプ。
                 マッピング、罠、限られたリソース管理など、古典的ダンジョン探索を踏襲する。
                 探索モジュール＋戦闘モジュールを併用し、リソース管理と戦術の両方が試される構造だ。
               </p>
             </div>
 
-            <div class="archetype-card">
-              <h3 class="archetype-title">サンドボックス</h3>
-              <div class="archetype-meta">
-                <span class="meta-item">自由度: 高</span>
-                <span class="meta-item">テーマ: 箱庭</span>
+            <div className="archetype-card">
+              <h3 className="archetype-title">サンドボックス</h3>
+              <div className="archetype-meta">
+                <span className="meta-item">自由度: 高</span>
+                <span className="meta-item">テーマ: 箱庭</span>
               </div>
-              <p class="archetype-description">
+              <p className="archetype-description">
                 指定された範囲を自由に行動できる箱庭型アーキタイプ。
                 明確な目標は提示されるが、達成方法はプレイヤーに委ねられる。
                 高い自由度と、それを支える豊富なイベント・NPC配置が特徴となる。
@@ -149,27 +149,27 @@ function ScenarioCreators() {
           </div>
         </section>
 
-        <section class="tools-section" style="display:none;">
-          <div class="tools-card">
-            <h2 class="section-title">
-              <span class="title-icon">▶</span> 製作支援ツール
+        <section className="tools-section" style={{ display: 'none' }}>
+          <div className="tools-card">
+            <h2 className="section-title">
+              <span className="title-icon">▶</span> 製作支援ツール
             </h2>
             <p>
               モジュールシステム、タグ駆動イベント、コマンド定義など、
               シナリオ製作を効率化する各種機能の詳細は、
               関連ドキュメントを参照すること。
             </p>
-            <div class="tools-links">
-              <a class="tool-link" href="#">
-                <span class="link-icon">›</span>
+            <div className="tools-links">
+              <a className="tool-link" href="#">
+                <span className="link-icon">›</span>
                 <span>モジュールシステム</span>
               </a>
-              <a class="tool-link" href="#">
-                <span class="link-icon">›</span>
+              <a className="tool-link" href="#">
+                <span className="link-icon">›</span>
                 <span>タグシステム</span>
               </a>
-              <a class="tool-link" href="#">
-                <span class="link-icon">›</span>
+              <a className="tool-link" href="#">
+                <span className="link-icon">›</span>
                 <span>コマンド定義</span>
               </a>
             </div>
@@ -411,5 +411,3 @@ function ScenarioCreators() {
     </div>
   );
 }
-
-export default ScenarioCreators;

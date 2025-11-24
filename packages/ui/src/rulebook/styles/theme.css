@@ -1,0 +1,324 @@
+/* Echo:500 Theme - Post-Apocalyptic Cyber Ruins */
+
+:root {
+  /* Primary Colors - Cyber & Tech */
+  --color-cyber-primary: #00ffcc;
+  --color-cyber-secondary: #00d4ff;
+  --color-cyber-accent: #ff00ff;
+  --color-cyber-glow: rgba(0, 255, 204, 0.3);
+
+  /* Nature Reclaimed - Ivy & Vegetation */
+  --color-nature-primary: #2d5016;
+  --color-nature-secondary: #4a7c2c;
+  --color-nature-accent: #6b9c42;
+  --color-nature-light: #8bc34a;
+
+  /* Ruins & Decay */
+  --color-ruin-dark: #1a1a1a;
+  --color-ruin-concrete: #3a3a3a;
+  --color-ruin-steel: #5a5a5a;
+  --color-ruin-rust: #8b4513;
+
+  /* Background Layers */
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Text Colors */
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --text-glow: var(--color-cyber-primary);
+
+  /* Border & Effects */
+  --border-cyber: 1px solid var(--color-cyber-primary);
+  --border-nature: 1px solid var(--color-nature-accent);
+  --border-ruin: 1px solid var(--color-ruin-steel);
+
+  /* Shadows & Glows */
+  --shadow-cyber: 0 0 10px var(--color-cyber-glow);
+  --shadow-deep: 0 4px 20px rgba(0, 0, 0, 0.8);
+  --shadow-text: 0 0 8px rgba(0, 255, 204, 0.5);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Typography */
+  --font-primary: 'Courier New', 'Courier', monospace;
+  --font-heading: 'Share Tech Mono', 'Courier New', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Layout */
+  --header-height: 60px;
+  --sidebar-width: 280px;
+  --content-max-width: 1200px;
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #0d0d0d;
+    --bg-secondary: #1a1a1a;
+    /* Force dark theme - post-apocalyptic world is always dark */
+  }
+}
+
+/* Global Resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-glow);
+  text-shadow: var(--shadow-text);
+}
+
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 2rem;
+  letter-spacing: 0.03em;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--color-cyber-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+a:hover {
+  color: var(--color-cyber-primary);
+  text-shadow: var(--shadow-text);
+}
+
+a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-cyber-primary);
+  box-shadow: var(--shadow-cyber);
+}
+
+/* Code blocks */
+code,
+pre {
+  font-family: var(--font-primary);
+  background: var(--bg-tertiary);
+  border: var(--border-ruin);
+  border-radius: 4px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+pre {
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Lists */
+ul,
+ol {
+  margin-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+li {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-secondary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-left: var(--border-cyber);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-nature-secondary);
+  border: 2px solid var(--bg-secondary);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-nature-accent);
+  box-shadow: var(--shadow-cyber);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-cyber-primary);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background: var(--color-cyber-primary);
+  color: var(--bg-primary);
+}
+
+/* Cyber Grid Background Effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(0, 255, 204, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Scanline Effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(50px);
+  }
+}
+
+/* Utility Classes */
+.cyber-glow {
+  text-shadow: var(--shadow-text);
+  color: var(--color-cyber-primary);
+}
+
+.nature-text {
+  color: var(--color-nature-accent);
+}
+
+.ruin-text {
+  color: var(--color-ruin-steel);
+}
+
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* Button Base Styles */
+.btn {
+  font-family: var(--font-heading);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: var(--border-cyber);
+  background: transparent;
+  color: var(--color-cyber-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-cyber-primary);
+  transition: left var(--transition-normal);
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.btn:hover::before {
+  left: 0;
+}
+
+.btn:hover {
+  box-shadow: var(--shadow-cyber);
+  color: var(--text-primary);
+}

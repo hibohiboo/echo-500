@@ -1,98 +1,99 @@
-# TRPG Rulebook
+# Rulebook App
 
-TRPGシナリオメーカー用のルールブックアプリケーション（SolidJS）
-
-## サイトマップ
-
-```
-rulebook/
-├── src/
-│   ├── pages/
-│   │   ├── introduction/          # はじめに
-│   │   │   ├── WhatIsTRPG.tsx    # TRPGとは
-│   │   │   ├── HowToPlay.tsx     # 遊び方の流れ
-│   │   │   └── Terminology.tsx   # 用語集
-│   │   │
-│   │   ├── basics/                # 基本ルール
-│   │   │   ├── DiceRolls.tsx     # ダイスロール
-│   │   │   ├── SkillChecks.tsx   # 技能判定
-│   │   │   ├── Combat.tsx        # 戦闘ルール
-│   │   │   └── SanityCheck.tsx   # 正気度判定
-│   │   │
-│   │   ├── character/             # キャラクター作成
-│   │   │   ├── Creation.tsx      # キャラクター作成手順
-│   │   │   ├── Stats.tsx         # 能力値の決定
-│   │   │   ├── Skills.tsx        # 技能の割り振り
-│   │   │   └── Background.tsx    # 背景設定
-│   │   │
-│   │   ├── scenarios/             # シナリオ運用
-│   │   │   ├── GMGuide.tsx       # GM向けガイド
-│   │   │   ├── PlayerGuide.tsx   # PL向けガイド
-│   │   │   ├── SessionPrep.tsx   # セッション準備
-│   │   │   └── Trouble.tsx       # トラブルシューティング
-│   │   │
-│   │   ├── advanced/              # 上級ルール
-│   │   │   ├── HouseRules.tsx    # ハウスルール例
-│   │   │   ├── Variants.tsx      # バリアントルール
-│   │   │   └── Customization.tsx # カスタマイズ
-│   │   │
-│   │   ├── reference/             # リファレンス
-│   │   │   ├── QuickReference.tsx # クイックリファレンス
-│   │   │   ├── Tables.tsx         # 各種表一覧
-│   │   │   └── FAQ.tsx            # よくある質問
-│   │   │
-│   │   └── legal/                 # 法的文書
-│   │       ├── PrivacyPolicy.tsx  # プライバシーポリシー
-│   │       └── TermsOfService.tsx # 利用規約
-│   │
-│   └── app/
-│       ├── Router.tsx             # ルーティング設定
-│       └── Navigation.tsx         # ナビゲーションUI
-```
-
-## ディレクトリ構造方針
-
-### カテゴリ分類
-1. **introduction/** - TRPG初心者向けの導入コンテンツ
-2. **basics/** - ゲームの基本ルール
-3. **character/** - キャラクター作成関連
-4. **scenarios/** - セッション運用ガイド
-5. **advanced/** - 経験者向け応用ルール
-6. **reference/** - 逆引き・クイックリファレンス
-7. **legal/** - プライバシーポリシー、利用規約
-
-### ファイル命名規則
-- PascalCase（例: `WhatIsTRPG.tsx`）
-- 1ページ1ファイル
-- 内容が明確にわかる名前
-
-## 開発コマンド
-
-### `bun dev`
-開発モードで起動<br>
-[http://localhost:5173](http://localhost:5173) でアクセス
-
-### `bun run build`
-本番用ビルド（`dist/` フォルダに出力）
-
-### `bun run lint`
-ESLintによるコードチェック
+ECHO-500 TRPGのルールブックアプリケーション（React版）
 
 ## 技術スタック
-- **フレームワーク**: SolidJS
-- **ビルドツール**: Vite
-- **言語**: TypeScript
-- **スタイリング**: CSS（詳細は今後決定）
 
-## コンテンツ追加手順
+- **React 19** - UIフレームワーク
+- **TypeScript** - 型安全性
+- **Tailwind CSS v4** - スタイリング（CSS変数ベース）
+- **React Router v7** - ルーティング
+- **Mermaid** - 図表描画
+- **Vite (Rolldown)** - ビルドツール
+- **React Compiler** - 自動最適化
 
-1. 適切なカテゴリフォルダ配下に `.tsx` ファイルを作成
-2. `app/Router.tsx` にルート追加
-3. `app/Navigation.tsx` にナビゲーションリンク追加
-4. 必要に応じて画像を `public/` に配置
+## 開発
 
-## 今後の拡張予定
-- [ ] 検索機能
-- [ ] ブックマーク機能
-- [ ] PDF出力機能
-- [ ] 多言語対応（日/英）
+```bash
+# 開発サーバー起動
+bun run dev
+
+# ビルド
+bun run build
+
+# Lint + 型チェック
+bun run lint
+
+# プレビュー
+bun run preview
+```
+
+## プロジェクト構造
+
+Feature-Sliced Design (FSD) アーキテクチャを採用しています。
+
+```
+src/
+├── app/          # アプリケーション初期化・ルーティング
+│   └── router.tsx
+├── pages/        # ページコンポーネント
+│   ├── home/     # ホームページ（実装済み）
+│   ├── tutorial/
+│   ├── glossary/
+│   └── ...
+└── index.tsx     # エントリーポイント
+```
+
+## UIコンポーネント
+
+共通UIコンポーネントは `packages/ui/src/rulebook` に配置されています。
+
+### 利用可能なコンポーネント
+
+```typescript
+import {
+  RulebookLayout,      // レイアウト（Header/Footer付き）
+  RulebookHeader,      // ヘッダー
+  RulebookFooter,      // フッター
+  RulebookNavigation,  // サイドバーナビゲーション
+  CommandCard,         // コマンドカード
+} from '@echo-500/ui';
+```
+
+### テーマ
+
+Echo:500独自のポストアポカリプス × サイバーパンクテーマを使用：
+- CSS変数ベースのテーマシステム
+- ダークモード強制
+- サイバーグリッド背景エフェクト
+- スキャンラインアニメーション
+
+## 実装状況
+
+### 完了
+- ✅ プロジェクト構造
+- ✅ ルーティング設定
+- ✅ Layout（Header/Footer/Background）
+- ✅ Navigation（8カテゴリー、30+リンク）
+- ✅ HomePage（Hero/Intro/Warning）
+- ✅ モバイル対応（レスポンシブ）
+- ✅ Storybook ストーリー
+
+### TODO
+- ⏳ チュートリアルページ
+- ⏳ 用語集ページ
+- ⏳ キャラクター作成ページ
+- ⏳ 戦闘ルールページ
+- ⏳ その他のコンテンツページ
+
+## ビルド出力
+
+```
+../dist/rulebook/assets/index-*.js         43.37 kB │ gzip:   9.86 kB
+../dist/rulebook/assets/react-*.js        373.31 kB │ gzip: 119.36 kB
+../dist/rulebook/assets/vendor-*.js       479.86 kB │ gzip: 152.19 kB
+```
+
+## 移行元
+
+本プロジェクトは `apps/rulebook-solid` (SolidJS版) から移行されました。

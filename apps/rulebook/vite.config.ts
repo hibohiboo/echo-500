@@ -1,15 +1,23 @@
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import solid from 'vite-plugin-solid';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 const basePath = 'rulebook';
 
 export default defineConfig({
-  plugins: [solid()],
   base: `/${basePath}/`,
   define: {
     BASE_PATH: `${JSON.stringify(basePath)}`,
   },
+  plugins: [
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler']],
+      },
+    }),
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
       '@': path.join(__dirname, './src'),
@@ -29,8 +37,13 @@ export default defineConfig({
     },
   },
 });
+
 function chunkRule(moduleId: string) {
-  if (moduleId.includes('solid')) return 'solid';
+  if (moduleId.includes('react-router')) return 'router';
+  if (moduleId.includes('react-markdown') || moduleId.includes('remark-gfm'))
+    return 'markdown';
+  if (moduleId.includes('mermaid')) return 'mermaid';
+  if (moduleId.includes('react')) return 'react';
 
   return 'vendor';
 }

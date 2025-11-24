@@ -1,39 +1,49 @@
-import { Router, Route } from '@solidjs/router';
-import { BattleCommandsPage } from '@/pages/battle-commands';
-import {
-  BattleRulesPage,
-  SimpleBattleRulePage,
-} from '@/pages/battle-rules';
-import { CharacterCreationPage } from '@/pages/character-creation';
-import { GameMasterPage } from '@/pages/game-master';
-import { GlossaryPage } from '@/pages/glossary';
-import { HomePage } from '@/pages/home';
-import { PrivacyPolicyPage } from '@/pages/privacy-policy';
-import { ScenarioCreatorsPage } from '@/pages/scenario-creators';
-import { TermsOfServicePage } from '@/pages/terms-of-service';
-import { TutorialPage } from '@/pages/tutorial';
-import { Layout } from '@/shared/ui/layout';
+import { RulebookLayout } from '@echo-500/ui';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import { BattleCommandsPage } from '@/pages/battle-commands/BattleCommands';
+import { BattleRulesPage } from '@/pages/battle-rules/BattleRules';
+import { SimpleBattleRulePage } from '@/pages/battle-rules/SimpleBattleRulePage';
+import { CharacterCreationPage } from '@/pages/character-creation/CharacterCreation';
+import { GameMasterPage } from '@/pages/game-master/GameMaster';
+import { GlossaryPage } from '@/pages/glossary/Glossary';
+import { HomePage } from '@/pages/home/Home';
+import { PrivacyPolicyPage } from '@/pages/privacy-policy/PrivacyPolicy';
+import { ScenarioCreatorsPage } from '@/pages/scenario-creators/ScenarioCreators';
+import { TermsOfServicePage } from '@/pages/terms-of-service/TermsOfService';
+import { TutorialPage } from '@/pages/tutorial/Tutorial';
 
-function AppRouter() {
+export function AppRouter() {
+  const basePath = BASE_PATH;
+
   return (
-    <Router base={`/${BASE_PATH}`}>
-      <Route path="/" component={HomePage} />
-      <Route
-        path="/content"
-        component={(props) => <Layout>{props.children}</Layout>}
-      >
-        <Route path="/tutorial" component={TutorialPage} />
-        <Route path="/glossary" component={GlossaryPage} />
-        <Route path="/character-creation" component={CharacterCreationPage} />
-        <Route path="/scenario-creators" component={ScenarioCreatorsPage} />
-        <Route path="/game-master" component={GameMasterPage} />
-        <Route path="/battle-rules" component={BattleRulesPage} />
-        <Route path="/battle-commands" component={BattleCommandsPage} />
-        <Route path="/privacy" component={PrivacyPolicyPage} />
-        <Route path="/terms" component={TermsOfServicePage} />
-        <Route path="/simple-battle-rule" component={SimpleBattleRulePage} />
-      </Route>
-    </Router>
+    <BrowserRouter basename={`/${basePath}`}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route element={<RulebookLayout basePath={basePath} />}>
+          <Route path="/content/tutorial" element={<TutorialPage />} />
+          <Route path="/content/glossary" element={<GlossaryPage />} />
+          <Route
+            path="/content/character-creation"
+            element={<CharacterCreationPage />}
+          />
+          <Route
+            path="/content/scenario-creators"
+            element={<ScenarioCreatorsPage />}
+          />
+          <Route path="/content/game-master" element={<GameMasterPage />} />
+          <Route path="/content/battle-rules" element={<BattleRulesPage />} />
+          <Route
+            path="/content/battle-commands"
+            element={<BattleCommandsPage />}
+          />
+          <Route path="/content/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/content/terms" element={<TermsOfServicePage />} />
+          <Route
+            path="/content/simple-battle-rule"
+            element={<SimpleBattleRulePage />}
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-export default AppRouter;

@@ -1,37 +1,39 @@
-import { Navigation } from '@/widgets/navigation';
+import { RulebookNavigation } from '@echo-500/ui';
 
-function Home() {
+export function HomePage() {
+  const basePath = BASE_PATH;
+
   return (
-    <div class="home-container">
-      <div class="home-content">
-        <aside class="home-sidebar">
-          <Navigation />
+    <div className="home-container">
+      <div className="home-content">
+        <aside className="home-sidebar">
+          <RulebookNavigation basePath={basePath} />
         </aside>
 
-        <article class="home-main">
-          <section class="hero-section">
-            <div class="hero-glitch">
-              <h1 class="hero-title">
-                <span class="title-line">Welcome to</span>
-                <span class="title-main">
-                  <span class="cyber">Echo:</span>
-                  <span class="nature">500</span>
+        <article className="home-main">
+          <section className="hero-section">
+            <div className="hero-glitch">
+              <h1 className="hero-title">
+                <span className="title-line">Welcome to</span>
+                <span className="title-main">
+                  <span className="cyber">Echo:</span>
+                  <span className="nature">500</span>
                 </span>
               </h1>
             </div>
 
-            <p class="hero-subtitle">
+            <p className="hero-subtitle">
               Post-Apocalyptic TRPG where synthetic beings explore the ruins of
               civilization
             </p>
 
-            <div class="hero-divider"></div>
+            <div className="hero-divider"></div>
           </section>
 
-          <section class="intro-section">
-            <div class="intro-card">
-              <h2 class="section-title">
-                <span class="title-icon">▶</span> The World
+          <section className="intro-section">
+            <div className="intro-card">
+              <h2 className="section-title">
+                <span className="title-icon">▶</span> The World
               </h2>
               <p>——そして、停止していたあなたは目覚めた。</p>
               <p>荒れた大地。歪んだ生命。緑に沈む都市の亡骸。</p>
@@ -40,70 +42,70 @@ function Home() {
               <p>人のいない世界で、人に造られたものたちが紡ぐ物語。</p>
             </div>
 
-            <div class="intro-card">
-              <h2 class="section-title">
-                <span class="title-icon">▶</span> About This Rulebook
+            <div className="intro-card">
+              <h2 className="section-title">
+                <span className="title-icon">▶</span> About This Rulebook
               </h2>
               <p>
                 本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームだ。
                 プレイヤーの分身であるキャラクター（以下、PC）は、
                 破損した目的を取り戻すため、終わった世界をめぐることになる。
               </p>
-              <ul class="feature-list">
+              <ul className="feature-list">
                 <li>
-                  <span class="feature-bullet">◆</span>
+                  <span className="feature-bullet">◆</span>
                   ポストアポカリプス × アンドロイド × 自分探し
                 </li>
                 <li>
-                  <span class="feature-bullet">◆</span>
+                  <span className="feature-bullet">◆</span>
                   シナリオに合わせてモジュールをインストール
                 </li>
                 <li>
-                  <span class="feature-bullet">◆</span>
+                  <span className="feature-bullet">◆</span>
                   コマンドによるストーリー進行
                 </li>
                 <li>
-                  <span class="feature-bullet">◆</span>
+                  <span className="feature-bullet">◆</span>
                   タグ駆動のイベントシステム
                 </li>
               </ul>
             </div>
 
-            <div class="intro-card">
-              <h2 class="section-title">
-                <span class="title-icon">▶</span> Getting Started
+            <div className="intro-card">
+              <h2 className="section-title">
+                <span className="title-icon">▶</span> Getting Started
               </h2>
-              <div class="quick-links">
-                <a class="quick-link" href={`/${BASE_PATH}/content/tutorial`}>
-                  <span class="link-icon">›</span>
-                  <span class="link-text">チュートリアル</span>
+              <div className="quick-links">
+                <a className="quick-link" href={`/${basePath}/content/tutorial`}>
+                  <span className="link-icon">›</span>
+                  <span className="link-text">チュートリアル</span>
                 </a>
                 <a
-                  class="quick-link"
-                  href={`/${BASE_PATH}/content/scenario-creators`}
+                  className="quick-link"
+                  href={`/${basePath}/content/scenario-creators`}
                 >
-                  <span class="link-icon">›</span>
-                  <span class="link-text">シナリオ製作者向け</span>
+                  <span className="link-icon">›</span>
+                  <span className="link-text">シナリオ製作者向け</span>
                 </a>
-                <a class="quick-link" href={`/${BASE_PATH}/content/game-master`}>
-                  <span class="link-icon">›</span>
-                  <span class="link-text">ゲームマスター向け</span>
+                <a className="quick-link" href={`/${basePath}/content/game-master`}>
+                  <span className="link-icon">›</span>
+                  <span className="link-text">ゲームマスター向け</span>
                 </a>
-                <a class="quick-link">
-                  <span class="link-icon">›</span>
-                  <span class="link-text">プレイヤー向け</span>
+                <a className="quick-link">
+                  <span className="link-icon">›</span>
+                  <span className="link-text">プレイヤー向け</span>
                 </a>
               </div>
             </div>
           </section>
 
-          <section class="warning-section">
-            <div class="warning-box">
-              <div class="warning-header">
-                <span class="warning-icon">⚠</span>
-                <span class="warning-title">SYSTEM NOTICE</span>
+          <section className="warning-section">
+            <div className="warning-box">
+              <div className="warning-header">
+                <span className="warning-icon">⚠</span>
+                <span className="warning-title">SYSTEM NOTICE</span>
               </div>
-              <p class="warning-text">
+              <p className="warning-text">
                 このルールブックは現在開発中です。内容は予告なく変更される場合があります。
               </p>
             </div>
@@ -115,7 +117,7 @@ function Home() {
         .home-container {
           width: 100%;
         }
-       @scope {
+
         .home-content {
           display: flex;
           gap: var(--spacing-xl);
@@ -378,10 +380,7 @@ function Home() {
             grid-template-columns: 1fr;
           }
         }
-        }
       `}</style>
     </div>
   );
 }
-
-export default Home;

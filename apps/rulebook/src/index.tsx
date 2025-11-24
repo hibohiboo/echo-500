@@ -1,9 +1,10 @@
-/* @refresh reload */
-import { render } from 'solid-js/web';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import './index.css';
-import './styles/theme.css';
-import AppRouter from './app/router.tsx';
+import { AppRouter } from './app/router.tsx';
 
-const root = document.getElementById('root');
-
-render(() => <AppRouter />, root!);
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AppRouter />
+  </StrictMode>
+);

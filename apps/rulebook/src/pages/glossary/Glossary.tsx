@@ -1,16 +1,16 @@
-function Glossary() {
+export function GlossaryPage() {
   return (
-    <div class="glossary-container">
-      <article class="glossary-content">
-        <section class="header-section">
-          <h1 class="page-title">
-            <span class="title-icon">▶</span> 用語集
+    <div className="glossary-container">
+      <article className="glossary-content">
+        <section className="header-section">
+          <h1 className="page-title">
+            <span className="title-icon">▶</span> 用語集
           </h1>
-          <div class="header-divider"></div>
+          <div className="header-divider"></div>
         </section>
 
-        <section class="intro-section">
-          <div class="intro-card">
+        <section className="intro-section">
+          <div className="intro-card">
             <p>
               Echo:500で使用される基本的な用語の説明。
               ゲームを理解するための基礎となる概念をここで確認できる。
@@ -18,17 +18,17 @@ function Glossary() {
           </div>
         </section>
 
-        <section class="terms-section">
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> シナリオ
+        <section className="terms-section">
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> シナリオ
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 ゲームで遊ぶための物語の枠組みだ。
                 状況設定、イベント、目標、展開などが記述されている。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 シナリオは、プレイヤーが体験する物語の骨格を提供する。
                 ただし、シナリオ通りに進む必要はなく、プレイヤーの選択やGMの判断によって自由に変化していく。
                 Echo:500では、コンストラクション用のアーキタイプや、フルスクラッチでの自作シナリオなど、
@@ -37,16 +37,16 @@ function Glossary() {
             </div>
           </div>
 
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> ゲームマスター（GM）
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> ゲームマスター（GM）
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 セッションの進行役だ。
                 シナリオを選び、プレイヤーを募集し、ゲームを進行させる。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 GMは裁定者であり、語り部であり、共に遊ぶ仲間でもある。
                 プレイヤーの行動に対して結果を描写し、判定を下し、物語を紡いでいく。
                 ルールブックやシナリオより、その場のGMの判断が優先される。
@@ -56,16 +56,16 @@ function Glossary() {
             </div>
           </div>
 
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> セッション
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> セッション
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 ゲームを実際に遊ぶ、一回のプレイのことだ。
                 GMとプレイヤーが集まり、シナリオに基づいて物語を進めていく。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 セッションは、開始から終了までの一連のプレイを指す。
                 通常、数時間から半日程度の時間をかけて行われる。
                 オンラインセッション、オフラインセッション、ソロセッションなど、
@@ -75,16 +75,16 @@ function Glossary() {
             </div>
           </div>
 
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> プレイヤー（PL）
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> プレイヤー（PL）
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 ゲームに参加し、キャラクターを操作して物語を体験する人だ。
                 GMが提示する状況に対して、自分のキャラクターの行動を宣言する。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 プレイヤーは物語の主役だ。
                 自分のキャラクター（PC）を通して、荒廃した世界を探索し、
                 選択を重ね、物語を紡いでいく。
@@ -95,16 +95,16 @@ function Glossary() {
             </div>
           </div>
 
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> プレイヤーキャラクター（PC）
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> プレイヤーキャラクター（PC）
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 プレイヤーが操作するキャラクターだ。
                 プレイヤーの分身として、物語の中で行動し、成長していく。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 Echo:500のPCは、文明崩壊後の世界で再稼働した人造人間（アンドロイド）だ。
                 破損した記憶、失われた目的、終わった世界——そんな状況の中で、
                 PCは自分が造られた意味を探して旅をする。
@@ -114,16 +114,16 @@ function Glossary() {
             </div>
           </div>
 
-          <div class="term-card">
-            <h2 class="term-title">
-              <span class="term-icon">◆</span> ノンプレイヤーキャラクター（NPC）
+          <div className="term-card">
+            <h2 className="term-title">
+              <span className="term-icon">◆</span> ノンプレイヤーキャラクター（NPC）
             </h2>
-            <div class="term-content">
-              <p class="term-definition">
+            <div className="term-content">
+              <p className="term-definition">
                 GMが操作するキャラクターの総称だ。
                 PCが出会う人物、敵対者、協力者など、物語に登場するPC以外のキャラクターを指す。
               </p>
-              <p class="term-description">
+              <p className="term-description">
                 NPCは物語に彩りを加える存在だ。
                 情報を提供する案内人、立ちはだかる敵、共に旅をする仲間——
                 NPCとの出会いや交流が、物語に深みを与える。
@@ -135,13 +135,13 @@ function Glossary() {
           </div>
         </section>
 
-        <section class="note-section">
-          <div class="note-card">
-            <div class="note-header">
-              <span class="note-icon">※</span>
-              <h3 class="note-title">用語の使い方について</h3>
+        <section className="note-section">
+          <div className="note-card">
+            <div className="note-header">
+              <span className="note-icon">※</span>
+              <h3 className="note-title">用語の使い方について</h3>
             </div>
-            <p class="note-text">
+            <p className="note-text">
               これらの用語は、ゲームを円滑に進めるための共通言語だ。
               ただし、セッション内で別の呼び方をしても構わない。
               重要なのは、全員が意味を理解し、楽しく遊べることだ。
@@ -333,5 +333,3 @@ function Glossary() {
     </div>
   );
 }
-
-export default Glossary;

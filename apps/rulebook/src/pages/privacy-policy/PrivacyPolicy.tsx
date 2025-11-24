@@ -1,15 +1,15 @@
-function PrivacyPolicy() {
+export function PrivacyPolicyPage() {
   return (
-    <div class="legal-document">
+    <div className="legal-document">
       <h1>プライバシーポリシー</h1>
-      <p class="last-updated">最終更新日: 2025年11月12日</p>
+      <p className="last-updated">最終更新日: 2025年11月12日</p>
 
       <section>
         <h2>1. 基本方針</h2>
         <p>
           TRPG Scenario
-          Maker（以下「本サービス」）は、ユーザーの個人情報の重要性を認識し、
-          個人情報の保護に関する法律（個人情報保護法）を遵守し、
+          Maker(以下「本サービス」)は、ユーザーの個人情報の重要性を認識し、
+          個人情報の保護に関する法律(個人情報保護法)を遵守し、
           適切な取り扱い及び保護に努めます。
         </p>
       </section>
@@ -20,7 +20,7 @@ function PrivacyPolicy() {
         <ul>
           <li>
             <strong>アカウント情報：</strong>
-            メールアドレス、ユーザー名、パスワード（暗号化して保存）
+            メールアドレス、ユーザー名、パスワード(暗号化して保存)
           </li>
           <li>
             <strong>作成コンテンツ：</strong>
@@ -79,7 +79,7 @@ function PrivacyPolicy() {
           </li>
           <li>
             <strong>パスワード：</strong>
-            ハッシュ化（bcrypt等）により暗号化して保存
+            ハッシュ化(bcrypt等)により暗号化して保存
           </li>
           <li>
             <strong>通信の暗号化：</strong>
@@ -93,7 +93,7 @@ function PrivacyPolicy() {
       </section>
 
       <section>
-        <h2>6. Cookie（クッキー）について</h2>
+        <h2>6. Cookie(クッキー)について</h2>
         <p>本サービスでは、Cookieを使用しません。</p>
         <p>ブラウザの設定により、Cookieの受け取りを拒否することができます。</p>
       </section>
@@ -134,7 +134,7 @@ function PrivacyPolicy() {
           </li>
           <li>
             <strong>アクセスログ：</strong>
-            最大1年間保存（セキュリティ対策のため）
+            最大1年間保存(セキュリティ対策のため)
           </li>
         </ul>
       </section>
@@ -211,5 +211,3 @@ function PrivacyPolicy() {
     </div>
   );
 }
-
-export default PrivacyPolicy;

@@ -1,39 +1,39 @@
-function BattleRules() {
+export function BattleRulesPage() {
   return (
-    <div class="battle-rules-container">
-      <article class="battle-rules-content">
-        <section class="header-section">
-          <h1 class="page-title">
-            <span class="title-icon">▶</span> 戦闘ルール
+    <div className="battle-rules-container">
+      <article className="battle-rules-content">
+        <section className="header-section">
+          <h1 className="page-title">
+            <span className="title-icon">▶</span> 戦闘ルール
           </h1>
-          <div class="header-divider"></div>
+          <div className="header-divider"></div>
         </section>
 
-        <section class="intro-section">
-          <div class="intro-card">
+        <section className="intro-section">
+          <div className="intro-card">
             <p>Echo:500の戦闘は、カウンターボードとエリアマップを使用する。</p>
           </div>
         </section>
 
-        <section class="preparation-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> 戦闘準備
+        <section className="preparation-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> 戦闘準備
           </h2>
 
-          <div class="step-list">
-            <div class="step-item">
-              <div class="step-header">
-                <span class="step-number">01</span>
-                <h3 class="step-title">終了条件の確認</h3>
+          <div className="step-list">
+            <div className="step-item">
+              <div className="step-header">
+                <span className="step-number">01</span>
+                <h3 className="step-title">終了条件の確認</h3>
               </div>
-              <div class="step-content">
-                <p class="step-description">
+              <div className="step-content">
+                <p className="step-description">
                   戦闘開始前に、終了条件を明確にする。
                   GMが勝利条件と敗北条件を宣言し、全員で確認する。
                 </p>
-                <div class="example-box">
-                  <div class="example-title">終了条件の例</div>
-                  <ul class="example-list">
+                <div className="example-box">
+                  <div className="example-title">終了条件の例</div>
+                  <ul className="example-list">
                     <li>勝利条件: ボスの戦闘不能</li>
                     <li>敗北条件: 全PCの戦闘不能</li>
                     <li>時間制限: カウンター50到達で敵増援</li>
@@ -43,58 +43,58 @@ function BattleRules() {
               </div>
             </div>
 
-            <div class="step-item">
-              <div class="step-header">
-                <span class="step-number">02</span>
-                <h3 class="step-title">戦闘エリアへの配置</h3>
+            <div className="step-item">
+              <div className="step-header">
+                <span className="step-number">02</span>
+                <h3 className="step-title">戦闘エリアへの配置</h3>
               </div>
-              <div class="step-content">
-                <p class="step-description">
+              <div className="step-content">
+                <p className="step-description">
                   GMから配置を開始する。敵キャラクターを戦闘エリアに配置した後、
                   PLがPCを配置する。配置位置はシナリオやGMの指示に従う。
                 </p>
               </div>
             </div>
 
-            <div class="step-item">
-              <div class="step-header">
-                <span class="step-number">03</span>
-                <h3 class="step-title">カウンターボードへの配置</h3>
+            <div className="step-item">
+              <div className="step-header">
+                <span className="step-number">03</span>
+                <h3 className="step-title">カウンターボードへの配置</h3>
               </div>
-              <div class="step-content">
-                <p class="step-description">
+              <div className="step-content">
+                <p className="step-description">
                   カウンターボードにコマを配置する。キャラクターの「初期カウント」の位置にコマを置く。
                   同じ位置に複数のコマが配置される場合は、積み上げるように配置する。どのコマを上にするかはPLGMで相談して決める。
                 </p>
-                <div class="note-box">
-                  <span class="note-icon">※</span>
-                  <span class="note-text">
+                <div className="note-box">
+                  <span className="note-icon">※</span>
+                  <span className="note-text">
                     積まれたコマは、上から順に手番を得る。
                   </span>
                 </div>
               </div>
             </div>
 
-            <div class="step-item">
-              <div class="step-header">
-                <span class="step-number">04</span>
-                <h3 class="step-title">カウンターカーソルの配置</h3>
+            <div className="step-item">
+              <div className="step-header">
+                <span className="step-number">04</span>
+                <h3 className="step-title">カウンターカーソルの配置</h3>
               </div>
-              <div class="step-content">
-                <p class="step-description">
+              <div className="step-content">
+                <p className="step-description">
                   カウンターカーソルをカウンターボードの0の位置に置く。
                   これが現在カウントを表す目印となる。
                 </p>
               </div>
             </div>
 
-            <div class="step-item">
-              <div class="step-header">
-                <span class="step-number">05</span>
-                <h3 class="step-title">戦闘コマンド手札の準備</h3>
+            <div className="step-item">
+              <div className="step-header">
+                <span className="step-number">05</span>
+                <h3 className="step-title">戦闘コマンド手札の準備</h3>
               </div>
-              <div class="step-content">
-                <p class="step-description">
+              <div className="step-content">
+                <p className="step-description">
                   各PLは、自分のキャラクターのモジュールのうち
                   「戦闘コマンド」タグを持つものを手札として手元に用意する。
                   これらが戦闘中に使用可能なコマンドとなる。
@@ -103,67 +103,67 @@ function BattleRules() {
             </div>
           </div>
 
-          <div class="ready-box">
-            <div class="ready-icon">✓</div>
-            <div class="ready-text">これで戦闘開始の準備が整った。</div>
+          <div className="ready-box">
+            <div className="ready-icon">✓</div>
+            <div className="ready-text">これで戦闘開始の準備が整った。</div>
           </div>
         </section>
 
-        <section class="flow-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> 戦闘の流れ
+        <section className="flow-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> 戦闘の流れ
           </h2>
 
-          <div class="flow-description">
+          <div className="flow-description">
             <p>
               カウンターカーソルの位置にあるコマのキャラクターが手番を得る。
               手番を得たキャラクターは行動し、その後カウンターは進んでいく。
             </p>
           </div>
 
-          <div class="flow-steps">
-            <div class="flow-step">
-              <div class="flow-step-number">1</div>
-              <div class="flow-step-content">
-                <h3 class="flow-step-title">手番の取得</h3>
-                <p class="flow-step-text">
+          <div className="flow-steps">
+            <div className="flow-step">
+              <div className="flow-step-number">1</div>
+              <div className="flow-step-content">
+                <h3 className="flow-step-title">手番の取得</h3>
+                <p className="flow-step-text">
                   カウンターカーソルがある位置の、積まれたコマの一番上のキャラクターが手番を得る。
-                  そのキャラクターを操作するプレイヤー（またはGM）が行動を宣言する。
+                  そのキャラクターを操作するプレイヤー(またはGM)が行動を宣言する。
                 </p>
               </div>
             </div>
 
-            <div class="flow-step">
-              <div class="flow-step-number">2</div>
-              <div class="flow-step-content">
-                <h3 class="flow-step-title">手札の使用</h3>
-                <p class="flow-step-text">
+            <div className="flow-step">
+              <div className="flow-step-number">2</div>
+              <div className="flow-step-content">
+                <h3 className="flow-step-title">手札の使用</h3>
+                <p className="flow-step-text">
                   手番を得たキャラクターは、タイミング「手番」の手札を使用できる。
                   使用したコマンドのコスト分だけ、自分のコマをカウンターボード上で前進させる。
                 </p>
-                <div class="example-inline">
+                <div className="example-inline">
                   例: コスト3のコマンドを使用 →
                   現在位置から3マス進んだ位置にコマを移動
                 </div>
               </div>
             </div>
 
-            <div class="flow-step">
-              <div class="flow-step-number">3</div>
-              <div class="flow-step-content">
-                <h3 class="flow-step-title">カウンターカーソルの進行</h3>
-                <p class="flow-step-text">
+            <div className="flow-step">
+              <div className="flow-step-number">3</div>
+              <div className="flow-step-content">
+                <h3 className="flow-step-title">カウンターカーソルの進行</h3>
+                <p className="flow-step-text">
                   カウンターカーソルの位置にコマがなくなったら、
                   カウンターカーソルを1進める。次のコマがある位置まで進み続ける。
                 </p>
               </div>
             </div>
 
-            <div class="flow-step">
-              <div class="flow-step-number">4</div>
-              <div class="flow-step-content">
-                <h3 class="flow-step-title">繰り返し</h3>
-                <p class="flow-step-text">
+            <div className="flow-step">
+              <div className="flow-step-number">4</div>
+              <div className="flow-step-content">
+                <h3 className="flow-step-title">繰り返し</h3>
+                <p className="flow-step-text">
                   ステップ1に戻り、終了条件を満たすまで繰り返す。
                 </p>
               </div>
@@ -171,107 +171,107 @@ function BattleRules() {
           </div>
         </section>
 
-        <section class="area-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> 戦闘エリア
+        <section className="area-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> 戦闘エリア
           </h2>
 
-          <div class="area-description">
+          <div className="area-description">
             <p>
               戦闘エリアは10×10のグリッドで構成される。
-              位置を示す座標系は、縦の列を算用数字（0〜9）、横の行を漢数字（零〜九）で表す。
+              位置を示す座標系は、縦の列を算用数字(0〜9)、横の行を漢数字(零〜九)で表す。
             </p>
           </div>
 
-          <div class="coordinate-info">
-            <div class="coordinate-card">
-              <h3 class="coordinate-title">座標の読み方</h3>
-              <ul class="coordinate-list">
+          <div className="coordinate-info">
+            <div className="coordinate-card">
+              <h3 className="coordinate-title">座標の読み方</h3>
+              <ul className="coordinate-list">
                 <li>
-                  <span class="coordinate-label">左上</span>
-                  <span class="coordinate-value">0零</span>
+                  <span className="coordinate-label">左上</span>
+                  <span className="coordinate-value">0零</span>
                 </li>
                 <li>
-                  <span class="coordinate-label">右下</span>
-                  <span class="coordinate-value">9九</span>
+                  <span className="coordinate-label">右下</span>
+                  <span className="coordinate-value">9九</span>
                 </li>
               </ul>
             </div>
 
-            <div class="coordinate-visual">
-              <div class="grid-example">
-                <div class="grid-header">
-                  <span class="grid-label-corner"></span>
-                  <span class="grid-label">0</span>
-                  <span class="grid-label">1</span>
-                  <span class="grid-label">2</span>
-                  <span class="grid-label">...</span>
-                  <span class="grid-label">9</span>
+            <div className="coordinate-visual">
+              <div className="grid-example">
+                <div className="grid-header">
+                  <span className="grid-label-corner"></span>
+                  <span className="grid-label">0</span>
+                  <span className="grid-label">1</span>
+                  <span className="grid-label">2</span>
+                  <span className="grid-label">...</span>
+                  <span className="grid-label">9</span>
                 </div>
-                <div class="grid-row">
-                  <span class="grid-label">零</span>
-                  <span class="grid-cell highlight">0零</span>
-                  <span class="grid-cell">1零</span>
-                  <span class="grid-cell">2零</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">9零</span>
+                <div className="grid-row">
+                  <span className="grid-label">零</span>
+                  <span className="grid-cell highlight">0零</span>
+                  <span className="grid-cell">1零</span>
+                  <span className="grid-cell">2零</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">9零</span>
                 </div>
-                <div class="grid-row">
-                  <span class="grid-label">一</span>
-                  <span class="grid-cell">0一</span>
-                  <span class="grid-cell">1一</span>
-                  <span class="grid-cell">2一</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">9一</span>
+                <div className="grid-row">
+                  <span className="grid-label">一</span>
+                  <span className="grid-cell">0一</span>
+                  <span className="grid-cell">1一</span>
+                  <span className="grid-cell">2一</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">9一</span>
                 </div>
-                <div class="grid-row">
-                  <span class="grid-label">二</span>
-                  <span class="grid-cell">0二</span>
-                  <span class="grid-cell">1二</span>
-                  <span class="grid-cell">2二</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">9二</span>
+                <div className="grid-row">
+                  <span className="grid-label">二</span>
+                  <span className="grid-cell">0二</span>
+                  <span className="grid-cell">1二</span>
+                  <span className="grid-cell">2二</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">9二</span>
                 </div>
-                <div class="grid-row">
-                  <span class="grid-label">...</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell">...</span>
+                <div className="grid-row">
+                  <span className="grid-label">...</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell">...</span>
                 </div>
-                <div class="grid-row">
-                  <span class="grid-label">九</span>
-                  <span class="grid-cell">0九</span>
-                  <span class="grid-cell">1九</span>
-                  <span class="grid-cell">2九</span>
-                  <span class="grid-cell">...</span>
-                  <span class="grid-cell highlight">9九</span>
+                <div className="grid-row">
+                  <span className="grid-label">九</span>
+                  <span className="grid-cell">0九</span>
+                  <span className="grid-cell">1九</span>
+                  <span className="grid-cell">2九</span>
+                  <span className="grid-cell">...</span>
+                  <span className="grid-cell highlight">9九</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="occupation-rules">
-            <h3 class="subsection-title">
-              <span class="subsection-icon">◆</span> マス占有ルール
+          <div className="occupation-rules">
+            <h3 className="subsection-title">
+              <span className="subsection-icon">◆</span> マス占有ルール
             </h3>
-            <ul class="rule-list">
+            <ul className="rule-list">
               <li>
-                <span class="rule-bullet">•</span>
-                <span class="rule-text">
+                <span className="rule-bullet">•</span>
+                <span className="rule-text">
                   キャラクターは1マス以上を占有する。大型キャラクターは複数マスを占有する場合がある。
                 </span>
               </li>
               <li>
-                <span class="rule-bullet">•</span>
-                <span class="rule-text">
+                <span className="rule-bullet">•</span>
+                <span className="rule-text">
                   占有されているマスに他のキャラクターが入ることはできない。
                 </span>
               </li>
               <li>
-                <span class="rule-bullet">•</span>
-                <span class="rule-text">
+                <span className="rule-bullet">•</span>
+                <span className="rule-text">
                   占有されているマスの通過は占有しているキャラクターの許可があれば可能。移動経路上に味方がいても、そこで停止しない限り通り抜けられる。
                 </span>
               </li>
@@ -790,5 +790,3 @@ function BattleRules() {
     </div>
   );
 }
-
-export default BattleRules;

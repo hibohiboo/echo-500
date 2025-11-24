@@ -179,3 +179,18 @@ export type {
   CharacterImageGalleryProps,
   CharacterImageUploadModalProps,
 } from './features/scenarioCharacterManagement';
+
+// Rulebook components
+export { Layout as RulebookLayout } from './rulebook/layout';
+export { Header as RulebookHeader } from './rulebook/layout';
+export { Footer as RulebookFooter } from './rulebook/layout';
+export { CommandCard } from './rulebook/command-card';
+export { Navigation as RulebookNavigation } from './rulebook/navigation';
+export { TutorialSection } from './rulebook/tutorial-section';
+export { InventoryIcon } from './rulebook/inventory-icon';
+export { InventoryCard } from './rulebook/inventory-card';
+export { InventoryPanel } from './rulebook/inventory-panel';
+export { ItemDetail } from './rulebook/item-detail';
+export { ItemToast } from './rulebook/item-toast';
+export type { InventoryItem } from './rulebook/inventory-panel';
+export type { InventoryIconType } from './rulebook/inventory-icon';

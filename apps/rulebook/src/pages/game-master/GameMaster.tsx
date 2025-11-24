@@ -1,17 +1,17 @@
-function GameMaster() {
+export function GameMasterPage() {
   return (
-    <div class="game-master-container">
-      <article class="game-master-content">
-        <section class="header-section">
-          <h1 class="page-title">
-            <span class="title-icon">▶</span> ゲームマスター向け
+    <div className="game-master-container">
+      <article className="game-master-content">
+        <section className="header-section">
+          <h1 className="page-title">
+            <span className="title-icon">▶</span> ゲームマスター向け
           </h1>
-          <div class="header-divider"></div>
+          <div className="header-divider"></div>
         </section>
 
-        <section class="intro-section">
-          <div class="intro-card">
-            <h2 class="section-title">ゲームマスターの役割</h2>
+        <section className="intro-section">
+          <div className="intro-card">
+            <h2 className="section-title">ゲームマスターの役割</h2>
             <p>
               ゲームマスター（以下、GM）はセッションの進行役だ。
               シナリオ一覧から遊びたいシナリオを選び、セッションを開催してプレイヤーを募る。
@@ -20,43 +20,43 @@ function GameMaster() {
           </div>
         </section>
 
-        <section class="flow-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> GMの基本フロー
+        <section className="flow-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> GMの基本フロー
           </h2>
 
-          <div class="flow-grid">
-            <div class="flow-card">
-              <div class="flow-number">01</div>
-              <h3 class="flow-title">シナリオ選択</h3>
-              <p class="flow-description">
+          <div className="flow-grid">
+            <div className="flow-card">
+              <div className="flow-number">01</div>
+              <h3 className="flow-title">シナリオ選択</h3>
+              <p className="flow-description">
                 シナリオ一覧から、自分が遊びたい、またはプレイヤーに体験してもらいたいシナリオを選ぶ。
                 シナリオの内容を事前に読み込み、セッションの楽しい風景を想像しよう。
               </p>
             </div>
 
-            <div class="flow-card">
-              <div class="flow-number">02</div>
-              <h3 class="flow-title">セッション開催</h3>
-              <p class="flow-description">
+            <div className="flow-card">
+              <div className="flow-number">02</div>
+              <h3 className="flow-title">セッション開催</h3>
+              <p className="flow-description">
                 セッションを開催し、プレイヤーを募集する。
                 プレイ時間、人数、事前準備などの情報を明確に伝える。
               </p>
             </div>
 
-            <div class="flow-card">
-              <div class="flow-number">03</div>
-              <h3 class="flow-title">セッション進行</h3>
-              <p class="flow-description">
+            <div className="flow-card">
+              <div className="flow-number">03</div>
+              <h3 className="flow-title">セッション進行</h3>
+              <p className="flow-description">
                 セッション開始後、シナリオに従ってゲームを進行する。
                 プレイヤーの行動を受け止め、状況を描写し、判定を下す。
               </p>
             </div>
 
-            <div class="flow-card">
-              <div class="flow-number">04</div>
-              <h3 class="flow-title">最終判断</h3>
-              <p class="flow-description">
+            <div className="flow-card">
+              <div className="flow-number">04</div>
+              <h3 className="flow-title">最終判断</h3>
+              <p className="flow-description">
                 セッション内での最終的な判断はGMが下す。
                 ルールブックやシナリオよりも、その場のGMの判断が優先される。
               </p>
@@ -64,17 +64,17 @@ function GameMaster() {
           </div>
         </section>
 
-        <section class="principle-section">
-          <div class="principle-card highlight">
-            <div class="principle-header">
-              <span class="principle-icon">★</span>
-              <h2 class="section-title">最も重要な原則</h2>
+        <section className="principle-section">
+          <div className="principle-card highlight">
+            <div className="principle-header">
+              <span className="principle-icon">★</span>
+              <h2 className="section-title">最も重要な原則</h2>
             </div>
-            <div class="principle-content">
-              <p class="principle-main">
+            <div className="principle-content">
+              <p className="principle-main">
                 このゲームの成功条件は、楽しい時を過ごせたかどうかだ。
               </p>
-              <p class="principle-sub">
+              <p className="principle-sub">
                 ルールはそのためのレールにすぎない。
                 本ルールブックより、シナリオより、その場で遊んでいるGMの判断が優先される。
               </p>
@@ -82,15 +82,15 @@ function GameMaster() {
           </div>
         </section>
 
-        <section class="authority-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> GMの権限と責任
+        <section className="authority-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> GMの権限と責任
           </h2>
 
-          <div class="authority-grid">
-            <div class="authority-card">
-              <h3 class="authority-title">
-                <span class="authority-icon">◆</span> ルール解釈
+          <div className="authority-grid">
+            <div className="authority-card">
+              <h3 className="authority-title">
+                <span className="authority-icon">◆</span> ルール解釈
               </h3>
               <p>
                 ルールに不明瞭な点や矛盾がある場合、GMが最終的な解釈を決定する。
@@ -98,9 +98,9 @@ function GameMaster() {
               </p>
             </div>
 
-            <div class="authority-card">
-              <h3 class="authority-title">
-                <span class="authority-icon">◆</span> ルール変更
+            <div className="authority-card">
+              <h3 className="authority-title">
+                <span className="authority-icon">◆</span> ルール変更
               </h3>
               <p>
                 セッションをより楽しくするため、ルールを変更・調整する権限を持つ。
@@ -110,42 +110,42 @@ function GameMaster() {
           </div>
         </section>
 
-        <section class="tips-section">
-          <h2 class="section-title">
-            <span class="title-icon">▶</span> GMのためのヒント
+        <section className="tips-section">
+          <h2 className="section-title">
+            <span className="title-icon">▶</span> GMのためのヒント
           </h2>
 
-          <div class="tips-list">
-            <div class="tip-item">
-              <div class="tip-header">
-                <span class="tip-icon">›</span>
-                <h3 class="tip-title">柔軟性を持つ</h3>
+          <div className="tips-list">
+            <div className="tip-item">
+              <div className="tip-header">
+                <span className="tip-icon">›</span>
+                <h3 className="tip-title">柔軟性を持つ</h3>
               </div>
-              <p class="tip-description">
+              <p className="tip-description">
                 プレイヤーは予想外の行動をとる。
                 シナリオ通りに進まなくても、その展開を楽しみ、柔軟に対応する。
                 計画にこだわりすぎず、プレイヤーの選択を尊重する。
               </p>
             </div>
 
-            <div class="tip-item">
-              <div class="tip-header">
-                <span class="tip-icon">›</span>
-                <h3 class="tip-title">判断に迷ったら</h3>
+            <div className="tip-item">
+              <div className="tip-header">
+                <span className="tip-icon">›</span>
+                <h3 className="tip-title">判断に迷ったら</h3>
               </div>
-              <p class="tip-description">
+              <p className="tip-description">
                 完璧な判断を求めすぎない。
                 迷った時は、より面白くなる方、プレイヤーが喜ぶ方を選ぶ。
                 間違えても構わない。修正が必要なら、後で調整すればいい。
               </p>
             </div>
 
-            <div class="tip-item">
-              <div class="tip-header">
-                <span class="tip-icon">›</span>
-                <h3 class="tip-title">コミュニケーション</h3>
+            <div className="tip-item">
+              <div className="tip-header">
+                <span className="tip-icon">›</span>
+                <h3 className="tip-title">コミュニケーション</h3>
               </div>
-              <p class="tip-description">
+              <p className="tip-description">
                 プレイヤーとの対話を大切にする。
                 判断に困ったら、積極的に相談しよう。
               </p>
@@ -153,9 +153,9 @@ function GameMaster() {
           </div>
         </section>
 
-        <section class="closing-section">
-          <div class="closing-card">
-            <p class="closing-text">
+        <section className="closing-section">
+          <div className="closing-card">
+            <p className="closing-text">
               GMは裁定者であり、語り部であり、共に遊ぶ仲間だ。
               <br />
               完璧である必要はない。楽しむことを忘れずに。
@@ -510,5 +510,3 @@ function GameMaster() {
     </div>
   );
 }
-
-export default GameMaster;
