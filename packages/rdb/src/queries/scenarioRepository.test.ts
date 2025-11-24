@@ -1,5 +1,5 @@
 import { PGlite } from '@electric-sql/pglite';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { generateUUID } from '@echo-500/utility';
 import { drizzle } from 'drizzle-orm/pglite';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
 import { createScenarioRepository } from './scenarioRepository';

@@ -1,6 +1,6 @@
 import { PGlite } from '@electric-sql/pglite';
-import { parseRDBData } from '@trpg-scenario-maker/schema';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { parseRDBData } from '@echo-500/schema';
+import { generateUUID } from '@echo-500/utility';
 import { drizzle } from 'drizzle-orm/pglite';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
 

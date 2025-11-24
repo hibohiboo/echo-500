@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/tsconfig",
+  "name": "@echo-500/tsconfig",
   "type": "module",
   "private": true,
   "devDependencies": {

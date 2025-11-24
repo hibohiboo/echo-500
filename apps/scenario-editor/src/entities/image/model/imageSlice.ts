@@ -5,8 +5,8 @@ import {
   setPrimaryImageAction,
   deleteImageAction,
 } from '../actions/imageActions';
+import type { Image } from '@echo-500/schema';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Image } from '@trpg-scenario-maker/schema';
 
 /**
  * キャラクター画像の状態

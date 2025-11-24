@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/utility",
+  "name": "@echo-500/utility",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
@@ -13,13 +13,14 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@zip.js/zip.js": "^2.8.10",
+    "@echo-500/schema": "workspace:*",
+    "@zip.js/zip.js": "^2.8.11",
     "uuid": "^13.0.0",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "eslint": "catalog:testing",
     "typescript": "catalog:building"
   }

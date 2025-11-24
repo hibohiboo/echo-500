@@ -5,7 +5,7 @@ import {
   InformationItemConnectionList,
   InformationItemConnectionFormModal,
   type InformationItemConnectionDisplay,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 import { useMemo } from 'react';
 import { useSceneList } from '@/entities/scene';
 import { useInformationManagement } from '../hooks/useInformationManagement';

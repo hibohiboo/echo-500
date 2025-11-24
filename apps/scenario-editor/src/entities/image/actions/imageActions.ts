@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
 import { imageGraphApi } from '../api/imageGraphApi';
 import { imageRdbApi } from '../api/imageRdbApi';
-import type { Image } from '@trpg-scenario-maker/schema';
+import type { Image } from '@echo-500/schema';
 
 /**
  * キャラクターの画像一覧を取得

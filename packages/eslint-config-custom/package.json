@@ -1,10 +1,10 @@
 {
-  "name": "@trpg-scenario-maker/eslint-config-custom",
+  "name": "@echo-500/eslint-config-custom",
   "type": "module",
   "private": true,
   "devDependencies": {
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
-    "@eslint/config-inspector": "^1.4.1",
+    "@eslint/config-inspector": "^1.4.2",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.1",
     "eslint": "^9.39.1",

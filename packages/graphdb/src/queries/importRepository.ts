@@ -1,6 +1,6 @@
 import { executeQuery } from '../db';
 import { escapeCypherString } from '../utils/escapeCypherString';
-import type { GraphNode, GraphRelationship } from '@trpg-scenario-maker/schema';
+import type { GraphNode, GraphRelationship } from '@echo-500/schema';
 
 // === ノード挿入関数（個別） ===
 

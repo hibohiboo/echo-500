@@ -1,5 +1,5 @@
 {
-  "name": "@echo-500/schema",
+  "name": "@echo-500/frontend-common",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
@@ -9,11 +9,10 @@
   },
   "scripts": {
     "ncu": "ncu -u",
-    "lint": "eslint . --fix && tsc -b",
-    "test": "vitest"
+    "lint": "eslint . --fix && tsc -b"
   },
   "dependencies": {
-    "valibot": "^1.1.0"
+    "@echo-500/schema": "workspace:*"
   },
   "devDependencies": {
     "@echo-500/eslint-config-custom": "workspace:*",

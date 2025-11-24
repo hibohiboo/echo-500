@@ -1,4 +1,4 @@
-import { imageGraphRepository } from '@trpg-scenario-maker/graphdb';
+import { imageGraphRepository } from '@echo-500/graphdb';
 import {
   parseCreateImageNodePayload,
   parseImageLinkPayload,
@@ -9,7 +9,7 @@ import {
   parseCharacterImageLinkList,
   parseImageCharacterInfoList,
   parseCharacterImageInfoList,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * 画像のグラフDB操作ハンドラー

@@ -1,4 +1,4 @@
-import { safeParseSceneSchema } from '@trpg-scenario-maker/schema';
+import { safeParseSceneSchema } from '@echo-500/schema';
 import { Handle, Position } from '@xyflow/react';
 import { memo } from 'react';
 import { SceneEventIcon } from './SceneEventIcon';

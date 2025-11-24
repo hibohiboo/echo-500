@@ -1,5 +1,12 @@
+/* eslint-disable complexity */
 import { useState } from 'react';
-import type { Character, MemorySlot, BattleFrame } from '../types';
+import { BATTLE_STYLES } from '../types';
+import type {
+  Character,
+  MemorySlot,
+  BattleFrame,
+  BattleStyleType,
+} from '../types';
 
 interface CharacterFormProps {
   character?: Character;
@@ -34,7 +41,6 @@ const getInitialMemorySlots = (): MemorySlot[] => [
   },
 ];
 
-// eslint-disable-next-line complexity
 export default function CharacterForm({
   character,
   onSave,
@@ -44,8 +50,11 @@ export default function CharacterForm({
   const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(
     character?.memorySlots || getInitialMemorySlots(),
   );
-  const [battleFrame, setBattleFrame] = useState<BattleFrame | null>(
+  const [battleFrame, setBattleFrame] = useState<BattleFrame>(
     character?.battleFrame || null,
+  );
+  const [battleStyles, setBattleStyles] = useState<BattleStyleType[]>(
+    character?.battleStyles || [],
   );
   const [error, setError] = useState('');
 
@@ -72,6 +81,7 @@ export default function CharacterForm({
       name: name.trim(),
       memorySlots,
       battleFrame: battleFrame || undefined,
+      battleStyles: battleStyles.length > 0 ? battleStyles : undefined,
     });
   };
 
@@ -121,24 +131,61 @@ export default function CharacterForm({
     ]);
   };
 
-  const createBattleFrame = () => {
-    setBattleFrame({
-      hp: 10,
+  const battleFramePresets = {
+    basic: {
+      hp: 20,
+      evasion: 5,
+      armor: 2,
+      initialCount: 5,
+      movement: 3,
+      size: 1 as const,
+    },
+    light: {
+      hp: 15,
       evasion: 7,
       armor: 0,
-      initialCount: 10,
-      movement: 3,
-      size: 1,
+      initialCount: 3,
+      movement: 5,
+      size: 1 as const,
+    },
+    heavy: {
+      hp: 30,
+      evasion: 3,
+      armor: 5,
+      initialCount: 8,
+      movement: 2,
+      size: 1 as const,
+    },
+  };
+
+  const createBattleFrame = (preset: 'basic' | 'light' | 'heavy' = 'basic') => {
+    setBattleFrame({
+      stats: { ...battleFramePresets[preset] },
+      type: preset,
     });
   };
 
-  const updateBattleFrame = (field: keyof BattleFrame, value: number) => {
+  const updateBattleFrame = (
+    field: keyof typeof battleFramePresets.basic,
+    value: number,
+  ) => {
     if (!battleFrame) return;
-    setBattleFrame({ ...battleFrame, [field]: value });
+    setBattleFrame({
+      ...battleFrame,
+      stats: { ...battleFrame.stats, [field]: value },
+    });
   };
 
   const removeBattleFrame = () => {
     setBattleFrame(null);
+  };
+
+  const toggleBattleStyle = (style: BattleStyleType) => {
+    if (battleStyles.includes(style)) {
+      setBattleStyles(battleStyles.filter((s) => s !== style));
+    } else {
+      setBattleStyles([...battleStyles, style]);
+    }
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -349,6 +396,163 @@ export default function CharacterForm({
               バスターシナリオに参加する場合は戦闘フレームを設定してください
             </p>
 
+            {/* Frame Type Selection */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--spacing-sm)',
+                marginBottom: 'var(--spacing-md)',
+                padding: 'var(--spacing-md)',
+                background: 'var(--bg-tertiary)',
+                borderRadius: '4px',
+              }}
+            >
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    battleFrame === null
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    battleFrame === null
+                      ? '2px solid var(--color-cyber-secondary)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={battleFrame === null}
+                  onChange={() => removeBattleFrame()}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>なし</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (戦闘フレームを使用しない)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    battleFrame?.type === 'basic'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    battleFrame?.type === 'basic'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={battleFrame?.type === 'basic'}
+                  onChange={() => createBattleFrame('basic')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ベーシック</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (バランス型)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    battleFrame?.type === 'light'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    battleFrame?.type === 'light'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={battleFrame?.type === 'light'}
+                  onChange={() => createBattleFrame('light')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ライト</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (高機動型)
+                </span>
+              </label>
+
+              <label
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--spacing-sm)',
+                  cursor: 'pointer',
+                  padding: 'var(--spacing-sm)',
+                  background:
+                    battleFrame?.type === 'heavy'
+                      ? 'var(--bg-secondary)'
+                      : 'transparent',
+                  borderRadius: '4px',
+                  border:
+                    battleFrame?.type === 'heavy'
+                      ? '2px solid var(--color-nature-accent)'
+                      : '2px solid transparent',
+                }}
+              >
+                <input
+                  type="radio"
+                  name="battleFrameType"
+                  checked={battleFrame?.type === 'heavy'}
+                  onChange={() => createBattleFrame('heavy')}
+                  style={{ cursor: 'pointer' }}
+                />
+                <span style={{ fontWeight: 'bold' }}>ヘビー</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  (重装甲型)
+                </span>
+              </label>
+            </div>
+
             {battleFrame ? (
               <div
                 style={{
@@ -389,7 +593,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.hp}
+                      value={battleFrame.stats.hp}
                       onChange={(e) =>
                         updateBattleFrame('hp', Number(e.target.value))
                       }
@@ -420,7 +624,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.evasion}
+                      value={battleFrame.stats.evasion}
                       onChange={(e) =>
                         updateBattleFrame('evasion', Number(e.target.value))
                       }
@@ -452,7 +656,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.armor}
+                      value={battleFrame.stats.armor}
                       onChange={(e) =>
                         updateBattleFrame('armor', Number(e.target.value))
                       }
@@ -483,7 +687,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.initialCount}
+                      value={battleFrame.stats.initialCount}
                       onChange={(e) =>
                         updateBattleFrame(
                           'initialCount',
@@ -517,7 +721,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.movement}
+                      value={battleFrame.stats.movement}
                       onChange={(e) =>
                         updateBattleFrame('movement', Number(e.target.value))
                       }
@@ -547,7 +751,7 @@ export default function CharacterForm({
                     </p>
                     <select
                       className="form-input"
-                      value={battleFrame.size}
+                      value={battleFrame.stats.size}
                       onChange={(e) =>
                         updateBattleFrame(
                           'size',
@@ -560,25 +764,139 @@ export default function CharacterForm({
                     </select>
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={removeBattleFrame}
-                  style={{ width: '100%' }}
-                >
-                  戦闘フレームを削除
-                </button>
               </div>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={createBattleFrame}
-                style={{ width: '100%' }}
+            ) : null}
+          </div>
+
+          {/* Battle Styles */}
+          <div className="form-group">
+            <label className="form-label">
+              <span style={{ marginRight: 'var(--spacing-xs)' }}>⚡</span>
+              戦闘スタイル (CP消費: 1スタイル30点)
+            </label>
+            <p
+              style={{
+                fontSize: '0.85rem',
+                color: 'var(--text-tertiary)',
+                marginBottom: 'var(--spacing-md)',
+              }}
+            >
+              複数のスタイルを習得できます。スタイルごとにステータス補正と戦闘モジュールを取得します
+            </p>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--spacing-md)',
+              }}
+            >
+              {(Object.keys(BATTLE_STYLES) as BattleStyleType[]).map((key) => {
+                const style = BATTLE_STYLES[key];
+                const isSelected = battleStyles.includes(key);
+                const modifierText = [];
+
+                if (style.modifier.movement !== undefined) {
+                  modifierText.push(
+                    `移動力${style.modifier.movement > 0 ? '+' : ''}${style.modifier.movement}`,
+                  );
+                }
+                if (style.modifier.evasion !== undefined) {
+                  modifierText.push(
+                    `回避値${style.modifier.evasion > 0 ? '+' : ''}${style.modifier.evasion}`,
+                  );
+                }
+
+                return (
+                  <label
+                    key={key}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--spacing-sm)',
+                      cursor: 'pointer',
+                      padding: 'var(--spacing-md)',
+                      background: isSelected
+                        ? 'var(--bg-secondary)'
+                        : 'var(--bg-tertiary)',
+                      borderRadius: '4px',
+                      border: isSelected
+                        ? '2px solid var(--color-nature-accent)'
+                        : '2px solid transparent',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleBattleStyle(key)}
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--spacing-sm)',
+                          marginBottom: 'var(--spacing-xs)',
+                        }}
+                      >
+                        <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+                          {style.name}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--text-tertiary)',
+                          }}
+                        >
+                          (CP: {style.cpCost})
+                        </span>
+                      </div>
+                      <p
+                        style={{
+                          fontSize: '0.85rem',
+                          color: 'var(--text-secondary)',
+                          marginBottom: 'var(--spacing-xs)',
+                        }}
+                      >
+                        {style.description}
+                      </p>
+                      {modifierText.length > 0 && (
+                        <p
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--color-nature-accent)',
+                          }}
+                        >
+                          補正: {modifierText.join(', ')}
+                        </p>
+                      )}
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+
+            {battleStyles.length > 0 && (
+              <div
+                style={{
+                  marginTop: 'var(--spacing-md)',
+                  padding: 'var(--spacing-md)',
+                  background: 'var(--bg-tertiary)',
+                  borderRadius: '4px',
+                  border: '1px solid var(--color-nature-accent)',
+                }}
               >
-                + 戦闘フレームを追加
-              </button>
+                <p
+                  style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  選択中: {battleStyles.length}スタイル / 合計CP消費:{' '}
+                  {battleStyles.length * 30}点
+                </p>
+              </div>
             )}
           </div>
 

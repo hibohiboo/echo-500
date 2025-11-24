@@ -1,5 +1,5 @@
 import { imagesTable, scenariosTable } from '../schema';
-import type { RDBData } from '@trpg-scenario-maker/schema';
+import type { RDBData } from '@echo-500/schema';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 
 /**

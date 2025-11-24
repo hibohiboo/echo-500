@@ -1,4 +1,4 @@
-import { informationItemRepository } from '@trpg-scenario-maker/graphdb';
+import { informationItemRepository } from '@echo-500/graphdb';
 import {
   parseGetInformationItemsByScenarioIdPayload,
   parseCreateInformationItemPayload,
@@ -17,7 +17,7 @@ import {
   parseInformationItemConnectionListSchema,
   parseSceneInformationConnectionListSchema,
   parseInformationToSceneConnectionListSchema,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * 情報項目のグラフDB操作ハンドラー

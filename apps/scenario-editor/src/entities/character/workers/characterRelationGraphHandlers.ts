@@ -1,5 +1,5 @@
-import { relationshipGraphRepository } from '@trpg-scenario-maker/graphdb';
-import { parseToRelationshipList } from '@trpg-scenario-maker/schema';
+import { relationshipGraphRepository } from '@echo-500/graphdb';
+import { parseToRelationshipList } from '@echo-500/schema';
 
 /**
  * キャラクター関係性のグラフDB操作ハンドラー

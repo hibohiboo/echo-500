@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/rdb",
+  "name": "@echo-500/rdb",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -18,14 +18,14 @@
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.7",
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "eslint": "catalog:testing"
   },
   "dependencies": {
-    "@trpg-scenario-maker/schema": "workspace:*",
+    "@echo-500/schema": "workspace:*",
     "@electric-sql/pglite": "^0.3.14",
     "drizzle-orm": "^0.44.7",
-    "@trpg-scenario-maker/utility": "workspace:*"
+    "@echo-500/utility": "workspace:*"
   }
 }

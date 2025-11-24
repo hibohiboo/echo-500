@@ -1,5 +1,5 @@
-import { parseGraphDBData } from '@trpg-scenario-maker/schema';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { parseGraphDBData } from '@echo-500/schema';
+import { generateUUID } from '@echo-500/utility';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { initializeDatabase, closeDatabase, executeQuery } from '../db';
 import { graphDbSchemas } from '../schemas';
@@ -13,7 +13,7 @@ import { scenarioCharacterRepository } from './scenarioCharacterRepository';
 import { scenarioGraphRepository } from './scenarioRepository';
 import { sceneEventRepository } from './sceneEventRepository';
 import { sceneGraphRepository } from './sceneRepository';
-import type { GraphNode, GraphRelationship } from '@trpg-scenario-maker/schema';
+import type { GraphNode, GraphRelationship } from '@echo-500/schema';
 
 describe('exportRepository / importRepository', () => {
   beforeAll(async () => {

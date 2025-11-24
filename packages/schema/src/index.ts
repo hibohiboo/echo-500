@@ -9,3 +9,4 @@ export * from './characterNode';
 export * from './informationItem';
 export * from './image';
 export * from './export';
+export * from './battleFrame';

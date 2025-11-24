@@ -1,5 +1,5 @@
 {
-  "name": "@trpg-scenario-maker/frontend",
+  "name": "@echo-500/frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,13 +15,13 @@
     "codegen": "playwright codegen"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.10.1",
-    "@trpg-scenario-maker/graphdb": "workspace:*",
-    "@trpg-scenario-maker/rdb": "workspace:*",
-    "@trpg-scenario-maker/schema": "workspace:*",
-    "@trpg-scenario-maker/ui": "workspace:*",
-    "@trpg-scenario-maker/utility": "workspace:*",
-    "@zip.js/zip.js": "^2.8.10",
+    "@reduxjs/toolkit": "^2.11.0",
+    "@echo-500/graphdb": "workspace:*",
+    "@echo-500/rdb": "workspace:*",
+    "@echo-500/schema": "workspace:*",
+    "@echo-500/ui": "workspace:*",
+    "@echo-500/utility": "workspace:*",
+    "@zip.js/zip.js": "^2.8.11",
     "date-fns": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -32,8 +32,8 @@
     "@cucumber/cucumber": "^12.2.0",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/vite": "^4.1.17",
-    "@trpg-scenario-maker/eslint-config-custom": "workspace:*",
-    "@trpg-scenario-maker/tsconfig": "workspace:*",
+    "@echo-500/eslint-config-custom": "workspace:*",
+    "@echo-500/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "eslint": "catalog:testing",
     "ts-node": "^10.9.2"
