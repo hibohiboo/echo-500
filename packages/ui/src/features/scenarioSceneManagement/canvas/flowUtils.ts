@@ -1,3 +1,4 @@
+import './dagre.d.ts'; // 一時的な型エラーに対応 . https://github.com/dagrejs/dagre/issues/492
 import dagre from '@dagrejs/dagre';
 import type { Scene } from '../types';
 import type { SceneEvent } from '@echo-500/schema';

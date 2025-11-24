@@ -1,4 +1,4 @@
-import { Layout } from '@echo-500/ui/rulebook/layout';
+import { RulebookLayout } from '@echo-500/ui';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { BattleCommandsPage } from '@/pages/battle-commands/BattleCommands';
 import { BattleRulesPage } from '@/pages/battle-rules/BattleRules';
@@ -13,11 +13,13 @@ import { TermsOfServicePage } from '@/pages/terms-of-service/TermsOfService';
 import { TutorialPage } from '@/pages/tutorial/Tutorial';
 
 export function AppRouter() {
+  const basePath = BASE_PATH;
+
   return (
-    <BrowserRouter basename={`/${BASE_PATH}`}>
+    <BrowserRouter basename={`/${basePath}`}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route element={<Layout />}>
+        <Route element={<RulebookLayout basePath={basePath} />}>
           <Route path="/content/tutorial" element={<TutorialPage />} />
           <Route path="/content/glossary" element={<GlossaryPage />} />
           <Route

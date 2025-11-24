@@ -1,9 +1,13 @@
-export function Header() {
+interface HeaderProps {
+  basePath?: string;
+}
+
+export function Header({ basePath = '' }: HeaderProps) {
   return (
     <header className="site-header">
       <div className="header-content">
         <div className="header-left">
-          <a href={`/${BASE_PATH}/`} className="site-logo">
+          <a href={`/${basePath}/`} className="site-logo">
             <span className="logo-text">Echo:</span>
             <span className="logo-number">500</span>
           </a>

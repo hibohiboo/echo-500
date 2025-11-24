@@ -179,3 +179,9 @@ export type {
   CharacterImageGalleryProps,
   CharacterImageUploadModalProps,
 } from './features/scenarioCharacterManagement';
+
+// Rulebook components
+export { Layout as RulebookLayout } from './rulebook/layout';
+export { Header as RulebookHeader } from './rulebook/layout';
+export { Footer as RulebookFooter } from './rulebook/layout';
+export { CommandCard } from './rulebook/command-card';
