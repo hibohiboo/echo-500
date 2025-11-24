@@ -1,7 +1,10 @@
 import type { BattleFrameStats } from '@echo-500/schema';
 
-export { BATTLE_FRAME_PRESETS } from '@echo-500/frontend-common';
-export type { BattleFramePresetType } from '@echo-500/frontend-common';
+export { BATTLE_FRAME_PRESETS, BATTLE_STYLES } from '@echo-500/frontend-common';
+export type {
+  BattleFramePresetType,
+  BattleStyleType,
+} from '@echo-500/frontend-common';
 
 export interface MemorySlot {
   title: string;
@@ -19,4 +22,5 @@ export interface Character {
   name: string;
   memorySlots: MemorySlot[];
   battleFrame?: BattleFrame;
+  battleStyles?: Array<'saber' | 'gunner' | 'wizard'>;
 }

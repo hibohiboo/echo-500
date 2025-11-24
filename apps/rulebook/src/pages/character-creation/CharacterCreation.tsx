@@ -219,6 +219,69 @@ function CharacterCreation() {
                     100CPを使用してモジュールを追加購入することで、これらの値を強化できる。
                   </p>
                 </div>
+
+                <h3 class="subsection-title" style="margin-top: var(--spacing-xl)">
+                  <span class="subsection-icon">⚡</span> 戦闘スタイル
+                </h3>
+
+                <p>
+                  戦闘スタイルは、キャラクターの戦闘における専門性を表す。
+                  複数のスタイルを習得することができ、1スタイルの習得に
+                  <strong>30CP</strong>を消費する。
+                </p>
+
+                <div class="style-types-grid">
+                  <div class="style-type-card">
+                    <h4 class="style-type-name">
+                      <span class="style-icon">⚔️</span> セイバー（近接攻撃型）
+                    </h4>
+                    <div class="style-type-modifier">
+                      <p class="modifier-text">補正: 移動力 +1</p>
+                    </div>
+                    <p class="style-type-desc">
+                      近接戦闘を主とするスタイル。接近して敵を制圧する戦術に長ける。
+                      高い機動力で敵との距離を詰め、近接攻撃で確実に仕留める。
+                    </p>
+                    <p class="cp-cost">CP消費: 30</p>
+                  </div>
+
+                  <div class="style-type-card">
+                    <h4 class="style-type-name">
+                      <span class="style-icon">🎯</span> ガンナー（遠距離攻撃型）
+                    </h4>
+                    <div class="style-type-modifier">
+                      <p class="modifier-text">補正: なし</p>
+                    </div>
+                    <p class="style-type-desc">
+                      遠距離攻撃を主とするスタイル。安全な距離から敵を攻撃する。
+                      射撃精度と火力に優れ、距離を保ちながら確実にダメージを与える。
+                    </p>
+                    <p class="cp-cost">CP消費: 30</p>
+                  </div>
+
+                  <div class="style-type-card">
+                    <h4 class="style-type-name">
+                      <span class="style-icon">✨</span> ウィザード（支援妨害型）
+                    </h4>
+                    <div class="style-type-modifier">
+                      <p class="modifier-text">補正: 移動力 -1, 回避値 -1</p>
+                    </div>
+                    <p class="style-type-desc">
+                      支援と妨害を主とするスタイル。味方の強化や敵の弱体化を行う。
+                      機動性は低いが、戦場全体をコントロールする高度な戦術を可能にする。
+                    </p>
+                    <p class="cp-cost">CP消費: 30</p>
+                  </div>
+                </div>
+
+                <div class="note-box">
+                  <span class="note-icon">※</span>
+                  <p class="note-text">
+                    戦闘スタイルは複数習得可能。習得したスタイルに応じて、
+                    戦闘モジュール（攻撃・防御・支援アクション）が使用可能になる。
+                    ステータス補正は全スタイルの合計値が適用される。
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -664,12 +727,83 @@ function CharacterCreation() {
           margin: 0;
         }
 
+        /* Battle Styles */
+        .style-types-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: var(--spacing-md);
+          margin: var(--spacing-lg) 0;
+        }
+
+        .style-type-card {
+          background: var(--bg-tertiary);
+          border: 2px solid var(--color-nature-secondary);
+          border-radius: 8px;
+          padding: var(--spacing-md);
+          transition: all 0.2s;
+        }
+
+        .style-type-card:hover {
+          border-color: var(--color-nature-accent);
+          box-shadow: 0 0 15px rgba(107, 156, 66, 0.2);
+        }
+
+        .style-type-name {
+          font-family: var(--font-heading);
+          font-size: 1rem;
+          color: var(--color-cyber-primary);
+          margin: 0 0 var(--spacing-sm) 0;
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-xs);
+        }
+
+        .style-icon {
+          font-size: 1.2rem;
+        }
+
+        .style-type-modifier {
+          margin-bottom: var(--spacing-sm);
+          padding: var(--spacing-xs);
+          background: rgba(107, 156, 66, 0.1);
+          border-radius: 4px;
+          border: 1px solid var(--color-nature-secondary);
+        }
+
+        .modifier-text {
+          font-family: var(--font-primary);
+          font-size: 0.8rem;
+          color: var(--color-nature-accent);
+          margin: 0;
+          font-weight: bold;
+        }
+
+        .style-type-desc {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        .cp-cost {
+          font-family: var(--font-primary);
+          font-size: 0.75rem;
+          color: var(--color-cyber-secondary);
+          margin: 0;
+          text-align: right;
+          font-weight: bold;
+        }
+
         @media (max-width: 768px) {
           .stat-grid {
             grid-template-columns: 1fr;
           }
 
           .frame-types-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .style-types-grid {
             grid-template-columns: 1fr;
           }
         }

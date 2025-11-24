@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import type { Character, MemorySlot, BattleFrame } from '../types';
+import { BATTLE_STYLES } from '../types';
+import type {
+  Character,
+  MemorySlot,
+  BattleFrame,
+  BattleStyleType,
+} from '../types';
 
 interface CharacterFormProps {
   character?: Character;
@@ -47,6 +53,9 @@ export default function CharacterForm({
   const [battleFrame, setBattleFrame] = useState<BattleFrame>(
     character?.battleFrame || null,
   );
+  const [battleStyles, setBattleStyles] = useState<BattleStyleType[]>(
+    character?.battleStyles || [],
+  );
   const [error, setError] = useState('');
 
   const validateForm = (): string | null => {
@@ -72,6 +81,7 @@ export default function CharacterForm({
       name: name.trim(),
       memorySlots,
       battleFrame: battleFrame || undefined,
+      battleStyles: battleStyles.length > 0 ? battleStyles : undefined,
     });
   };
 
@@ -168,6 +178,14 @@ export default function CharacterForm({
 
   const removeBattleFrame = () => {
     setBattleFrame(null);
+  };
+
+  const toggleBattleStyle = (style: BattleStyleType) => {
+    if (battleStyles.includes(style)) {
+      setBattleStyles(battleStyles.filter((s) => s !== style));
+    } else {
+      setBattleStyles([...battleStyles, style]);
+    }
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -748,6 +766,138 @@ export default function CharacterForm({
                 </div>
               </div>
             ) : null}
+          </div>
+
+          {/* Battle Styles */}
+          <div className="form-group">
+            <label className="form-label">
+              <span style={{ marginRight: 'var(--spacing-xs)' }}>⚡</span>
+              戦闘スタイル (CP消費: 1スタイル30点)
+            </label>
+            <p
+              style={{
+                fontSize: '0.85rem',
+                color: 'var(--text-tertiary)',
+                marginBottom: 'var(--spacing-md)',
+              }}
+            >
+              複数のスタイルを習得できます。スタイルごとにステータス補正と戦闘モジュールを取得します
+            </p>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 'var(--spacing-md)',
+              }}
+            >
+              {(Object.keys(BATTLE_STYLES) as BattleStyleType[]).map((key) => {
+                const style = BATTLE_STYLES[key];
+                const isSelected = battleStyles.includes(key);
+                const modifierText = [];
+
+                if (style.modifier.movement !== undefined) {
+                  modifierText.push(
+                    `移動力${style.modifier.movement > 0 ? '+' : ''}${style.modifier.movement}`,
+                  );
+                }
+                if (style.modifier.evasion !== undefined) {
+                  modifierText.push(
+                    `回避値${style.modifier.evasion > 0 ? '+' : ''}${style.modifier.evasion}`,
+                  );
+                }
+
+                return (
+                  <label
+                    key={key}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--spacing-sm)',
+                      cursor: 'pointer',
+                      padding: 'var(--spacing-md)',
+                      background: isSelected
+                        ? 'var(--bg-secondary)'
+                        : 'var(--bg-tertiary)',
+                      borderRadius: '4px',
+                      border: isSelected
+                        ? '2px solid var(--color-nature-accent)'
+                        : '2px solid transparent',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleBattleStyle(key)}
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--spacing-sm)',
+                          marginBottom: 'var(--spacing-xs)',
+                        }}
+                      >
+                        <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+                          {style.name}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--text-tertiary)',
+                          }}
+                        >
+                          (CP: {style.cpCost})
+                        </span>
+                      </div>
+                      <p
+                        style={{
+                          fontSize: '0.85rem',
+                          color: 'var(--text-secondary)',
+                          marginBottom: 'var(--spacing-xs)',
+                        }}
+                      >
+                        {style.description}
+                      </p>
+                      {modifierText.length > 0 && (
+                        <p
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--color-nature-accent)',
+                          }}
+                        >
+                          補正: {modifierText.join(', ')}
+                        </p>
+                      )}
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+
+            {battleStyles.length > 0 && (
+              <div
+                style={{
+                  marginTop: 'var(--spacing-md)',
+                  padding: 'var(--spacing-md)',
+                  background: 'var(--bg-tertiary)',
+                  borderRadius: '4px',
+                  border: '1px solid var(--color-nature-accent)',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--text-secondary)',
+                  }}
+                >
+                  選択中: {battleStyles.length}スタイル / 合計CP消費:{' '}
+                  {battleStyles.length * 30}点
+                </p>
+              </div>
+            )}
           </div>
 
           {error ? (
