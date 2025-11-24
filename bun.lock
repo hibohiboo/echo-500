@@ -44,6 +44,7 @@
       "name": "@echo-500/rulebook",
       "version": "0.0.0",
       "dependencies": {
+        "@echo-500/frontend-common": "workspace:*",
         "@echo-500/schema": "workspace:*",
         "@echo-500/ui": "workspace:*",
         "mermaid": "^11.12.1",
@@ -139,8 +140,13 @@
       "devDependencies": {
         "@echo-500/eslint-config-custom": "workspace:*",
         "@echo-500/tsconfig": "workspace:*",
+        "@types/react": "^19.2.6",
         "eslint": "catalog:testing",
+        "react": "catalog:",
         "typescript": "catalog:building",
+      },
+      "peerDependencies": {
+        "react": "^18.0.0",
       },
     },
     "packages/graphdb": {

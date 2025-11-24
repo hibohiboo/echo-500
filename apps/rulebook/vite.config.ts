@@ -22,6 +22,10 @@ export default defineConfig({
     alias: {
       '@': path.join(__dirname, './src'),
     },
+    dedupe: ['react', 'react-dom', 'react-router'],
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router'],
   },
   build: {
     outDir: '../dist/rulebook',
@@ -39,11 +43,13 @@ export default defineConfig({
 });
 
 function chunkRule(moduleId: string) {
-  if (moduleId.includes('react-router')) return 'router';
   if (moduleId.includes('react-markdown') || moduleId.includes('remark-gfm'))
     return 'markdown';
   if (moduleId.includes('mermaid')) return 'mermaid';
-  if (moduleId.includes('react')) return 'react';
+  // React系は全て同じチャンクに入れる（複数インスタンスを防ぐ）
+  if (moduleId.includes('react')) {
+    return 'react';
+  }
 
   return 'vendor';
 }
