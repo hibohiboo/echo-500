@@ -3,7 +3,7 @@ import {
   ScenarioForm,
   ScenarioList,
   ScenarioImportModal,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 import { usePage } from '../hooks/usePage';
 
 export const Page = () => {

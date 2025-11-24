@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { sceneGraphApi } from '../api/sceneGraphApi';
-import type { Scene, SceneConnection } from '@trpg-scenario-maker/ui';
+import type { Scene, SceneConnection } from '@echo-500/ui';
 
 export const readScenesAction = createAsyncThunk<Scene[], string>(
   'scene/readScenes',

@@ -1,4 +1,4 @@
-import { scenarioRepository } from '@trpg-scenario-maker/rdb';
+import { scenarioRepository } from '@echo-500/rdb';
 import {
   parseCreateScenarioPayload,
   parseUpdateScenarioPayload,
@@ -6,8 +6,8 @@ import {
   parseScenarioList,
   parseScenario,
   parseScenarioCount,
-} from '@trpg-scenario-maker/schema';
-import { generateUUID } from '@trpg-scenario-maker/utility';
+} from '@echo-500/schema';
+import { generateUUID } from '@echo-500/utility';
 
 // ===== シナリオ操作ハンドラー =====
 // 循環依存を避けるため、ハンドラーを配列形式でエクスポート

@@ -1,4 +1,4 @@
-import { parseExportData, type Scenario } from '@trpg-scenario-maker/schema';
+import { parseExportData, type Scenario } from '@echo-500/schema';
 import { BlobWriter, ZipWriter } from '@zip.js/zip.js';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';

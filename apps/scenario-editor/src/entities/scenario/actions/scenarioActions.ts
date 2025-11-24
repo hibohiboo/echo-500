@@ -1,6 +1,6 @@
+import { type SerializableScenario } from '@echo-500/schema';
+import { generateUUID } from '@echo-500/utility';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { type SerializableScenario } from '@trpg-scenario-maker/schema';
-import { generateUUID } from '@trpg-scenario-maker/utility';
 import { scenarioApi } from '../api/scenarioApi';
 import { scenarioGraphApi } from '../api/scenarioGraphApi';
 

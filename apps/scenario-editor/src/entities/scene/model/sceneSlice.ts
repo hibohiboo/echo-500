@@ -8,8 +8,8 @@ import {
   createConnectionAction,
   deleteConnectionAction,
 } from '../actions/sceneActions';
+import type { Scene, SceneConnection } from '@echo-500/ui';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Scene, SceneConnection } from '@trpg-scenario-maker/ui';
 
 export interface SceneState {
   scenes: Scene[];

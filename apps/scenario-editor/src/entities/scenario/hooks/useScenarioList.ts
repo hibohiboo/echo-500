@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import { getCountSample, readScenarioAction } from '../actions/scenarioActions';
 import { scenariosSelector, scenarioSlice } from '../model/scenarioSlice';
-import type { Scenario } from '@trpg-scenario-maker/ui';
+import type { Scenario } from '@echo-500/ui';
 
 export const useScenarioList = () => {
   const dispatch = useAppDispatch();

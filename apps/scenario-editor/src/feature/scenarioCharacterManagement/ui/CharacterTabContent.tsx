@@ -5,7 +5,7 @@ import {
   ScenarioCharacterFormModal,
   ScenarioCharacterEditModal,
   CharacterRelationshipGraph,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 import { useMemo } from 'react';
 import { CharacterImageManager, useMultipleCharacterImages } from '@/entities/image';
 import { useCharacterManagement } from '../hooks/useCharacterManagement';

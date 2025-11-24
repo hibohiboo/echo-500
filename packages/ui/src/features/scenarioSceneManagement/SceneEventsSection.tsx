@@ -9,7 +9,7 @@ import {
 import { SceneEventIcon } from '../../entities/scene';
 import { Button } from '../../shared/button';
 import { SceneEventForm } from './SceneEventForm';
-import type { SceneEvent, SceneEventType } from '@trpg-scenario-maker/schema';
+import type { SceneEvent, SceneEventType } from '@echo-500/schema';
 
 export interface SceneEventsSectionProps {
   events: SceneEvent[];

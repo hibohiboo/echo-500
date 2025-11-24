@@ -1,8 +1,8 @@
 import {
   exportScenarioGraph,
   importScenarioGraph,
-} from '@trpg-scenario-maker/graphdb';
-import type { GraphDBData } from '@trpg-scenario-maker/schema';
+} from '@echo-500/graphdb';
+import type { GraphDBData } from '@echo-500/schema';
 
 export const scenarioExportHandlers = [
   {

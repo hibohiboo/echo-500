@@ -1,5 +1,5 @@
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
-import type { Relationship } from '@trpg-scenario-maker/schema';
+import type { Relationship } from '@echo-500/schema';
 
 /**
  * キャラクター関係性グラフDB API

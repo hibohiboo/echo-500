@@ -1,11 +1,11 @@
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { generateUUID } from '@echo-500/utility';
 import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
 import type {
   InformationItem,
   InformationItemConnection,
   InformationToSceneConnection,
   SceneInformationConnection,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 
 /**
  * 情報項目のグラフDB操作API

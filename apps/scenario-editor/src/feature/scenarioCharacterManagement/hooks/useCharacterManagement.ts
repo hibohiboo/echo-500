@@ -1,4 +1,4 @@
-import { generateUUID } from '@trpg-scenario-maker/utility';
+import { generateUUID } from '@echo-500/utility';
 import { useState } from 'react';
 import { characterGraphApi } from '@/entities/character';
 import {
@@ -12,7 +12,7 @@ import { graphdbWorkerClient } from '@/workers/graphdbWorkerClient';
 import type {
   CharacterWithRole,
   ScenarioCharacterRelation,
-} from '@trpg-scenario-maker/ui';
+} from '@echo-500/ui';
 
 /**
  * シナリオ詳細ページのキャラクター管理機能

@@ -7,7 +7,7 @@ import {
   setEditRelationshipName,
   relationshipSlice,
 } from '../model/relationshipSlice';
-import type { Relationship } from '@trpg-scenario-maker/schema';
+import type { Relationship } from '@echo-500/schema';
 
 /**
  * 関係性更新処理を行うHook

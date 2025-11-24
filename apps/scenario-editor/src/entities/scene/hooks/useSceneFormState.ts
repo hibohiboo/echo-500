@@ -5,7 +5,7 @@ import {
   setEditingScene,
   sceneSlice,
 } from '../model/sceneSlice';
-import type { Scene } from '@trpg-scenario-maker/ui';
+import type { Scene } from '@echo-500/ui';
 
 /**
  * シーンフォームの状態を管理するカスタムフック

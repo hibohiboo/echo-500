@@ -1,5 +1,5 @@
-import { scenarioCharacterRepository } from '@trpg-scenario-maker/graphdb';
-import { parseToScenarioCharacterList } from '@trpg-scenario-maker/schema';
+import { scenarioCharacterRepository } from '@echo-500/graphdb';
+import { parseToScenarioCharacterList } from '@echo-500/schema';
 
 /**
  * シナリオ×キャラクター関係のグラフDB操作ハンドラー

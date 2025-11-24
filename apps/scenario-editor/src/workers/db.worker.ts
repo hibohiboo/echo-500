@@ -1,4 +1,4 @@
-import { runMigrate } from '@trpg-scenario-maker/rdb/db/runMigrate';
+import { runMigrate } from '@echo-500/rdb/db/runMigrate';
 import { imageRdbHandlers } from '@/entities/image/workers/imageRdbHandlers';
 import { scenarioHandlers } from '@/entities/scenario/workers/scenarioHandlers';
 import { scenarioRdbExportHandlers } from '@/entities/scenario/workers/scenarioRdbExportHandlers';

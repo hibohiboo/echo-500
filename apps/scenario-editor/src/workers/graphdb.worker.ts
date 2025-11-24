@@ -6,8 +6,8 @@ import {
   writeFSVFile,
   setItem,
   getItem,
-} from '@trpg-scenario-maker/graphdb';
-import { initSampleData } from '@trpg-scenario-maker/graphdb/db';
+} from '@echo-500/graphdb';
+import { initSampleData } from '@echo-500/graphdb/db';
 import { characterGraphHandlers } from '@/entities/character/workers/characterGraphHandlers';
 import { characterRelationGraphHandlers } from '@/entities/character/workers/characterRelationGraphHandlers';
 import { imageGraphHandlers } from '@/entities/image/workers/imageGraphHandlers';

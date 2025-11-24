@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { exportToZip, importFromZip } from './zip';
-import type { ExportData } from '@trpg-scenario-maker/schema';
+import type { ExportData } from '@echo-500/schema';
 
 describe('zip utilities', () => {
   const sampleExportData: ExportData = {

@@ -1,4 +1,4 @@
-import { sceneEventRepository } from '@trpg-scenario-maker/graphdb';
+import { sceneEventRepository } from '@echo-500/graphdb';
 import {
   parseGetEventsBySceneIdPayload,
   parseCreateEventPayload,
@@ -7,7 +7,7 @@ import {
   parseUpdateEventOrderPayload,
   parseSceneEventListSchema,
   type SceneEvent,
-} from '@trpg-scenario-maker/schema';
+} from '@echo-500/schema';
 
 /**
  * シーンイベントのグラフDB操作ハンドラー

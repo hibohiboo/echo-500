@@ -1,7 +1,7 @@
-import type { BattleFrameStats } from '@trpg-scenario-maker/schema';
+import type { BattleFrameStats } from '@echo-500/schema';
 
-export { BATTLE_FRAME_PRESETS } from '@trpg-scenario-maker/frontend-common';
-export type { BattleFramePresetType } from '@trpg-scenario-maker/frontend-common';
+export { BATTLE_FRAME_PRESETS } from '@echo-500/frontend-common';
+export type { BattleFramePresetType } from '@echo-500/frontend-common';
 
 export interface MemorySlot {
   title: string;

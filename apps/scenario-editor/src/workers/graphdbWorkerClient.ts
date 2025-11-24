@@ -1,4 +1,4 @@
-import { graphDbSchemas } from '@trpg-scenario-maker/graphdb';
+import { graphDbSchemas } from '@echo-500/graphdb';
 import { BaseWorkerClient } from './BaseWorkerClient';
 import DBWorker from './graphdb.worker?worker';
 import type {

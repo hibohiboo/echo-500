@@ -1,4 +1,4 @@
-import { Layout } from '@trpg-scenario-maker/ui';
+import { Layout } from '@echo-500/ui';
 import { Outlet, useLocation } from 'react-router';
 
 const navigationItems = [

@@ -1,4 +1,4 @@
-import { dataUrlToBlob } from '@trpg-scenario-maker/utility';
+import { dataUrlToBlob } from '@echo-500/utility';
 import React, { useState, useRef, type DragEvent, useId } from 'react';
 
 export default function ImageUploadDataUrlPreview({

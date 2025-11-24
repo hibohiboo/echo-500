@@ -1,6 +1,6 @@
 import dagre from '@dagrejs/dagre';
 import type { Scene } from '../types';
-import type { SceneEvent } from '@trpg-scenario-maker/schema';
+import type { SceneEvent } from '@echo-500/schema';
 import type { Edge, Node } from '@xyflow/react';
 
 export const nodeWidth = 172;
