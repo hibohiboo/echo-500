@@ -44,12 +44,9 @@ export default function CharacterForm({
   const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(
     character?.memorySlots || getInitialMemorySlots(),
   );
-  const [battleFrame, setBattleFrame] = useState<BattleFrame | null>(
+  const [battleFrame, setBattleFrame] = useState<BattleFrame>(
     character?.battleFrame || null,
   );
-  const [selectedFrameType, setSelectedFrameType] = useState<
-    'basic' | 'light' | 'heavy' | null
-  >(null);
   const [error, setError] = useState('');
 
   const validateForm = (): string | null => {
@@ -152,18 +149,25 @@ export default function CharacterForm({
   };
 
   const createBattleFrame = (preset: 'basic' | 'light' | 'heavy' = 'basic') => {
-    setBattleFrame({ ...battleFramePresets[preset] });
-    setSelectedFrameType(preset);
+    setBattleFrame({
+      stats: { ...battleFramePresets[preset] },
+      type: preset,
+    });
   };
 
-  const updateBattleFrame = (field: keyof BattleFrame, value: number) => {
+  const updateBattleFrame = (
+    field: keyof typeof battleFramePresets.basic,
+    value: number,
+  ) => {
     if (!battleFrame) return;
-    setBattleFrame({ ...battleFrame, [field]: value });
+    setBattleFrame({
+      ...battleFrame,
+      stats: { ...battleFrame.stats, [field]: value },
+    });
   };
 
   const removeBattleFrame = () => {
     setBattleFrame(null);
-    setSelectedFrameType(null);
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -394,12 +398,12 @@ export default function CharacterForm({
                   cursor: 'pointer',
                   padding: 'var(--spacing-sm)',
                   background:
-                    selectedFrameType === null
+                    battleFrame === null
                       ? 'var(--bg-secondary)'
                       : 'transparent',
                   borderRadius: '4px',
                   border:
-                    selectedFrameType === null
+                    battleFrame === null
                       ? '2px solid var(--color-cyber-secondary)'
                       : '2px solid transparent',
                 }}
@@ -407,11 +411,8 @@ export default function CharacterForm({
                 <input
                   type="radio"
                   name="battleFrameType"
-                  checked={selectedFrameType === null}
-                  onChange={() => {
-                    setSelectedFrameType(null);
-                    removeBattleFrame();
-                  }}
+                  checked={battleFrame === null}
+                  onChange={() => removeBattleFrame()}
                   style={{ cursor: 'pointer' }}
                 />
                 <span style={{ fontWeight: 'bold' }}>なし</span>
@@ -433,12 +434,12 @@ export default function CharacterForm({
                   cursor: 'pointer',
                   padding: 'var(--spacing-sm)',
                   background:
-                    selectedFrameType === 'basic'
+                    battleFrame?.type === 'basic'
                       ? 'var(--bg-secondary)'
                       : 'transparent',
                   borderRadius: '4px',
                   border:
-                    selectedFrameType === 'basic'
+                    battleFrame?.type === 'basic'
                       ? '2px solid var(--color-nature-accent)'
                       : '2px solid transparent',
                 }}
@@ -446,7 +447,7 @@ export default function CharacterForm({
                 <input
                   type="radio"
                   name="battleFrameType"
-                  checked={selectedFrameType === 'basic'}
+                  checked={battleFrame?.type === 'basic'}
                   onChange={() => createBattleFrame('basic')}
                   style={{ cursor: 'pointer' }}
                 />
@@ -469,12 +470,12 @@ export default function CharacterForm({
                   cursor: 'pointer',
                   padding: 'var(--spacing-sm)',
                   background:
-                    selectedFrameType === 'light'
+                    battleFrame?.type === 'light'
                       ? 'var(--bg-secondary)'
                       : 'transparent',
                   borderRadius: '4px',
                   border:
-                    selectedFrameType === 'light'
+                    battleFrame?.type === 'light'
                       ? '2px solid var(--color-nature-accent)'
                       : '2px solid transparent',
                 }}
@@ -482,7 +483,7 @@ export default function CharacterForm({
                 <input
                   type="radio"
                   name="battleFrameType"
-                  checked={selectedFrameType === 'light'}
+                  checked={battleFrame?.type === 'light'}
                   onChange={() => createBattleFrame('light')}
                   style={{ cursor: 'pointer' }}
                 />
@@ -505,12 +506,12 @@ export default function CharacterForm({
                   cursor: 'pointer',
                   padding: 'var(--spacing-sm)',
                   background:
-                    selectedFrameType === 'heavy'
+                    battleFrame?.type === 'heavy'
                       ? 'var(--bg-secondary)'
                       : 'transparent',
                   borderRadius: '4px',
                   border:
-                    selectedFrameType === 'heavy'
+                    battleFrame?.type === 'heavy'
                       ? '2px solid var(--color-nature-accent)'
                       : '2px solid transparent',
                 }}
@@ -518,7 +519,7 @@ export default function CharacterForm({
                 <input
                   type="radio"
                   name="battleFrameType"
-                  checked={selectedFrameType === 'heavy'}
+                  checked={battleFrame?.type === 'heavy'}
                   onChange={() => createBattleFrame('heavy')}
                   style={{ cursor: 'pointer' }}
                 />
@@ -574,7 +575,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.hp}
+                      value={battleFrame.stats.hp}
                       onChange={(e) =>
                         updateBattleFrame('hp', Number(e.target.value))
                       }
@@ -605,7 +606,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.evasion}
+                      value={battleFrame.stats.evasion}
                       onChange={(e) =>
                         updateBattleFrame('evasion', Number(e.target.value))
                       }
@@ -637,7 +638,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.armor}
+                      value={battleFrame.stats.armor}
                       onChange={(e) =>
                         updateBattleFrame('armor', Number(e.target.value))
                       }
@@ -668,7 +669,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.initialCount}
+                      value={battleFrame.stats.initialCount}
                       onChange={(e) =>
                         updateBattleFrame(
                           'initialCount',
@@ -702,7 +703,7 @@ export default function CharacterForm({
                     <input
                       type="number"
                       className="form-input"
-                      value={battleFrame.movement}
+                      value={battleFrame.stats.movement}
                       onChange={(e) =>
                         updateBattleFrame('movement', Number(e.target.value))
                       }
@@ -732,7 +733,7 @@ export default function CharacterForm({
                     </p>
                     <select
                       className="form-input"
-                      value={battleFrame.size}
+                      value={battleFrame.stats.size}
                       onChange={(e) =>
                         updateBattleFrame(
                           'size',

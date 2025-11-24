@@ -9,7 +9,10 @@ export interface MemorySlot {
   tags: string[];
 }
 
-export type BattleFrame = BattleFrameStats;
+export type BattleFrame = {
+  stats: BattleFrameStats;
+  type: 'basic' | 'light' | 'heavy';
+} | null;
 
 export interface Character {
   id: string;

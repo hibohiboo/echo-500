@@ -122,12 +122,17 @@ export default function CharacterDetail({
             <div className="detail-section">
               <h2 className="detail-label">
                 <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
-                戦闘フレーム
+                戦闘フレーム -{' '}
+                {character.battleFrame.type === 'basic'
+                  ? 'ベーシック (バランス型)'
+                  : character.battleFrame.type === 'light'
+                    ? 'ライト (高機動型)'
+                    : 'ヘビー (重装甲型)'}
               </h2>
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                   gap: 'var(--spacing-md)',
                   padding: 'var(--spacing-md)',
                   background: 'var(--bg-tertiary)',
@@ -135,7 +140,13 @@ export default function CharacterDetail({
                   borderRadius: '4px',
                 }}
               >
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -143,20 +154,35 @@ export default function CharacterDetail({
                       marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    HP
+                    HP (ヒットポイント)
                   </div>
                   <div
                     style={{
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.hp}
+                    {character.battleFrame.stats.hp}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    0になると戦闘不能
                   </div>
                 </div>
 
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -171,13 +197,28 @@ export default function CharacterDetail({
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.evasion}
+                    {character.battleFrame.stats.evasion}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    2d6がこの値未満なら攻撃失敗
                   </div>
                 </div>
 
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -192,13 +233,28 @@ export default function CharacterDetail({
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.armor}
+                    {character.battleFrame.stats.armor}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    ダメージをこの値分減少
                   </div>
                 </div>
 
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -213,13 +269,28 @@ export default function CharacterDetail({
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.initialCount}
+                    {character.battleFrame.stats.initialCount}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    カウンターボードの配置位置
                   </div>
                 </div>
 
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -234,13 +305,28 @@ export default function CharacterDetail({
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.movement}
+                    {character.battleFrame.stats.movement}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    1ターンに移動できるマス数
                   </div>
                 </div>
 
-                <div>
+                <div
+                  style={{
+                    padding: 'var(--spacing-sm)',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '4px',
+                  }}
+                >
                   <div
                     style={{
                       fontSize: '0.8rem',
@@ -255,9 +341,18 @@ export default function CharacterDetail({
                       fontSize: '1.5rem',
                       fontWeight: 'bold',
                       color: 'var(--color-cyber-primary)',
+                      marginBottom: 'var(--spacing-xs)',
                     }}
                   >
-                    {character.battleFrame.size === 1 ? '1x1' : '2x2'}
+                    {character.battleFrame.stats.size === 1 ? '1x1' : '2x2'}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    占有マスの大きさ
                   </div>
                 </div>
               </div>
