@@ -17,7 +17,7 @@
   "devDependencies": {
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
-    "@types/react": "^19.2.6",
+    "@types/react": "^19.2.7",
     "eslint": "catalog:testing",
     "react": "catalog:",
     "typescript": "catalog:building"

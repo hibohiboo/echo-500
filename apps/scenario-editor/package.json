@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^12.2.0",
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/vite": "^4.1.17",
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
