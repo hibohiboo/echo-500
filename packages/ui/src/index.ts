@@ -194,3 +194,37 @@ export { ItemDetail } from './rulebook/item-detail';
 export { ItemToast } from './rulebook/item-toast';
 export type { InventoryItem } from './rulebook/inventory-panel';
 export type { InventoryIconType } from './rulebook/inventory-icon';
+
+// Rulebook Page Layout components
+export {
+  PageHeader,
+  IntroCard,
+  ContentCard,
+  SectionTitle,
+  NoteBox,
+  ExampleBox,
+} from './rulebook/page-layout';
+export type {
+  PageHeaderProps,
+  IntroCardProps,
+  ContentCardProps,
+  SectionTitleProps,
+  NoteBoxProps,
+  ExampleBoxProps,
+} from './rulebook/page-layout';
+
+// Rulebook Battle Frame components
+export {
+  StatCard,
+  ModifierBanner,
+  MemorySlots,
+  BattleStyles,
+} from './rulebook/battle-frame';
+export type {
+  StatCardProps,
+  ModifierBannerProps,
+  MemorySlotsProps,
+  MemorySlot,
+  BattleStylesProps,
+  BattleStyle,
+} from './rulebook/battle-frame';

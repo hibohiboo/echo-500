@@ -1,10 +1,11 @@
 import {
   useBattleCommandData,
   BattleCommandCard,
+  BATTLE_STYLES,
 } from '@echo-500/frontend-common';
 import { battleFrameTypeToString } from '@echo-500/schema';
-import { BATTLE_STYLES } from '../types';
 import type { Character } from '../types';
+import type { BattleStyle } from '@echo-500/frontend-common';
 
 interface CharacterDetailProps {
   character: Character;
@@ -12,25 +13,6 @@ interface CharacterDetailProps {
   onDelete: () => void;
   onBack: () => void;
 }
-
-const getStyleModifierText = (
-  style: (typeof BATTLE_STYLES)[keyof typeof BATTLE_STYLES],
-): string[] => {
-  const modifierText: string[] = [];
-
-  if ('movement' in style.modifier && style.modifier.movement !== undefined) {
-    modifierText.push(
-      `移動力${style.modifier.movement > 0 ? '+' : ''}${style.modifier.movement}`,
-    );
-  }
-  if ('evasion' in style.modifier && style.modifier.evasion !== undefined) {
-    modifierText.push(
-      `回避値${style.modifier.evasion > 0 ? '+' : ''}${style.modifier.evasion}`,
-    );
-  }
-
-  return modifierText;
-};
 
 const calculateStyleModifiers = (
   battleStyles?: Array<'saber' | 'gunner' | 'wizard'>,
@@ -74,86 +56,7 @@ const calculateFinalStats = (character: Character) => {
   };
 };
 
-interface MemorySlotsProps {
-  memorySlots: Character['memorySlots'];
-}
-
-function MemorySlots({ memorySlots }: MemorySlotsProps) {
-  return (
-    <div className="detail-section">
-      <h2 className="detail-label">
-        <span style={{ marginRight: 'var(--spacing-xs)' }}>🧠</span>
-        記憶スロット
-      </h2>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--spacing-md)',
-        }}
-      >
-        {memorySlots.map((slot, index) => (
-          <div
-            key={index}
-            style={{
-              padding: 'var(--spacing-md)',
-              background: 'var(--bg-tertiary)',
-              border: '1px solid var(--color-cyber-secondary)',
-              borderRadius: '4px',
-            }}
-          >
-            <h3
-              style={{
-                fontSize: '1rem',
-                color: 'var(--color-cyber-secondary)',
-                marginBottom: 'var(--spacing-sm)',
-              }}
-            >
-              {slot.title}
-            </h3>
-            <p
-              style={{
-                fontSize: '0.9rem',
-                color: 'var(--text-secondary)',
-                lineHeight: '1.6',
-                marginBottom: 'var(--spacing-sm)',
-              }}
-            >
-              {slot.description}
-            </p>
-            {slot.tags.length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: 'var(--spacing-xs)',
-                  marginTop: 'var(--spacing-sm)',
-                }}
-              >
-                {slot.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    style={{
-                      padding: '4px 8px',
-                      background: 'var(--color-cyber-primary)',
-                      color: 'var(--bg-primary)',
-                      fontSize: '0.75rem',
-                      borderRadius: '12px',
-                      fontFamily: 'var(--font-primary)',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
+// StatCard Component
 interface StatCardProps {
   label: string;
   value: number | string;
@@ -170,59 +73,28 @@ function StatCard({
   baseValue,
 }: StatCardProps) {
   return (
-    <div
-      style={{
-        padding: 'var(--spacing-sm)',
-        background: 'var(--bg-secondary)',
-        borderRadius: '4px',
-      }}
-    >
+    <div className="p-3 bg-bg-secondary rounded">
+      <div className="text-xs text-text-tertiary mb-1">{label}</div>
       <div
-        style={{
-          fontSize: '0.8rem',
-          color: 'var(--text-tertiary)',
-          marginBottom: 'var(--spacing-xs)',
-        }}
-      >
-        {label}
-      </div>
-      <div
-        style={{
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          color:
-            modifier !== 0
-              ? 'var(--color-nature-accent)'
-              : 'var(--color-cyber-primary)',
-          marginBottom: 'var(--spacing-xs)',
-        }}
+        className={`text-2xl font-bold mb-1 ${
+          modifier !== 0 ? 'text-nature-accent' : 'text-cyber-primary'
+        }`}
       >
         {value}
         {modifier !== 0 && baseValue !== undefined && (
-          <span
-            style={{
-              fontSize: '0.9rem',
-              marginLeft: 'var(--spacing-xs)',
-            }}
-          >
+          <span className="text-sm ml-1">
             (基本{baseValue}
             {modifier > 0 ? '+' : ''}
             {modifier})
           </span>
         )}
       </div>
-      <div
-        style={{
-          fontSize: '0.7rem',
-          color: 'var(--text-tertiary)',
-        }}
-      >
-        {description}
-      </div>
+      <div className="text-[11px] text-text-tertiary">{description}</div>
     </div>
   );
 }
 
+// ModifierBanner Component
 interface ModifierBannerProps {
   modifiers: { movement: number; evasion: number };
 }
@@ -232,23 +104,8 @@ function ModifierBanner({ modifiers }: ModifierBannerProps) {
   if (!hasModifiers) return null;
 
   return (
-    <div
-      style={{
-        marginBottom: 'var(--spacing-md)',
-        padding: 'var(--spacing-sm)',
-        background: 'rgba(107, 156, 66, 0.1)',
-        border: '1px solid var(--color-nature-accent)',
-        borderRadius: '4px',
-      }}
-    >
-      <p
-        style={{
-          fontSize: '0.85rem',
-          color: 'var(--color-nature-accent)',
-          margin: 0,
-          fontWeight: 'bold',
-        }}
-      >
+    <div className="mb-4 px-3 py-2 bg-[rgba(107,156,66,0.1)] border border-nature-accent rounded">
+      <p className="text-sm text-nature-accent m-0 font-bold">
         ⚡ スタイル補正適用済み
         {modifiers.movement !== 0 &&
           ` / 移動力${modifiers.movement > 0 ? '+' : ''}${modifiers.movement}`}
@@ -257,6 +114,67 @@ function ModifierBanner({ modifiers }: ModifierBannerProps) {
       </p>
     </div>
   );
+}
+
+// MemorySlots Component
+interface MemorySlotsProps {
+  memorySlots: Character['memorySlots'];
+}
+
+function MemorySlots({ memorySlots }: MemorySlotsProps) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-xl font-semibold text-text-primary flex items-center gap-2">
+        <span>🧠</span>
+        記憶スロット
+      </h2>
+      <div className="flex flex-col gap-4">
+        {memorySlots.map((slot, index) => (
+          <div
+            key={index}
+            className="p-4 bg-bg-tertiary border border-cyber-secondary rounded"
+          >
+            <h3 className="text-base text-cyber-secondary mb-2">
+              {slot.title}
+            </h3>
+            <p className="text-sm text-text-secondary leading-relaxed mb-2">
+              {slot.description}
+            </p>
+            {slot.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {slot.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="px-2 py-1 bg-cyber-primary text-bg-primary text-xs rounded-full font-primary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Helper function for BattleStyles
+function getStyleModifierText(style: BattleStyle): string[] {
+  const modifierText: string[] = [];
+
+  if (style.modifier.movement !== undefined) {
+    modifierText.push(
+      `移動力${style.modifier.movement > 0 ? '+' : ''}${style.modifier.movement}`,
+    );
+  }
+  if (style.modifier.evasion !== undefined) {
+    modifierText.push(
+      `回避値${style.modifier.evasion > 0 ? '+' : ''}${style.modifier.evasion}`,
+    );
+  }
+
+  return modifierText;
 }
 
 interface BattleFrameStatsProps {
@@ -270,25 +188,15 @@ function BattleFrameStats({ character, finalStats }: BattleFrameStatsProps) {
   }
 
   return (
-    <div className="detail-section">
-      <h2 className="detail-label">
-        <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
+    <div className="space-y-4">
+      <h2 className="text-xl font-semibold text-text-primary flex items-center gap-2">
+        <span>⚔️</span>
         戦闘フレーム - {battleFrameTypeToString(character.battleFrame.type)}
       </h2>
 
       <ModifierBanner modifiers={finalStats.modifiers} />
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-          gap: 'var(--spacing-md)',
-          padding: 'var(--spacing-md)',
-          background: 'var(--bg-tertiary)',
-          border: '2px solid var(--color-nature-accent)',
-          borderRadius: '4px',
-        }}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-bg-tertiary border-2 border-nature-accent rounded">
         <StatCard
           label="HP (ヒットポイント)"
           value={finalStats.hp}
@@ -351,37 +259,19 @@ function BattleCommands({ battleCommands }: BattleCommandsProps) {
   const totalCP = learnedCommands.reduce((sum, cmd) => sum + cmd.cp, 0);
 
   return (
-    <div className="detail-section">
-      <h2 className="detail-label">
-        <span style={{ marginRight: 'var(--spacing-xs)' }}>💾</span>
+    <div className="space-y-4">
+      <h2 className="text-xl font-semibold text-text-primary flex items-center gap-2">
+        <span>💾</span>
         習得済み戦闘モジュール
       </h2>
 
-      <div
-        style={{
-          marginBottom: 'var(--spacing-md)',
-          padding: 'var(--spacing-sm)',
-          background: 'var(--bg-secondary)',
-          borderRadius: '4px',
-        }}
-      >
-        <p
-          style={{
-            fontSize: '0.85rem',
-            color: 'var(--text-secondary)',
-          }}
-        >
+      <div className="mb-4 px-3 py-2 bg-bg-secondary rounded">
+        <p className="text-sm text-text-secondary">
           習得モジュール数: {learnedCommands.length} / 消費CP: {totalCP}点
         </p>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: 'var(--spacing-md)',
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {learnedCommands.map((cmd) => (
           <BattleCommandCard
             key={cmd.name}
@@ -402,86 +292,50 @@ function BattleCommands({ battleCommands }: BattleCommandsProps) {
   );
 }
 
-interface BattleStylesProps {
+// BattleStyles Component
+interface BattleStylesComponentProps {
   battleStyles: Character['battleStyles'];
 }
 
-function BattleStyles({ battleStyles }: BattleStylesProps) {
+function BattleStylesComponent({ battleStyles }: BattleStylesComponentProps) {
   if (!battleStyles || battleStyles.length === 0) {
     return null;
   }
 
+  const battleStylesData: BattleStyle[] = battleStyles.map(
+    (styleKey) => BATTLE_STYLES[styleKey],
+  );
+
   return (
-    <div className="detail-section">
-      <h2 className="detail-label">
-        <span style={{ marginRight: 'var(--spacing-xs)' }}>⚡</span>
+    <div className="space-y-4">
+      <h2 className="text-xl font-semibold text-text-primary flex items-center gap-2">
+        <span>⚡</span>
         戦闘スタイル
       </h2>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--spacing-md)',
-        }}
-      >
-        {battleStyles.map((styleKey) => {
-          const style = BATTLE_STYLES[styleKey];
+      <div className="flex flex-col gap-4">
+        {battleStylesData.map((style, index) => {
           const modifierText = getStyleModifierText(style);
 
           return (
             <div
-              key={styleKey}
-              style={{
-                padding: 'var(--spacing-md)',
-                background: 'var(--bg-tertiary)',
-                border: '2px solid var(--color-nature-accent)',
-                borderRadius: '4px',
-              }}
+              key={index}
+              className="p-4 bg-bg-tertiary border-2 border-nature-accent rounded"
             >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--spacing-sm)',
-                  marginBottom: 'var(--spacing-sm)',
-                }}
-              >
-                <h3
-                  style={{
-                    fontSize: '1.1rem',
-                    color: 'var(--color-nature-accent)',
-                    fontWeight: 'bold',
-                  }}
-                >
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="text-lg text-nature-accent font-bold">
                   {style.name}
                 </h3>
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <span className="text-xs text-text-tertiary">
                   (CP: {style.cpCost})
                 </span>
               </div>
               <p
-                style={{
-                  fontSize: '0.9rem',
-                  color: 'var(--text-secondary)',
-                  marginBottom:
-                    modifierText.length > 0 ? 'var(--spacing-sm)' : '0',
-                }}
+                className={`text-sm text-text-secondary ${modifierText.length > 0 ? 'mb-2' : ''}`}
               >
                 {style.description}
               </p>
               {modifierText.length > 0 && (
-                <p
-                  style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--color-cyber-primary)',
-                    fontWeight: 'bold',
-                  }}
-                >
+                <p className="text-sm text-cyber-primary font-bold">
                   補正: {modifierText.join(', ')}
                 </p>
               )}
@@ -490,20 +344,8 @@ function BattleStyles({ battleStyles }: BattleStylesProps) {
         })}
       </div>
 
-      <div
-        style={{
-          marginTop: 'var(--spacing-md)',
-          padding: 'var(--spacing-sm)',
-          background: 'var(--bg-secondary)',
-          borderRadius: '4px',
-        }}
-      >
-        <p
-          style={{
-            fontSize: '0.85rem',
-            color: 'var(--text-secondary)',
-          }}
-        >
+      <div className="mt-4 px-3 py-2 bg-bg-secondary rounded">
+        <p className="text-sm text-text-secondary">
           習得スタイル数: {battleStyles.length} / 合計CP消費:{' '}
           {battleStyles.length * 30}点
         </p>
@@ -528,27 +370,23 @@ export default function CharacterDetail({
       </header>
 
       <div className="card">
-        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
+        <div className="mb-8">
           <button className="btn btn-secondary" onClick={onBack}>
             ← Back to List
           </button>
         </div>
 
-        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-          <div className="detail-section">
-            <h2 className="detail-label">Name</h2>
-            <p className="detail-value">{character.name}</p>
+        <div className="mb-8 space-y-6">
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-text-primary">Name</h2>
+            <p className="text-lg text-text-secondary">{character.name}</p>
           </div>
 
-          <div className="detail-section">
-            <h2 className="detail-label">Character ID</h2>
-            <p
-              className="detail-value"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontSize: '0.875rem',
-              }}
-            >
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-text-primary">
+              Character ID
+            </h2>
+            <p className="text-sm text-text-secondary font-mono">
               {character.id}
             </p>
           </div>
@@ -557,12 +395,12 @@ export default function CharacterDetail({
 
           <BattleFrameStats character={character} finalStats={finalStats} />
 
-          <BattleStyles battleStyles={character.battleStyles} />
+          <BattleStylesComponent battleStyles={character.battleStyles} />
 
           <BattleCommands battleCommands={character.battleCommands} />
         </div>
 
-        <div className="character-actions" style={{ gap: 'var(--spacing-md)' }}>
+        <div className="flex flex-col sm:flex-row gap-4">
           <button className="btn btn-primary" onClick={onEdit}>
             Edit Character
           </button>
