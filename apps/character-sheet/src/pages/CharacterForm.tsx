@@ -264,35 +264,17 @@ export default function CharacterForm({
           {/* Memory Slots */}
           <div className="form-group">
             <label className="form-label">
-              <span style={{ marginRight: 'var(--spacing-xs)' }}>🧠</span>
+              <span className="mr-1">🧠</span>
               記憶スロット
             </label>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--spacing-md)',
-              }}
-            >
+            <div className="flex flex-col gap-4">
               {memorySlots.map((slot, index) => (
                 <div
                   key={index}
-                  style={{
-                    padding: 'var(--spacing-md)',
-                    background: 'var(--bg-tertiary)',
-                    border: '1px solid var(--color-cyber-secondary)',
-                    borderRadius: '4px',
-                  }}
+                  className="p-4 bg-bg-tertiary border border-cyber-secondary rounded"
                 >
-                  <div style={{ marginBottom: 'var(--spacing-sm)' }}>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                  <div className="mb-2">
+                    <label className="block text-xs text-text-tertiary mb-1">
                       タイトル
                     </label>
                     <input
@@ -306,86 +288,46 @@ export default function CharacterForm({
                     />
                   </div>
 
-                  <div style={{ marginBottom: 'var(--spacing-sm)' }}>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                  <div className="mb-2">
+                    <label className="block text-xs text-text-tertiary mb-1">
                       説明
                     </label>
                     <textarea
-                      className="form-input"
+                      className="form-input resize-y"
                       value={slot.description}
                       onChange={(e) =>
                         updateMemorySlot(index, 'description', e.target.value)
                       }
                       rows={3}
-                      style={{ resize: 'vertical' }}
                       placeholder="記憶の内容..."
                     />
                   </div>
 
-                  <div style={{ marginBottom: 'var(--spacing-sm)' }}>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                  <div className="mb-2">
+                    <label className="block text-xs text-text-tertiary mb-1">
                       タグ
                     </label>
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: 'var(--spacing-xs)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <div className="flex flex-wrap gap-1 mb-1">
                       {slot.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            padding: '4px 8px',
-                            background: 'var(--color-cyber-primary)',
-                            color: 'var(--bg-primary)',
-                            fontSize: '0.75rem',
-                            borderRadius: '12px',
-                            fontFamily: 'var(--font-primary)',
-                          }}
+                          className="inline-flex items-center gap-1 px-2 py-1 bg-cyber-primary text-bg-primary text-xs rounded-full font-primary"
                         >
                           {tag}
                           <button
                             type="button"
                             onClick={() => removeTag(index, tagIndex)}
-                            style={{
-                              background: 'none',
-                              border: 'none',
-                              color: 'inherit',
-                              cursor: 'pointer',
-                              padding: '0',
-                              fontSize: '1rem',
-                              lineHeight: '1',
-                            }}
+                            className="bg-transparent border-0 text-inherit cursor-pointer p-0 text-base leading-none"
                           >
                             ×
                           </button>
                         </span>
                       ))}
                     </div>
-                    <div style={{ display: 'flex', gap: 'var(--spacing-xs)' }}>
+                    <div className="flex gap-1">
                       <input
                         type="text"
-                        className="form-input"
+                        className="form-input flex-1"
                         placeholder="タグを入力..."
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
@@ -395,16 +337,14 @@ export default function CharacterForm({
                             input.value = '';
                           }
                         }}
-                        style={{ flex: 1 }}
                       />
                     </div>
                   </div>
 
                   <button
                     type="button"
-                    className="btn btn-danger"
+                    className="btn btn-danger w-full"
                     onClick={() => deleteMemorySlot(index)}
-                    style={{ width: '100%' }}
                   >
                     削除
                   </button>
@@ -414,9 +354,8 @@ export default function CharacterForm({
 
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary mt-4 w-full"
               onClick={addMemorySlot}
-              style={{ marginTop: 'var(--spacing-md)', width: '100%' }}
             >
               + 記憶スロットを追加
             </button>
@@ -425,211 +364,104 @@ export default function CharacterForm({
           {/* Battle Frame */}
           <div className="form-group">
             <label className="form-label">
-              <span style={{ marginRight: 'var(--spacing-xs)' }}>⚔️</span>
+              <span className="mr-1">⚔️</span>
               戦闘フレーム (バスターシナリオ用)
             </label>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                color: 'var(--text-tertiary)',
-                marginBottom: 'var(--spacing-md)',
-              }}
-            >
+            <p className="text-[0.85rem] text-text-tertiary mb-4">
               バスターシナリオに参加する場合は戦闘フレームを設定してください
             </p>
 
             {/* Frame Type Selection */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--spacing-sm)',
-                marginBottom: 'var(--spacing-md)',
-                padding: 'var(--spacing-md)',
-                background: 'var(--bg-tertiary)',
-                borderRadius: '4px',
-              }}
-            >
+            <div className="flex flex-col gap-2 mb-4 p-4 bg-bg-tertiary rounded">
               <label
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--spacing-sm)',
-                  cursor: 'pointer',
-                  padding: 'var(--spacing-sm)',
-                  background:
-                    battleFrame === null
-                      ? 'var(--bg-secondary)'
-                      : 'transparent',
-                  borderRadius: '4px',
-                  border:
-                    battleFrame === null
-                      ? '2px solid var(--color-cyber-secondary)'
-                      : '2px solid transparent',
-                }}
+                className={`flex items-center gap-2 cursor-pointer p-2 rounded border-2 ${
+                  battleFrame === null
+                    ? 'bg-bg-secondary border-cyber-secondary'
+                    : 'bg-transparent border-transparent'
+                }`}
               >
                 <input
                   type="radio"
                   name="battleFrameType"
                   checked={battleFrame === null}
                   onChange={() => removeBattleFrame()}
-                  style={{ cursor: 'pointer' }}
+                  className="cursor-pointer"
                 />
-                <span style={{ fontWeight: 'bold' }}>なし</span>
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <span className="font-bold">なし</span>
+                <span className="text-xs text-text-tertiary">
                   (戦闘フレームを使用しない)
                 </span>
               </label>
 
               <label
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--spacing-sm)',
-                  cursor: 'pointer',
-                  padding: 'var(--spacing-sm)',
-                  background:
-                    battleFrame?.type === 'basic'
-                      ? 'var(--bg-secondary)'
-                      : 'transparent',
-                  borderRadius: '4px',
-                  border:
-                    battleFrame?.type === 'basic'
-                      ? '2px solid var(--color-nature-accent)'
-                      : '2px solid transparent',
-                }}
+                className={`flex items-center gap-2 cursor-pointer p-2 rounded border-2 ${
+                  battleFrame?.type === 'basic'
+                    ? 'bg-bg-secondary border-nature-accent'
+                    : 'bg-transparent border-transparent'
+                }`}
               >
                 <input
                   type="radio"
                   name="battleFrameType"
                   checked={battleFrame?.type === 'basic'}
                   onChange={() => createBattleFrame('basic')}
-                  style={{ cursor: 'pointer' }}
+                  className="cursor-pointer"
                 />
-                <span style={{ fontWeight: 'bold' }}>ベーシック</span>
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <span className="font-bold">ベーシック</span>
+                <span className="text-xs text-text-tertiary">
                   (バランス型)
                 </span>
               </label>
 
               <label
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--spacing-sm)',
-                  cursor: 'pointer',
-                  padding: 'var(--spacing-sm)',
-                  background:
-                    battleFrame?.type === 'light'
-                      ? 'var(--bg-secondary)'
-                      : 'transparent',
-                  borderRadius: '4px',
-                  border:
-                    battleFrame?.type === 'light'
-                      ? '2px solid var(--color-nature-accent)'
-                      : '2px solid transparent',
-                }}
+                className={`flex items-center gap-2 cursor-pointer p-2 rounded border-2 ${
+                  battleFrame?.type === 'light'
+                    ? 'bg-bg-secondary border-nature-accent'
+                    : 'bg-transparent border-transparent'
+                }`}
               >
                 <input
                   type="radio"
                   name="battleFrameType"
                   checked={battleFrame?.type === 'light'}
                   onChange={() => createBattleFrame('light')}
-                  style={{ cursor: 'pointer' }}
+                  className="cursor-pointer"
                 />
-                <span style={{ fontWeight: 'bold' }}>ライト</span>
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <span className="font-bold">ライト</span>
+                <span className="text-xs text-text-tertiary">
                   (高機動型)
                 </span>
               </label>
 
               <label
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--spacing-sm)',
-                  cursor: 'pointer',
-                  padding: 'var(--spacing-sm)',
-                  background:
-                    battleFrame?.type === 'heavy'
-                      ? 'var(--bg-secondary)'
-                      : 'transparent',
-                  borderRadius: '4px',
-                  border:
-                    battleFrame?.type === 'heavy'
-                      ? '2px solid var(--color-nature-accent)'
-                      : '2px solid transparent',
-                }}
+                className={`flex items-center gap-2 cursor-pointer p-2 rounded border-2 ${
+                  battleFrame?.type === 'heavy'
+                    ? 'bg-bg-secondary border-nature-accent'
+                    : 'bg-transparent border-transparent'
+                }`}
               >
                 <input
                   type="radio"
                   name="battleFrameType"
                   checked={battleFrame?.type === 'heavy'}
                   onChange={() => createBattleFrame('heavy')}
-                  style={{ cursor: 'pointer' }}
+                  className="cursor-pointer"
                 />
-                <span style={{ fontWeight: 'bold' }}>ヘビー</span>
-                <span
-                  style={{
-                    fontSize: '0.75rem',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <span className="font-bold">ヘビー</span>
+                <span className="text-xs text-text-tertiary">
                   (重装甲型)
                 </span>
               </label>
             </div>
 
             {battleFrame ? (
-              <div
-                style={{
-                  padding: 'var(--spacing-md)',
-                  background: 'var(--bg-tertiary)',
-                  border: '2px solid var(--color-nature-accent)',
-                  borderRadius: '4px',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: 'var(--spacing-md)',
-                    marginBottom: 'var(--spacing-md)',
-                  }}
-                >
+              <div className="p-4 bg-bg-tertiary border-2 border-nature-accent rounded">
+                <div className="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 mb-4">
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       HP (ヒットポイント)
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       0になると戦闘不能
                     </p>
                     <input
@@ -644,23 +476,10 @@ export default function CharacterForm({
                   </div>
 
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       回避値
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       2d6がこの値未満なら攻撃失敗
                     </p>
                     <input
@@ -676,23 +495,10 @@ export default function CharacterForm({
                   </div>
 
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       装甲値
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       ダメージをこの値分減少
                     </p>
                     <input
@@ -707,23 +513,10 @@ export default function CharacterForm({
                   </div>
 
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       初期カウント
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       カウンターボードの配置位置
                     </p>
                     <input
@@ -741,23 +534,10 @@ export default function CharacterForm({
                   </div>
 
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       移動力
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       1ターンに移動できるマス数
                     </p>
                     <input
@@ -772,23 +552,10 @@ export default function CharacterForm({
                   </div>
 
                   <div>
-                    <label
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <label className="block text-xs text-text-tertiary mb-1">
                       サイズ
                     </label>
-                    <p
-                      style={{
-                        fontSize: '0.7rem',
-                        color: 'var(--text-tertiary)',
-                        marginBottom: 'var(--spacing-xs)',
-                      }}
-                    >
+                    <p className="text-[0.7rem] text-text-tertiary mb-1">
                       占有マスの大きさ (1=1x1, 2=2x2)
                     </p>
                     <select
@@ -813,26 +580,14 @@ export default function CharacterForm({
           {/* Battle Styles */}
           <div className="form-group">
             <label className="form-label">
-              <span style={{ marginRight: 'var(--spacing-xs)' }}>⚡</span>
+              <span className="mr-1">⚡</span>
               戦闘スタイル (CP消費: 1スタイル30点)
             </label>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                color: 'var(--text-tertiary)',
-                marginBottom: 'var(--spacing-md)',
-              }}
-            >
+            <p className="text-[0.85rem] text-[var(--text-tertiary)] mb-4">
               複数のスタイルを習得できます。スタイルごとにステータス補正と戦闘モジュールを取得します
             </p>
 
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--spacing-md)',
-              }}
-            >
+            <div className="flex flex-col gap-4">
               {(Object.keys(BATTLE_STYLES) as BattleStyleType[]).map((key) => {
                 const style = BATTLE_STYLES[key];
                 const isSelected = battleStyles.includes(key);
@@ -852,64 +607,32 @@ export default function CharacterForm({
                 return (
                   <label
                     key={key}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 'var(--spacing-sm)',
-                      cursor: 'pointer',
-                      padding: 'var(--spacing-md)',
-                      background: isSelected
-                        ? 'var(--bg-secondary)'
-                        : 'var(--bg-tertiary)',
-                      borderRadius: '4px',
-                      border: isSelected
-                        ? '2px solid var(--color-nature-accent)'
-                        : '2px solid transparent',
-                    }}
+                    className={`flex items-center gap-2 cursor-pointer p-4 rounded border-2 ${
+                      isSelected
+                        ? 'bg-[var(--bg-secondary)] border-[var(--color-nature-accent)]'
+                        : 'bg-[var(--bg-tertiary)] border-transparent'
+                    }`}
                   >
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => toggleBattleStyle(key)}
-                      style={{ cursor: 'pointer' }}
+                      className="cursor-pointer"
                     />
-                    <div style={{ flex: 1 }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 'var(--spacing-sm)',
-                          marginBottom: 'var(--spacing-xs)',
-                        }}
-                      >
-                        <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-base">
                           {style.name}
                         </span>
-                        <span
-                          style={{
-                            fontSize: '0.75rem',
-                            color: 'var(--text-tertiary)',
-                          }}
-                        >
+                        <span className="text-xs text-[var(--text-tertiary)]">
                           (CP: {style.cpCost})
                         </span>
                       </div>
-                      <p
-                        style={{
-                          fontSize: '0.85rem',
-                          color: 'var(--text-secondary)',
-                          marginBottom: 'var(--spacing-xs)',
-                        }}
-                      >
+                      <p className="text-[0.85rem] text-[var(--text-secondary)] mb-1">
                         {style.description}
                       </p>
                       {modifierText.length > 0 && (
-                        <p
-                          style={{
-                            fontSize: '0.75rem',
-                            color: 'var(--color-nature-accent)',
-                          }}
-                        >
+                        <p className="text-xs text-[var(--color-nature-accent)]">
                           補正: {modifierText.join(', ')}
                         </p>
                       )}
@@ -920,21 +643,8 @@ export default function CharacterForm({
             </div>
 
             {battleStyles.length > 0 && (
-              <div
-                style={{
-                  marginTop: 'var(--spacing-md)',
-                  padding: 'var(--spacing-md)',
-                  background: 'var(--bg-tertiary)',
-                  borderRadius: '4px',
-                  border: '1px solid var(--color-nature-accent)',
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: '0.85rem',
-                    color: 'var(--text-secondary)',
-                  }}
-                >
+              <div className="mt-4 p-4 bg-[var(--bg-tertiary)] rounded border border-[var(--color-nature-accent)]">
+                <p className="text-[0.85rem] text-[var(--text-secondary)]">
                   選択中: {battleStyles.length}スタイル / 合計CP消費:{' '}
                   {battleStyles.length * 30}点
                 </p>
@@ -946,72 +656,35 @@ export default function CharacterForm({
           {battleStyles.length > 0 && (
             <div className="form-group">
               <label className="form-label">
-                <span style={{ marginRight: 'var(--spacing-xs)' }}>💾</span>
+                <span className="mr-1">💾</span>
                 戦闘モジュール (習得したスタイルに応じて選択可能)
               </label>
-              <p
-                style={{
-                  fontSize: '0.85rem',
-                  color: 'var(--text-tertiary)',
-                  marginBottom: 'var(--spacing-md)',
-                }}
-              >
+              <p className="text-[0.85rem] text-[var(--text-tertiary)] mb-4">
                 習得した戦闘スタイルのタグを持つモジュールを取得できます。初期CP:
                 100点
               </p>
 
               {getAvailableCommandsByStyle().length === 0 ? (
-                <div
-                  style={{
-                    padding: 'var(--spacing-md)',
-                    background: 'var(--bg-tertiary)',
-                    borderRadius: '4px',
-                    textAlign: 'center',
-                    color: 'var(--text-tertiary)',
-                  }}
-                >
+                <div className="p-4 bg-[var(--bg-tertiary)] rounded text-center text-[var(--text-tertiary)]">
                   戦闘スタイルを選択すると、対応する戦闘モジュールが表示されます
                 </div>
               ) : (
                 <>
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns:
-                        'repeat(auto-fill, minmax(300px, 1fr))',
-                      gap: 'var(--spacing-md)',
-                      marginBottom: 'var(--spacing-md)',
-                    }}
-                  >
+                  <div className="grid grid-cols-1 lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 mb-4">
                     {getAvailableCommandsByStyle().map((cmd) => {
                       const isSelected = battleCommands.includes(cmd.name);
                       return (
                         <div
                           key={cmd.name}
                           onClick={() => toggleBattleCommand(cmd.name)}
-                          style={{
-                            cursor: 'pointer',
-                            opacity: isSelected ? 1 : 0.7,
-                            transform: isSelected ? 'scale(1)' : 'scale(0.98)',
-                            transition: 'all 0.2s',
-                            position: 'relative',
-                          }}
+                          className={`cursor-pointer transition-all duration-200 relative ${
+                            isSelected
+                              ? 'opacity-100 scale-100'
+                              : 'opacity-70 scale-[0.98]'
+                          }`}
                         >
                           {isSelected && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                top: '8px',
-                                right: '8px',
-                                background: 'var(--color-nature-accent)',
-                                color: 'var(--bg-primary)',
-                                padding: '4px 8px',
-                                borderRadius: '4px',
-                                fontSize: '0.75rem',
-                                fontWeight: 'bold',
-                                zIndex: 10,
-                              }}
-                            >
+                            <div className="absolute top-2 right-2 bg-[var(--color-nature-accent)] text-[var(--bg-primary)] px-2 py-1 rounded text-xs font-bold z-10">
                               ✓ 習得済み
                             </div>
                           )}
@@ -1032,57 +705,27 @@ export default function CharacterForm({
                     })}
                   </div>
 
-                  <div
-                    style={{
-                      padding: 'var(--spacing-md)',
-                      background: 'var(--bg-tertiary)',
-                      borderRadius: '4px',
-                      border: '1px solid var(--color-cyber-primary)',
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--text-secondary)',
-                        marginBottom: 'var(--spacing-sm)',
-                      }}
-                    >
+                  <div className="p-4 bg-[var(--bg-tertiary)] rounded border border-[var(--color-cyber-primary)]">
+                    <p className="text-[0.9rem] text-[var(--text-secondary)] mb-2">
                       <strong>CP消費状況</strong>
                     </p>
-                    <div
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns:
-                          'repeat(auto-fit, minmax(150px, 1fr))',
-                        gap: 'var(--spacing-sm)',
-                        fontSize: '0.85rem',
-                        color: 'var(--text-tertiary)',
-                      }}
-                    >
+                    <div className="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2 text-[0.85rem] text-[var(--text-tertiary)]">
                       <div>戦闘スタイル: {calculateTotalCP().styleCost}点</div>
                       <div>
                         戦闘モジュール: {calculateTotalCP().commandCost}点
                       </div>
                       <div
-                        style={{
-                          color:
-                            calculateTotalCP().total > 100
-                              ? '#ff6b6b'
-                              : 'var(--color-nature-accent)',
-                          fontWeight: 'bold',
-                        }}
+                        className={`font-bold ${
+                          calculateTotalCP().total > 100
+                            ? 'text-[#ff6b6b]'
+                            : 'text-[var(--color-nature-accent)]'
+                        }`}
                       >
                         合計: {calculateTotalCP().total} / 100点
                       </div>
                     </div>
                     {calculateTotalCP().total > 100 && (
-                      <p
-                        style={{
-                          marginTop: 'var(--spacing-sm)',
-                          color: '#ff6b6b',
-                          fontSize: '0.85rem',
-                        }}
-                      >
+                      <p className="mt-2 text-[#ff6b6b] text-[0.85rem]">
                         ⚠️
                         CP上限を超えています。スタイルまたはモジュールを減らしてください。
                       </p>
@@ -1094,17 +737,10 @@ export default function CharacterForm({
           )}
 
           {error ? (
-            <p
-              style={{
-                color: 'var(--color-cyber-accent)',
-                marginBottom: 'var(--spacing-md)',
-              }}
-            >
-              {error}
-            </p>
+            <p className="text-[var(--color-cyber-accent)] mb-4">{error}</p>
           ) : null}
 
-          <div style={{ display: 'flex', gap: 'var(--spacing-md)' }}>
+          <div className="flex gap-4">
             <button type="submit" className="btn btn-primary">
               {submitButtonText}
             </button>
