@@ -45,7 +45,7 @@ export const MultiLine: NoteStory = {
   },
 };
 
-const ExampleBoxMeta = {
+const _ExampleBoxMeta = {
   title: 'Rulebook/Page Layout/ExampleBox',
   component: ExampleBox,
   parameters: {
@@ -54,7 +54,7 @@ const ExampleBoxMeta = {
   tags: ['autodocs'],
 } satisfies Meta<typeof ExampleBox>;
 
-export const ExampleDefault: StoryObj<typeof ExampleBoxMeta> = {
+export const ExampleDefault: StoryObj<typeof _ExampleBoxMeta> = {
   args: {
     children: (
       <ul>
@@ -67,7 +67,7 @@ export const ExampleDefault: StoryObj<typeof ExampleBoxMeta> = {
   },
 };
 
-export const ExampleWithCustomTitle: StoryObj<typeof ExampleBoxMeta> = {
+export const ExampleWithCustomTitle: StoryObj<typeof _ExampleBoxMeta> = {
   args: {
     title: '終了条件の例',
     children: (
