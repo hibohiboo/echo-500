@@ -1,4 +1,8 @@
 /* eslint-disable complexity */
+import {
+  useBattleCommandData,
+  BattleCommandCard,
+} from '@echo-500/frontend-common';
 import { useState } from 'react';
 import { BATTLE_STYLES } from '../types';
 import type {
@@ -56,8 +60,18 @@ export default function CharacterForm({
   const [battleStyles, setBattleStyles] = useState<BattleStyleType[]>(
     character?.battleStyles || [],
   );
+  const [battleCommands, setBattleCommands] = useState<string[]>(
+    character?.battleCommands || [],
+  );
   const [error, setError] = useState('');
 
+  const apiKey = import.meta.env.VITE_SPREAD_SHEET_API_KEY || '';
+  const spreadSheetId = import.meta.env.VITE_SPREAD_SHEET_ID || '';
+  const { data: availableCommands } = useBattleCommandData(
+    apiKey,
+    spreadSheetId,
+  );
+  console.log('usebatte', { apiKey, spreadSheetId });
   const validateForm = (): string | null => {
     if (!name.trim()) {
       return 'Character name is required';
@@ -82,6 +96,7 @@ export default function CharacterForm({
       memorySlots,
       battleFrame: battleFrame || undefined,
       battleStyles: battleStyles.length > 0 ? battleStyles : undefined,
+      battleCommands: battleCommands.length > 0 ? battleCommands : undefined,
     });
   };
 
@@ -186,6 +201,33 @@ export default function CharacterForm({
     } else {
       setBattleStyles([...battleStyles, style]);
     }
+  };
+
+  const toggleBattleCommand = (commandName: string) => {
+    if (battleCommands.includes(commandName)) {
+      setBattleCommands(battleCommands.filter((c) => c !== commandName));
+    } else {
+      setBattleCommands([...battleCommands, commandName]);
+    }
+  };
+
+  const getAvailableCommandsByStyle = () => {
+    if (battleStyles.length === 0) return [];
+
+    return availableCommands.filter((cmd) =>
+      battleStyles.some((style) =>
+        cmd.tags.includes(BATTLE_STYLES[style].name),
+      ),
+    );
+  };
+
+  const calculateTotalCP = () => {
+    const styleCost = battleStyles.length * 30;
+    const commandCost = battleCommands.reduce((sum, cmdName) => {
+      const cmd = availableCommands.find((c) => c.name === cmdName);
+      return sum + (cmd?.cp || 0);
+    }, 0);
+    return { styleCost, commandCost, total: styleCost + commandCost };
   };
 
   const pageTitle = character ? 'Edit Character' : 'Create New Character';
@@ -899,6 +941,157 @@ export default function CharacterForm({
               </div>
             )}
           </div>
+
+          {/* Battle Commands */}
+          {battleStyles.length > 0 && (
+            <div className="form-group">
+              <label className="form-label">
+                <span style={{ marginRight: 'var(--spacing-xs)' }}>💾</span>
+                戦闘モジュール (習得したスタイルに応じて選択可能)
+              </label>
+              <p
+                style={{
+                  fontSize: '0.85rem',
+                  color: 'var(--text-tertiary)',
+                  marginBottom: 'var(--spacing-md)',
+                }}
+              >
+                習得した戦闘スタイルのタグを持つモジュールを取得できます。初期CP:
+                100点
+              </p>
+
+              {getAvailableCommandsByStyle().length === 0 ? (
+                <div
+                  style={{
+                    padding: 'var(--spacing-md)',
+                    background: 'var(--bg-tertiary)',
+                    borderRadius: '4px',
+                    textAlign: 'center',
+                    color: 'var(--text-tertiary)',
+                  }}
+                >
+                  戦闘スタイルを選択すると、対応する戦闘モジュールが表示されます
+                </div>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns:
+                        'repeat(auto-fill, minmax(300px, 1fr))',
+                      gap: 'var(--spacing-md)',
+                      marginBottom: 'var(--spacing-md)',
+                    }}
+                  >
+                    {getAvailableCommandsByStyle().map((cmd) => {
+                      const isSelected = battleCommands.includes(cmd.name);
+                      return (
+                        <div
+                          key={cmd.name}
+                          onClick={() => toggleBattleCommand(cmd.name)}
+                          style={{
+                            cursor: 'pointer',
+                            opacity: isSelected ? 1 : 0.7,
+                            transform: isSelected ? 'scale(1)' : 'scale(0.98)',
+                            transition: 'all 0.2s',
+                            position: 'relative',
+                          }}
+                        >
+                          {isSelected && (
+                            <div
+                              style={{
+                                position: 'absolute',
+                                top: '8px',
+                                right: '8px',
+                                background: 'var(--color-nature-accent)',
+                                color: 'var(--bg-primary)',
+                                padding: '4px 8px',
+                                borderRadius: '4px',
+                                fontSize: '0.75rem',
+                                fontWeight: 'bold',
+                                zIndex: 10,
+                              }}
+                            >
+                              ✓ 習得済み
+                            </div>
+                          )}
+                          <BattleCommandCard
+                            name={cmd.name}
+                            cp={cmd.cp}
+                            timing={cmd.timing}
+                            target={cmd.target}
+                            range={cmd.range}
+                            cost={cmd.cost}
+                            effect={cmd.effect}
+                            flavor={cmd.flavor}
+                            tags={cmd.tags}
+                            details={cmd.details}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div
+                    style={{
+                      padding: 'var(--spacing-md)',
+                      background: 'var(--bg-tertiary)',
+                      borderRadius: '4px',
+                      border: '1px solid var(--color-cyber-primary)',
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: '0.9rem',
+                        color: 'var(--text-secondary)',
+                        marginBottom: 'var(--spacing-sm)',
+                      }}
+                    >
+                      <strong>CP消費状況</strong>
+                    </p>
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns:
+                          'repeat(auto-fit, minmax(150px, 1fr))',
+                        gap: 'var(--spacing-sm)',
+                        fontSize: '0.85rem',
+                        color: 'var(--text-tertiary)',
+                      }}
+                    >
+                      <div>戦闘スタイル: {calculateTotalCP().styleCost}点</div>
+                      <div>
+                        戦闘モジュール: {calculateTotalCP().commandCost}点
+                      </div>
+                      <div
+                        style={{
+                          color:
+                            calculateTotalCP().total > 100
+                              ? '#ff6b6b'
+                              : 'var(--color-nature-accent)',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        合計: {calculateTotalCP().total} / 100点
+                      </div>
+                    </div>
+                    {calculateTotalCP().total > 100 && (
+                      <p
+                        style={{
+                          marginTop: 'var(--spacing-sm)',
+                          color: '#ff6b6b',
+                          fontSize: '0.85rem',
+                        }}
+                      >
+                        ⚠️
+                        CP上限を超えています。スタイルまたはモジュールを減らしてください。
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
           {error ? (
             <p
