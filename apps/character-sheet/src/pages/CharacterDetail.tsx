@@ -1,3 +1,7 @@
+import {
+  useBattleCommandData,
+  BattleCommandCard,
+} from '@echo-500/frontend-common';
 import { battleFrameTypeToString } from '@echo-500/schema';
 import { BATTLE_STYLES } from '../types';
 import type { Character } from '../types';
@@ -324,6 +328,80 @@ function BattleFrameStats({ character, finalStats }: BattleFrameStatsProps) {
   );
 }
 
+interface BattleCommandsProps {
+  battleCommands: Character['battleCommands'];
+}
+
+function BattleCommands({ battleCommands }: BattleCommandsProps) {
+  const apiKey = import.meta.env.VITE_SPREAD_SHEET_API_KEY || '';
+  const spreadSheetId = import.meta.env.VITE_SPREAD_SHEET_ID || '';
+  const { data: availableCommands } = useBattleCommandData(
+    apiKey,
+    spreadSheetId,
+  );
+
+  if (!battleCommands || battleCommands.length === 0) {
+    return null;
+  }
+
+  const learnedCommands = availableCommands.filter((cmd) =>
+    battleCommands.includes(cmd.name),
+  );
+
+  const totalCP = learnedCommands.reduce((sum, cmd) => sum + cmd.cp, 0);
+
+  return (
+    <div className="detail-section">
+      <h2 className="detail-label">
+        <span style={{ marginRight: 'var(--spacing-xs)' }}>💾</span>
+        習得済み戦闘モジュール
+      </h2>
+
+      <div
+        style={{
+          marginBottom: 'var(--spacing-md)',
+          padding: 'var(--spacing-sm)',
+          background: 'var(--bg-secondary)',
+          borderRadius: '4px',
+        }}
+      >
+        <p
+          style={{
+            fontSize: '0.85rem',
+            color: 'var(--text-secondary)',
+          }}
+        >
+          習得モジュール数: {learnedCommands.length} / 消費CP: {totalCP}点
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: 'var(--spacing-md)',
+        }}
+      >
+        {learnedCommands.map((cmd) => (
+          <BattleCommandCard
+            key={cmd.name}
+            name={cmd.name}
+            cp={cmd.cp}
+            timing={cmd.timing}
+            target={cmd.target}
+            range={cmd.range}
+            cost={cmd.cost}
+            effect={cmd.effect}
+            flavor={cmd.flavor}
+            tags={cmd.tags}
+            details={cmd.details}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 interface BattleStylesProps {
   battleStyles: Character['battleStyles'];
 }
@@ -480,6 +558,8 @@ export default function CharacterDetail({
           <BattleFrameStats character={character} finalStats={finalStats} />
 
           <BattleStyles battleStyles={character.battleStyles} />
+
+          <BattleCommands battleCommands={character.battleCommands} />
         </div>
 
         <div className="character-actions" style={{ gap: 'var(--spacing-md)' }}>

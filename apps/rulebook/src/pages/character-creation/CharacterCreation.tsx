@@ -137,14 +137,14 @@ export function CharacterCreationPage() {
                   <div className="stat-item">
                     <h4 className="stat-name">回避値</h4>
                     <p className="stat-description">
-                      攻撃を回避する能力。攻撃時に2d6を振り、この値未満なら攻撃は失敗となる。
+                      攻撃を回避する能力。攻撃側は回避値を目標値として2d6を振り、目標値未満なら攻撃は失敗となる。
                     </p>
                   </div>
 
                   <div className="stat-item">
                     <h4 className="stat-name">装甲値</h4>
                     <p className="stat-description">
-                      受けるダメージをこの値分だけ減少させる防御力。
+                      防御力。受けるダメージをこの値分だけ減少させる。
                     </p>
                   </div>
 
@@ -170,7 +170,10 @@ export function CharacterCreationPage() {
                   </div>
                 </div>
 
-                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
+                <h3
+                  className="subsection-title"
+                  style={{ marginTop: 'var(--spacing-xl)' }}
+                >
                   <span className="subsection-icon">🤖</span> フレームタイプ
                 </h3>
 
@@ -220,7 +223,10 @@ export function CharacterCreationPage() {
                   </p>
                 </div>
 
-                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
+                <h3
+                  className="subsection-title"
+                  style={{ marginTop: 'var(--spacing-xl)' }}
+                >
                   <span className="subsection-icon">⚡</span> 戦闘スタイル
                 </h3>
 
@@ -233,7 +239,8 @@ export function CharacterCreationPage() {
                 <div className="style-types-grid">
                   <div className="style-type-card">
                     <h4 className="style-type-name">
-                      <span className="style-icon">⚔️</span> セイバー(近接攻撃型)
+                      <span className="style-icon">⚔️</span>{' '}
+                      セイバー(近接攻撃型)
                     </h4>
                     <div className="style-type-modifier">
                       <p className="modifier-text">補正: 移動力 +1</p>
@@ -247,7 +254,8 @@ export function CharacterCreationPage() {
 
                   <div className="style-type-card">
                     <h4 className="style-type-name">
-                      <span className="style-icon">🎯</span> ガンナー(遠距離攻撃型)
+                      <span className="style-icon">🎯</span>{' '}
+                      ガンナー(遠距離攻撃型)
                     </h4>
                     <div className="style-type-modifier">
                       <p className="modifier-text">補正: なし</p>
@@ -261,10 +269,13 @@ export function CharacterCreationPage() {
 
                   <div className="style-type-card">
                     <h4 className="style-type-name">
-                      <span className="style-icon">✨</span> ウィザード(支援妨害型)
+                      <span className="style-icon">✨</span>{' '}
+                      ウィザード(支援妨害型)
                     </h4>
                     <div className="style-type-modifier">
-                      <p className="modifier-text">補正: 移動力 -1, 回避値 -1</p>
+                      <p className="modifier-text">
+                        補正: 移動力 -1, 回避値 -1
+                      </p>
                     </div>
                     <p className="style-type-desc">
                       支援と妨害を主とするスタイル。味方の強化や敵の弱体化を行う。
@@ -283,8 +294,12 @@ export function CharacterCreationPage() {
                   </p>
                 </div>
 
-                <h3 className="subsection-title" style={{ marginTop: 'var(--spacing-xl)' }}>
-                  <span className="subsection-icon">💾</span> 戦闘モジュールの取得
+                <h3
+                  className="subsection-title"
+                  style={{ marginTop: 'var(--spacing-xl)' }}
+                >
+                  <span className="subsection-icon">💾</span>{' '}
+                  戦闘モジュールの取得
                 </h3>
 
                 <p>
@@ -297,20 +312,21 @@ export function CharacterCreationPage() {
                   <h4 className="acquisition-title">取得可能なモジュール</h4>
                   <ul className="acquisition-list">
                     <li>
-                      <strong>セイバー</strong>のタグを持つ戦闘モジュール
-                      → 近接攻撃系のアクション
+                      <strong>セイバー</strong>のタグを持つ戦闘モジュール →
+                      近接攻撃系のアクション
                     </li>
                     <li>
-                      <strong>ガンナー</strong>のタグを持つ戦闘モジュール
-                      → 遠距離攻撃系のアクション
+                      <strong>ガンナー</strong>のタグを持つ戦闘モジュール →
+                      遠距離攻撃系のアクション
                     </li>
                     <li>
-                      <strong>ウィザード</strong>のタグを持つ戦闘モジュール
-                      → 支援・妨害系のアクション
+                      <strong>ウィザード</strong>のタグを持つ戦闘モジュール →
+                      支援・妨害系のアクション
                     </li>
                   </ul>
                   <p className="acquisition-note">
-                    各戦闘モジュールには<strong>CP(コストポイント)</strong>が設定されており、
+                    各戦闘モジュールには<strong>CP(コストポイント)</strong>
+                    が設定されており、
                     そのCPを消費することで取得できる。キャラクター作成時には
                     <strong>100CP</strong>が与えられる。
                   </p>

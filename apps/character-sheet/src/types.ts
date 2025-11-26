@@ -23,4 +23,5 @@ export interface Character {
   memorySlots: MemorySlot[];
   battleFrame?: BattleFrame;
   battleStyles?: Array<'saber' | 'gunner' | 'wizard'>;
+  battleCommands?: string[];
 }
