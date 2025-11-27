@@ -10,8 +10,8 @@ const defaultCharacter = {
   name: '',
   memorySlots: createInitialMemorySlots(),
   battleFrame: null,
-  battleStyles: [] as BattleStyleType[],
-  battleCommands: [] as string[],
+  battleStyles: [],
+  battleCommands: [],
 };
 
 export function getCharacterOrDefault(character?: Character) {
@@ -20,9 +20,9 @@ export function getCharacterOrDefault(character?: Character) {
   return {
     name: character.name,
     memorySlots: character.memorySlots,
-    battleFrame: character.battleFrame,
-    battleStyles: character.battleStyles,
-    battleCommands: character.battleCommands,
+    battleFrame: character.battleFrame ?? null,
+    battleStyles: character.battleStyles ?? [],
+    battleCommands: character.battleCommands ?? [],
   };
 }
 
