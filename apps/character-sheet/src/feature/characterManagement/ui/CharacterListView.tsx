@@ -1,6 +1,6 @@
-import type { Character } from '../types';
+import type { Character } from '@/entities/character';
 
-interface CharacterListProps {
+interface CharacterListViewProps {
   characters: Character[];
   onCreateNew: () => void;
   onViewDetail: (id: string) => void;
@@ -8,13 +8,13 @@ interface CharacterListProps {
   onDelete: (id: string) => void;
 }
 
-export default function CharacterList({
+export default function CharacterListView({
   characters,
   onCreateNew,
   onViewDetail,
   onEdit,
   onDelete,
-}: CharacterListProps) {
+}: CharacterListViewProps) {
   return (
     <div className="app-container">
       <header className="app-header">

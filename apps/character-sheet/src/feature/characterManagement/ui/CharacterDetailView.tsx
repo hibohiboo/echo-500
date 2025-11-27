@@ -1,60 +1,38 @@
-import {
-  useBattleCommandData,
-  BattleCommandCard,
-  BATTLE_STYLES,
-} from '@echo-500/frontend-common';
+import { BattleCommandCard } from '@echo-500/frontend-common';
 import { battleFrameTypeToString } from '@echo-500/schema';
-import type { Character } from '../types';
+import type { Character } from '@/entities/character';
 import type { BattleStyle } from '@echo-500/frontend-common';
 
-interface CharacterDetailProps {
+interface CharacterDetailViewProps {
   character: Character;
+  finalStats: {
+    hp: number;
+    evasion: number;
+    armor: number;
+    initialCount: number;
+    movement: number;
+    size: number;
+    modifiers: { movement: number; evasion: number };
+  } | null;
+  battleStylesData: BattleStyle[];
+  learnedCommands: Array<{
+    name: string;
+    cp: number;
+    timing: string;
+    target: string;
+    range: string;
+    cost: string;
+    effect: string;
+    flavor: string;
+    tags: string[];
+    details: string;
+  }>;
+  totalCP: number;
+  getStyleModifierText: (style: BattleStyle) => string[];
   onEdit: () => void;
   onDelete: () => void;
   onBack: () => void;
 }
-
-const calculateStyleModifiers = (
-  battleStyles?: Array<'saber' | 'gunner' | 'wizard'>,
-) => {
-  if (!battleStyles || battleStyles.length === 0) {
-    return { movement: 0, evasion: 0 };
-  }
-
-  return battleStyles.reduce(
-    (acc, styleKey) => {
-      const style = BATTLE_STYLES[styleKey];
-      return {
-        movement:
-          acc.movement +
-          ('movement' in style.modifier ? style.modifier.movement || 0 : 0),
-        evasion:
-          acc.evasion +
-          ('evasion' in style.modifier ? style.modifier.evasion || 0 : 0),
-      };
-    },
-    { movement: 0, evasion: 0 },
-  );
-};
-
-const calculateFinalStats = (character: Character) => {
-  if (!character.battleFrame) {
-    return null;
-  }
-
-  const baseStats = character.battleFrame.stats;
-  const modifiers = calculateStyleModifiers(character.battleStyles);
-
-  return {
-    hp: baseStats.hp,
-    evasion: baseStats.evasion + modifiers.evasion,
-    armor: baseStats.armor,
-    initialCount: baseStats.initialCount,
-    movement: baseStats.movement + modifiers.movement,
-    size: baseStats.size,
-    modifiers,
-  };
-};
 
 // StatCard Component
 interface StatCardProps {
@@ -159,27 +137,9 @@ function MemorySlots({ memorySlots }: MemorySlotsProps) {
   );
 }
 
-// Helper function for BattleStyles
-function getStyleModifierText(style: BattleStyle): string[] {
-  const modifierText: string[] = [];
-
-  if (style.modifier.movement !== undefined) {
-    modifierText.push(
-      `移動力${style.modifier.movement > 0 ? '+' : ''}${style.modifier.movement}`,
-    );
-  }
-  if (style.modifier.evasion !== undefined) {
-    modifierText.push(
-      `回避値${style.modifier.evasion > 0 ? '+' : ''}${style.modifier.evasion}`,
-    );
-  }
-
-  return modifierText;
-}
-
 interface BattleFrameStatsProps {
   character: Character;
-  finalStats: ReturnType<typeof calculateFinalStats>;
+  finalStats: CharacterDetailViewProps['finalStats'];
 }
 
 function BattleFrameStats({ character, finalStats }: BattleFrameStatsProps) {
@@ -237,26 +197,14 @@ function BattleFrameStats({ character, finalStats }: BattleFrameStatsProps) {
 }
 
 interface BattleCommandsProps {
-  battleCommands: Character['battleCommands'];
+  learnedCommands: CharacterDetailViewProps['learnedCommands'];
+  totalCP: number;
 }
 
-function BattleCommands({ battleCommands }: BattleCommandsProps) {
-  const apiKey = import.meta.env.VITE_SPREAD_SHEET_API_KEY || '';
-  const spreadSheetId = import.meta.env.VITE_SPREAD_SHEET_ID || '';
-  const { data: availableCommands } = useBattleCommandData(
-    apiKey,
-    spreadSheetId,
-  );
-
-  if (!battleCommands || battleCommands.length === 0) {
+function BattleCommands({ learnedCommands, totalCP }: BattleCommandsProps) {
+  if (!learnedCommands || learnedCommands.length === 0) {
     return null;
   }
-
-  const learnedCommands = availableCommands.filter((cmd) =>
-    battleCommands.includes(cmd.name),
-  );
-
-  const totalCP = learnedCommands.reduce((sum, cmd) => sum + cmd.cp, 0);
 
   return (
     <div className="space-y-4">
@@ -294,17 +242,17 @@ function BattleCommands({ battleCommands }: BattleCommandsProps) {
 
 // BattleStyles Component
 interface BattleStylesComponentProps {
-  battleStyles: Character['battleStyles'];
+  battleStylesData: BattleStyle[];
+  getStyleModifierText: (style: BattleStyle) => string[];
 }
 
-function BattleStylesComponent({ battleStyles }: BattleStylesComponentProps) {
-  if (!battleStyles || battleStyles.length === 0) {
+function BattleStylesComponent({
+  battleStylesData,
+  getStyleModifierText,
+}: BattleStylesComponentProps) {
+  if (!battleStylesData || battleStylesData.length === 0) {
     return null;
   }
-
-  const battleStylesData: BattleStyle[] = battleStyles.map(
-    (styleKey) => BATTLE_STYLES[styleKey],
-  );
 
   return (
     <div className="space-y-4">
@@ -346,22 +294,25 @@ function BattleStylesComponent({ battleStyles }: BattleStylesComponentProps) {
 
       <div className="mt-4 px-3 py-2 bg-bg-secondary rounded">
         <p className="text-sm text-text-secondary">
-          習得スタイル数: {battleStyles.length} / 合計CP消費:{' '}
-          {battleStyles.length * 30}点
+          習得スタイル数: {battleStylesData.length} / 合計CP消費:{' '}
+          {battleStylesData.length * 30}点
         </p>
       </div>
     </div>
   );
 }
 
-export default function CharacterDetail({
+export default function CharacterDetailView({
   character,
+  finalStats,
+  battleStylesData,
+  learnedCommands,
+  totalCP,
+  getStyleModifierText,
   onEdit,
   onDelete,
   onBack,
-}: CharacterDetailProps) {
-  const finalStats = calculateFinalStats(character);
-
+}: CharacterDetailViewProps) {
   return (
     <div className="app-container">
       <header className="app-header">
@@ -395,9 +346,12 @@ export default function CharacterDetail({
 
           <BattleFrameStats character={character} finalStats={finalStats} />
 
-          <BattleStylesComponent battleStyles={character.battleStyles} />
+          <BattleStylesComponent
+            battleStylesData={battleStylesData}
+            getStyleModifierText={getStyleModifierText}
+          />
 
-          <BattleCommands battleCommands={character.battleCommands} />
+          <BattleCommands learnedCommands={learnedCommands} totalCP={totalCP} />
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">

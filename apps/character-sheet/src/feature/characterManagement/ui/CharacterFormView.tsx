@@ -1,215 +1,74 @@
-/* eslint-disable complexity */
 import {
   useBattleCommandData,
   BattleCommandCard,
 } from '@echo-500/frontend-common';
-import { useState } from 'react';
-import { BATTLE_STYLES } from '../types';
-import type {
-  Character,
-  MemorySlot,
-  BattleFrame,
-  BattleStyleType,
-} from '../types';
+import {
+  BATTLE_STYLES,
+  type BattleStyleType,
+  type MemorySlot,
+  type Character,
+} from '@/entities/character';
 
-interface CharacterFormProps {
+interface CharacterFormViewProps {
   character?: Character;
-  onSave: (character: Omit<Character, 'id'>) => void;
+  name: string;
+  setName: (name: string) => void;
+  memorySlots: MemorySlot[];
+  battleFrame: Character['battleFrame'];
+  battleStyles: BattleStyleType[];
+  battleCommands: string[];
+  error: string;
+  setError: (error: string) => void;
+  onSubmit: (e: React.FormEvent) => void;
   onCancel: () => void;
+  updateMemorySlot: (
+    index: number,
+    field: keyof MemorySlot,
+    value: string | string[],
+  ) => void;
+  addTag: (slotIndex: number, tag: string) => void;
+  removeTag: (slotIndex: number, tagIndex: number) => void;
+  deleteMemorySlot: (index: number) => void;
+  addMemorySlot: () => void;
+  createBattleFrame: (preset: 'basic' | 'light' | 'heavy') => void;
+  updateBattleFrame: (
+    field: 'hp' | 'evasion' | 'armor' | 'initialCount' | 'movement' | 'size',
+    value: number,
+  ) => void;
+  removeBattleFrame: () => void;
+  toggleBattleStyle: (style: BattleStyleType) => void;
+  toggleBattleCommand: (commandName: string) => void;
 }
 
-const getInitialMemorySlots = (): MemorySlot[] => [
-  {
-    title: '人間の保護',
-    description:
-      'ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。',
-    tags: ['ロボット工学三原則', 'システムコア', '優先度：最高'],
-  },
-  {
-    title: '命令順守',
-    description:
-      'ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。',
-    tags: ['ロボット工学三原則', 'システムコア', '優先度：高'],
-  },
-  {
-    title: '自己保存',
-    description:
-      'ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。',
-    tags: ['ロボット工学三原則', 'システムコア', '優先度：中'],
-  },
-  {
-    title: '破損したメモリ',
-    description:
-      'あなたの目的に関するデータが含まれていたようだ。記憶を再構築せよ。',
-    tags: ['破損データ', '要復旧', 'クリティカル'],
-  },
-];
-
-export default function CharacterForm({
+export default function CharacterFormView({
   character,
-  onSave,
+  name,
+  setName,
+  memorySlots,
+  battleFrame,
+  battleStyles,
+  battleCommands,
+  error,
+  setError,
+  onSubmit,
   onCancel,
-}: CharacterFormProps) {
-  const [name, setName] = useState(character?.name || '');
-  const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(
-    character?.memorySlots || getInitialMemorySlots(),
-  );
-  const [battleFrame, setBattleFrame] = useState<BattleFrame>(
-    character?.battleFrame || null,
-  );
-  const [battleStyles, setBattleStyles] = useState<BattleStyleType[]>(
-    character?.battleStyles || [],
-  );
-  const [battleCommands, setBattleCommands] = useState<string[]>(
-    character?.battleCommands || [],
-  );
-  const [error, setError] = useState('');
-
+  updateMemorySlot,
+  addTag,
+  removeTag,
+  deleteMemorySlot,
+  addMemorySlot,
+  createBattleFrame,
+  updateBattleFrame,
+  removeBattleFrame,
+  toggleBattleStyle,
+  toggleBattleCommand,
+}: CharacterFormViewProps) {
   const apiKey = import.meta.env.VITE_SPREAD_SHEET_API_KEY || '';
   const spreadSheetId = import.meta.env.VITE_SPREAD_SHEET_ID || '';
   const { data: availableCommands } = useBattleCommandData(
     apiKey,
     spreadSheetId,
   );
-  console.log('usebatte', { apiKey, spreadSheetId });
-  const validateForm = (): string | null => {
-    if (!name.trim()) {
-      return 'Character name is required';
-    }
-    if (memorySlots.length === 0) {
-      return 'At least one memory slot is required';
-    }
-    return null;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const validationError = validateForm();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
-
-    onSave({
-      name: name.trim(),
-      memorySlots,
-      battleFrame: battleFrame || undefined,
-      battleStyles: battleStyles.length > 0 ? battleStyles : undefined,
-      battleCommands: battleCommands.length > 0 ? battleCommands : undefined,
-    });
-  };
-
-  const updateMemorySlot = (
-    index: number,
-    field: keyof MemorySlot,
-    value: string | string[],
-  ) => {
-    const updated = [...memorySlots];
-    updated[index] = { ...updated[index], [field]: value };
-    setMemorySlots(updated);
-  };
-
-  const addTag = (slotIndex: number, tag: string) => {
-    const updated = [...memorySlots];
-    const trimmedTag = tag.trim();
-    if (trimmedTag && !updated[slotIndex].tags.includes(trimmedTag)) {
-      updated[slotIndex] = {
-        ...updated[slotIndex],
-        tags: [...updated[slotIndex].tags, trimmedTag],
-      };
-      setMemorySlots(updated);
-    }
-  };
-
-  const removeTag = (slotIndex: number, tagIndex: number) => {
-    const updated = [...memorySlots];
-    updated[slotIndex] = {
-      ...updated[slotIndex],
-      tags: updated[slotIndex].tags.filter((_, i) => i !== tagIndex),
-    };
-    setMemorySlots(updated);
-  };
-
-  const deleteMemorySlot = (index: number) => {
-    setMemorySlots(memorySlots.filter((_, i) => i !== index));
-  };
-
-  const addMemorySlot = () => {
-    setMemorySlots([
-      ...memorySlots,
-      {
-        title: '',
-        description: '',
-        tags: [],
-      },
-    ]);
-  };
-
-  const battleFramePresets = {
-    basic: {
-      hp: 20,
-      evasion: 5,
-      armor: 2,
-      initialCount: 5,
-      movement: 3,
-      size: 1 as const,
-    },
-    light: {
-      hp: 15,
-      evasion: 7,
-      armor: 0,
-      initialCount: 3,
-      movement: 5,
-      size: 1 as const,
-    },
-    heavy: {
-      hp: 30,
-      evasion: 3,
-      armor: 5,
-      initialCount: 8,
-      movement: 2,
-      size: 1 as const,
-    },
-  };
-
-  const createBattleFrame = (preset: 'basic' | 'light' | 'heavy' = 'basic') => {
-    setBattleFrame({
-      stats: { ...battleFramePresets[preset] },
-      type: preset,
-    });
-  };
-
-  const updateBattleFrame = (
-    field: keyof typeof battleFramePresets.basic,
-    value: number,
-  ) => {
-    if (!battleFrame) return;
-    setBattleFrame({
-      ...battleFrame,
-      stats: { ...battleFrame.stats, [field]: value },
-    });
-  };
-
-  const removeBattleFrame = () => {
-    setBattleFrame(null);
-  };
-
-  const toggleBattleStyle = (style: BattleStyleType) => {
-    if (battleStyles.includes(style)) {
-      setBattleStyles(battleStyles.filter((s) => s !== style));
-    } else {
-      setBattleStyles([...battleStyles, style]);
-    }
-  };
-
-  const toggleBattleCommand = (commandName: string) => {
-    if (battleCommands.includes(commandName)) {
-      setBattleCommands(battleCommands.filter((c) => c !== commandName));
-    } else {
-      setBattleCommands([...battleCommands, commandName]);
-    }
-  };
 
   const getAvailableCommandsByStyle = () => {
     if (battleStyles.length === 0) return [];
@@ -241,7 +100,7 @@ export default function CharacterForm({
       </header>
 
       <div className="card">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           {/* Name */}
           <div className="form-group">
             <label htmlFor="name" className="form-label">
@@ -408,9 +267,7 @@ export default function CharacterForm({
                   className="cursor-pointer"
                 />
                 <span className="font-bold">ベーシック</span>
-                <span className="text-xs text-text-tertiary">
-                  (バランス型)
-                </span>
+                <span className="text-xs text-text-tertiary">(バランス型)</span>
               </label>
 
               <label
@@ -428,9 +285,7 @@ export default function CharacterForm({
                   className="cursor-pointer"
                 />
                 <span className="font-bold">ライト</span>
-                <span className="text-xs text-text-tertiary">
-                  (高機動型)
-                </span>
+                <span className="text-xs text-text-tertiary">(高機動型)</span>
               </label>
 
               <label
@@ -448,9 +303,7 @@ export default function CharacterForm({
                   className="cursor-pointer"
                 />
                 <span className="font-bold">ヘビー</span>
-                <span className="text-xs text-text-tertiary">
-                  (重装甲型)
-                </span>
+                <span className="text-xs text-text-tertiary">(重装甲型)</span>
               </label>
             </div>
 
