@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { getCharacter } from '@/entities/character';
+import { useNavigate, useLoaderData } from 'react-router';
 import type { Character } from '@/entities/character';
 import {
   useCharacterForm,
@@ -9,18 +7,10 @@ import {
 
 export default function CharacterFormPage() {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  const [character, setCharacter] = useState<Character | undefined>();
-
-  useEffect(() => {
-    if (id) {
-      const char = getCharacter(id);
-      setCharacter(char);
-    }
-  }, [id]);
+  const character = useLoaderData<Character | null>();
 
   const formState = useCharacterForm({
-    character,
+    character: character ?? undefined,
     onSave: () => navigate('/'),
   });
 

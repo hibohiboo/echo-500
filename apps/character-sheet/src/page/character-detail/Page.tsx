@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { getCharacter, deleteCharacter } from '@/entities/character';
+import { useNavigate, useLoaderData } from 'react-router';
+import { deleteCharacter } from '@/entities/character';
 import type { Character } from '@/entities/character';
 import {
   useCharacterDetail,
@@ -9,39 +8,21 @@ import {
 
 export default function CharacterDetailPage() {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
-  const [character, setCharacter] = useState<Character | undefined>();
+  const character = useLoaderData<Character>();
 
-  useEffect(() => {
-    if (id) {
-      const char = getCharacter(id);
-      setCharacter(char);
-      if (!char) {
-        navigate('/');
-      }
-    }
-  }, [id, navigate]);
-
-  const detailState = useCharacterDetail({ character: character! });
+  const detailState = useCharacterDetail({ character });
 
   const handleDelete = () => {
-    if (
-      id &&
-      window.confirm('Are you sure you want to delete this character?')
-    ) {
-      deleteCharacter(id);
+    if (window.confirm('Are you sure you want to delete this character?')) {
+      deleteCharacter(character.id);
       navigate('/');
     }
   };
 
-  if (!character) {
-    return null;
-  }
-
   return (
     <CharacterDetailView
       {...detailState}
-      onEdit={() => navigate(`/edit/${id}`)}
+      onEdit={() => navigate(`/edit/${character.id}`)}
       onDelete={handleDelete}
       onBack={() => navigate('/')}
     />
