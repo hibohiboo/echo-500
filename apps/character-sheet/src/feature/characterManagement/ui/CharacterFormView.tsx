@@ -436,7 +436,7 @@ export default function CharacterFormView({
               <span className="mr-1">⚡</span>
               戦闘スタイル (CP消費: 1スタイル30点)
             </label>
-            <p className="text-[0.85rem] text-[var(--text-tertiary)] mb-4">
+            <p className="text-[0.85rem] text-(--text-tertiary) mb-4">
               複数のスタイルを習得できます。スタイルごとにステータス補正と戦闘モジュールを取得します
             </p>
 
@@ -462,8 +462,8 @@ export default function CharacterFormView({
                     key={key}
                     className={`flex items-center gap-2 cursor-pointer p-4 rounded border-2 ${
                       isSelected
-                        ? 'bg-[var(--bg-secondary)] border-[var(--color-nature-accent)]'
-                        : 'bg-[var(--bg-tertiary)] border-transparent'
+                        ? 'bg-(--bg-secondary) border-(--color-nature-accent)'
+                        : 'bg-(--bg-tertiary) border-transparent'
                     }`}
                   >
                     <input
@@ -477,15 +477,15 @@ export default function CharacterFormView({
                         <span className="font-bold text-base">
                           {style.name}
                         </span>
-                        <span className="text-xs text-[var(--text-tertiary)]">
+                        <span className="text-xs text-(--text-tertiary)">
                           (CP: {style.cpCost})
                         </span>
                       </div>
-                      <p className="text-[0.85rem] text-[var(--text-secondary)] mb-1">
+                      <p className="text-[0.85rem] text-(--text-secondary) mb-1">
                         {style.description}
                       </p>
                       {modifierText.length > 0 && (
-                        <p className="text-xs text-[var(--color-nature-accent)]">
+                        <p className="text-xs text-(--color-nature-accent)">
                           補正: {modifierText.join(', ')}
                         </p>
                       )}
@@ -496,8 +496,8 @@ export default function CharacterFormView({
             </div>
 
             {battleStyles.length > 0 && (
-              <div className="mt-4 p-4 bg-[var(--bg-tertiary)] rounded border border-[var(--color-nature-accent)]">
-                <p className="text-[0.85rem] text-[var(--text-secondary)]">
+              <div className="mt-4 p-4 bg-(--bg-tertiary) rounded border border-(--color-nature-accent)">
+                <p className="text-[0.85rem] text-(--text-secondary)">
                   選択中: {battleStyles.length}スタイル / 合計CP消費:{' '}
                   {battleStyles.length * 30}点
                 </p>
@@ -512,13 +512,13 @@ export default function CharacterFormView({
                 <span className="mr-1">💾</span>
                 戦闘モジュール (習得したスタイルに応じて選択可能)
               </label>
-              <p className="text-[0.85rem] text-[var(--text-tertiary)] mb-4">
+              <p className="text-[0.85rem] text-(--text-tertiary) mb-4">
                 習得した戦闘スタイルのタグを持つモジュールを取得できます。初期CP:
                 100点
               </p>
 
               {getAvailableCommandsByStyle().length === 0 ? (
-                <div className="p-4 bg-[var(--bg-tertiary)] rounded text-center text-[var(--text-tertiary)]">
+                <div className="p-4 bg-(--bg-tertiary) rounded text-center text-(--text-tertiary)">
                   戦闘スタイルを選択すると、対応する戦闘モジュールが表示されます
                 </div>
               ) : (
@@ -537,7 +537,7 @@ export default function CharacterFormView({
                           }`}
                         >
                           {isSelected && (
-                            <div className="absolute top-2 right-2 bg-[var(--color-nature-accent)] text-[var(--bg-primary)] px-2 py-1 rounded text-xs font-bold z-10">
+                            <div className="absolute top-2 right-2 bg-(--color-nature-accent) text-(--bg-primary) px-2 py-1 rounded text-xs font-bold z-10">
                               ✓ 習得済み
                             </div>
                           )}
@@ -558,11 +558,11 @@ export default function CharacterFormView({
                     })}
                   </div>
 
-                  <div className="p-4 bg-[var(--bg-tertiary)] rounded border border-[var(--color-cyber-primary)]">
-                    <p className="text-[0.9rem] text-[var(--text-secondary)] mb-2">
+                  <div className="p-4 bg-(--bg-tertiary) rounded border border-(--color-cyber-primary)">
+                    <p className="text-[0.9rem] text-(--text-secondary) mb-2">
                       <strong>CP消費状況</strong>
                     </p>
-                    <div className="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2 text-[0.85rem] text-[var(--text-tertiary)]">
+                    <div className="grid grid-cols-1 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2 text-[0.85rem] text-(--text-tertiary)">
                       <div>戦闘スタイル: {calculateTotalCP().styleCost}点</div>
                       <div>
                         戦闘モジュール: {calculateTotalCP().commandCost}点
@@ -571,7 +571,7 @@ export default function CharacterFormView({
                         className={`font-bold ${
                           calculateTotalCP().total > 100
                             ? 'text-[#ff6b6b]'
-                            : 'text-[var(--color-nature-accent)]'
+                            : 'text-(--color-nature-accent)'
                         }`}
                       >
                         合計: {calculateTotalCP().total} / 100点
@@ -590,7 +590,7 @@ export default function CharacterFormView({
           )}
 
           {error ? (
-            <p className="text-[var(--color-cyber-accent)] mb-4">{error}</p>
+            <p className="text-(--color-cyber-accent) mb-4">{error}</p>
           ) : null}
 
           <div className="flex gap-4">

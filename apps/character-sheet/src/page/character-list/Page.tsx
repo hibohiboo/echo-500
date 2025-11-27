@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router';
+import { useNavigate, useLoaderData, useRevalidator } from 'react-router';
+import type { Character } from '@/entities/character';
 import {
   useCharacterList,
   CharacterListView,
@@ -6,7 +7,10 @@ import {
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
-  const { characters, handleDelete, reloadCharacters } = useCharacterList();
+  const characters = useLoaderData<Character[]>();
+  const revalidator = useRevalidator();
+
+  const { handleDelete } = useCharacterList({ characters });
 
   return (
     <CharacterListView
@@ -16,7 +20,7 @@ export default function CharacterListPage() {
       onEdit={(id) => navigate(`/edit/${id}`)}
       onDelete={async (id) => {
         await handleDelete(id);
-        reloadCharacters();
+        revalidator.revalidate();
       }}
     />
   );
