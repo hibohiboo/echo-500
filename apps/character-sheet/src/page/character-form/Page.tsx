@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { getCharacter } from '../../entities/character';
+import { getCharacter } from '@/entities/character';
+import type { Character } from '@/entities/character';
 import {
   useCharacterForm,
   CharacterFormView,
-} from '../../feature/characterManagement';
-import type { Character } from '../../entities/character';
+} from '@/feature/characterManagement';
 
 export default function CharacterFormPage() {
   const navigate = useNavigate();

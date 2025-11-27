@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import {
   useCharacterList,
   CharacterListView,
-} from '../../feature/characterManagement';
+} from '@/feature/characterManagement';
 
 export default function CharacterListPage() {
   const navigate = useNavigate();

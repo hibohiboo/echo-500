@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { getCharacter, deleteCharacter } from '../../entities/character';
+import { getCharacter, deleteCharacter } from '@/entities/character';
+import type { Character } from '@/entities/character';
 import {
   useCharacterDetail,
   CharacterDetailView,
-} from '../../feature/characterManagement';
-import type { Character } from '../../entities/character';
+} from '@/feature/characterManagement';
 
 export default function CharacterDetailPage() {
   const navigate = useNavigate();
