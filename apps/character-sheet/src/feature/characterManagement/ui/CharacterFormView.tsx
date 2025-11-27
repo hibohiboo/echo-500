@@ -19,7 +19,7 @@ interface CharacterFormViewProps {
   battleCommands: string[];
   error: string;
   setError: (error: string) => void;
-  onSubmit: (e: React.FormEvent) => void;
+  handleSubmit: (e: React.FormEvent) => void;
   onCancel: () => void;
   updateMemorySlot: (
     index: number,
@@ -40,6 +40,7 @@ interface CharacterFormViewProps {
   toggleBattleCommand: (commandName: string) => void;
 }
 
+// eslint-disable-next-line complexity
 export default function CharacterFormView({
   character,
   name,
@@ -50,7 +51,7 @@ export default function CharacterFormView({
   battleCommands,
   error,
   setError,
-  onSubmit,
+  handleSubmit,
   onCancel,
   updateMemorySlot,
   addTag,
@@ -100,7 +101,7 @@ export default function CharacterFormView({
       </header>
 
       <div className="card">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           {/* Name */}
           <div className="form-group">
             <label htmlFor="name" className="form-label">

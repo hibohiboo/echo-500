@@ -15,11 +15,6 @@ export default function CharacterFormPage() {
   });
 
   return (
-    <CharacterFormView
-      {...formState}
-      pageTitle={character ? 'Edit Character' : 'Create New Character'}
-      submitButtonText={character ? 'Update' : 'Create'}
-      onCancel={() => navigate('/')}
-    />
+    <CharacterFormView {...formState} onCancel={() => navigate('/')} />
   );
 }
