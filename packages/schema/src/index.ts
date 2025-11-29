@@ -10,3 +10,5 @@ export * from './informationItem';
 export * from './image';
 export * from './export';
 export * from './battleFrame';
+export * from './playerCharacter';
+export * from './battleCommand';

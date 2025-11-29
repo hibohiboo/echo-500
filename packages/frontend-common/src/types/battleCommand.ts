@@ -1,17 +1,14 @@
-export interface BattleCommandCardData {
-  class: string;
-  name: string;
-  cp: number;
-  timing: string;
-  cost: string;
-  range: string;
-  effect: string;
-  target: string;
-  flavor: string;
-  tags: string[];
-  details: string;
-}
+import type { BattleCommand } from '@echo-500/schema';
 
+/**
+ * バトルコマンドカードのデータ型
+ * @echo-500/schema の BattleCommand 型をそのまま使用
+ */
+export type BattleCommandCardData = BattleCommand;
+
+/**
+ * バトルコマンドカードコンポーネントのプロパティ
+ */
 export interface BattleCommandCardProps {
   name: string;
   cp: number;
