@@ -31,9 +31,20 @@ export const SerializablePlayerCharacterSchema = v.object({
 });
 
 /**
- * プレイヤーキャラクター作成・更新用の入力データスキーマ
+ * プレイヤーキャラクター作成用の入力データスキーマ
+ * PlayerCharacterSchemaからid, createdAt, updatedAtを除外
  */
-export const PlayerCharacterFormDataSchema = v.object({
+export const PlayerCharacterFormDataSchema = v.omit(PlayerCharacterSchema, [
+  'id',
+  'createdAt',
+  'updatedAt',
+]);
+
+/**
+ * プレイヤーキャラクター更新用の入力データスキーマ
+ * nameのみ更新可能
+ */
+export const UpdatePlayerCharacterDataSchema = v.object({
   /** キャラクター名 */
   name: v.string(),
 });
@@ -51,10 +62,17 @@ export type SerializablePlayerCharacter = v.InferOutput<
 >;
 
 /**
- * プレイヤーキャラクター作成・更新用の入力データ型
+ * プレイヤーキャラクター作成用の入力データ型
  */
 export type PlayerCharacterFormData = v.InferOutput<
   typeof PlayerCharacterFormDataSchema
+>;
+
+/**
+ * プレイヤーキャラクター更新用の入力データ型
+ */
+export type UpdatePlayerCharacterData = v.InferOutput<
+  typeof UpdatePlayerCharacterDataSchema
 >;
 
 /**

@@ -1,5 +1,6 @@
 import { eq, desc } from 'drizzle-orm';
 import { playerCharactersTable, type NewPlayerCharacter } from '../schema';
+import type { UpdatePlayerCharacterData } from '@echo-500/schema';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 
 /**
@@ -48,7 +49,7 @@ export const createPlayerCharacterRepository = (
   /**
    * プレイヤーキャラクターを更新
    */
-  async update(id: string, data: { name: string }) {
+  async update(id: string, data: UpdatePlayerCharacterData) {
     const [result] = await database
       .update(playerCharactersTable)
       .set({ name: data.name, updatedAt: new Date() })
