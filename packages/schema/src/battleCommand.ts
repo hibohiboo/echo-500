@@ -184,3 +184,37 @@ export const parseUnlinkBattleCommandPayload = (data: unknown) => {
 export const parseUpdateBattleCommandSortOrderPayload = (data: unknown) => {
   return v.parse(UpdateBattleCommandSortOrderPayloadSchema, data);
 };
+
+// === GraphDB Parse Functions ===
+
+/**
+ * GraphDBから取得したバトルコマンド（tagsがJSON文字列）のスキーマ
+ */
+export const GraphDbBattleCommandRawSchema = v.object({
+  id: v.string(),
+  class: v.string(),
+  name: v.string(),
+  cp: v.number(),
+  timing: v.string(),
+  cost: v.string(),
+  range: v.string(),
+  effect: v.string(),
+  target: v.string(),
+  flavor: v.string(),
+  tags: v.string(), // JSON文字列
+  details: v.string(),
+  sortOrder: v.number(),
+});
+
+/**
+ * GraphDBのバトルコマンドリストをパース（tagsをJSON.parseで配列に変換）
+ */
+export const parseToGraphDbBattleCommandList = (
+  data: unknown,
+): PlayerCharacterBattleCommand[] => {
+  const rawList = v.parse(v.array(GraphDbBattleCommandRawSchema), data);
+  return rawList.map((item) => ({
+    ...item,
+    tags: JSON.parse(item.tags) as string[],
+  }));
+};
