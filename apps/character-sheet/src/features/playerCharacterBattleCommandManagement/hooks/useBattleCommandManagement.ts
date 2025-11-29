@@ -14,9 +14,7 @@ export const useBattleCommandManagement = (characterId: string) => {
   const isLoading = useAppSelector((state) => state.battleCommand.isLoading);
 
   useEffect(() => {
-    if (characterId) {
-      dispatch(fetchBattleCommands(characterId));
-    }
+    dispatch(fetchBattleCommands(characterId));
   }, [dispatch, characterId]);
 
   return {

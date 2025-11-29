@@ -40,15 +40,16 @@ export const createPlayerCharacter =
     try {
       dispatch(setIsSubmitting(true));
 
+      // 1. IDを生成
       const id = generateUUID();
 
-      // 1. RDBにデータを保存
-      const character = await playerCharacterRdbApi.create({ name });
+      // 2. RDBにデータを保存（生成したIDを使用）
+      const character = await playerCharacterRdbApi.create(id, { name });
 
-      // 2. GraphDBにノードを作成
+      // 3. GraphDBにノードを作成（同じIDを使用）
       await playerCharacterGraphApi.create(id);
 
-      // 3. Reduxステートを更新
+      // 4. Reduxステートを更新
       dispatch(addCharacter(character));
       dispatch(closeCreateModal());
     } catch (error) {

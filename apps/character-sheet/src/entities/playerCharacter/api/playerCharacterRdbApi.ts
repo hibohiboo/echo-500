@@ -12,8 +12,11 @@ export const playerCharacterRdbApi = {
   /**
    * プレイヤーキャラクター作成
    */
-  create: (data: PlayerCharacterFormData): Promise<SerializablePlayerCharacter> =>
-    dbWorkerClient.request('playerCharacter:create', data),
+  create: (
+    id: string,
+    data: PlayerCharacterFormData,
+  ): Promise<SerializablePlayerCharacter> =>
+    dbWorkerClient.request('playerCharacter:create', { id, ...data }),
 
   /**
    * 全プレイヤーキャラクターを取得
