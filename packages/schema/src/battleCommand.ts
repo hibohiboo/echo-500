@@ -30,13 +30,23 @@ export const BattleCommandSchema = v.object({
 });
 
 /**
+ * グラフDB用のプレイヤーキャラクターのバトルコマンド（並び順付き）
+ * BattleCommandSchemaを拡張してidを追加
+ */
+export const GraphDbBattleCommandSchema = v.object({
+  ...BattleCommandSchema.entries,
+  /** バトルコマンドID */
+  id: v.string(),
+  /** 並び順 */
+  sortOrder: v.number(),
+});
+
+/**
  * プレイヤーキャラクターのバトルコマンド（並び順付き）
  * BattleCommandSchemaを拡張してidとsortOrderを追加
  */
 export const PlayerCharacterBattleCommandSchema = v.object({
-  ...BattleCommandSchema.entries,
-  /** バトルコマンドID */
-  id: v.string(),
+  ...GraphDbBattleCommandSchema.entries,
   /** 並び順 */
   sortOrder: v.number(),
 });
@@ -51,7 +61,7 @@ export const BattleCommandFormDataSchema = v.omit(
 );
 
 /**
- * バトルコマンドの型
+ * ルールブック用のバトルコマンドの型
  */
 export type BattleCommand = v.InferOutput<typeof BattleCommandSchema>;
 

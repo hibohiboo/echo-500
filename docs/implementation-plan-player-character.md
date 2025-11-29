@@ -53,18 +53,72 @@
 
 #### Valibotリファクタリング（冗長性削減）
 ```typescript
-// 基本スキーマ
-export const BattleCommandSchema = v.object({ ... });
+// ルールブック用基本スキーマ（idなし）
+export const BattleCommandSchema = v.object({
+  class: v.string(),
+  name: v.string(),
+  cp: v.number(),
+  // ... その他のフィールド
+});
 
-// 拡張: sortOrderを追加（スプレッド構文使用）
-export const PlayerCharacterBattleCommandSchema = v.object({
+// GraphDB管理用（id + sortOrder追加）
+export const GraphDbBattleCommandSchema = v.object({
   ...BattleCommandSchema.entries,
+  id: v.string(),
   sortOrder: v.number(),
 });
 
-// 除外: idを除外（v.omit使用）
-export const BattleCommandFormDataSchema = v.omit(BattleCommandSchema, ['id']);
+// プレイヤーキャラクター用（GraphDbBattleCommandSchemaを継承）
+export const PlayerCharacterBattleCommandSchema = v.object({
+  ...GraphDbBattleCommandSchema.entries,
+  sortOrder: v.number(),
+});
+
+// フォームデータ用（idを除外）
+export const BattleCommandFormDataSchema = v.omit(
+  PlayerCharacterBattleCommandSchema,
+  ['id']
+);
 ```
+
+**スキーマの使い分け:**
+- `BattleCommandSchema`: ルールブック静的データ（idなし）
+- `GraphDbBattleCommandSchema`: GraphDB保存用（id + sortOrder付き）
+- `PlayerCharacterBattleCommandSchema`: プレイヤーキャラクターのバトルコマンド
+- `BattleCommandFormDataSchema`: 作成/更新フォーム用（idなし）
+
+#### バトルコマンドID管理方針（YAGNI原則）
+
+**基本方針:**
+- **ルールブックデータ（Googleスプレッドシート）にはIDを持たせない**
+- プレイヤーキャラクターがバトルコマンドを取得する際にGraphDBでIDを発番
+- 同じプレイヤーが同じコマンドを複数回取得することは**不可**（重複チェックを実装）
+
+**設計意図:**
+1. **カスタマイズ性**: 各プレイヤーが独自にコマンドをカスタマイズ可能
+2. **データ管理の簡素化**: ルールブックは静的データとして管理
+3. **YAGNI準拠**: レコメンド機能など将来必要になるかもしれない機能のために今複雑化しない
+
+**データフロー:**
+```
+1. ルールブック表示
+   → BattleCommandSchema（IDなし）を使用
+
+2. PCへのコマンド追加
+   → ルールブックからコマンドを選択
+   → 重複チェック（同じname + classのコマンドが既に存在するか確認）
+   → 重複なし: GraphDBで新規ID発番
+   → GraphDbBattleCommandSchemaとしてGraphDBに保存
+   → HAS_BATTLE_COMMANDリレーションでPCと紐付け
+
+3. PCのコマンド管理
+   → GraphDBからGraphDbBattleCommandSchemaとして取得
+```
+
+**重複チェック仕様:**
+- 判定キー: `class` + `name` の組み合わせ
+- 同一PCに対して同じコマンドは1つまで
+- 削除後の再取得は可能
 
 #### 既存コード更新
 - `packages/frontend-common/src/types/battleCommand.ts`を`@echo-500/schema`の型を使用するように変更
@@ -381,8 +435,9 @@ packages/ui/src/
   - `getBattleCommands(characterId: string): Promise<BattleCommand[]>`
 
 - [ ] `packages/graphdb/src/queries/battleCommandRepository.ts` 作成
-  - `create(params: CreateBattleCommandParams): Promise<BattleCommand>`
-  - `linkToCharacter(characterId: string, commandId: string, sortOrder: number): Promise<void>`
+  - `create(params: CreateBattleCommandParams): Promise<BattleCommand>` - ID発番してBattleCommandノード作成
+  - `checkDuplicate(characterId: string, className: string, commandName: string): Promise<boolean>` - 重複チェック
+  - `linkToCharacter(characterId: string, commandId: string, sortOrder: number): Promise<void>` - HAS_BATTLE_COMMANDリレーション作成
   - `unlinkFromCharacter(characterId: string, commandId: string): Promise<void>`
   - `updateSortOrder(characterId: string, commandId: string, sortOrder: number): Promise<void>`
 
@@ -477,17 +532,32 @@ UI: 一覧に新しいキャラクター表示
 ### バトルコマンド追加フロー
 ```
 UI (BattleCommandForm)
-  ↓ onAddCommand(characterId, commandData)
+  ↓ onAddCommand(characterId, commandData: BattleCommand)
 Redux State (battleCommandSlice)
   ↓ createBattleCommandAction(characterId, commandData)
-    1. GraphDB API: battleCommandGraphApi.create(commandData)
-       → GraphDB: CREATE (bc:BattleCommand {id, name, description, commandType})
+    1. 重複チェック
+       ↓ battleCommandGraphApi.checkDuplicate(characterId, commandData.class, commandData.name)
+       → GraphDB: MATCH (pc:PlayerCharacter)-[:HAS_BATTLE_COMMAND]->(bc:BattleCommand)
+                  WHERE pc.id = characterId AND bc.class = class AND bc.name = name
+       → 重複あり: エラーを返す（処理中断）
+       → 重複なし: 次のステップへ
+
+    2. バトルコマンド作成（ID発番）
+       ↓ battleCommandGraphApi.create(commandData)
+       → GraphDB: CREATE (bc:BattleCommand {id: uuid(), ...commandData})
        → commandId取得
-    2. GraphDB API: battleCommandGraphApi.linkToCharacter(characterId, commandId, sortOrder)
+
+    3. プレイヤーキャラクターと紐付け
+       ↓ battleCommandGraphApi.linkToCharacter(characterId, commandId, sortOrder)
        → GraphDB: CREATE (pc)-[:HAS_BATTLE_COMMAND {sortOrder}]->(bc)
-    3. Redux: battleCommandSlice.addCommand(characterId, command)
+
+    4. Redux状態更新
+       ↓ battleCommandSlice.addCommand(characterId, command)
   ↓
 UI: コマンドリストに新しいコマンド表示
+
+エラーハンドリング:
+- 重複エラー: "このコマンドは既に取得済みです"
 ```
 
 ## 技術スタック
@@ -527,6 +597,7 @@ UI: コマンドリストに新しいコマンド表示
 ### 機能確認
 - [ ] プレイヤーキャラクターのCRUD操作が正常動作
 - [ ] バトルコマンドの追加・削除が正常動作
+- [ ] **バトルコマンド重複チェックが正常動作**（同じコマンドを2回追加できないこと）
 - [ ] データの永続化が正常動作（ページリロード後も保持）
 - [ ] GraphDBとRDBの整合性が保たれている
 
