@@ -30,26 +30,30 @@ export const BattleCommandSchema = v.object({
 });
 
 /**
- * グラフDB用のプレイヤーキャラクターのバトルコマンド（並び順付き）
+ * グラフDB用のバトルコマンドノード（ID付き、sortOrderなし）
  * BattleCommandSchemaを拡張してidを追加
  */
-export const GraphDbBattleCommandSchema = v.object({
+export const GraphDbBattleCommandNodeOnlySchema = v.object({
   ...BattleCommandSchema.entries,
   /** バトルコマンドID */
   id: v.string(),
+});
+
+/**
+ * グラフDB用のプレイヤーキャラクターのバトルコマンド（並び順付き）
+ * GraphDbBattleCommandNodeOnlySchemaを拡張してsortOrderを追加
+ */
+export const GraphDbBattleCommandSchema = v.object({
+  ...GraphDbBattleCommandNodeOnlySchema.entries,
   /** 並び順 */
   sortOrder: v.number(),
 });
 
 /**
  * プレイヤーキャラクターのバトルコマンド（並び順付き）
- * BattleCommandSchemaを拡張してidとsortOrderを追加
+ * GraphDbBattleCommandSchemaと同じ
  */
-export const PlayerCharacterBattleCommandSchema = v.object({
-  ...GraphDbBattleCommandSchema.entries,
-  /** 並び順 */
-  sortOrder: v.number(),
-});
+export const PlayerCharacterBattleCommandSchema = GraphDbBattleCommandSchema;
 
 /**
  * バトルコマンド作成・更新用の入力データスキーマ
@@ -64,6 +68,20 @@ export const BattleCommandFormDataSchema = v.omit(
  * ルールブック用のバトルコマンドの型
  */
 export type BattleCommand = v.InferOutput<typeof BattleCommandSchema>;
+
+/**
+ * GraphDB用のバトルコマンドノードの型（ID付き、sortOrderなし）
+ */
+export type GraphDbBattleCommandNode = v.InferOutput<
+  typeof GraphDbBattleCommandNodeOnlySchema
+>;
+
+/**
+ * GraphDB用のバトルコマンドの型（ID付き、sortOrder付き）
+ */
+export type GraphDbBattleCommand = v.InferOutput<
+  typeof GraphDbBattleCommandSchema
+>;
 
 /**
  * プレイヤーキャラクターのバトルコマンド型（並び順付き）
@@ -188,9 +206,9 @@ export const parseUpdateBattleCommandSortOrderPayload = (data: unknown) => {
 // === GraphDB Parse Functions ===
 
 /**
- * GraphDBから取得したバトルコマンド（tagsがJSON文字列）のスキーマ
+ * GraphDBから取得したバトルコマンドノード（tagsがJSON文字列、sortOrderなし）のスキーマ
  */
-export const GraphDbBattleCommandRawSchema = v.object({
+export const GraphDbBattleCommandNodeSchema = v.object({
   id: v.string(),
   class: v.string(),
   name: v.string(),
@@ -203,11 +221,31 @@ export const GraphDbBattleCommandRawSchema = v.object({
   flavor: v.string(),
   tags: v.string(), // JSON文字列
   details: v.string(),
+});
+
+/**
+ * GraphDBから取得したバトルコマンド（tagsがJSON文字列、sortOrder付き）のスキーマ
+ */
+export const GraphDbBattleCommandRawSchema = v.object({
+  ...GraphDbBattleCommandNodeSchema.entries,
   sortOrder: v.number(),
 });
 
 /**
- * GraphDBのバトルコマンドリストをパース（tagsをJSON.parseで配列に変換）
+ * GraphDBのバトルコマンドノードリストをパース（tagsをJSON.parseで配列に変換、sortOrderなし）
+ */
+export const parseToGraphDbBattleCommandNodeList = (
+  data: unknown,
+): GraphDbBattleCommandNode[] => {
+  const rawList = v.parse(v.array(GraphDbBattleCommandNodeSchema), data);
+  return rawList.map((item) => ({
+    ...item,
+    tags: JSON.parse(item.tags) as string[],
+  }));
+};
+
+/**
+ * GraphDBのバトルコマンドリストをパース（tagsをJSON.parseで配列に変換、sortOrder付き）
  */
 export const parseToGraphDbBattleCommandList = (
   data: unknown,
