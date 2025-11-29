@@ -1,5 +1,5 @@
 {
-  "extends": "@trpg-scenario-maker/tsconfig/tsconfig.frontend",
+  "extends": "@echo-500/tsconfig/tsconfig.frontend",
   "include": ["./src", ".storybook"],
   "exclude": ["node_modules", "dist", "**/node_modules"],
   "compilerOptions": {

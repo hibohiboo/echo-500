@@ -1,4 +1,4 @@
 {
-  "extends": "@trpg-scenario-maker/tsconfig/tsconfig.node",
+  "extends": "@echo-500/tsconfig/tsconfig.node",
   "include": ["vite.config.ts"]
 }
