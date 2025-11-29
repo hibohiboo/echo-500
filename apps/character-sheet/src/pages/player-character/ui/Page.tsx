@@ -33,8 +33,7 @@ export default function PlayerCharacterPage() {
   );
 
   const handleCreateCharacter = async (params: { name: string }) => {
-    createCharacterHook.setName(params.name);
-    await createCharacterHook.submit();
+    await createCharacterHook.submit(params.name);
     createCharacterHook.close();
   };
 

@@ -1,3 +1,4 @@
+import { initializeDatabase } from '@echo-500/graphdb';
 import { runMigrate } from '@echo-500/rdb/db/runMigrate';
 import { battleCommandGraphHandlers } from '@/entities/battleCommand/workers/battleCommandGraphHandlers';
 import { playerCharacterGraphHandlers } from '@/entities/playerCharacter/workers/playerCharacterGraphHandlers';
@@ -29,8 +30,16 @@ const handlers = new Map<string, HandlerFunction>();
 handlers.set('migrate', async () => {
   console.log('[DB Worker] Starting migration...');
   try {
+    // GraphDB初期化
+    console.log('[DB Worker] Initializing GraphDB...');
+    await initializeDatabase();
+    console.log('[DB Worker] GraphDB initialized successfully');
+
+    // RDBマイグレーション
+    console.log('[DB Worker] Running RDB migration...');
     await runMigrate();
-    console.log('[DB Worker] Migration completed successfully');
+    console.log('[DB Worker] RDB migration completed successfully');
+
     return { success: true };
   } catch (error) {
     console.error('[DB Worker] Migration failed:', error);

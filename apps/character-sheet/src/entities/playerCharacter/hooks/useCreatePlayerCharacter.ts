@@ -35,12 +35,16 @@ export const useCreatePlayerCharacter = () => {
     [dispatch],
   );
 
-  const submit = useCallback(async () => {
-    if (!name.trim()) {
-      throw new Error('名前を入力してください');
-    }
-    await dispatch(createPlayerCharacter(name));
-  }, [dispatch, name]);
+  const submit = useCallback(
+    async (nameParam?: string) => {
+      const targetName = nameParam ?? name;
+      if (!targetName.trim()) {
+        throw new Error('名前を入力してください');
+      }
+      await dispatch(createPlayerCharacter(targetName));
+    },
+    [dispatch, name],
+  );
 
   return {
     isOpen,
