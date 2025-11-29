@@ -59,6 +59,7 @@ export function HomePage() {
               </h2>
               <p>
                 本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームである。
+                <br />
                 永い眠りから目覚めたあなたは、破損した目的を取り戻すため、終わった世界で旅をする。
               </p>
               <ul className="feature-list">
