@@ -13,14 +13,12 @@ export {
 } from './model/battleCommandSlice';
 export type { BattleCommandState } from './model/battleCommandSlice';
 
-// Actions
+// Actions（純粋なAPI操作のみ）
 export {
-  fetchBattleCommands,
-  createBattleCommand,
-  unlinkBattleCommand,
-  deleteBattleCommand,
+  createBattleCommandNode,
+  checkDuplicateBattleCommand,
+  linkBattleCommandToCharacter,
+  unlinkBattleCommandFromCharacter,
   updateBattleCommandSortOrder,
+  deleteBattleCommandNode,
 } from './actions/battleCommandActions';
-
-// Hooks
-export { useBattleCommands } from './hooks/useBattleCommands';

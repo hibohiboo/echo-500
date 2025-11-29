@@ -31,6 +31,7 @@ export {
   deletePlayerCharacter,
   fetchPlayerCharacterById,
 } from './actions/playerCharacterActions';
+export { fetchPlayerCharacterBattleCommands } from './actions/playerCharacterBattleCommandActions';
 
 // Hooks
 export { usePlayerCharacterList } from './hooks/usePlayerCharacterList';

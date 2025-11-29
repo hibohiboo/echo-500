@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
-import { fetchBattleCommands } from '../actions/battleCommandActions';
+import { fetchBattleCommands } from '../actions/battleCommandManagementActions';
 
 /**
- * プレイヤーキャラクターのバトルコマンド一覧を取得・管理するhook
+ * プレイヤーキャラクターのバトルコマンド管理機能
+ * （Entity層の battleCommand と playerCharacter を組み合わせたFeature）
  */
-export const useBattleCommands = (characterId: string) => {
+export const useBattleCommandManagement = (characterId: string) => {
   const dispatch = useAppDispatch();
   const commands = useAppSelector(
     (state) => state.battleCommand.commandsByCharacter[characterId] || [],
