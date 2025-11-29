@@ -119,7 +119,10 @@ export const parseToPlayerCharacterString = (
  */
 export const parseToPlayerCharacter = (data: unknown): PlayerCharacter => {
   // まずSerializablePlayerCharacterとしてパース
-  const playerCharacterString = v.parse(SerializablePlayerCharacterSchema, data);
+  const playerCharacterString = v.parse(
+    SerializablePlayerCharacterSchema,
+    data,
+  );
   // その後Date型に変換
   return stringToPlayerCharacter(playerCharacterString);
 };
@@ -181,7 +184,9 @@ export const parsePlayerCharacter = (
 export const parsePlayerCharacterList = (
   data: unknown,
 ): SerializablePlayerCharacter[] => {
-  return v.parse(v.array(PlayerCharacterSchema), data).map(playerCharacterToString);
+  return v
+    .parse(v.array(PlayerCharacterSchema), data)
+    .map(playerCharacterToString);
 };
 
 // === GraphDB Parse Functions ===
@@ -204,4 +209,19 @@ export const parseToPlayerCharacterNodeList = (
   data: unknown,
 ): GraphDbPlayerCharacterNode[] => {
   return v.parse(v.array(GraphDbPlayerCharacterNodeSchema), data);
+};
+const CheckDuplicateBattleCommandSchema = v.object({
+  count: v.number(),
+});
+type CheckDuplicateBattleCommand = v.InferOutput<
+  typeof CheckDuplicateBattleCommandSchema
+>;
+
+/**
+ * GraphDBのCheckBattoleCommandリストをパース
+ */
+export const parseToCheckDuplicateBattleCommand = (
+  data: unknown,
+): CheckDuplicateBattleCommand[] => {
+  return v.parse(v.array(CheckDuplicateBattleCommandSchema), data);
 };

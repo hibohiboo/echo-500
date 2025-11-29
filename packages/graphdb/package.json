@@ -8,7 +8,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . && tsc -b",
     "ncu": "ncu -u",
     "test": "vitest"
   },

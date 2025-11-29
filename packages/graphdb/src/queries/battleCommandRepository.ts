@@ -1,3 +1,4 @@
+import { parseToCheckDuplicateBattleCommand } from '@echo-500/schema';
 import { executeQuery } from '../db';
 import { escapeCypherString } from '../utils/escapeCypherString';
 
@@ -83,8 +84,8 @@ export const battleCommandGraphRepository = {
       WHERE bc.class = '${escapedClass}' AND bc.name = '${escapedName}'
       RETURN count(bc) AS count
     `);
-
-    return result.length > 0 && Number(result[0].count) > 0;
+    const parsed = parseToCheckDuplicateBattleCommand(result);
+    return parsed.length > 0 && Number(parsed[0].count) > 0;
   },
 
   /**
