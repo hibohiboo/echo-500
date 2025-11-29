@@ -119,4 +119,107 @@ describe('battleCommandGraphRepository', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('linkToCharacter', () => {
+    it('PlayerCharacterとBattleCommandをリレーションで接続できる', async () => {
+      // Arrange（準備）
+      const characterId = generateUUID();
+      const commandId = generateUUID();
+
+      // PlayerCharacter作成
+      await executeQuery(`
+        CREATE (pc:PlayerCharacter {id: '${characterId}'})
+      `);
+
+      // BattleCommand作成
+      await battleCommandGraphRepository.create({
+        id: commandId,
+        class: '戦士',
+        name: 'テストコマンド',
+        cp: 1,
+        timing: 'メイン',
+        cost: '1',
+        range: '近接',
+        effect: '効果',
+        target: '単体',
+        flavor: 'フレーバー',
+        tags: ['攻撃'],
+        details: '詳細',
+      });
+
+      // Act（実行）
+      await battleCommandGraphRepository.linkToCharacter(
+        characterId,
+        commandId,
+        5,
+      );
+
+      // Assert（検証）
+      const result = await executeQuery(`
+        MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_BATTLE_COMMAND]->(bc:BattleCommand {id: '${commandId}'})
+        RETURN r.sortOrder AS sortOrder
+      `);
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(1);
+      expect((result as { sortOrder: number }[])[0].sortOrder).toBe(5);
+    });
+  });
+
+  describe('unlinkFromCharacter', () => {
+    it('PlayerCharacterとBattleCommandのリレーションを削除できる', async () => {
+      // Arrange（準備）
+      const characterId = generateUUID();
+      const commandId = generateUUID();
+
+      // PlayerCharacter作成
+      await executeQuery(`
+        CREATE (pc:PlayerCharacter {id: '${characterId}'})
+      `);
+
+      // BattleCommand作成
+      await battleCommandGraphRepository.create({
+        id: commandId,
+        class: '戦士',
+        name: 'テストコマンド',
+        cp: 1,
+        timing: 'メイン',
+        cost: '1',
+        range: '近接',
+        effect: '効果',
+        target: '単体',
+        flavor: 'フレーバー',
+        tags: ['攻撃'],
+        details: '詳細',
+      });
+
+      // リレーション作成
+      await battleCommandGraphRepository.linkToCharacter(
+        characterId,
+        commandId,
+        0,
+      );
+
+      // 削除前にリレーション存在確認
+      const beforeDelete = await executeQuery(`
+        MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_BATTLE_COMMAND]->(bc:BattleCommand {id: '${commandId}'})
+        RETURN r
+      `);
+      expect(Array.isArray(beforeDelete)).toBe(true);
+      expect(beforeDelete).toHaveLength(1);
+
+      // Act（実行）
+      await battleCommandGraphRepository.unlinkFromCharacter(
+        characterId,
+        commandId,
+      );
+
+      // Assert（検証）
+      const afterDelete = await executeQuery(`
+        MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_BATTLE_COMMAND]->(bc:BattleCommand {id: '${commandId}'})
+        RETURN r
+      `);
+      expect(Array.isArray(afterDelete)).toBe(true);
+      expect(afterDelete).toHaveLength(0);
+    });
+  });
 });
