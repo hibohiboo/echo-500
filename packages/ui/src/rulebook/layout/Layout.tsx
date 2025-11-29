@@ -1,13 +1,14 @@
-import { Outlet } from 'react-router';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import '../styles/theme.css';
+import type { ReactNode } from 'react';
 
 interface LayoutProps {
   basePath?: string;
+  children: ReactNode;
 }
 
-export function Layout({ basePath }: LayoutProps) {
+export function Layout({ basePath, children }: LayoutProps) {
   return (
     <div className="app-container">
       <div className="layout-background">
@@ -17,9 +18,7 @@ export function Layout({ basePath }: LayoutProps) {
 
       <div className="layout-content">
         <Header basePath={basePath} />
-        <main className="site-main">
-          <Outlet />
-        </main>
+        <main className="site-main">{children}</main>
         <Footer />
       </div>
 
