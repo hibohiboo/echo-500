@@ -183,3 +183,25 @@ export const parsePlayerCharacterList = (
 ): SerializablePlayerCharacter[] => {
   return v.parse(v.array(PlayerCharacterSchema), data).map(playerCharacterToString);
 };
+
+// === GraphDB Parse Functions ===
+
+/**
+ * GraphDBから取得したPlayerCharacterノード（IDのみ）のスキーマ
+ */
+export const GraphDbPlayerCharacterNodeSchema = v.object({
+  id: v.string(),
+});
+
+export type GraphDbPlayerCharacterNode = v.InferOutput<
+  typeof GraphDbPlayerCharacterNodeSchema
+>;
+
+/**
+ * GraphDBのPlayerCharacterノードリストをパース
+ */
+export const parseToPlayerCharacterNodeList = (
+  data: unknown,
+): GraphDbPlayerCharacterNode[] => {
+  return v.parse(v.array(GraphDbPlayerCharacterNodeSchema), data);
+};

@@ -1,3 +1,4 @@
+import { parseToPlayerCharacterNodeList } from '@echo-500/schema';
 import { generateUUID } from '@echo-500/utility';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { initializeDatabase, closeDatabase, executeQuery } from '../db';
@@ -30,8 +31,8 @@ describe('playerCharacterGraphRepository', () => {
       const result = await playerCharacterGraphRepository.create(characterId);
 
       // Assert（検証）
-      expect(result).toHaveLength(1);
-      expect(result[0].id).toBe(characterId);
+      const [pc] = parseToPlayerCharacterNodeList(result);
+      expect(pc.id).toBe(characterId);
     });
   });
 });
