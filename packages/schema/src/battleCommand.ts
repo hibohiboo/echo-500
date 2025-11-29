@@ -203,6 +203,41 @@ export const parseUpdateBattleCommandSortOrderPayload = (data: unknown) => {
   return v.parse(UpdateBattleCommandSortOrderPayloadSchema, data);
 };
 
+// === Worker Handler Parse Functions ===
+
+/**
+ * バトルコマンドフォームデータをパース
+ */
+export const parseBattleCommandFormData = (data: unknown): BattleCommandFormData => {
+  return v.parse(BattleCommandFormDataSchema, data);
+};
+
+/**
+ * バトルコマンドIDをパース
+ */
+export const parseBattleCommandId = (data: unknown): { id: string } => {
+  return v.parse(BattleCommandIdPayloadSchema, data);
+};
+
+/**
+ * 重複チェックペイロードをパース
+ */
+export const parseCheckDuplicateBattleCommandPayload = (data: unknown): { characterId: string; className: string; commandName: string } => {
+  const schema = v.object({
+    characterId: v.string(),
+    className: v.string(),
+    commandName: v.string(),
+  });
+  return v.parse(schema, data);
+};
+
+/**
+ * sortOrder更新ペイロードをパース
+ */
+export const parseUpdateSortOrderPayload = (data: unknown): { characterId: string; commandId: string; sortOrder: number } => {
+  return v.parse(UpdateBattleCommandSortOrderPayloadSchema, data);
+};
+
 // === GraphDB Parse Functions ===
 
 /**

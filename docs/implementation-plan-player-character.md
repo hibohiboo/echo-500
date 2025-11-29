@@ -500,31 +500,149 @@ packages/ui/src/
 - [x] ~~BattleCommandハンドラー実装~~ ✅ **完了**
   - [x] ~~`apps/character-sheet/src/entities/battleCommand/workers/battleCommandGraphHandlers.ts`~~ (GraphDB操作)
 
-#### 4-8. API層のWorker対応（次のステップ）🔄
-**重要:** 現在のAPI層はfetch()を使用しているが、IndexedDB経由のWorker通信に変更する必要がある
+#### 4-8. API層のWorker対応 ✅ **完了**
 
-- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` を修正
-  - ❌ 現在: `fetch('/api/player-characters')`
-  - ✅ 修正後: `dbWorkerClient.request('playerCharacter:getList')`
+**実施内容:**
+- Worker基盤実装完了（BaseWorkerClient, db.worker.ts, dbWorkerClient.ts, handlerMaps.ts）
+- Workerハンドラー実装完了（RDB/GraphDB）
+- **API層をfetch()からWorker通信に変換完了**
 
-- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` を修正
-  - ❌ 現在: `fetch('/api/graph/player-characters')`
-  - ✅ 修正後: `dbWorkerClient.request('playerCharacter:createNode', { id })`
+##### 変換が必要なファイル
 
-- [ ] `apps/character-sheet/src/entities/battleCommand/api/battleCommandGraphApi.ts` を修正
-  - ❌ 現在: `fetch('/api/graph/battle-commands')`
-  - ✅ 修正後: `dbWorkerClient.request('battleCommand:create', data)`
+1. **playerCharacterRdbApi.ts**
+   ```typescript
+   // ❌ 現在の実装（fetch使用）
+   export const playerCharacterRdbApi = {
+     async create(data: PlayerCharacterFormData): Promise<SerializablePlayerCharacter> {
+       const response = await fetch(`${API_BASE_URL}/player-characters`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(data),
+       });
+       return response.json();
+     },
+     // ... その他のメソッド
+   };
 
-**参考実装:** `apps/scenario-editor/src/entities/scenario/api/scenarioApi.ts`
+   // ✅ 変換後（Worker使用）
+   import { dbWorkerClient } from '@/workers/dbWorkerClient';
+
+   export const playerCharacterRdbApi = {
+     create: (data: PlayerCharacterFormData) =>
+       dbWorkerClient.request('playerCharacter:create', data),
+     findAll: () =>
+       dbWorkerClient.request('playerCharacter:getList'),
+     findById: (id: string) =>
+       dbWorkerClient.request('playerCharacter:getById', { id }),
+     update: (id: string, data: UpdatePlayerCharacterData) =>
+       dbWorkerClient.request('playerCharacter:update', { id, ...data }),
+     delete: (id: string) =>
+       dbWorkerClient.request('playerCharacter:delete', { id }),
+   };
+   ```
+
+2. **playerCharacterGraphApi.ts**
+   ```typescript
+   // ❌ 現在の実装（fetch使用）
+   export const playerCharacterGraphApi = {
+     async create(id: string): Promise<void> {
+       const response = await fetch(`${API_BASE_URL}/graph/player-characters`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ id }),
+       });
+       // ...
+     },
+     // ...
+   };
+
+   // ✅ 変換後（Worker使用）
+   import { dbWorkerClient } from '@/workers/dbWorkerClient';
+
+   export const playerCharacterGraphApi = {
+     create: (id: string) =>
+       dbWorkerClient.request('playerCharacter:createNode', { id }),
+     delete: (id: string) =>
+       dbWorkerClient.request('playerCharacter:deleteNode', { id }),
+     getBattleCommands: (characterId: string) =>
+       dbWorkerClient.request('playerCharacter:getBattleCommands', { id: characterId }),
+   };
+   ```
+
+3. **battleCommandGraphApi.ts**
+   ```typescript
+   // ❌ 現在の実装（fetch使用）
+   export const battleCommandGraphApi = {
+     async create(data: BattleCommandFormData & { id: string }): Promise<GraphDbBattleCommandNode> {
+       const response = await fetch(`${API_BASE_URL}/graph/battle-commands`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(data),
+       });
+       return response.json();
+     },
+     // ...
+   };
+
+   // ✅ 変換後（Worker使用）
+   import { dbWorkerClient } from '@/workers/dbWorkerClient';
+
+   export const battleCommandGraphApi = {
+     create: (data: BattleCommandFormData) =>
+       dbWorkerClient.request('battleCommand:create', data),
+     checkDuplicate: (characterId: string, className: string, commandName: string) =>
+       dbWorkerClient.request('battleCommand:checkDuplicate', { characterId, className, commandName }),
+     linkToCharacter: (characterId: string, commandId: string, sortOrder: number) =>
+       dbWorkerClient.request('battleCommand:linkToCharacter', { characterId, commandId, sortOrder }),
+     unlinkFromCharacter: (characterId: string, commandId: string) =>
+       dbWorkerClient.request('battleCommand:unlinkFromCharacter', { characterId, commandId }),
+     updateSortOrder: (characterId: string, commandId: string, sortOrder: number) =>
+       dbWorkerClient.request('battleCommand:updateSortOrder', { characterId, commandId, sortOrder }),
+     delete: (commandId: string) =>
+       dbWorkerClient.request('battleCommand:delete', { id: commandId }),
+   };
+   ```
+
+##### 変換作業チェックリスト
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` 変換~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` 変換~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/api/battleCommandGraphApi.ts` 変換~~ ✅ **完了**
+- [x] ~~Lint・型チェック実行（`bun run lint`）~~ ✅ **完了**
+
+##### 追加で必要だった対応
+- [x] ~~`packages/rdb/src/index.ts`に`playerCharacterRepository`のエクスポート追加~~ ✅ **完了**
+- [x] ~~`packages/schema/src/playerCharacter.ts`にWorkerハンドラー用パース関数追加~~ ✅ **完了**
+  - `parsePlayerCharacterFormData`
+  - `parseUpdatePlayerCharacterData`
+  - `parsePlayerCharacterId`
+- [x] ~~`packages/schema/src/battleCommand.ts`にWorkerハンドラー用パース関数追加~~ ✅ **完了**
+  - `parseBattleCommandFormData`
+  - `parseBattleCommandId`
+  - `parseCheckDuplicateBattleCommandPayload`
+  - `parseUpdateSortOrderPayload`
+- [x] ~~`apps/character-sheet/src/workers/types.ts`作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/actions/battleCommandActions.ts`修正~~ ✅ **完了**
+  - ID生成をWorkerハンドラー側に移動
+
+##### 参考実装
+`apps/scenario-editor/src/entities/scenario/api/scenarioApi.ts`:
 ```typescript
 import { dbWorkerClient } from '@/workers/dbWorkerClient';
 
 export const scenarioApi = {
   getList: () => dbWorkerClient.request('scenario:getList'),
-  create: (params) => dbWorkerClient.request('scenario:create', params),
-  // ...
+  create: (params: { id: string; title: string }) =>
+    dbWorkerClient.request('scenario:create', params),
+  update: (id: string, data: { title: string }) =>
+    dbWorkerClient.request('scenario:update', { id, data }),
+  delete: (id: string) => dbWorkerClient.request('scenario:delete', { id }),
 };
 ```
+
+##### 注意点
+- Worker通信では、payloadが`unknown`型で渡されるため、各ハンドラーでパース関数を使ってバリデーション
+- `dbWorkerClient.request()`の戻り値の型は`GlobalHandlerMap`で自動推論される
+- fetch()のエラーハンドリング（response.okチェックなど）は不要（Workerハンドラー側でthrowされる）
 
 ### フェーズ5: UI層
 

@@ -1,4 +1,3 @@
-import { generateUUID } from '@echo-500/utility';
 import { battleCommandGraphApi } from '../api/battleCommandGraphApi';
 import type {
   BattleCommandFormData,
@@ -7,13 +6,11 @@ import type {
 
 /**
  * BattleCommandノードを作成（リンクはしない）
+ * IDはWorkerハンドラー側で生成される
  */
 export const createBattleCommandNode = async (
   data: BattleCommandFormData,
-): Promise<GraphDbBattleCommandNode> => {
-  const id = generateUUID();
-  return battleCommandGraphApi.create({ id, ...data });
-};
+): Promise<GraphDbBattleCommandNode> => battleCommandGraphApi.create(data);
 
 /**
  * 重複チェック

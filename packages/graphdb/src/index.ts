@@ -20,3 +20,5 @@ export { imageGraphRepository } from './queries/imageRepository';
 export { exportScenarioGraph } from './queries/exportRepository';
 export { importScenarioGraph } from './queries/importRepository';
 export { setItem, getItem, removeItem, clear } from './indexedDBStorage';
+export { battleCommandGraphRepository } from './queries/battleCommandRepository';
+export { playerCharacterGraphRepository } from './queries/playerCharacterRepository';
