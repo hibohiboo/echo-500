@@ -30,9 +30,6 @@ export function GlossaryPage() {
               </p>
               <p className="term-description">
                 シナリオは、プレイヤーが体験する物語の骨格を提供する。
-                ただし、シナリオ通りに進む必要はなく、プレイヤーの選択やGMの判断によって自由に変化していく。
-                Echo:500では、コンストラクション用のアーキタイプや、フルスクラッチでの自作シナリオなど、
-                多様なシナリオ製作手法が用意されている。
               </p>
             </div>
           </div>
@@ -62,15 +59,11 @@ export function GlossaryPage() {
             </h2>
             <div className="term-content">
               <p className="term-definition">
-                ゲームを実際に遊ぶ、一回のプレイのことだ。
+                ゲームを実際に遊ぶ、一回のプレイのこと。
                 GMとプレイヤーが集まり、シナリオに基づいて物語を進めていく。
               </p>
               <p className="term-description">
                 セッションは、開始から終了までの一連のプレイを指す。
-                通常、数時間から半日程度の時間をかけて行われる。
-                オンラインセッション、オフラインセッション、ソロセッションなど、
-                様々な形式でセッションを開催できる。
-                一つのシナリオを複数回のセッションに分けて遊ぶこともできる。
               </p>
             </div>
           </div>
@@ -89,8 +82,6 @@ export function GlossaryPage() {
                 自分のキャラクター（PC）を通して、荒廃した世界を探索し、
                 選択を重ね、物語を紡いでいく。
                 プレイヤーの判断と行動が、物語の展開を大きく左右する。
-                複数のプレイヤーが協力してプレイすることもあれば、
-                一人でソロプレイを楽しむこともできる。
               </p>
             </div>
           </div>
@@ -116,7 +107,8 @@ export function GlossaryPage() {
 
           <div className="term-card">
             <h2 className="term-title">
-              <span className="term-icon">◆</span> ノンプレイヤーキャラクター（NPC）
+              <span className="term-icon">◆</span>{' '}
+              ノンプレイヤーキャラクター（NPC）
             </h2>
             <div className="term-content">
               <p className="term-definition">
