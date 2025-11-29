@@ -5,6 +5,106 @@
 `apps/rulebook` アプリケーションにプレイヤーキャラクター管理機能を追加する。
 既存の `apps/scenario-editor` と同様に、RDB + GraphDB の組み合わせでデータを管理する。
 
+## 実装フィードバック（2025-11-29）
+
+### フェーズ1完了: スキーマ層
+✅ **完了済み**
+
+#### 実装内容
+1. **PlayerCharacterSchema** ([packages/schema/src/playerCharacter.ts](../packages/schema/src/playerCharacter.ts))
+   - `PlayerCharacterSchema`: Date型（UI層用）
+   - `SerializablePlayerCharacterSchema`: string型（API/Redux用）
+   - `PlayerCharacterFormDataSchema`: フォーム入力用
+   - 変換関数、パース関数、ペイロードスキーマを完備
+
+2. **BattleCommandSchema** ([packages/schema/src/battleCommand.ts](../packages/schema/src/battleCommand.ts))
+   - **設計変更**: 既存の`packages/frontend-common/src/types/battleCommand.ts`に準拠
+   - 当初計画の簡易的な構造から、実際のルールブックで使用される詳細な構造に変更
+
+#### BattleCommandスキーマの実装詳細
+
+**変更前（計画）:**
+```typescript
+{
+  id: string,
+  name: string,
+  description: string,
+  commandType: 'attack' | 'defense' | 'support' | 'special'
+}
+```
+
+**変更後（実装）:**
+```typescript
+{
+  id: string,
+  class: string,        // クラス名（職業など）
+  name: string,
+  cp: number,           // コストポイント
+  timing: string,       // タイミング
+  cost: string,         // コスト
+  range: string,        // 射程
+  effect: string,       // 効果
+  target: string,       // 対象
+  flavor: string,       // フレーバーテキスト
+  tags: string[],       // タグ
+  details: string       // 詳細説明
+}
+```
+
+#### Valibotリファクタリング（冗長性削減）
+```typescript
+// 基本スキーマ
+export const BattleCommandSchema = v.object({ ... });
+
+// 拡張: sortOrderを追加（スプレッド構文使用）
+export const PlayerCharacterBattleCommandSchema = v.object({
+  ...BattleCommandSchema.entries,
+  sortOrder: v.number(),
+});
+
+// 除外: idを除外（v.omit使用）
+export const BattleCommandFormDataSchema = v.omit(BattleCommandSchema, ['id']);
+```
+
+#### 既存コード更新
+- `packages/frontend-common/src/types/battleCommand.ts`を`@echo-500/schema`の型を使用するように変更
+- `packages/schema/src/index.ts`に`playerCharacter`と`battleCommand`をエクスポート追加
+
+#### GraphDBスキーマへの影響
+BattleCommandノードの構造を以下のように更新する必要があります:
+
+**変更前:**
+```cypher
+CREATE NODE TABLE BattleCommand (
+  id STRING,
+  name STRING,
+  description STRING,
+  commandType STRING,
+  PRIMARY KEY (id)
+)
+```
+
+**変更後:**
+```cypher
+CREATE NODE TABLE BattleCommand (
+  id STRING,
+  class STRING,
+  name STRING,
+  cp INT64,
+  timing STRING,
+  cost STRING,
+  range STRING,
+  effect STRING,
+  target STRING,
+  flavor STRING,
+  tags STRING,      -- JSON文字列として保存
+  details STRING,
+  PRIMARY KEY (id)
+)
+```
+
+**注意**: GraphDBではJSON配列を直接サポートしないため、`tags`はJSON文字列として保存し、アプリケーション層でパース/シリアライズを行う。
+
 ## 要件定義
 
 ### 機能要件
@@ -55,12 +155,21 @@ CREATE NODE TABLE PlayerCharacter (
 ```cypher
 CREATE NODE TABLE BattleCommand (
   id STRING,
+  class STRING,        -- クラス名（職業など）
   name STRING,
-  description STRING,
-  commandType STRING,  -- 'attack', 'defense', 'support', 'special'
+  cp INT64,            -- コストポイント
+  timing STRING,       -- タイミング
+  cost STRING,         -- コスト
+  range STRING,        -- 射程
+  effect STRING,       -- 効果
+  target STRING,       -- 対象
+  flavor STRING,       -- フレーバーテキスト
+  tags STRING,         -- タグ（JSON文字列）
+  details STRING,      -- 詳細説明
   PRIMARY KEY (id)
 )
 ```
+**Note**: `tags`はJSON配列を文字列化して保存（例: `"[\"tag1\", \"tag2\"]"`）
 
 #### HAS_BATTLE_COMMAND リレーション
 ```cypher
@@ -177,9 +286,17 @@ packages/ui/src/
 ### フェーズ1: スキーマ層
 
 #### 1-1. Schema定義
-- [ ] `packages/schema/src/playerCharacter.ts` 作成
+- [x] ~~`packages/schema/src/playerCharacter.ts` 作成~~ ✅ **完了**
   ```typescript
+  // Date型とstring型の両方のスキーマを定義
   export const PlayerCharacterSchema = v.object({
+    id: v.string(),
+    name: v.string(),
+    createdAt: v.date(),
+    updatedAt: v.date(),
+  });
+
+  export const SerializablePlayerCharacterSchema = v.object({
     id: v.string(),
     name: v.string(),
     createdAt: v.string(),
@@ -187,20 +304,40 @@ packages/ui/src/
   });
   ```
 
-- [ ] `packages/schema/src/battleCommand.ts` 作成
+- [x] ~~`packages/schema/src/battleCommand.ts` 作成~~ ✅ **完了**
   ```typescript
+  // 既存のBattleCommandCardData構造に準拠
   export const BattleCommandSchema = v.object({
     id: v.string(),
+    class: v.string(),
     name: v.string(),
-    description: v.string(),
-    commandType: v.picklist(['attack', 'defense', 'support', 'special']),
+    cp: v.number(),
+    timing: v.string(),
+    cost: v.string(),
+    range: v.string(),
+    effect: v.string(),
+    target: v.string(),
+    flavor: v.string(),
+    tags: v.array(v.string()),
+    details: v.string(),
   });
+
+  // Valibotのスプレッド構文とv.omitで冗長性を削減
+  export const PlayerCharacterBattleCommandSchema = v.object({
+    ...BattleCommandSchema.entries,
+    sortOrder: v.number(),
+  });
+
+  export const BattleCommandFormDataSchema = v.omit(BattleCommandSchema, ['id']);
   ```
+
+- [x] ~~`packages/schema/src/index.ts`にエクスポート追加~~ ✅ **完了**
+- [x] ~~`packages/frontend-common/src/types/battleCommand.ts`を更新~~ ✅ **完了**
 
 ### フェーズ2: データベース層（RDB）
 
 #### 2-1. RDB スキーマ追加
-- [ ] `packages/rdb/src/schema.ts` に `playerCharactersTable` 追加
+- [x] ~~`packages/rdb/src/schema.ts` に `playerCharactersTable` 追加~~ ✅ **完了**
   ```typescript
   export const playerCharactersTable = pgTable('player_characters', {
     id: uuid().primaryKey().defaultRandom(),

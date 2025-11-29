@@ -5,8 +5,6 @@ import * as v from 'valibot';
  * ルールブックで使用されるバトルコマンドカードのデータ構造
  */
 export const BattleCommandSchema = v.object({
-  /** バトルコマンドID */
-  id: v.string(),
   /** クラス名（職業など） */
   class: v.string(),
   /** コマンド名 */
@@ -33,10 +31,12 @@ export const BattleCommandSchema = v.object({
 
 /**
  * プレイヤーキャラクターのバトルコマンド（並び順付き）
- * BattleCommandSchemaを拡張してsortOrderを追加
+ * BattleCommandSchemaを拡張してidとsortOrderを追加
  */
 export const PlayerCharacterBattleCommandSchema = v.object({
   ...BattleCommandSchema.entries,
+  /** バトルコマンドID */
+  id: v.string(),
   /** 並び順 */
   sortOrder: v.number(),
 });
@@ -45,7 +45,10 @@ export const PlayerCharacterBattleCommandSchema = v.object({
  * バトルコマンド作成・更新用の入力データスキーマ
  * BattleCommandSchemaからidを除外
  */
-export const BattleCommandFormDataSchema = v.omit(BattleCommandSchema, ['id']);
+export const BattleCommandFormDataSchema = v.omit(
+  PlayerCharacterBattleCommandSchema,
+  ['id'],
+);
 
 /**
  * バトルコマンドの型

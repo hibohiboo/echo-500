@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
+    "@conarti/eslint-plugin-feature-sliced": "2.0.0-rc.3",
     "@eslint/config-inspector": "^1.4.2",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.1",
