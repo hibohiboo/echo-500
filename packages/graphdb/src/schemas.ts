@@ -71,6 +71,33 @@ export const graphDbSchemas = {
         PRIMARY KEY (id)
       )`,
     },
+    {
+      name: 'PlayerCharacter',
+      query: `
+      CREATE NODE TABLE PlayerCharacter (
+        id STRING,
+        PRIMARY KEY (id)
+      )`,
+    },
+    {
+      name: 'BattleCommand',
+      query: `
+      CREATE NODE TABLE BattleCommand (
+        id STRING,
+        class STRING,
+        name STRING,
+        cp INT64,
+        timing STRING,
+        cost STRING,
+        range STRING,
+        effect STRING,
+        target STRING,
+        flavor STRING,
+        tags STRING,
+        details STRING,
+        PRIMARY KEY (id)
+      )`,
+    },
   ],
   relationships: [
     {
@@ -166,6 +193,14 @@ export const graphDbSchemas = {
       CREATE REL TABLE HAS_IMAGE (
         FROM Character TO Image,
         isPrimary BOOL
+      )`,
+    },
+    {
+      name: 'HAS_BATTLE_COMMAND',
+      query: `
+      CREATE REL TABLE HAS_BATTLE_COMMAND (
+        FROM PlayerCharacter TO BattleCommand,
+        sortOrder INT64
       )`,
     },
   ],

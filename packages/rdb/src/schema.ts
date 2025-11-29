@@ -24,3 +24,19 @@ export const imagesTable = pgTable('images', {
 
 export type NewImage = typeof imagesTable.$inferInsert;
 export type Image = typeof imagesTable.$inferSelect;
+
+/**
+ * プレイヤーキャラクターテーブル
+ * コマンドや能力値の関連付けはGraphDBで管理
+ */
+export const playerCharactersTable = pgTable('player_characters', {
+  id: uuid().primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
+export type NewPlayerCharacter = typeof playerCharactersTable.$inferInsert;
+export type PlayerCharacter = typeof playerCharactersTable.$inferSelect;

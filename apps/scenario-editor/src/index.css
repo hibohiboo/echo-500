@@ -1,2 +1,2 @@
-@import '@trpg-scenario-maker/ui/tailwind.css';
+@import '@echo-500/ui/tailwind.css';
 @source "../../../packages/ui/**/*.{tsx}";

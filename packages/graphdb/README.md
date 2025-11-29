@@ -1,4 +1,4 @@
-# @trpg-scenario-maker/graphdb
+# @echo-500/graphdb
 
 GraphDB操作パッケージ（KùzuDB使用）
 

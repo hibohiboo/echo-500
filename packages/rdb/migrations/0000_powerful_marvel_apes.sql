@@ -1,16 +1,22 @@
+CREATE TABLE "images" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"data_url" text NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "player_characters" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"name" text NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "scenarios" (
 	"id" uuid PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp NOT NULL
 );
-
-CREATE TABLE "images" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"data_url" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL
-);
-
 
 INSERT INTO "scenarios" ("id", "title", "created_at", "updated_at")
 VALUES ('3f81c321-1941-4247-9f5d-37bb6a9e8e45', 'サンプルシナリオ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

@@ -168,37 +168,41 @@ shared/
 ### 各層の責務
 
 #### Entity層
+
 - **責務**: ドメインモデルのCRUD操作、API通信、Redux状態管理
 - **含めるもの**: 単一エンティティに特化したhooks、API、Redux slices
 - **例**: `useCharacterList()`, `characterGraphApi.create()`
 
 #### Feature層
+
 - **責務**: ビジネスロジックの統合、基本的なUI構造
 - **含めるもの**: 複数のentity hooksを組み合わせたカスタムフック、基本的なリスト/フォーム/モーダルUI
 - **依存可能**: entities のみ（widgetは使えない）
 - **例**: `useCharacterManagement()` - キャラクターCRUD + 関係性管理を統合
 
 #### Widget層
+
 - **責務**: 複雑なUI、複数のfeatureの組み合わせ、高度なビジュアライゼーション
 - **含めるもの**: 複数のfeatureを組み合わせた複合UI、グラフ表示、ギャラリー
 - **依存可能**: feature, entities
 - **例**: `TabNavigationBar` - 汎用タブナビゲーション
 
 #### Page層
+
 - **責務**: ルーティング、レイアウト、widget/featureの組み立て
 - **原則**: widgetを優先的に使い、シンプルなUIはfeatureを直接使う
 - **依存可能**: widget, feature, entities
 
 ### リファクタリング成果（scenarioDetailページ）
 
-| 項目 | リファクタ前 | リファクタ後 |
-|------|-------------|-------------|
-| Page.tsx | 175行, 77 props | 65行, 0 props |
-| 最大hook行数 | 533行（GOD HOOK） | 約120行/feature |
-| feature層 | なし | 3 features |
-| widget層 | なし | 1 widget |
-| 再利用性 | 低い | 高い（feature単位） |
-| テスト容易性 | 困難 | 容易（feature独立） |
+| 項目         | リファクタ前      | リファクタ後        |
+| ------------ | ----------------- | ------------------- |
+| Page.tsx     | 175行, 77 props   | 65行, 0 props       |
+| 最大hook行数 | 533行（GOD HOOK） | 約120行/feature     |
+| feature層    | なし              | 3 features          |
+| widget層     | なし              | 1 widget            |
+| 再利用性     | 低い              | 高い（feature単位） |
+| テスト容易性 | 困難              | 容易（feature独立） |
 
 ## React Routerのloaderパターン
 
@@ -288,11 +292,11 @@ export const useScenarioDetailPage = () => {
 
 ### 配置パターンの選択基準
 
-| パターン | 適用ケース |
-|---------|-----------|
-| **ページディレクトリ内** | ページ専用のloaderロジック（推奨） |
-| **entitiesディレクトリ内** | 複数ページで共通利用するloaderロジック |
-| **routesディレクトリ内** | ルーティング関連ロジックを集約したい場合 |
+| パターン                   | 適用ケース                               |
+| -------------------------- | ---------------------------------------- |
+| **ページディレクトリ内**   | ページ専用のloaderロジック（推奨）       |
+| **entitiesディレクトリ内** | 複数ページで共通利用するloaderロジック   |
+| **routesディレクトリ内**   | ルーティング関連ロジックを集約したい場合 |
 
 ## Web Workerアーキテクチャ詳細
 
@@ -380,7 +384,7 @@ export const dbWorkerClient = new DBWorkerClient();
 Worker内で実行されるメインファイル。ハンドラーを登録し、メッセージをディスパッチします。
 
 ```typescript
-import { runMigrate } from '@trpg-scenario-maker/rdb/db/runMigrate';
+import { runMigrate } from '@echo-500/rdb/db/runMigrate';
 import { scenarioHandlers } from '@/entities/scenario/workers/scenarioHandlers';
 
 // ハンドラーマップ
@@ -427,8 +431,8 @@ self.addEventListener('message', async (event) => {
 各エンティティのハンドラーを配列で定義します。循環依存を避けるための設計です。
 
 ```typescript
-import { scenarioRepository } from '@trpg-scenario-maker/rdb';
-import type { NewScenario } from '@trpg-scenario-maker/rdb/schema';
+import { scenarioRepository } from '@echo-500/rdb';
+import type { NewScenario } from '@echo-500/rdb/schema';
 
 export const scenarioHandlers = [
   {
@@ -479,7 +483,7 @@ Workerクライアントを呼び出す型安全なAPI層を提供します。
 
 ```typescript
 import { dbWorkerClient } from '@/workers/dbWorkerClient';
-import type { Scenario } from '@trpg-scenario-maker/rdb/schema';
+import type { Scenario } from '@echo-500/rdb/schema';
 
 export const scenarioApi = {
   getList: () => dbWorkerClient.request<Scenario[]>('scenario:getList'),
@@ -780,7 +784,7 @@ export const scenarioGraphRepository = {
 **GraphDBハンドラー ([scenarioGraphHandlers.ts](src/entities/scenario/workers/scenarioGraphHandlers.ts)):**
 
 ```typescript
-import { scenarioGraphRepository } from '@trpg-scenario-maker/graphdb';
+import { scenarioGraphRepository } from '@echo-500/graphdb';
 
 export const scenarioGraphHandlers = [
   {

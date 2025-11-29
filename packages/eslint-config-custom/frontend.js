@@ -1,27 +1,16 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import featureSliced from '@conarti/eslint-plugin-feature-sliced';
 import { defineConfig } from 'eslint/config';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import customConfig from './defaults.js';
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
-
-const compat = new FlatCompat({
-  baseDirectory: dirname,
-});
-
 export default defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx'],
     ignores: ['dist', 'public'],
     extends: [
-      ...compat.extends(
-        'plugin:@conarti/eslint-plugin-feature-sliced/recommended',
-      ),
+      featureSliced(),
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       ...customConfig,
