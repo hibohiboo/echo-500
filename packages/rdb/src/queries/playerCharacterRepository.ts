@@ -1,3 +1,4 @@
+import { eq, desc } from 'drizzle-orm';
 import { playerCharactersTable, type NewPlayerCharacter } from '../schema';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 
@@ -16,5 +17,52 @@ export const createPlayerCharacterRepository = (
       .values(data)
       .returning();
     return result;
+  },
+
+  /**
+   * 全プレイヤーキャラクターを取得（更新日時の降順）
+   */
+  async findAll() {
+    return database
+      .select({
+        id: playerCharactersTable.id,
+        name: playerCharactersTable.name,
+        createdAt: playerCharactersTable.createdAt,
+        updatedAt: playerCharactersTable.updatedAt,
+      })
+      .from(playerCharactersTable)
+      .orderBy(desc(playerCharactersTable.updatedAt));
+  },
+
+  /**
+   * IDでプレイヤーキャラクターを取得
+   */
+  async findById(id: string) {
+    const [result] = await database
+      .select()
+      .from(playerCharactersTable)
+      .where(eq(playerCharactersTable.id, id));
+    return result ?? null;
+  },
+
+  /**
+   * プレイヤーキャラクターを更新
+   */
+  async update(id: string, data: { name: string }) {
+    const [result] = await database
+      .update(playerCharactersTable)
+      .set({ name: data.name, updatedAt: new Date() })
+      .where(eq(playerCharactersTable.id, id))
+      .returning();
+    return result;
+  },
+
+  /**
+   * プレイヤーキャラクターを削除
+   */
+  async delete(id: string) {
+    await database
+      .delete(playerCharactersTable)
+      .where(eq(playerCharactersTable.id, id));
   },
 });
