@@ -1,4 +1,4 @@
-import { initializeDatabase } from '@echo-500/graphdb';
+import { initializeDatabase, graphDbSchemas, executeQuery } from '@echo-500/graphdb';
 import { runMigrate } from '@echo-500/rdb/db/runMigrate';
 import { battleCommandGraphHandlers } from '@/entities/battleCommand/workers/battleCommandGraphHandlers';
 import { playerCharacterGraphHandlers } from '@/entities/playerCharacter/workers/playerCharacterGraphHandlers';
@@ -34,6 +34,12 @@ handlers.set('migrate', async () => {
     console.log('[DB Worker] Initializing GraphDB...');
     await initializeDatabase();
     console.log('[DB Worker] GraphDB initialized successfully');
+
+    // GraphDBスキーマ作成
+    console.log('[DB Worker] Creating GraphDB schemas...');
+    const schemas = [...graphDbSchemas.nodes, ...graphDbSchemas.relationships];
+    await Promise.all(schemas.map((schema) => executeQuery(schema.query)));
+    console.log('[DB Worker] GraphDB schemas created successfully');
 
     // RDBマイグレーション
     console.log('[DB Worker] Running RDB migration...');

@@ -16,8 +16,19 @@ export const battleCommandGraphHandlers = [
     handler: async (payload: unknown) => {
       const data = parseBattleCommandFormData(payload);
       const id = generateUUID();
+      console.log('[BattleCommand Worker] Creating command with ID:', id);
+      console.log('[BattleCommand Worker] Data:', data);
+
       const result = await battleCommandGraphRepository.create({ id, ...data });
-      const commands = parseToGraphDbBattleCommandNodeList([result]);
+      console.log('[BattleCommand Worker] Repository result:', result);
+
+      const commands = parseToGraphDbBattleCommandNodeList(result);
+      console.log('[BattleCommand Worker] Parsed commands:', commands);
+
+      if (!commands || commands.length === 0) {
+        throw new Error('Failed to create battle command: empty result');
+      }
+
       return { data: commands[0] };
     },
   },
