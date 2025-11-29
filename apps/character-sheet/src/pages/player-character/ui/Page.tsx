@@ -41,18 +41,13 @@ export default function PlayerCharacterPage() {
     id: string;
     name: string;
   }) => {
-    // Find full character object from the list
-    const fullCharacter = characters.find((c) => c.id === clickedCharacter.id);
-    if (!fullCharacter) return;
-
     if (
       window.confirm(
-        `プレイヤーキャラクター「${fullCharacter.name}」を削除しますか？`,
+        `プレイヤーキャラクター「${clickedCharacter.name}」を削除しますか？`,
       )
     ) {
-      deleteCharacterHook.open(fullCharacter);
-      await deleteCharacterHook.submit();
-      if (selectedCharacterId === fullCharacter.id) {
+      await deleteCharacterHook.submit(clickedCharacter.id);
+      if (selectedCharacterId === clickedCharacter.id) {
         setSelectedCharacterId(null);
       }
     }

@@ -33,12 +33,16 @@ export const useDeletePlayerCharacter = () => {
     dispatch(closeDeleteModal());
   }, [dispatch]);
 
-  const submit = useCallback(async () => {
-    if (!deletingCharacter) {
-      throw new Error('削除対象が選択されていません');
-    }
-    await dispatch(deletePlayerCharacter(deletingCharacter.id));
-  }, [dispatch, deletingCharacter]);
+  const submit = useCallback(
+    async (characterId?: string) => {
+      const targetId = characterId ?? deletingCharacter?.id;
+      if (!targetId) {
+        throw new Error('削除対象が選択されていません');
+      }
+      await dispatch(deletePlayerCharacter(targetId));
+    },
+    [dispatch, deletingCharacter],
+  );
 
   return {
     isOpen,
