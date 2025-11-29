@@ -222,4 +222,119 @@ describe('battleCommandGraphRepository', () => {
       expect(afterDelete).toHaveLength(0);
     });
   });
+
+  describe('updateSortOrder', () => {
+    it('バトルコマンドの並び順を更新できる', async () => {
+      // Arrange（準備）
+      const characterId = generateUUID();
+      const commandId = generateUUID();
+
+      // PlayerCharacter作成
+      await executeQuery(`
+        CREATE (pc:PlayerCharacter {id: '${characterId}'})
+      `);
+
+      // BattleCommand作成
+      await battleCommandGraphRepository.create({
+        id: commandId,
+        class: '戦士',
+        name: 'テストコマンド',
+        cp: 1,
+        timing: 'メイン',
+        cost: '1',
+        range: '近接',
+        effect: '効果',
+        target: '単体',
+        flavor: 'フレーバー',
+        tags: ['攻撃'],
+        details: '詳細',
+      });
+
+      // リレーション作成（sortOrder: 0）
+      await battleCommandGraphRepository.linkToCharacter(
+        characterId,
+        commandId,
+        0,
+      );
+
+      // Act（実行）sortOrderを10に更新
+      await battleCommandGraphRepository.updateSortOrder(
+        characterId,
+        commandId,
+        10,
+      );
+
+      // Assert（検証）
+      const result = await executeQuery(`
+        MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_BATTLE_COMMAND]->(bc:BattleCommand {id: '${commandId}'})
+        RETURN r.sortOrder AS sortOrder
+      `);
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(1);
+      expect((result as { sortOrder: number }[])[0].sortOrder).toBe(10);
+    });
+  });
+
+  describe('delete', () => {
+    it('BattleCommandノードとそのリレーションを削除できる', async () => {
+      // Arrange（準備）
+      const characterId = generateUUID();
+      const commandId = generateUUID();
+
+      // PlayerCharacter作成
+      await executeQuery(`
+        CREATE (pc:PlayerCharacter {id: '${characterId}'})
+      `);
+
+      // BattleCommand作成
+      await battleCommandGraphRepository.create({
+        id: commandId,
+        class: '戦士',
+        name: 'テストコマンド',
+        cp: 1,
+        timing: 'メイン',
+        cost: '1',
+        range: '近接',
+        effect: '効果',
+        target: '単体',
+        flavor: 'フレーバー',
+        tags: ['攻撃'],
+        details: '詳細',
+      });
+
+      // リレーション作成
+      await battleCommandGraphRepository.linkToCharacter(
+        characterId,
+        commandId,
+        0,
+      );
+
+      // 削除前に存在確認
+      const beforeDelete = await executeQuery(`
+        MATCH (bc:BattleCommand {id: '${commandId}'})
+        RETURN bc.id AS id
+      `);
+      expect(Array.isArray(beforeDelete)).toBe(true);
+      expect(beforeDelete).toHaveLength(1);
+
+      // Act（実行）
+      await battleCommandGraphRepository.delete(commandId);
+
+      // Assert（検証）
+      const afterDelete = await executeQuery(`
+        MATCH (bc:BattleCommand {id: '${commandId}'})
+        RETURN bc.id AS id
+      `);
+      expect(Array.isArray(afterDelete)).toBe(true);
+      expect(afterDelete).toHaveLength(0);
+
+      // リレーションも削除されていることを確認
+      const relationCheck = await executeQuery(`
+        MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_BATTLE_COMMAND]->(bc:BattleCommand {id: '${commandId}'})
+        RETURN r
+      `);
+      expect(Array.isArray(relationCheck)).toBe(true);
+      expect(relationCheck).toHaveLength(0);
+    });
+  });
 });
