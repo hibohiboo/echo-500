@@ -1,6 +1,9 @@
 import { eq, desc } from 'drizzle-orm';
 import { playerCharactersTable, type NewPlayerCharacter } from '../schema';
-import type { UpdatePlayerCharacterData } from '@echo-500/schema';
+import type {
+  PlayerCharacter,
+  UpdatePlayerCharacterData,
+} from '@echo-500/schema';
 import type { PgliteDatabase } from 'drizzle-orm/pglite';
 
 /**
@@ -12,7 +15,7 @@ export const createPlayerCharacterRepository = (
   /**
    * プレイヤーキャラクターを作成
    */
-  async create(data: NewPlayerCharacter) {
+  async create(data: NewPlayerCharacter): Promise<PlayerCharacter> {
     const [result] = await database
       .insert(playerCharactersTable)
       .values(data)
@@ -23,7 +26,7 @@ export const createPlayerCharacterRepository = (
   /**
    * 全プレイヤーキャラクターを取得（更新日時の降順）
    */
-  async findAll() {
+  async findAll(): Promise<PlayerCharacter[]> {
     return database
       .select({
         id: playerCharactersTable.id,
@@ -38,7 +41,7 @@ export const createPlayerCharacterRepository = (
   /**
    * IDでプレイヤーキャラクターを取得
    */
-  async findById(id: string) {
+  async findById(id: string): Promise<PlayerCharacter> {
     const [result] = await database
       .select()
       .from(playerCharactersTable)
@@ -49,7 +52,10 @@ export const createPlayerCharacterRepository = (
   /**
    * プレイヤーキャラクターを更新
    */
-  async update(id: string, data: UpdatePlayerCharacterData) {
+  async update(
+    id: string,
+    data: UpdatePlayerCharacterData,
+  ): Promise<PlayerCharacter> {
     const [result] = await database
       .update(playerCharactersTable)
       .set({ name: data.name, updatedAt: new Date() })
