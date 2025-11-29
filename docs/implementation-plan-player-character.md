@@ -2,7 +2,7 @@
 
 ## 概要
 
-`apps/rulebook` アプリケーションにプレイヤーキャラクター管理機能を追加する。
+`apps/character-sheet` アプリケーションにプレイヤーキャラクター管理機能を追加する。
 既存の `apps/scenario-editor` と同様に、RDB + GraphDB の組み合わせでデータを管理する。
 
 ## 実装フィードバック（2025-11-29）
@@ -238,57 +238,50 @@ CREATE REL TABLE HAS_BATTLE_COMMAND (
 ### ディレクトリ構造（新規作成）
 
 ```
-apps/rulebook/
+apps/character-sheet/
 ├── src/
 │   ├── app/
 │   │   ├── router.tsx              # ルーティング定義（更新）
-│   │   └── store/                  # Redux store（新規作成）
+│   │   └── store/                  # Redux store（既存）
 │   │       ├── index.ts
 │   │       └── rootReducer.ts
 │   │
 │   ├── entities/                   # Entity層（新規作成）
 │   │   ├── playerCharacter/
 │   │   │   ├── actions/
-│   │   │   │   └── playerCharacterActions.ts
+│   │   │   │   ├── playerCharacterActions.ts
+│   │   │   │   └── playerCharacterBattleCommandActions.ts
 │   │   │   ├── api/
 │   │   │   │   ├── playerCharacterRdbApi.ts
 │   │   │   │   └── playerCharacterGraphApi.ts
 │   │   │   ├── hooks/
 │   │   │   │   ├── usePlayerCharacterList.ts
 │   │   │   │   ├── useCreatePlayerCharacter.ts
+│   │   │   │   ├── useUpdatePlayerCharacter.ts
 │   │   │   │   └── useDeletePlayerCharacter.ts
 │   │   │   ├── model/
 │   │   │   │   └── playerCharacterSlice.ts
-│   │   │   ├── workers/
-│   │   │   │   ├── playerCharacterRdbHandlers.ts
-│   │   │   │   └── playerCharacterGraphHandlers.ts
 │   │   │   └── index.ts
 │   │   │
 │   │   └── battleCommand/
 │   │       ├── actions/
-│   │       │   └── battleCommandActions.ts
+│   │       │   └── battleCommandActions.ts    # 純粋なAPI操作のみ
 │   │       ├── api/
 │   │       │   └── battleCommandGraphApi.ts
-│   │       ├── hooks/
-│   │       │   ├── useBattleCommandList.ts
-│   │       │   ├── useCreateBattleCommand.ts
-│   │       │   └── useDeleteBattleCommand.ts
 │   │       ├── model/
 │   │       │   └── battleCommandSlice.ts
-│   │       ├── workers/
-│   │       │   └── battleCommandGraphHandlers.ts
 │   │       └── index.ts
 │   │
-│   ├── feature/                    # Feature層（新規作成）
-│   │   └── playerCharacterManagement/
+│   ├── features/                   # Feature層（新規作成）
+│   │   └── playerCharacterBattleCommandManagement/
+│   │       ├── actions/
+│   │       │   └── battleCommandManagementActions.ts  # 統合ビジネスロジック
 │   │       ├── hooks/
-│   │       │   └── usePlayerCharacterManagement.ts
-│   │       ├── ui/
-│   │       │   └── PlayerCharacterTabContent.tsx
+│   │       │   └── useBattleCommandManagement.ts
 │   │       └── index.ts
 │   │
 │   └── pages/
-│       └── player-character/       # 新規ページ
+│       └── player-character/       # 新規ページ（予定）
 │           ├── ui/
 │           │   └── Page.tsx
 │           └── index.ts
@@ -389,6 +382,7 @@ packages/ui/src/
 - [x] ~~`packages/frontend-common/src/types/battleCommand.ts`を更新~~ ✅ **完了**
 
 ### フェーズ2: データベース層（RDB）
+✅ **完了済み**
 
 #### 2-1. RDB スキーマ追加
 - [x] ~~`packages/rdb/src/schema.ts` に `playerCharactersTable` 追加~~ ✅ **完了**
@@ -404,11 +398,11 @@ packages/ui/src/
   ```
 
 #### 2-2. マイグレーション生成
-- [ ] `bun run db:generate` 実行
-- [ ] 生成されたマイグレーションファイル確認
+- [x] ~~`bun run db:generate` 実行~~ ✅ **完了**
+- [x] ~~生成されたマイグレーションファイル確認~~ ✅ **完了**
 
 #### 2-3. Repository実装
-- [ ] `packages/rdb/src/queries/playerCharacterRepository.ts` 作成
+- [x] ~~`packages/rdb/src/queries/playerCharacterRepository.ts` 作成~~ ✅ **完了**
   - `create(name: string): Promise<PlayerCharacter>`
   - `findAll(): Promise<PlayerCharacter[]>`
   - `findById(id: string): Promise<PlayerCharacter | null>`
@@ -416,59 +410,81 @@ packages/ui/src/
   - `delete(id: string): Promise<void>`
 
 #### 2-4. ユニットテスト
-- [ ] `packages/rdb/src/queries/playerCharacterRepository.test.ts` 作成
+- [x] ~~`packages/rdb/src/queries/playerCharacterRepository.test.ts` 作成~~ ✅ **完了**
 
 ### フェーズ3: データベース層（GraphDB）
+✅ **完了済み**
 
 #### 3-1. GraphDB スキーマ追加
-- [ ] `packages/graphdb/src/schemas.ts` に以下を追加
+- [x] ~~`packages/graphdb/src/schemas.ts` に以下を追加~~ ✅ **完了**
   - `PlayerCharacter` ノード
   - `BattleCommand` ノード
   - `HAS_BATTLE_COMMAND` リレーション
 
 #### 3-2. Repository実装
-- [ ] `packages/graphdb/src/queries/playerCharacterRepository.ts` 作成
-  - `create(id: string, name: string): Promise<void>`
+- [x] ~~`packages/graphdb/src/queries/playerCharacterRepository.ts` 作成~~ ✅ **完了**
+  - `create(id: string): Promise<void>`
   - `findById(id: string): Promise<PlayerCharacter | null>`
-  - `update(id: string, name: string): Promise<void>`
   - `delete(id: string): Promise<void>`
-  - `getBattleCommands(characterId: string): Promise<BattleCommand[]>`
+  - `getBattleCommands(characterId: string): Promise<PlayerCharacterBattleCommand[]>`
 
-- [ ] `packages/graphdb/src/queries/battleCommandRepository.ts` 作成
-  - `create(params: CreateBattleCommandParams): Promise<BattleCommand>` - ID発番してBattleCommandノード作成
+- [x] ~~`packages/graphdb/src/queries/battleCommandRepository.ts` 作成~~ ✅ **完了**
+  - `create(params: CreateBattleCommandParams): Promise<GraphDbBattleCommandNode>` - ID発番してBattleCommandノード作成
   - `checkDuplicate(characterId: string, className: string, commandName: string): Promise<boolean>` - 重複チェック
   - `linkToCharacter(characterId: string, commandId: string, sortOrder: number): Promise<void>` - HAS_BATTLE_COMMANDリレーション作成
   - `unlinkFromCharacter(characterId: string, commandId: string): Promise<void>`
   - `updateSortOrder(characterId: string, commandId: string, sortOrder: number): Promise<void>`
+  - `delete(commandId: string): Promise<void>`
 
 #### 3-3. ユニットテスト
-- [ ] `packages/graphdb/src/queries/playerCharacterRepository.test.ts` 作成
-- [ ] `packages/graphdb/src/queries/battleCommandRepository.test.ts` 作成
+- [x] ~~`packages/graphdb/src/queries/playerCharacterRepository.test.ts` 作成~~ ✅ **完了** (5 tests passed)
+- [x] ~~`packages/graphdb/src/queries/battleCommandRepository.test.ts` 作成~~ ✅ **完了** (7 tests passed)
 
 ### フェーズ4: フロントエンド Entity層
+✅ **完了済み**
+
+#### 設計変更: Feature-Sliced Design準拠
+**重要な設計原則:**
+- Entity層は**単一エンティティの純粋なCRUD操作のみ**
+- Entity層同士の直接インポートは**禁止**
+- 複数entityを組み合わせたビジネスロジックは**Feature層**で実装
 
 #### 4-1. API層実装
-- [ ] `apps/rulebook/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` 作成
-- [ ] `apps/rulebook/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` 作成
-- [ ] `apps/rulebook/src/entities/battleCommand/api/battleCommandGraphApi.ts` 作成
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/api/battleCommandGraphApi.ts` 作成~~ ✅ **完了**
 
 #### 4-2. Redux State管理
-- [ ] `apps/rulebook/src/entities/playerCharacter/model/playerCharacterSlice.ts` 作成
-- [ ] `apps/rulebook/src/entities/battleCommand/model/battleCommandSlice.ts` 作成
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/model/playerCharacterSlice.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/model/battleCommandSlice.ts` 作成~~ ✅ **完了**
 
 #### 4-3. Actions実装
-- [ ] `apps/rulebook/src/entities/playerCharacter/actions/playerCharacterActions.ts` 作成
-- [ ] `apps/rulebook/src/entities/battleCommand/actions/battleCommandActions.ts` 作成
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/actions/playerCharacterActions.ts` 作成~~ ✅ **完了**
+  - プレイヤーキャラクターのCRUD操作（Redux操作を含む）
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/actions/playerCharacterBattleCommandActions.ts` 作成~~ ✅ **完了**
+  - バトルコマンド取得（**API操作のみ、Redux操作なし**）
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/actions/battleCommandActions.ts` 作成~~ ✅ **完了**
+  - バトルコマンドノード操作（**純粋なAPI操作のみ、Redux操作なし**）
 
 #### 4-4. Hooks実装
-- [ ] `apps/rulebook/src/entities/playerCharacter/hooks/usePlayerCharacterList.ts` 作成
-- [ ] `apps/rulebook/src/entities/playerCharacter/hooks/useCreatePlayerCharacter.ts` 作成
-- [ ] `apps/rulebook/src/entities/battleCommand/hooks/useBattleCommandList.ts` 作成
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/hooks/usePlayerCharacterList.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/hooks/useCreatePlayerCharacter.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/hooks/useUpdatePlayerCharacter.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/hooks/useDeletePlayerCharacter.ts` 作成~~ ✅ **完了**
 
-#### 4-5. Workers実装
-- [ ] `apps/rulebook/src/entities/playerCharacter/workers/playerCharacterRdbHandlers.ts` 作成
-- [ ] `apps/rulebook/src/entities/playerCharacter/workers/playerCharacterGraphHandlers.ts` 作成
-- [ ] `apps/rulebook/src/entities/battleCommand/workers/battleCommandGraphHandlers.ts` 作成
+#### 4-5. Feature層実装（新規追加）
+- [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/actions/battleCommandManagementActions.ts` 作成~~ ✅ **完了**
+  - `fetchBattleCommands()` - playerCharacter API + battleCommand Redux更新
+  - `createAndLinkBattleCommand()` - battleCommand作成 + リンク + Redux更新
+  - `unlinkBattleCommand()` - リンク解除 + Redux更新
+  - `deleteBattleCommand()` - ノード削除 + Redux更新
+  - `updateBattleCommandSortOrder()` - 並び順更新 + Redux更新
+- [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/hooks/useBattleCommandManagement.ts` 作成~~ ✅ **完了**
+
+#### 4-6. index.tsエクスポート整理
+- [x] ~~`apps/character-sheet/src/entities/playerCharacter/index.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/entities/battleCommand/index.ts` 作成~~ ✅ **完了**
+- [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/index.ts` 作成~~ ✅ **完了**
 
 ### フェーズ5: UI層
 
