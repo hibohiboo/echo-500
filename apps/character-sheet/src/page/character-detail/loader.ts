@@ -1,9 +1,7 @@
 import { getCharacter } from '@/entities/character';
 import type { LoaderFunctionArgs } from 'react-router';
 
-export const characterDetailLoader = async ({
-  params,
-}: LoaderFunctionArgs) => {
+export const characterDetailLoader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params;
 
   if (!id) {

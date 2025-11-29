@@ -10,7 +10,7 @@ export default defineConfig([
     files: ['**/*.ts', '**/*.tsx'],
     ignores: ['dist', 'public'],
     extends: [
-      featureSliced(),
+      featureSliced({ sortImports: false }),
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       ...customConfig,

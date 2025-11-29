@@ -13,8 +13,14 @@
   "dependencies": {
     "@echo-500/frontend-common": "workspace:*",
     "@echo-500/schema": "workspace:*",
+    "@echo-500/graphdb": "workspace:*",
+    "@echo-500/rdb": "workspace:*",
+    "@echo-500/ui": "workspace:*",
+    "@echo-500/utility": "workspace:*",
+    "@reduxjs/toolkit": "^2.11.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-redux": "^9.2.0",
     "react-router": "catalog:"
   },
   "devDependencies": {
