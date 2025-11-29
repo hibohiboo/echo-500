@@ -39,6 +39,7 @@
       "devDependencies": {
         "@echo-500/eslint-config-custom": "workspace:*",
         "@echo-500/tsconfig": "workspace:*",
+        "@tailwindcss/vite": "^4.1.17",
         "@types/node": "catalog:",
         "@vitejs/plugin-react": "^5.1.1",
         "eslint": "catalog:testing",

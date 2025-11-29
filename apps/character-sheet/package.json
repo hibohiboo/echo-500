@@ -26,10 +26,11 @@
   "devDependencies": {
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/node": "catalog:",
-    "typescript": "^5.9.3",
-    "vite": "npm:rolldown-vite@7.2.8",
     "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "catalog:testing"
+    "eslint": "catalog:testing",
+    "typescript": "^5.9.3",
+    "vite": "npm:rolldown-vite@7.2.8"
   }
 }

@@ -27,8 +27,15 @@ const handlers = new Map<string, HandlerFunction>();
 
 // マイグレーションハンドラー（共通）
 handlers.set('migrate', async () => {
-  await runMigrate();
-  return { success: true };
+  console.log('[DB Worker] Starting migration...');
+  try {
+    await runMigrate();
+    console.log('[DB Worker] Migration completed successfully');
+    return { success: true };
+  } catch (error) {
+    console.error('[DB Worker] Migration failed:', error);
+    throw error;
+  }
 });
 
 // プレイヤーキャラクターハンドラーを登録（RDB）
