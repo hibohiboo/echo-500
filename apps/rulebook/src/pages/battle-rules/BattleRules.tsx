@@ -17,6 +17,8 @@ export function BattleRulesPage() {
         {/* Intro Section */}
         <IntroCard>
           Echo:500の戦闘は、カウンターボードとエリアマップを使用する。
+          <br />
+          ターン制ではなく、行動コストによって手番が回ってくる「カウントタイムバトル」方式を採用している。
         </IntroCard>
 
         {/* Preparation Section */}
@@ -40,20 +42,28 @@ export function BattleRulesPage() {
                   GMが勝利条件と敗北条件を宣言し、全員で確認する。
                 </p>
                 <ExampleBox title="終了条件の例">
-                  <ul className="list-none m-0 p-0 text-text-secondary text-sm">
-                    <li className="py-1 pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-nature-accent">
-                      勝利条件: ボスの戦闘不能
-                    </li>
-                    <li className="py-1 pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-nature-accent">
-                      敗北条件: 全PCの戦闘不能
-                    </li>
-                    <li className="py-1 pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-nature-accent">
-                      時間制限: カウンター50到達で敵増援
-                    </li>
-                    <li className="py-1 pl-4 relative before:content-['›'] before:absolute before:left-0 before:text-nature-accent">
-                      特殊条件: 特定のオブジェクト破壊
-                    </li>
-                  </ul>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div className="bg-bg-primary/50 p-3 rounded border-l-2 border-nature-accent">
+                      <div className="font-bold text-nature-accent mb-1">
+                        勝利条件
+                      </div>
+                      <ul className="list-none m-0 p-0 text-text-secondary">
+                        <li>› ボスの戦闘不能</li>
+                        <li>› 敵の全滅</li>
+                        <li>› 特定エリアへの到達</li>
+                      </ul>
+                    </div>
+                    <div className="bg-bg-primary/50 p-3 rounded border-l-2 border-cyber-alert">
+                      <div className="font-bold text-cyber-alert mb-1">
+                        敗北条件
+                      </div>
+                      <ul className="list-none m-0 p-0 text-text-secondary">
+                        <li>› 全PCの戦闘不能</li>
+                        <li>› 護衛対象の死亡</li>
+                        <li>› 制限時間の超過</li>
+                      </ul>
+                    </div>
+                  </div>
                 </ExampleBox>
               </div>
             </ContentCard>
@@ -155,17 +165,20 @@ export function BattleRulesPage() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 relative">
+            {/* Connecting Line (Visual only) */}
+            <div className="absolute left-[1.5rem] top-8 bottom-8 w-0.5 bg-cyber-primary/20 -z-10 hidden lg:block" />
+
             {/* Flow Step 1 */}
             <ContentCard>
               <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading shadow-[0_0_10px_rgba(var(--color-cyber-primary),0.5)]">
                   1
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl text-text-primary mb-2">手番の取得</h3>
                   <p className="leading-relaxed text-text-secondary m-0">
-                    カウンターカーソルがある位置の、積まれたコマのy1番上のキャラクターが手番を得る。
+                    カウンターカーソルがある位置の、積まれたコマの一番上のキャラクターが手番を得る。
                     そのキャラクターを操作するプレイヤー(またはGM)が行動を宣言する。
                   </p>
                 </div>
@@ -175,7 +188,7 @@ export function BattleRulesPage() {
             {/* Flow Step 2 */}
             <ContentCard>
               <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading shadow-[0_0_10px_rgba(var(--color-cyber-primary),0.5)]">
                   2
                 </div>
                 <div className="flex-1">
@@ -184,8 +197,11 @@ export function BattleRulesPage() {
                     手番を得たキャラクターは、タイミング「手番」の手札を使用できる。
                     使用したコマンドのコスト分だけ、自分のコマをカウンターボード上で前進させる。
                   </p>
-                  <div className="mt-2 p-2 px-4 bg-cyber-primary/5 border-l-3 border-cyber-primary rounded text-sm text-text-tertiary">
-                    例: コスト3のコマンドを使用 →
+                  <div className="mt-4 p-3 bg-cyber-primary/5 border-l-4 border-cyber-primary rounded text-sm text-text-secondary">
+                    <span className="font-bold text-cyber-primary block mb-1">
+                      例
+                    </span>
+                    コスト3のコマンドを使用 →
                     現在位置から3マス進んだ位置にコマを移動
                   </div>
                 </div>
@@ -195,7 +211,7 @@ export function BattleRulesPage() {
             {/* Flow Step 3 */}
             <ContentCard>
               <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading shadow-[0_0_10px_rgba(var(--color-cyber-primary),0.5)]">
                   3
                 </div>
                 <div className="flex-1">
@@ -213,7 +229,7 @@ export function BattleRulesPage() {
             {/* Flow Step 4 */}
             <ContentCard>
               <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-cyber-primary text-bg-primary text-2xl font-bold rounded-full font-heading shadow-[0_0_10px_rgba(var(--color-cyber-primary),0.5)]">
                   4
                 </div>
                 <div className="flex-1">
@@ -260,122 +276,59 @@ export function BattleRulesPage() {
 
             {/* Coordinate Visual */}
             <ContentCard>
-              <div className="text-xs font-heading">
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-black/30 p-1 text-center rounded-sm"></span>
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    x0
-                  </span>
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    x1
-                  </span>
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    x2
-                  </span>
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    x9
-                  </span>
-                </div>
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm"></span>
-                  <span className="bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold p-1 text-center rounded-sm">
-                    x0y0
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x1y0
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x2y0
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x9y0
-                  </span>
-                </div>
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x0y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x1y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x2y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x9y1
-                  </span>
-                </div>
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x0y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x1y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x2y1
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x9y1
-                  </span>
-                </div>
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                </div>
-                <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    y9
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x0y9
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x1y9
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    x2y9
-                  </span>
-                  <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    ...
-                  </span>
-                  <span className="bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold p-1 text-center rounded-sm">
-                    x9y9
-                  </span>
+              <div className="text-xs font-heading overflow-x-auto">
+                <div className="min-w-[300px]">
+                  {/* Header Row (x-axis) */}
+                  <div className="grid grid-cols-[2rem_repeat(10,1fr)] gap-[2px] mb-[2px]">
+                    <span className="bg-transparent"></span>
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <span
+                        key={`x${i}`}
+                        className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm"
+                      >
+                        x{i}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Grid Rows */}
+                  {Array.from({ length: 10 }).map((_, y) => (
+                    <div
+                      key={`row-${y}`}
+                      className="grid grid-cols-[2rem_repeat(10,1fr)] gap-[2px] mb-[2px]"
+                    >
+                      {/* Y-axis label */}
+                      <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm flex items-center justify-center">
+                        y{y}
+                      </span>
+
+                      {/* Cells */}
+                      {Array.from({ length: 10 }).map((_, x) => {
+                        const isCorner =
+                          (x === 0 && y === 0) || (x === 9 && y === 9);
+
+                        let cellClass =
+                          'bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary';
+                        if (isCorner) {
+                          cellClass =
+                            'bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold';
+                        }
+
+                        return (
+                          <span
+                            key={`cell-${x}-${y}`}
+                            className={`${cellClass} p-1 text-center rounded-sm flex items-center justify-center aspect-square`}
+                          >
+                            {x === 0 && y === 0
+                              ? 'x0y0'
+                              : x === 9 && y === 9
+                                ? 'x9y9'
+                                : ''}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  ))}
                 </div>
               </div>
             </ContentCard>
@@ -392,7 +345,11 @@ export function BattleRulesPage() {
                   •
                 </span>
                 <span className="flex-1 text-text-secondary leading-relaxed">
-                  キャラクターは1マス以上を占有する。大型キャラクターは複数マスを占有する場合がある。
+                  キャラクターは1マス以上を占有する。
+                  <br />
+                  <span className="text-sm text-text-tertiary">
+                    (例: 人間サイズは1x1マス、大型メカは2x2マスなど)
+                  </span>
                 </span>
               </li>
               <li className="flex items-start gap-2 py-2">
