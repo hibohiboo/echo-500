@@ -644,14 +644,39 @@ export const scenarioApi = {
 - `dbWorkerClient.request()`の戻り値の型は`GlobalHandlerMap`で自動推論される
 - fetch()のエラーハンドリング（response.okチェックなど）は不要（Workerハンドラー側でthrowされる）
 
-### フェーズ5: UI層
+### フェーズ5: UI層 ✅ **完了**
 
 #### 5-1. UI コンポーネント実装
-- [ ] `packages/ui/src/playerCharacter/PlayerCharacterList.tsx` 作成
-- [ ] `packages/ui/src/playerCharacter/PlayerCharacterCreateModal.tsx` 作成
-- [ ] `packages/ui/src/playerCharacter/BattleCommandList.tsx` 作成
-- [ ] `packages/ui/src/playerCharacter/BattleCommandForm.tsx` 作成
-- [ ] `packages/ui/src/playerCharacter/types.ts` 作成
+- [x] ~~`packages/ui/src/entities/playerCharacter/types.ts` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/entities/playerCharacter/PlayerCharacterList.tsx` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/entities/playerCharacter/PlayerCharacterCreateModal.tsx` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/entities/playerCharacter/BattleCommandList.tsx` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/entities/playerCharacter/BattleCommandForm.tsx` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/entities/playerCharacter/index.ts` 作成~~ ✅ **完了**
+- [x] ~~`packages/ui/src/index.ts`にエクスポート追加~~ ✅ **完了**
+- [x] ~~Lint・型チェック実行（`bun run lint`）~~ ✅ **完了**
+
+#### 実装内容
+1. **PlayerCharacterList** - プレイヤーキャラクター一覧表示
+   - キャラクター名、作成日表示
+   - 新規作成ボタン
+   - 削除ボタン
+
+2. **PlayerCharacterCreateModal** - プレイヤーキャラクター作成モーダル
+   - 名前入力フィールド
+   - バリデーション
+   - ローディング状態対応
+
+3. **BattleCommandList** - バトルコマンド一覧表示
+   - クラス、コマンド名、CP表示
+   - タイミング、コスト、射程、対象の詳細表示
+   - 効果、タグ表示
+   - 追加・削除ボタン
+
+4. **BattleCommandForm** - バトルコマンド作成フォーム
+   - 全フィールド入力（クラス、名前、CP、タイミング、コスト、射程、対象、効果、フレーバー、タグ、詳細）
+   - タグのカンマ区切り入力対応
+   - バリデーション
 
 ### フェーズ6: Feature層
 

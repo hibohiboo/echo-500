@@ -121,6 +121,24 @@ export type {
   DeleteConfirmModalProps,
 } from './entities/scenario';
 
+// PlayerCharacter関連（entities層から）
+export {
+  PlayerCharacterList,
+  PlayerCharacterCreateModal,
+  BattleCommandList,
+  BattleCommandForm,
+} from './entities/playerCharacter';
+export type {
+  PlayerCharacter,
+  PlayerCharacterFormData,
+  BattleCommand,
+  BattleCommandFormData,
+  PlayerCharacterListProps,
+  PlayerCharacterCreateModalProps,
+  BattleCommandListProps,
+  BattleCommandFormProps,
+} from './entities/playerCharacter';
+
 // Features層（新構造）
 export {
   SceneEditor as SceneEditorFeature,
