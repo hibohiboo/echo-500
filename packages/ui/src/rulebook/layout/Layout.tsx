@@ -6,9 +6,10 @@ import type { ReactNode } from 'react';
 interface LayoutProps {
   basePath?: string;
   children: ReactNode;
+  navigation?: ReactNode;
 }
 
-export function Layout({ basePath, children }: LayoutProps) {
+export function Layout({ basePath, children, navigation }: LayoutProps) {
   return (
     <div className="app-container">
       <div className="layout-background">
@@ -18,11 +19,28 @@ export function Layout({ basePath, children }: LayoutProps) {
 
       <div className="layout-content">
         <Header basePath={basePath} />
-        <main className="site-main">{children}</main>
+        {navigation ? (
+          <div className="main-content">
+            <div className="layout-sidebar">{navigation}</div>
+            <main className="site-main">{children}</main>
+          </div>
+        ) : (
+          <main className="site-main">{children}</main>
+        )}
+
         <Footer />
       </div>
 
       <style>{`
+        .main-content {
+          display: flex;
+          gap: var(--spacing-xl);
+          max-width: var(--content-max-width);
+          margin: 0 auto;
+        }
+        .layout-sidebar {
+          flex-shrink: 0;
+        }
         .app-container {
           position: relative;
           min-height: 100vh;
@@ -91,6 +109,19 @@ export function Layout({ basePath, children }: LayoutProps) {
             padding: var(--spacing-md) var(--spacing-sm);
           }
         }
+      /* Responsive */
+      @media (max-width: 1024px) {
+          /* naviのハンバーガー分 */
+          .layout-content > header > div:first-child {
+            margin-left: 50px;
+          }
+          .home-content {
+            flex-direction: column;
+          }
+          .layout-sidebar {
+            order: 2;
+          }
+      }
       `}</style>
     </div>
   );
