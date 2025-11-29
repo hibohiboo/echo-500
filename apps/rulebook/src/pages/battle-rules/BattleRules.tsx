@@ -5,7 +5,7 @@ import {
   SectionTitle,
   NoteBox,
   ExampleBox,
-} from "@echo-500/ui";
+} from '@echo-500/ui';
 
 export function BattleRulesPage() {
   return (
@@ -163,11 +163,9 @@ export function BattleRulesPage() {
                   1
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl text-text-primary mb-2">
-                    手番の取得
-                  </h3>
+                  <h3 className="text-xl text-text-primary mb-2">手番の取得</h3>
                   <p className="leading-relaxed text-text-secondary m-0">
-                    カウンターカーソルがある位置の、積まれたコマの一番上のキャラクターが手番を得る。
+                    カウンターカーソルがある位置の、積まれたコマのy1番上のキャラクターが手番を得る。
                     そのキャラクターを操作するプレイヤー(またはGM)が行動を宣言する。
                   </p>
                 </div>
@@ -181,9 +179,7 @@ export function BattleRulesPage() {
                   2
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl text-text-primary mb-2">
-                    手札の使用
-                  </h3>
+                  <h3 className="text-xl text-text-primary mb-2">手札の使用</h3>
                   <p className="leading-relaxed text-text-secondary m-0">
                     手番を得たキャラクターは、タイミング「手番」の手札を使用できる。
                     使用したコマンドのコスト分だけ、自分のコマをカウンターボード上で前進させる。
@@ -238,27 +234,25 @@ export function BattleRulesPage() {
           <div className="mb-6">
             <p className="leading-relaxed text-text-secondary">
               戦闘エリアは10×10のグリッドで構成される。
-              位置を示す座標系は、縦の列を算用数字(0〜9)、横の行を漢数字(零〜九)で表す。
+              位置を示す座標系は、縦の列をx数字(x0〜x9)、横の行をy数字(y0〜y9)で表す。
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
             {/* Coordinate Card */}
             <ContentCard>
-              <h3 className="text-lg text-text-primary mb-4">
-                座標の読み方
-              </h3>
+              <h3 className="text-lg text-text-primary mb-4">座標の読み方</h3>
               <ul className="list-none m-0 p-0">
                 <li className="flex justify-between py-2 border-b border-nature-accent/20">
                   <span className="text-text-secondary">左上</span>
                   <span className="text-cyber-primary font-bold font-heading">
-                    0零
+                    x0y0
                   </span>
                 </li>
                 <li className="flex justify-between py-2">
                   <span className="text-text-secondary">右下</span>
                   <span className="text-cyber-primary font-bold font-heading">
-                    9九
+                    x9y9
                   </span>
                 </li>
               </ul>
@@ -270,79 +264,77 @@ export function BattleRulesPage() {
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
                   <span className="bg-black/30 p-1 text-center rounded-sm"></span>
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    0
+                    x0
                   </span>
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    1
+                    x1
                   </span>
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    2
+                    x2
                   </span>
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
                     ...
                   </span>
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    9
+                    x9
                   </span>
                 </div>
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
-                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    零
-                  </span>
+                  <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm"></span>
                   <span className="bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold p-1 text-center rounded-sm">
-                    0零
+                    x0y0
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    1零
+                    x1y0
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    2零
+                    x2y0
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
                     ...
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    9零
+                    x9y0
                   </span>
                 </div>
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    一
+                    y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    0一
+                    x0y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    1一
+                    x1y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    2一
+                    x2y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
                     ...
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    9一
+                    x9y1
                   </span>
                 </div>
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    二
+                    y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    0二
+                    x0y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    1二
+                    x1y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    2二
+                    x2y1
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
                     ...
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    9二
+                    x9y1
                   </span>
                 </div>
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px] mb-[2px]">
@@ -367,22 +359,22 @@ export function BattleRulesPage() {
                 </div>
                 <div className="grid grid-cols-[2rem_repeat(5,1fr)] gap-[2px]">
                   <span className="bg-nature-accent/20 text-nature-accent p-1 text-center rounded-sm">
-                    九
+                    y9
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    0九
+                    x0y9
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    1九
+                    x1y9
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
-                    2九
+                    x2y9
                   </span>
                   <span className="bg-cyber-primary/5 border border-cyber-secondary text-text-tertiary p-1 text-center rounded-sm">
                     ...
                   </span>
                   <span className="bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold p-1 text-center rounded-sm">
-                    9九
+                    x9y9
                   </span>
                 </div>
               </div>

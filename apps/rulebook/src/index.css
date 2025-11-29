@@ -1,3 +1,4 @@
+@import '@echo-500/ui/tailwind.css';
 body {
   margin: 0;
   display: flex;
