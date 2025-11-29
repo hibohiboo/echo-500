@@ -486,6 +486,46 @@ packages/ui/src/
 - [x] ~~`apps/character-sheet/src/entities/battleCommand/index.ts` 作成~~ ✅ **完了**
 - [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/index.ts` 作成~~ ✅ **完了**
 
+#### 4-7. Workers実装（2025-11-29追加）
+- [x] ~~Worker基盤実装~~ ✅ **完了**
+  - [x] ~~`apps/character-sheet/src/workers/BaseWorkerClient.ts`~~ (scenario-editorからコピー)
+  - [x] ~~`apps/character-sheet/src/workers/db.worker.ts`~~ 作成
+  - [x] ~~`apps/character-sheet/src/workers/dbWorkerClient.ts`~~ 作成
+  - [x] ~~`apps/character-sheet/src/workers/types/handlerMaps.ts`~~ 型定義作成
+
+- [x] ~~PlayerCharacterハンドラー実装~~ ✅ **完了**
+  - [x] ~~`apps/character-sheet/src/entities/playerCharacter/workers/playerCharacterRdbHandlers.ts`~~ (RDB操作)
+  - [x] ~~`apps/character-sheet/src/entities/playerCharacter/workers/playerCharacterGraphHandlers.ts`~~ (GraphDB操作)
+
+- [x] ~~BattleCommandハンドラー実装~~ ✅ **完了**
+  - [x] ~~`apps/character-sheet/src/entities/battleCommand/workers/battleCommandGraphHandlers.ts`~~ (GraphDB操作)
+
+#### 4-8. API層のWorker対応（次のステップ）🔄
+**重要:** 現在のAPI層はfetch()を使用しているが、IndexedDB経由のWorker通信に変更する必要がある
+
+- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` を修正
+  - ❌ 現在: `fetch('/api/player-characters')`
+  - ✅ 修正後: `dbWorkerClient.request('playerCharacter:getList')`
+
+- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` を修正
+  - ❌ 現在: `fetch('/api/graph/player-characters')`
+  - ✅ 修正後: `dbWorkerClient.request('playerCharacter:createNode', { id })`
+
+- [ ] `apps/character-sheet/src/entities/battleCommand/api/battleCommandGraphApi.ts` を修正
+  - ❌ 現在: `fetch('/api/graph/battle-commands')`
+  - ✅ 修正後: `dbWorkerClient.request('battleCommand:create', data)`
+
+**参考実装:** `apps/scenario-editor/src/entities/scenario/api/scenarioApi.ts`
+```typescript
+import { dbWorkerClient } from '@/workers/dbWorkerClient';
+
+export const scenarioApi = {
+  getList: () => dbWorkerClient.request('scenario:getList'),
+  create: (params) => dbWorkerClient.request('scenario:create', params),
+  // ...
+};
+```
+
 ### フェーズ5: UI層
 
 #### 5-1. UI コンポーネント実装
