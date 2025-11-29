@@ -47,7 +47,7 @@ export function HomePage() {
                 <span className="title-icon">▶</span> About This Rulebook
               </h2>
               <p>
-                本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームだ。
+                本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームである。
                 プレイヤーの分身であるキャラクター（以下、PC）は、
                 破損した目的を取り戻すため、終わった世界をめぐることになる。
               </p>
@@ -76,7 +76,10 @@ export function HomePage() {
                 <span className="title-icon">▶</span> Getting Started
               </h2>
               <div className="quick-links">
-                <a className="quick-link" href={`/${basePath}/content/tutorial`}>
+                <a
+                  className="quick-link"
+                  href={`/${basePath}/content/tutorial`}
+                >
                   <span className="link-icon">›</span>
                   <span className="link-text">チュートリアル</span>
                 </a>
@@ -87,7 +90,10 @@ export function HomePage() {
                   <span className="link-icon">›</span>
                   <span className="link-text">シナリオ製作者向け</span>
                 </a>
-                <a className="quick-link" href={`/${basePath}/content/game-master`}>
+                <a
+                  className="quick-link"
+                  href={`/${basePath}/content/game-master`}
+                >
                   <span className="link-icon">›</span>
                   <span className="link-text">ゲームマスター向け</span>
                 </a>
