@@ -44,7 +44,7 @@ export default function CharacterCreatePage() {
             <div className="flex flex-col gap-4">
               {memorySlots.map((slot, index) => (
                 <MemoryForm
-                  key={index}
+                  key={slot.id}
                   {...{
                     index,
                     slot,

@@ -1,4 +1,4 @@
-import type { MemorySlot } from '@echo-500/ui';
+import type { GraphDbMemoryNode } from '@echo-500/schema';
 
 export const MemoryForm = (args: {
   index: number;
@@ -8,7 +8,7 @@ export const MemoryForm = (args: {
     tags: string[];
   };
   removeTag: (i: number, j: number) => void;
-  updateMemorySlot: (i: number, d: keyof MemorySlot, t: string) => void;
+  updateMemorySlot: (i: number, d: keyof GraphDbMemoryNode, t: string) => void;
   addTag: (i: number, v: string) => void;
   deleteMemorySlot: (i: number) => void;
 }) => {

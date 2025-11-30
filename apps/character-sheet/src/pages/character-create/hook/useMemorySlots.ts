@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import type { MemorySlot } from '@/entities/character';
+import type { GraphDbMemoryNode } from '@echo-500/schema';
 
 interface UseMemorySlotsProps {
-  initialSlots: MemorySlot[];
+  initialSlots: GraphDbMemoryNode[];
 }
 
 export function useMemorySlots({ initialSlots }: UseMemorySlotsProps) {
-  const [memorySlots, setMemorySlots] = useState<MemorySlot[]>(initialSlots);
+  const [memorySlots, setMemorySlots] =
+    useState<GraphDbMemoryNode[]>(initialSlots);
 
   const updateMemorySlot = (
     index: number,
-    field: keyof MemorySlot,
+    field: keyof GraphDbMemoryNode,
     value: string | string[],
   ) => {
     const updated = [...memorySlots];

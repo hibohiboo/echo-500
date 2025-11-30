@@ -1,3 +1,4 @@
+import { generateUUID } from '@echo-500/utility';
 import { useNavigate } from 'react-router';
 import { createInitialMemorySlots } from '@/entities/character';
 import { useCreatePlayerCharacter } from '@/entities/playerCharacter';
@@ -18,7 +19,10 @@ export const useCharacterForm = () => {
   );
   const createCharacterHook = useCreatePlayerCharacter();
   const memoryModel = useMemorySlots({
-    initialSlots: createInitialMemorySlots(),
+    initialSlots: createInitialMemorySlots().map((s) => ({
+      ...s,
+      id: generateUUID(),
+    })),
   });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
