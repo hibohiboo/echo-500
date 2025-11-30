@@ -49,3 +49,13 @@ When(
       .click();
   },
 );
+
+When(
+  'モーダルの {string} ボタンをクリックする',
+  async function (this: CustomWorld, buttonText: string) {
+    await this.page
+      .getByRole('dialog')
+      .getByRole('button', { name: buttonText, exact: true })
+      .click();
+  },
+);

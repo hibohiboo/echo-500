@@ -14,7 +14,7 @@ When('プレイヤーキャラクターページを開く', async function (this
 When(
   'モーダルで名前 {string} を入力する',
   async function (this: CustomWorld, name: string) {
-    const input = this.page.getByLabel('名前');
+    const input = this.page.getByLabel(/キャラクター名/);
     await input.fill(name);
   },
 );
