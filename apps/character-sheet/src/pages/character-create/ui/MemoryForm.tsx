@@ -1,19 +1,17 @@
 import type { GraphDbMemoryNode } from '@echo-500/schema';
 
 export const MemoryForm = (args: {
-  index: number;
-  slot: {
-    title: string;
-    description: string;
-    tags: string[];
-  };
-  removeTag: (i: number, j: number) => void;
-  updateMemorySlot: (i: number, d: keyof GraphDbMemoryNode, t: string) => void;
-  addTag: (i: number, v: string) => void;
-  deleteMemorySlot: (i: number) => void;
+  slot: GraphDbMemoryNode;
+  removeTag: (id: string, tagIndex: number) => void;
+  updateMemorySlot: (
+    id: string,
+    field: keyof GraphDbMemoryNode,
+    value: string,
+  ) => void;
+  addTag: (id: string, tag: string) => void;
+  deleteMemorySlot: (id: string) => void;
 }) => {
-  const { index, slot, updateMemorySlot, removeTag, addTag, deleteMemorySlot } =
-    args;
+  const { slot, updateMemorySlot, removeTag, addTag, deleteMemorySlot } = args;
   return (
     <div className="p-4 bg-bg-tertiary border border-cyber-secondary rounded">
       <div className="mb-2">
@@ -24,7 +22,7 @@ export const MemoryForm = (args: {
           type="text"
           className="form-input"
           value={slot.title}
-          onChange={(e) => updateMemorySlot(index, 'title', e.target.value)}
+          onChange={(e) => updateMemorySlot(slot.id, 'title', e.target.value)}
           placeholder="記憶のタイトル..."
         />
       </div>
@@ -35,7 +33,7 @@ export const MemoryForm = (args: {
           className="form-input resize-y"
           value={slot.description}
           onChange={(e) =>
-            updateMemorySlot(index, 'description', e.target.value)
+            updateMemorySlot(slot.id, 'description', e.target.value)
           }
           rows={3}
           placeholder="記憶の内容..."
@@ -53,7 +51,7 @@ export const MemoryForm = (args: {
               {tag}
               <button
                 type="button"
-                onClick={() => removeTag(index, tagIndex)}
+                onClick={() => removeTag(slot.id, tagIndex)}
                 className="bg-transparent border-0 text-inherit cursor-pointer p-0 text-base leading-none"
               >
                 ×
@@ -70,7 +68,7 @@ export const MemoryForm = (args: {
               if (e.key === 'Enter') {
                 e.preventDefault();
                 const input = e.currentTarget;
-                addTag(index, input.value);
+                addTag(slot.id, input.value);
                 input.value = '';
               }
             }}
@@ -81,7 +79,7 @@ export const MemoryForm = (args: {
       <button
         type="button"
         className="btn btn-danger w-full"
-        onClick={() => deleteMemorySlot(index)}
+        onClick={() => deleteMemorySlot(slot.id)}
       >
         削除
       </button>

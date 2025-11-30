@@ -42,17 +42,14 @@ export default function CharacterCreatePage() {
               記憶スロット
             </label>
             <div className="flex flex-col gap-4">
-              {memorySlots.map((slot, index) => (
+              {memorySlots.map((slot) => (
                 <MemoryForm
                   key={slot.id}
-                  {...{
-                    index,
-                    slot,
-                    updateMemorySlot,
-                    removeTag,
-                    addTag,
-                    deleteMemorySlot,
-                  }}
+                  slot={slot}
+                  updateMemorySlot={updateMemorySlot}
+                  removeTag={removeTag}
+                  addTag={addTag}
+                  deleteMemorySlot={deleteMemorySlot}
                 />
               ))}
             </div>
