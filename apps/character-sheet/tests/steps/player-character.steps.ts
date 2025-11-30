@@ -19,6 +19,27 @@ When(
   },
 );
 
+When(
+  'モーダルで名前を {string} に変更する',
+  async function (this: CustomWorld, name: string) {
+    const input = this.page.getByLabel(/キャラクター名/);
+    await input.clear();
+    await input.fill(name);
+  },
+);
+
+// 編集操作
+When(
+  'キャラクター {string} の編集ボタンをクリックする',
+  async function (this: CustomWorld, characterName: string) {
+    // キャラクター名を含む見出しを探し、その親要素のdivから編集ボタンを取得
+    const characterHeading = this.page.getByRole('heading', { name: characterName });
+    const characterRow = characterHeading.locator('xpath=ancestor::div[contains(@class, "flex") and contains(@class, "items-center")]');
+    const editButton = characterRow.getByRole('button', { name: '編集', exact: true });
+    await editButton.click();
+  },
+);
+
 // 削除操作
 When(
   '削除確認ダイアログで {string} を選択する準備をする',

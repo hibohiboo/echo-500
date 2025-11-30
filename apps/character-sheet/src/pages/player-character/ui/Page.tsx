@@ -6,6 +6,7 @@ import {
   BattleCommandForm,
 } from '@echo-500/ui';
 import { useState } from 'react';
+import { updatePlayerCharacter } from '@/entities/playerCharacter/actions/playerCharacterActions';
 import { useCreatePlayerCharacter } from '@/entities/playerCharacter/hooks/useCreatePlayerCharacter';
 import { useDeletePlayerCharacter } from '@/entities/playerCharacter/hooks/useDeletePlayerCharacter';
 import { usePlayerCharacterList } from '@/entities/playerCharacter/hooks/usePlayerCharacterList';
@@ -40,8 +41,12 @@ export default function PlayerCharacterPage() {
     createCharacterHook.close();
   };
 
-  const handleUpdateCharacter = async (_params: { name: string }) => {
-    await updateCharacterHook.submit();
+  const handleUpdateCharacter = async (params: { name: string }) => {
+    if (!updateCharacterHook.editingCharacter) return;
+    await dispatch(
+      updatePlayerCharacter(updateCharacterHook.editingCharacter.id, params.name),
+    );
+    updateCharacterHook.close();
   };
 
   const handleDeleteCharacter = async (clickedCharacter: {
