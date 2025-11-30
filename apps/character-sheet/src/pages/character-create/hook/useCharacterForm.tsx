@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { createInitialMemorySlots } from '@/entities/character';
 import { useCreatePlayerCharacter } from '@/entities/playerCharacter';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import {
@@ -6,6 +7,7 @@ import {
   setIsSubmitting,
   resetForm,
 } from '../model/characterCreateSlice';
+import { useMemorySlots } from './useMemorySlots';
 import type { FormEventHandler } from 'react';
 
 export const useCharacterForm = () => {
@@ -15,6 +17,9 @@ export const useCharacterForm = () => {
     (state) => state.characterCreate,
   );
   const createCharacterHook = useCreatePlayerCharacter();
+  const memoryModel = useMemorySlots({
+    initialSlots: createInitialMemorySlots(),
+  });
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -45,5 +50,6 @@ export const useCharacterForm = () => {
     handleSubmit,
     onCancel,
     handleNameChange,
+    ...memoryModel,
   };
 };
