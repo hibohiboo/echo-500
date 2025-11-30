@@ -28,7 +28,7 @@ export function BattleRulesPage() {
           <div className="flex flex-col gap-6">
             {/* Step 01 */}
             <ContentCard>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-baseline gap-4 mb-4">
                 <span className="text-2xl font-bold text-cyber-primary font-heading min-w-[3rem]">
                   01
                 </span>
