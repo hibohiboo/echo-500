@@ -545,56 +545,130 @@ export function BattleRulesPage() {
                     </span>
                   </div>
                 </div>
-                <div className="text-sm text-text-secondary mt-4 pt-4 border-t border-cyber-primary/30">
-                  <p className="font-bold text-cyber-primary mb-2">
-                    処理例: 攻撃側(2d6期待値: 7) vs 防御側(回避:5 / 装甲:2 /
-                    HP:20)
-                  </p>
-                  <ol className="list-decimal list-inside space-y-2 m-0">
-                    <li>
-                      <span className="font-bold text-text-primary">
-                        命中判定:
-                      </span>{' '}
-                      攻撃側が2d6を振る。出目は「7」。
-                      <br />
-                      <span className="text-xs text-text-tertiary ml-4">
-                        → 出目(7) ≧ 回避値(5) なので
-                        <span className="text-cyber-primary font-bold">
-                          命中
-                        </span>
-                        (未満なら失敗)
-                      </span>
-                    </li>
-                    <li>
-                      <span className="font-bold text-text-primary">
-                        ダメージ算出:
-                      </span>{' '}
-                      攻撃側が2d6を振る。出目は「8」。
-                      <br />
-                      <span className="text-xs text-text-tertiary ml-4">
-                        → 出目(8) - 装甲値(2) =
-                        <span className="text-cyber-alert font-bold">
-                          6ダメージ
-                        </span>
-                      </span>
-                    </li>
-                    <li>
-                      <span className="font-bold text-text-primary">
-                        HP減少:
-                      </span>{' '}
-                      防御側のHPを減らす。
-                      <br />
-                      <span className="text-xs text-text-tertiary ml-4">
-                        → HP(20) - 6 =
-                        <span className="text-text-primary font-bold">
-                          残りHP 14
-                        </span>
-                      </span>
-                    </li>
-                  </ol>
-                </div>
+                <p className="text-sm text-text-secondary m-0">
+                  <span className="text-cyber-primary font-bold">処理:</span>{' '}
+                  手番プレイヤーはコスト5を支払い(カウンターを5進める)、
+                  射程1(隣接マス)にいる敵1体を選択して攻撃を行う。
+                  詳細は以下の「攻撃の処理」を参照。
+                </p>
               </div>
             </ExampleBox>
+          </div>
+        </section>
+
+        {/* Attack Resolution Section */}
+        <section className="mt-8">
+          <SectionTitle icon="▶">攻撃の処理</SectionTitle>
+
+          <div className="mb-6">
+            <p className="leading-relaxed text-text-secondary">
+              攻撃タグを持つコマンドを使用した場合、以下の手順で処理を行う。
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {/* Step 1: Hit Check */}
+            <ContentCard>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-cyber-primary text-bg-primary text-xl font-bold rounded font-heading">
+                  1
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-text-primary mb-2">
+                    命中判定
+                  </h3>
+                  <p className="text-text-secondary leading-relaxed mb-4">
+                    攻撃が対象に命中したかどうかを判定する。
+                    攻撃側は2d6を振り、その結果と対象の<strong>回避値</strong>
+                    を比較する。
+                  </p>
+                  <div className="bg-bg-tertiary p-4 rounded border border-cyber-secondary/30">
+                    <div className="flex items-center gap-4 text-sm justify-center">
+                      <div className="text-center">
+                        <div className="font-bold text-cyber-primary mb-1">
+                          攻撃側
+                        </div>
+                        <div className="bg-black/30 px-3 py-1 rounded text-text-primary">
+                          2d6の出目
+                        </div>
+                      </div>
+                      <div className="text-text-tertiary font-bold">≧</div>
+                      <div className="text-center">
+                        <div className="font-bold text-cyber-alert mb-1">
+                          防御側
+                        </div>
+                        <div className="bg-black/30 px-3 py-1 rounded text-text-primary">
+                          回避値
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-center text-xs text-text-secondary mt-3 m-0">
+                      以上なら
+                      <span className="text-cyber-primary font-bold">命中</span>
+                      、未満なら
+                      <span className="text-text-tertiary font-bold">失敗</span>
+                      (攻撃終了)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ContentCard>
+
+            {/* Step 2: Damage Calculation */}
+            <ContentCard>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-cyber-primary text-bg-primary text-xl font-bold rounded font-heading">
+                  2
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-text-primary mb-2">
+                    ダメージ算出
+                  </h3>
+                  <p className="text-text-secondary leading-relaxed mb-4">
+                    命中した場合、ダメージを算出する。
+                    コマンドに記述されたダメージ量(例:
+                    2d6)を振り、そこから対象の
+                    <strong>装甲値</strong>を引く。
+                  </p>
+                  <div className="bg-bg-tertiary p-4 rounded border border-cyber-secondary/30">
+                    <div className="flex items-center gap-2 text-sm justify-center flex-wrap">
+                      <div className="bg-black/30 px-3 py-1 rounded text-text-primary">
+                        コマンドの威力
+                      </div>
+                      <div className="text-text-tertiary font-bold">-</div>
+                      <div className="bg-black/30 px-3 py-1 rounded text-text-primary">
+                        装甲値
+                      </div>
+                      <div className="text-text-tertiary font-bold">=</div>
+                      <div className="font-bold text-cyber-alert">
+                        最終ダメージ
+                      </div>
+                    </div>
+                    <p className="text-center text-xs text-text-secondary mt-3 m-0">
+                      ※最終ダメージが0以下の場合は0となる。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ContentCard>
+
+            {/* Step 3: HP Reduction */}
+            <ContentCard>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-cyber-primary text-bg-primary text-xl font-bold rounded font-heading">
+                  3
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-text-primary mb-2">
+                    HPの減少
+                  </h3>
+                  <p className="text-text-secondary leading-relaxed m-0">
+                    算出された最終ダメージの分だけ、対象の<strong>HP</strong>
+                    を減らす。 HPが0以下になったキャラクターは戦闘不能となる。
+                  </p>
+                </div>
+              </div>
+            </ContentCard>
           </div>
         </section>
       </article>
