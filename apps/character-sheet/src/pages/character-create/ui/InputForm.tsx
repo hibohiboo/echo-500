@@ -3,20 +3,24 @@ export const InputForm = (
     id: string;
     label: string;
     placeholder: string;
-  } & React.InputHTMLAttributes<HTMLInputElement>,
+    value?: string;
+    onChange?: (value: string) => void;
+  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>,
 ) => {
-  const { id, label: _label } = args;
+  const { id, label: _label, value, onChange, ...inputProps } = args;
   return (
-    <div className="form-group">
+    <>
       <label htmlFor={id} className="form-label ">
         {_label}
       </label>
       <input
-        {...args}
+        {...inputProps}
         id={id}
         name={id}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         className={`form-input ${args.className ?? ''}`}
       />
-    </div>
+    </>
   );
 };
