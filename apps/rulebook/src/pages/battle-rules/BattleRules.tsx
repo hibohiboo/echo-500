@@ -70,7 +70,7 @@ export function BattleRulesPage() {
 
             {/* Step 02 */}
             <ContentCard>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-baseline gap-4 mb-4">
                 <span className="text-2xl font-bold text-cyber-primary font-heading min-w-[3rem]">
                   02
                 </span>
@@ -88,7 +88,7 @@ export function BattleRulesPage() {
 
             {/* Step 03 */}
             <ContentCard>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-baseline gap-4 mb-4">
                 <span className="text-2xl font-bold text-cyber-primary font-heading min-w-[3rem]">
                   03
                 </span>
@@ -109,7 +109,7 @@ export function BattleRulesPage() {
 
             {/* Step 04 */}
             <ContentCard>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-baseline gap-4 mb-4">
                 <span className="text-2xl font-bold text-cyber-primary font-heading min-w-[3rem]">
                   04
                 </span>
@@ -127,7 +127,7 @@ export function BattleRulesPage() {
 
             {/* Step 05 */}
             <ContentCard>
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-baseline gap-4 mb-4">
                 <span className="text-2xl font-bold text-cyber-primary font-heading min-w-[3rem]">
                   05
                 </span>
