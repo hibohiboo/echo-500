@@ -303,7 +303,7 @@ export function BattleRulesPage() {
                       </span>
 
                       {/* Cells */}
-                      {Array.from({ length: 10 }).map((_, x) => {
+                      {Array.from({ length: 10 }).map((__, x) => {
                         const isCorner =
                           (x === 0 && y === 0) || (x === 9 && y === 9);
 
@@ -313,17 +313,17 @@ export function BattleRulesPage() {
                           cellClass =
                             'bg-cyber-primary/20 border border-cyber-primary text-cyber-primary font-bold';
                         }
-
+                        const dispCellNumber = (_x: number, _y: number) => {
+                          if ((_x === 0 && _y === 0) || (_x === 9 && _y === 9))
+                            return `x${_x}y${_y}`;
+                          return '';
+                        };
                         return (
                           <span
                             key={`cell-${x}-${y}`}
                             className={`${cellClass} p-1 text-center rounded-sm flex items-center justify-center aspect-square`}
                           >
-                            {x === 0 && y === 0
-                              ? 'x0y0'
-                              : x === 9 && y === 9
-                                ? 'x9y9'
-                                : ''}
+                            {dispCellNumber(x, y)}
                           </span>
                         );
                       })}
