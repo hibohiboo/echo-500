@@ -34,7 +34,7 @@ export const playerCharacterRdbHandlers = [
     handler: async (payload: unknown) => {
       const parsed = parsePlayerCharacterFormData(payload);
       // payloadにidが含まれている場合は使用、なければ自動生成
-      const id = (payload as { id?: string }).id;
+      const {id} = (payload as { id?: string });
       const newCharacter = await playerCharacterRepository.create({
         id,
         name: parsed.name,

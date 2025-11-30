@@ -125,6 +125,7 @@ export type {
 export {
   PlayerCharacterList,
   PlayerCharacterCreateModal,
+  PlayerCharacterUpdateModal,
   BattleCommandList,
   BattleCommandForm,
 } from './entities/playerCharacter';
@@ -135,6 +136,7 @@ export type {
   BattleCommandFormData,
   PlayerCharacterListProps,
   PlayerCharacterCreateModalProps,
+  PlayerCharacterUpdateModalProps,
   BattleCommandListProps,
   BattleCommandFormProps,
 } from './entities/playerCharacter';

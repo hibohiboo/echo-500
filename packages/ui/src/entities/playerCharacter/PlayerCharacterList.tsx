@@ -11,6 +11,8 @@ export interface PlayerCharacterListProps {
   onCharacterClick?: (character: PlayerCharacter) => void;
   /** 新規作成ボタンクリック時のコールバック */
   onCreateNew?: () => void;
+  /** キャラクター編集ボタンクリック時のコールバック */
+  onEdit?: (character: PlayerCharacter) => void;
   /** キャラクター削除ボタンクリック時のコールバック */
   onDelete?: (character: PlayerCharacter) => void;
 }
@@ -23,6 +25,7 @@ export function PlayerCharacterList({
   isLoading,
   onCharacterClick,
   onCreateNew,
+  onEdit,
   onDelete,
 }: PlayerCharacterListProps) {
   if (isLoading) {
@@ -61,6 +64,15 @@ export function PlayerCharacterList({
                   作成日: {new Date(character.createdAt).toLocaleDateString('ja-JP')}
                 </p>
               </button>
+              {onEdit && (
+                <Button
+                  onClick={() => onEdit(character)}
+                  variant="secondary"
+                  size="sm"
+                >
+                  編集
+                </Button>
+              )}
               {onDelete && (
                 <Button
                   onClick={() => onDelete(character)}

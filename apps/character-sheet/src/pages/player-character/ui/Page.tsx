@@ -1,6 +1,7 @@
 import {
   PlayerCharacterList,
   PlayerCharacterCreateModal,
+  PlayerCharacterUpdateModal,
   BattleCommandList,
   BattleCommandForm,
 } from '@echo-500/ui';
@@ -8,6 +9,7 @@ import { useState } from 'react';
 import { useCreatePlayerCharacter } from '@/entities/playerCharacter/hooks/useCreatePlayerCharacter';
 import { useDeletePlayerCharacter } from '@/entities/playerCharacter/hooks/useDeletePlayerCharacter';
 import { usePlayerCharacterList } from '@/entities/playerCharacter/hooks/usePlayerCharacterList';
+import { useUpdatePlayerCharacter } from '@/entities/playerCharacter/hooks/useUpdatePlayerCharacter';
 import {
   createAndLinkBattleCommand,
   deleteBattleCommand,
@@ -21,6 +23,7 @@ export default function PlayerCharacterPage() {
   const { characters, isLoading: isLoadingCharacters } =
     usePlayerCharacterList();
   const createCharacterHook = useCreatePlayerCharacter();
+  const updateCharacterHook = useUpdatePlayerCharacter();
   const deleteCharacterHook = useDeletePlayerCharacter();
 
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
@@ -35,6 +38,10 @@ export default function PlayerCharacterPage() {
   const handleCreateCharacter = async (params: { name: string }) => {
     await createCharacterHook.submit(params.name);
     createCharacterHook.close();
+  };
+
+  const handleUpdateCharacter = async (_params: { name: string }) => {
+    await updateCharacterHook.submit();
   };
 
   const handleDeleteCharacter = async (clickedCharacter: {
@@ -99,6 +106,7 @@ export default function PlayerCharacterPage() {
             isLoading={isLoadingCharacters}
             onCharacterClick={handleSelectCharacter}
             onCreateNew={createCharacterHook.open}
+            onEdit={updateCharacterHook.open}
             onDelete={handleDeleteCharacter}
           />
         </div>
@@ -133,6 +141,14 @@ export default function PlayerCharacterPage() {
         onClose={createCharacterHook.close}
         onSubmit={handleCreateCharacter}
         isLoading={createCharacterHook.isSubmitting}
+      />
+
+      <PlayerCharacterUpdateModal
+        isOpen={updateCharacterHook.isOpen}
+        onClose={updateCharacterHook.close}
+        onSubmit={handleUpdateCharacter}
+        currentName={updateCharacterHook.editingCharacter?.name || ''}
+        isLoading={updateCharacterHook.isSubmitting}
       />
 
       <BattleCommandForm
