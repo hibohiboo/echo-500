@@ -1,7 +1,11 @@
+import { graphDbSchemas } from '@echo-500/graphdb';
 import { BaseWorkerClient } from './BaseWorkerClient';
 import DBWorker from './db.worker?worker';
 import type { DBWorkerRequest, DBWorkerResponse } from './db.worker';
 import type { GlobalHandlerMap } from './types/handlerMaps';
+
+const { nodes, relationships } = graphDbSchemas;
+const schemas = [...nodes, ...relationships];
 
 /**
  * DBWorkerクライアント（汎用）
@@ -22,10 +26,11 @@ class DBWorkerClient extends BaseWorkerClient<
   }
 
   /**
-   * 初期化時にマイグレーションを実行
+   * 初期化時にマイグレーションとデータロードを実行
    */
   protected async onInitialize(): Promise<void> {
     await this.sendRequest({ type: 'migrate' });
+    await this.load();
   }
 
   /**
@@ -43,6 +48,56 @@ class DBWorkerClient extends BaseWorkerClient<
       payload,
     });
     return response.data as GlobalHandlerMap[K];
+  }
+
+  /**
+   * GraphDBデータをIndexedDBに保存
+   */
+  async save(): Promise<void> {
+    await Promise.all(nodes.map((schema) => this.saveNode(schema.name)));
+    await Promise.all(
+      relationships.map((schema) => this.saveEdge(schema.name)),
+    );
+  }
+
+  /**
+   * IndexedDBからGraphDBデータを読み込み
+   */
+  async load(): Promise<void> {
+    await Promise.all(schemas.map((schema) => this.loadTable(schema.name)));
+  }
+
+  private async saveNode(tableName: string): Promise<void> {
+    const nodeFilename = `/${tableName}.csv`;
+    await this.sendRequest<DBWorkerResponse>({
+      type: 'graphdb:save',
+      payload: {
+        path: nodeFilename,
+        query: `COPY (MATCH (n:${tableName}) RETURN n.*) TO '${nodeFilename}' (header=false);`,
+      },
+    });
+  }
+
+  private async saveEdge(tableName: string): Promise<void> {
+    const edgeFilename = `/${tableName}.csv`;
+    await this.sendRequest<DBWorkerResponse>({
+      type: 'graphdb:save',
+      payload: {
+        path: edgeFilename,
+        query: `COPY (MATCH (a)-[f:${tableName}]->(b) RETURN a.id, b.id, f.*) TO '${edgeFilename}' (header=false, delim='|');`,
+      },
+    });
+  }
+
+  private async loadTable(tableName: string): Promise<void> {
+    const path = `/${tableName}.csv`;
+    await this.sendRequest<DBWorkerResponse>({
+      type: 'graphdb:load',
+      payload: {
+        path,
+        query: `COPY ${tableName} FROM '${path}'`,
+      },
+    });
   }
 }
 

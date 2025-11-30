@@ -1,4 +1,5 @@
 import * as v from 'valibot';
+import { OptionalToStringSchema } from './common';
 
 /**
  * バトルコマンドスキーマ
@@ -260,9 +261,21 @@ export const GraphDbBattleCommandNodeSchema = v.object({
 
 /**
  * GraphDBから取得したバトルコマンド（tagsがJSON文字列、sortOrder付き）のスキーマ
+ * KuzuDBは空文字列をnullとして復元するため、OptionalToStringSchemaを使用
  */
 export const GraphDbBattleCommandRawSchema = v.object({
-  ...GraphDbBattleCommandNodeSchema.entries,
+  id: OptionalToStringSchema,
+  class: OptionalToStringSchema,
+  name: OptionalToStringSchema,
+  cp: v.number(),
+  timing: OptionalToStringSchema,
+  cost: OptionalToStringSchema,
+  range: OptionalToStringSchema,
+  effect: OptionalToStringSchema,
+  target: OptionalToStringSchema,
+  flavor: OptionalToStringSchema,
+  tags: OptionalToStringSchema, // JSON文字列
+  details: OptionalToStringSchema,
   sortOrder: v.number(),
 });
 
@@ -287,7 +300,18 @@ export const parseToGraphDbBattleCommandList = (
 ): PlayerCharacterBattleCommand[] => {
   const rawList = v.parse(v.array(GraphDbBattleCommandRawSchema), data);
   return rawList.map((item) => ({
-    ...item,
-    tags: JSON.parse(item.tags) as string[],
+    id: item.id ?? '',
+    class: item.class ?? '',
+    name: item.name ?? '',
+    cp: item.cp,
+    timing: item.timing ?? '',
+    cost: item.cost ?? '',
+    range: item.range ?? '',
+    effect: item.effect ?? '',
+    target: item.target ?? '',
+    flavor: item.flavor ?? '',
+    tags: JSON.parse(item.tags ?? '[]') as string[],
+    details: item.details ?? '',
+    sortOrder: item.sortOrder,
   }));
 };
