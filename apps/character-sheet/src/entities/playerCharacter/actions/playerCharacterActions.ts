@@ -24,6 +24,7 @@ export const fetchPlayerCharacters = () => async (dispatch: AppDispatch) => {
     dispatch(setIsLoading(true));
     const characters = await playerCharacterRdbApi.findAll();
     dispatch(setCharacters(characters));
+    return characters;
   } catch (error) {
     console.error('Failed to fetch player characters:', error);
     throw error;

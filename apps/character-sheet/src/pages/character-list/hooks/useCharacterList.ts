@@ -1,8 +1,8 @@
 import { deleteCharacter } from '@/entities/character';
-import type { Character } from '@/entities/character';
+import type { CharacterListItem } from '@/feature/characterManagement/ui/CharacterListView';
 
 interface UseCharacterListProps {
-  characters: Character[];
+  characters: CharacterListItem[];
 }
 
 export function useCharacterList({ characters }: UseCharacterListProps) {

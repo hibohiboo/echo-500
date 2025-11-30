@@ -1,13 +1,11 @@
 import { useNavigate, useLoaderData, useRevalidator } from 'react-router';
-import type { Character } from '@/entities/character';
-import {
-  useCharacterList,
-  CharacterListView,
-} from '@/feature/characterManagement';
+import { CharacterListView } from '@/feature/characterManagement';
+import type { CharacterListItem } from '@/feature/characterManagement/ui/CharacterListView';
+import { useCharacterList } from '../hooks/useCharacterList';
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
-  const characters = useLoaderData<Character[]>();
+  const characters = useLoaderData<CharacterListItem[]>();
   const revalidator = useRevalidator();
 
   const { handleDelete } = useCharacterList({ characters });

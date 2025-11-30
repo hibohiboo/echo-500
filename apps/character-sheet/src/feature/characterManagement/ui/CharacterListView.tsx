@@ -1,7 +1,6 @@
-import type { Character } from '@/entities/character';
-
+export type CharacterListItem = { id: string; name: string };
 interface CharacterListViewProps {
-  characters: Character[];
+  characters: CharacterListItem[];
   onCreateNew: () => void;
   onViewDetail: (id: string) => void;
   onEdit: (id: string) => void;
