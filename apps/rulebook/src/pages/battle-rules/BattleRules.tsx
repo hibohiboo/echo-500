@@ -371,6 +371,232 @@ export function BattleRulesPage() {
             </ul>
           </ContentCard>
         </section>
+
+        {/* Battle Commands Section */}
+        <section className="mt-8">
+          <SectionTitle icon="▶">戦闘コマンド</SectionTitle>
+
+          <div className="mb-6">
+            <p className="leading-relaxed text-text-secondary">
+              戦闘コマンドは、キャラクターが戦闘中に行うアクションである。
+              各コマンドには以下の要素が設定されている。
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            {/* Timing */}
+            <ContentCard>
+              <h3 className="text-xl mb-4 flex items-center gap-2 text-text-primary">
+                <span className="text-cyber-primary">◆</span> タイミング
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-bg-tertiary p-3 rounded border border-cyber-secondary/30">
+                  <div className="font-bold text-cyber-primary mb-1">手番</div>
+                  <p className="text-sm text-text-secondary m-0">
+                    自分の手番でのみ使用可能。
+                  </p>
+                </div>
+                <div className="bg-bg-tertiary p-3 rounded border border-cyber-secondary/30">
+                  <div className="font-bold text-cyber-alert mb-1">割込</div>
+                  <p className="text-sm text-text-secondary m-0">
+                    相手の手番や特定の行動に対して割り込んで使用可能。
+                  </p>
+                </div>
+                <div className="bg-bg-tertiary p-3 rounded border border-cyber-secondary/30">
+                  <div className="font-bold text-nature-accent mb-1">常時</div>
+                  <p className="text-sm text-text-secondary m-0">
+                    常に効果を発揮する。パッシブスキル。
+                  </p>
+                </div>
+              </div>
+            </ContentCard>
+
+            {/* Target */}
+            <ContentCard>
+              <h3 className="text-xl mb-4 flex items-center gap-2 text-text-primary">
+                <span className="text-cyber-primary">◆</span> 対象
+              </h3>
+              <ul className="list-none m-0 p-0 grid grid-cols-1 gap-4">
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2 pb-2 border-b border-cyber-secondary/20">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    n体
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    射程内の任意のキャラクターを n 体選ぶ。
+                  </span>
+                </li>
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2 pb-2 border-b border-cyber-secondary/20">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    範囲 n
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    射程内の任意のマスを 1 つ選び、そこから上下左右に n
+                    マス分の範囲の任意のキャラクターを選ぶ。
+                  </span>
+                </li>
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    グループ
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    射程内のグループの任意のキャラクターを選ぶ。
+                    <br />
+                    <span className="text-xs text-text-tertiary">
+                      ※グループとは互いに隣接するキャラクターのひとまとまり。グループ内は互いに射程1として扱う。
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </ContentCard>
+
+            {/* Range */}
+            <ContentCard>
+              <h3 className="text-xl mb-4 flex items-center gap-2 text-text-primary">
+                <span className="text-cyber-primary">◆</span> 射程
+              </h3>
+              <ul className="list-none m-0 p-0 grid grid-cols-1 gap-4">
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2 pb-2 border-b border-cyber-secondary/20">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    0
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    スキル使用者がいるマス。
+                  </span>
+                </li>
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2 pb-2 border-b border-cyber-secondary/20">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    n
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    使用者のマスから、上下左右に n マス分の距離まで。
+                    <br />
+                    <span className="text-xs text-text-tertiary">
+                      (例: 射程1 = 隣接する上下左右のマス)
+                    </span>
+                  </span>
+                </li>
+                <li className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                  <span className="font-bold text-text-primary min-w-[6rem]">
+                    n-m
+                  </span>
+                  <span className="text-text-secondary text-sm">
+                    n マス目から m マス目までの距離。
+                    <br />
+                    <span className="text-xs text-text-tertiary">
+                      (例: 射程2-3 = 隣接マスや自身のマスは含まない)
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </ContentCard>
+
+            {/* Notes */}
+            <NoteBox>
+              <ul className="list-disc list-inside m-0 p-0 text-sm text-text-secondary space-y-1">
+                <li>1マスには1キャラクターのみ存在できる。</li>
+                <li>
+                  1キャラクターが複数マスを占めることもある。その場合、1マスでも射程内に入っていれば対象にとれる。
+                </li>
+                <li>
+                  複数マスを占めるキャラクターが範囲ダメージを受けたときは、
+                  <span className="text-cyber-alert font-bold">
+                    [ダメージ] × [範囲内の占有マス数]
+                  </span>
+                  のダメージを受ける。
+                </li>
+              </ul>
+            </NoteBox>
+
+            {/* Example Command */}
+            <ExampleBox title="コマンド使用例">
+              <div className="flex flex-col gap-4">
+                <div className="bg-bg-primary/80 border border-cyber-primary rounded p-4 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-cyber-primary text-bg-primary text-xs font-bold px-2 py-1 rounded-bl">
+                    近接攻撃
+                  </div>
+                  <h4 className="text-lg font-bold text-cyber-primary mb-2">
+                    近接攻撃
+                  </h4>
+                  <div className="grid grid-cols-2 gap-y-2 text-sm mb-3">
+                    <div className="flex gap-2">
+                      <span className="text-text-tertiary">射程:</span>
+                      <span className="text-text-primary">1</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-text-tertiary">コスト:</span>
+                      <span className="text-text-primary">5</span>
+                    </div>
+                    <div className="flex gap-2 col-span-2">
+                      <span className="text-text-tertiary">対象:</span>
+                      <span className="text-text-primary">1体</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-cyber-primary/30 pt-2 mb-2">
+                    <p className="text-text-secondary text-sm m-0">
+                      対象に2d6のダメージを与える。
+                    </p>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <span className="text-[10px] border border-cyber-secondary text-cyber-secondary px-1 rounded">
+                      攻撃
+                    </span>
+                    <span className="text-[10px] border border-cyber-secondary text-cyber-secondary px-1 rounded">
+                      近接攻撃
+                    </span>
+                  </div>
+                </div>
+                <div className="text-sm text-text-secondary mt-4 pt-4 border-t border-cyber-primary/30">
+                  <p className="font-bold text-cyber-primary mb-2">
+                    処理例: 攻撃側(2d6期待値: 7) vs 防御側(回避:5 / 装甲:2 /
+                    HP:20)
+                  </p>
+                  <ol className="list-decimal list-inside space-y-2 m-0">
+                    <li>
+                      <span className="font-bold text-text-primary">
+                        命中判定:
+                      </span>{' '}
+                      攻撃側が2d6を振る。出目は「7」。
+                      <br />
+                      <span className="text-xs text-text-tertiary ml-4">
+                        → 出目(7) ≧ 回避値(5) なので
+                        <span className="text-cyber-primary font-bold">
+                          命中
+                        </span>
+                        (未満なら失敗)
+                      </span>
+                    </li>
+                    <li>
+                      <span className="font-bold text-text-primary">
+                        ダメージ算出:
+                      </span>{' '}
+                      攻撃側が2d6を振る。出目は「8」。
+                      <br />
+                      <span className="text-xs text-text-tertiary ml-4">
+                        → 出目(8) - 装甲値(2) =
+                        <span className="text-cyber-alert font-bold">
+                          6ダメージ
+                        </span>
+                      </span>
+                    </li>
+                    <li>
+                      <span className="font-bold text-text-primary">
+                        HP減少:
+                      </span>{' '}
+                      防御側のHPを減らす。
+                      <br />
+                      <span className="text-xs text-text-tertiary ml-4">
+                        → HP(20) - 6 =
+                        <span className="text-text-primary font-bold">
+                          残りHP 14
+                        </span>
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </ExampleBox>
+          </div>
+        </section>
       </article>
     </div>
   );
