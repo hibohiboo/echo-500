@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint . --fix && tsc -b ",
     "preview": "vite preview",
-    "ncu": "ncu -u"
+    "ncu": "ncu -u",
+    "test:bdd": "cucumber-js --config cucumber.mjs"
   },
   "dependencies": {
     "@echo-500/frontend-common": "workspace:*",
