@@ -38,9 +38,13 @@ export const PlayerCharacterMemorySchema = GraphDbMemorySchema;
 // === Types ===
 
 export type Memory = v.InferOutput<typeof MemorySchema>;
-export type GraphDbMemoryNode = v.InferOutput<typeof GraphDbMemoryNodeOnlySchema>;
+export type GraphDbMemoryNode = v.InferOutput<
+  typeof GraphDbMemoryNodeOnlySchema
+>;
 export type GraphDbMemory = v.InferOutput<typeof GraphDbMemorySchema>;
-export type PlayerCharacterMemory = v.InferOutput<typeof PlayerCharacterMemorySchema>;
+export type PlayerCharacterMemory = v.InferOutput<
+  typeof PlayerCharacterMemorySchema
+>;
 
 // === GraphDB Parse Functions ===
 
@@ -66,7 +70,9 @@ const GraphDbMemoryRawSchema = v.object({
   sortOrder: v.number(),
 });
 
-export const parseToGraphDbMemoryNodeList = (data: unknown): GraphDbMemoryNode[] => {
+export const parseToGraphDbMemoryNodeList = (
+  data: unknown,
+): GraphDbMemoryNode[] => {
   const rawList = v.parse(v.array(GraphDbMemoryNodeRawSchema), data);
   return rawList.map((item) => ({
     ...item,
@@ -74,7 +80,9 @@ export const parseToGraphDbMemoryNodeList = (data: unknown): GraphDbMemoryNode[]
   }));
 };
 
-export const parseToGraphDbMemoryList = (data: unknown): PlayerCharacterMemory[] => {
+export const parseToGraphDbMemoryList = (
+  data: unknown,
+): PlayerCharacterMemory[] => {
   const rawList = v.parse(v.array(GraphDbMemoryRawSchema), data);
   return rawList.map((item) => ({
     id: item.id ?? '',
@@ -88,61 +96,30 @@ export const parseToGraphDbMemoryList = (data: unknown): PlayerCharacterMemory[]
 // === Worker Handler Parse Functions ===
 
 export const parseCreateMemoryParams = (data: unknown) => {
-  return v.parse(
-    v.object({
-      id: v.string(),
-      title: v.string(),
-      description: v.string(),
-      tags: v.array(v.string()),
-    }),
-    data,
-  );
+  return v.parse(GraphDbMemoryNodeOnlySchema, data);
 };
 
 export const parseUpdateMemoryParams = (data: unknown) => {
-  return v.parse(
-    v.object({
-      id: v.string(),
-      title: v.string(),
-      description: v.string(),
-      tags: v.array(v.string()),
-    }),
-    data,
-  );
+  return v.parse(GraphDbMemoryNodeOnlySchema, data);
 };
 
 export const parseMemoryId = (data: unknown) => {
   return v.parse(v.object({ id: v.string() }), data);
 };
+const LinkMemorySchema = v.object({
+  characterId: v.string(),
+  memoryId: v.string(),
+  sortOrder: v.number(),
+});
 
 export const parseLinkMemoryPayload = (data: unknown) => {
-  return v.parse(
-    v.object({
-      characterId: v.string(),
-      memoryId: v.string(),
-      sortOrder: v.number(),
-    }),
-    data,
-  );
+  return v.parse(LinkMemorySchema, data);
 };
 
 export const parseUnlinkMemoryPayload = (data: unknown) => {
-  return v.parse(
-    v.object({
-      characterId: v.string(),
-      memoryId: v.string(),
-    }),
-    data,
-  );
+  return v.parse(v.omit(LinkMemorySchema, ['sortOrder']), data);
 };
 
 export const parseUpdateMemorySortOrder = (data: unknown) => {
-  return v.parse(
-    v.object({
-      characterId: v.string(),
-      memoryId: v.string(),
-      sortOrder: v.number(),
-    }),
-    data,
-  );
+  return v.parse(LinkMemorySchema, data);
 };

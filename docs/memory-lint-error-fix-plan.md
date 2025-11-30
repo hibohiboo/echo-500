@@ -263,3 +263,77 @@ packages/schema/src/memory.ts
 5. メンテナンス性が向上する
 
 この方針で進めてよろしいでしょうか？
+
+---
+
+## 実装完了（2025-11-30）
+
+### 実際の実装内容
+
+既存スキーマを最大限再利用する方針で実装しました：
+
+```typescript
+// packages/schema/src/memory.ts
+
+// === Worker Handler Parse Functions ===
+
+export const parseCreateMemoryParams = (data: unknown) => {
+  return v.parse(GraphDbMemoryNodeOnlySchema, data);
+};
+
+export const parseUpdateMemoryParams = (data: unknown) => {
+  return v.parse(GraphDbMemoryNodeOnlySchema, data);
+};
+
+export const parseMemoryId = (data: unknown) => {
+  return v.parse(v.object({ id: v.string() }), data);
+};
+
+const LinkMemorySchema = v.object({
+  characterId: v.string(),
+  memoryId: v.string(),
+  sortOrder: v.number(),
+});
+
+export const parseLinkMemoryPayload = (data: unknown) => {
+  return v.parse(LinkMemorySchema, data);
+};
+
+export const parseUnlinkMemoryPayload = (data: unknown) => {
+  return v.parse(v.omit(LinkMemorySchema, ['sortOrder']), data);
+};
+
+export const parseUpdateMemorySortOrder = (data: unknown) => {
+  return v.parse(LinkMemorySchema, data);
+};
+```
+
+### 改善ポイント
+
+1. **既存スキーマの再利用**:
+   - `parseCreateMemoryParams`と`parseUpdateMemoryParams`は`GraphDbMemoryNodeOnlySchema`を直接使用
+   - 重複定義を避け、DRY原則に従う
+
+2. **v.omitの活用**:
+   - `parseUnlinkMemoryPayload`は`LinkMemorySchema`から`sortOrder`を除外
+   - 新しいスキーマを定義せず、既存のものを変換
+
+3. **共通スキーマの定義**:
+   - `LinkMemorySchema`を定義して`parseLinkMemoryPayload`と`parseUpdateMemorySortOrder`で共有
+
+### 当初案との比較
+
+| 項目 | 当初案（A案） | 実装案 |
+|------|-------------|--------|
+| `parseCreateMemoryParams` | 新規`v.object`定義 | `GraphDbMemoryNodeOnlySchema`を再利用 |
+| `parseUpdateMemoryParams` | 新規`v.object`定義 | `GraphDbMemoryNodeOnlySchema`を再利用 |
+| `parseUnlinkMemoryPayload` | 新規`v.object`定義 | `v.omit(LinkMemorySchema, ['sortOrder'])` |
+| コード行数 | ~70行 | ~30行 |
+| スキーマ重複 | あり | なし |
+
+### 結果
+
+- **Lintエラー**: 解消
+- **コードの簡潔性**: 大幅に向上
+- **保守性**: 既存スキーマの変更が自動的に反映される
+- **一貫性**: BattleCommandパターンを踏襲しつつ、よりDRY
