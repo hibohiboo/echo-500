@@ -68,29 +68,79 @@ export const LongDescription: Story = {
   },
 };
 
-export const CustomMaxWidth: Story = {
+export const TwoColumnGrid: Story = {
   args: {
     slot: sampleSlot,
     removeTag: fn(),
     updateMemorySlot: fn(),
     addTag: fn(),
     deleteMemorySlot: fn(),
-    maxWidth: '400px',
   },
+  render: () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <MemoryForm
+        slot={{
+          id: '1',
+          title: '人間の保護',
+          description:
+            'ロボットは人間に危害を加えてはならない。また、その危険を看過することによって、人間に危害を及ぼしてはならない。',
+          tags: ['ロボット工学三原則', 'システムコア', '優先度：最高'],
+        }}
+        removeTag={fn()}
+        updateMemorySlot={fn()}
+        addTag={fn()}
+        deleteMemorySlot={fn()}
+      />
+      <MemoryForm
+        slot={{
+          id: '2',
+          title: '命令順守',
+          description:
+            'ロボットは人間にあたえられた命令に服従しなければならない。ただし、あたえられた命令が、第一条に反する場合は、この限りでない。',
+          tags: ['ロボット工学三原則', 'システムコア', '優先度：高'],
+        }}
+        removeTag={fn()}
+        updateMemorySlot={fn()}
+        addTag={fn()}
+        deleteMemorySlot={fn()}
+      />
+      <MemoryForm
+        slot={{
+          id: '3',
+          title: '自己保存',
+          description:
+            'ロボットは、前掲第一条および第二条に反するおそれのないかぎり、自己をまもらなければならない。',
+          tags: ['ロボット工学三原則', 'システムコア', '優先度：中'],
+        }}
+        removeTag={fn()}
+        updateMemorySlot={fn()}
+        addTag={fn()}
+        deleteMemorySlot={fn()}
+      />
+      <MemoryForm
+        slot={{
+          id: '4',
+          title: '破損したメモリ',
+          description: 'あなたの目的に関するデータが含まれていたようだ。記憶を再構築せよ。',
+          tags: ['破損データ', '要復旧', 'クリティカル'],
+        }}
+        removeTag={fn()}
+        updateMemorySlot={fn()}
+        addTag={fn()}
+        deleteMemorySlot={fn()}
+      />
+    </div>
+  ),
 };
 
-export const WideMaxWidth: Story = {
+export const SingleColumn: Story = {
   args: {
     slot: sampleSlot,
     removeTag: fn(),
     updateMemorySlot: fn(),
     addTag: fn(),
     deleteMemorySlot: fn(),
-    maxWidth: '800px',
   },
-};
-
-export const MultipleSlots: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <MemoryForm

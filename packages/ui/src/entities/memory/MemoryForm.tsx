@@ -10,10 +10,6 @@ export interface MemoryFormProps {
   ) => void;
   addTag: (id: string, tag: string) => void;
   deleteMemorySlot: (id: string) => void;
-  /**
-   * PC表示時の最大幅（デフォルト: "600px"）
-   */
-  maxWidth?: string;
 }
 
 export const MemoryForm = ({
@@ -22,13 +18,9 @@ export const MemoryForm = ({
   removeTag,
   addTag,
   deleteMemorySlot,
-  maxWidth = '600px',
-}: MemoryFormProps) => {
-  return (
-    <div
-      className="p-4 bg-bg-tertiary border border-cyber-secondary rounded mx-auto w-full"
-      style={{ maxWidth }}
-    >
+}: MemoryFormProps) => (
+    <div className="p-4 bg-bg-tertiary border border-cyber-secondary rounded w-full">
+
       <div className="mb-2">
         <label className="block text-xs text-text-tertiary mb-1">
           タイトル
@@ -100,4 +92,3 @@ export const MemoryForm = ({
       </button>
     </div>
   );
-};

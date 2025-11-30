@@ -41,7 +41,7 @@ export default function CharacterCreatePage() {
               <span className="mr-1">🧠</span>
               記憶スロット
             </label>
-            <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {memorySlots.map((slot) => (
                 <MemoryForm
                   key={slot.id}
