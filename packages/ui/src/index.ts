@@ -105,6 +105,8 @@ export type { NavigationItem, NavigationProps } from './shared/navigation';
 
 // Entities層（新構造）
 export { ImageInput } from './entities/image';
+export { MemoryForm } from './entities/memory';
+export type { MemoryFormProps } from './entities/memory';
 export {
   ScenarioCard,
   ScenarioForm,

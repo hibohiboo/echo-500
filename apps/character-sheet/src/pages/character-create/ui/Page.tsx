@@ -1,8 +1,8 @@
+import { MemoryForm } from '@echo-500/ui';
 import { AppContainer } from '@/shared/ui/atoms/AppContainer';
 import { AppHeader } from '@/shared/ui/atoms/AppHeader';
 import { useCharacterForm } from '../hook/useCharacterForm';
 import { InputForm } from './InputForm';
-import { MemoryForm } from './MemoryForm';
 
 export default function CharacterCreatePage() {
   const {

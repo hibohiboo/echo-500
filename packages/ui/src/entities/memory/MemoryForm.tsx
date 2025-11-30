@@ -1,6 +1,6 @@
 import type { GraphDbMemoryNode } from '@echo-500/schema';
 
-export const MemoryForm = (args: {
+export interface MemoryFormProps {
   slot: GraphDbMemoryNode;
   removeTag: (id: string, tagIndex: number) => void;
   updateMemorySlot: (
@@ -10,10 +10,25 @@ export const MemoryForm = (args: {
   ) => void;
   addTag: (id: string, tag: string) => void;
   deleteMemorySlot: (id: string) => void;
-}) => {
-  const { slot, updateMemorySlot, removeTag, addTag, deleteMemorySlot } = args;
+  /**
+   * PC表示時の最大幅（デフォルト: "600px"）
+   */
+  maxWidth?: string;
+}
+
+export const MemoryForm = ({
+  slot,
+  updateMemorySlot,
+  removeTag,
+  addTag,
+  deleteMemorySlot,
+  maxWidth = '600px',
+}: MemoryFormProps) => {
   return (
-    <div className="p-4 bg-bg-tertiary border border-cyber-secondary rounded">
+    <div
+      className="p-4 bg-bg-tertiary border border-cyber-secondary rounded mx-auto w-full"
+      style={{ maxWidth }}
+    >
       <div className="mb-2">
         <label className="block text-xs text-text-tertiary mb-1">
           タイトル
