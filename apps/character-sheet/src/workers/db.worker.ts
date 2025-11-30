@@ -9,6 +9,7 @@ import {
 } from '@echo-500/graphdb';
 import { runMigrate } from '@echo-500/rdb/db/runMigrate';
 import { battleCommandGraphHandlers } from '@/entities/battleCommand/workers/battleCommandGraphHandlers';
+import { memoryGraphHandlers } from '@/entities/memory/workers/memoryGraphHandlers';
 import { playerCharacterGraphHandlers } from '@/entities/playerCharacter/workers/playerCharacterGraphHandlers';
 import { playerCharacterRdbHandlers } from '@/entities/playerCharacter/workers/playerCharacterRdbHandlers';
 
@@ -115,6 +116,11 @@ playerCharacterGraphHandlers.forEach(({ type, handler }) => {
 
 // バトルコマンドハンドラーを登録（GraphDB）
 battleCommandGraphHandlers.forEach(({ type, handler }) => {
+  handlers.set(type, handler);
+});
+
+// メモリーハンドラーを登録（GraphDB）
+memoryGraphHandlers.forEach(({ type, handler }) => {
   handlers.set(type, handler);
 });
 

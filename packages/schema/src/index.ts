@@ -12,3 +12,4 @@ export * from './export';
 export * from './battleFrame';
 export * from './playerCharacter';
 export * from './battleCommand';
+export * from './memory';

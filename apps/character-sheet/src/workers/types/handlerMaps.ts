@@ -1,4 +1,5 @@
 import type { BattleCommandGraphHandlerMap } from '@/entities/battleCommand/workers/battleCommandGraphHandlers';
+import type { MemoryGraphHandlerMap } from '@/entities/memory/workers/memoryGraphHandlers';
 import type { PlayerCharacterGraphHandlerMap } from '@/entities/playerCharacter/workers/playerCharacterGraphHandlers';
 import type { PlayerCharacterRdbHandlerMap } from '@/entities/playerCharacter/workers/playerCharacterRdbHandlers';
 
@@ -7,7 +8,8 @@ import type { PlayerCharacterRdbHandlerMap } from '@/entities/playerCharacter/wo
  * graphdbWorkerClient.request メソッドで型推論を有効にするために使用
  */
 export type GlobalGraphHandlerMap = PlayerCharacterGraphHandlerMap &
-  BattleCommandGraphHandlerMap;
+  BattleCommandGraphHandlerMap &
+  MemoryGraphHandlerMap;
 
 /**
  * 全てのRDBハンドラーマップを統合した型

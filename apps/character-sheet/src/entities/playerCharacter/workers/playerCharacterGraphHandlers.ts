@@ -2,6 +2,7 @@ import { playerCharacterGraphRepository } from '@echo-500/graphdb';
 import {
   parsePlayerCharacterId,
   parseToGraphDbBattleCommandList,
+  parseToGraphDbMemoryList,
 } from '@echo-500/schema';
 
 // ===== プレイヤーキャラクター GraphDB操作ハンドラー =====
@@ -28,6 +29,15 @@ export const playerCharacterGraphHandlers = [
       const { id } = parsePlayerCharacterId(payload);
       const result = await playerCharacterGraphRepository.getBattleCommands(id);
       const data = parseToGraphDbBattleCommandList(result);
+      return { data };
+    },
+  },
+  {
+    type: 'playerCharacter:getMemories',
+    handler: async (payload: unknown) => {
+      const { id } = parsePlayerCharacterId(payload);
+      const result = await playerCharacterGraphRepository.getMemories(id);
+      const data = parseToGraphDbMemoryList(result);
       return { data };
     },
   },

@@ -1,5 +1,8 @@
 import { dbWorkerClient } from '@/workers/dbWorkerClient';
-import type { PlayerCharacterBattleCommand } from '@echo-500/schema';
+import type {
+  PlayerCharacterBattleCommand,
+  PlayerCharacterMemory,
+} from '@echo-500/schema';
 
 /**
  * プレイヤーキャラクターのGraphDB API（IndexedDB経由）
@@ -23,5 +26,13 @@ export const playerCharacterGraphApi = {
   getBattleCommands: (
     characterId: string,
   ): Promise<PlayerCharacterBattleCommand[]> =>
-    dbWorkerClient.request('playerCharacter:getBattleCommands', { id: characterId }),
+    dbWorkerClient.request('playerCharacter:getBattleCommands', {
+      id: characterId,
+    }),
+
+  /**
+   * PlayerCharacterのメモリーを取得（sortOrder順）
+   */
+  getMemories: (characterId: string): Promise<PlayerCharacterMemory[]> =>
+    dbWorkerClient.request('playerCharacter:getMemories', { id: characterId }),
 };

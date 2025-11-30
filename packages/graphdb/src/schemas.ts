@@ -98,6 +98,17 @@ export const graphDbSchemas = {
         PRIMARY KEY (id)
       )`,
     },
+    {
+      name: 'Memory',
+      query: `
+      CREATE NODE TABLE Memory (
+        id STRING,
+        title STRING,
+        description STRING,
+        tags STRING,
+        PRIMARY KEY (id)
+      )`,
+    },
   ],
   relationships: [
     {
@@ -200,6 +211,14 @@ export const graphDbSchemas = {
       query: `
       CREATE REL TABLE HAS_BATTLE_COMMAND (
         FROM PlayerCharacter TO BattleCommand,
+        sortOrder INT64
+      )`,
+    },
+    {
+      name: 'HAS_MEMORY',
+      query: `
+      CREATE REL TABLE HAS_MEMORY (
+        FROM PlayerCharacter TO Memory,
         sortOrder INT64
       )`,
     },
