@@ -723,19 +723,77 @@ export const scenarioApi = {
 #### 8-4. 動作確認
 - [x] ~~バトルコマンド追加後のF5でデータが永続化されることを確認~~ ✅ **完了**
 
-### フェーズ9: テスト（未実施）
+### フェーズ9: プレイヤーキャラクター更新機能（2025-11-30追加）
 
-#### 9-1. BDD テスト
-- [ ] `apps/character-sheet/tests/features/player-character.feature` 作成
-- [ ] `apps/character-sheet/tests/steps/player-character.steps.ts` 作成
+#### 9-1. データ層（Repository）
+- [ ] `packages/rdb/src/queries/playerCharacterRepository.ts` に `update()` メソッド追加
+  - `UPDATE player_characters SET name = ?, updated_at = NOW() WHERE id = ?`
+- [ ] `packages/graphdb/src/queries/playerCharacterRepository.ts` に `update()` メソッド追加
+  - `MATCH (pc:PlayerCharacter {id: $id}) SET pc.name = $name`
+- [ ] ユニットテスト追加
+  - `packages/rdb/src/queries/playerCharacterRepository.test.ts` に更新テスト
+  - `packages/graphdb/src/queries/playerCharacterRepository.test.ts` に更新テスト
 
-#### 9-2. テスト実行
+#### 9-2. Entity層（API・Redux）
+- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterRdbApi.ts` に `update()` 追加
+- [ ] `apps/character-sheet/src/entities/playerCharacter/api/playerCharacterGraphApi.ts` に `update()` 追加
+- [ ] `apps/character-sheet/src/entities/playerCharacter/model/playerCharacterSlice.ts` に `updateCharacter` action追加
+- [ ] `apps/character-sheet/src/entities/playerCharacter/hooks/useUpdatePlayerCharacter.ts` 作成
+  - モーダル開閉状態管理
+  - 更新フォーム状態管理
+  - RDB + GraphDB両方を更新
+  - Redux状態更新
+
+#### 9-3. Worker層（永続化対応）
+- [ ] `apps/character-sheet/src/entities/playerCharacter/workers/playerCharacterGraphHandlers.ts` に `playerCharacter:update` ハンドラー追加
+- [ ] `apps/character-sheet/src/entities/playerCharacter/workers/playerCharacterRdbHandlers.ts` に `playerCharacter:update` ハンドラー追加
+- [ ] `apps/character-sheet/src/workers/types/handlerMaps.ts` の型定義更新
+
+#### 9-4. UI層
+- [ ] `packages/ui/src/entities/playerCharacter/PlayerCharacterUpdateModal.tsx` 作成
+  - PlayerCharacterCreateModalと同様の構造
+  - 初期値として既存のキャラクター名を表示
+  - バリデーション（名前必須）
+- [ ] `packages/ui/src/entities/playerCharacter/PlayerCharacterList.tsx` に編集ボタン追加
+  - `onEdit?: (character: PlayerCharacter) => void` props追加
+  - 各キャラクター行に「編集」ボタン追加
+- [ ] `packages/ui/src/entities/playerCharacter/types.ts` エクスポート確認
+
+#### 9-5. Page層統合
+- [ ] `apps/character-sheet/src/pages/player-character/ui/Page.tsx` 更新
+  - `useUpdatePlayerCharacter()` hook使用
+  - `PlayerCharacterUpdateModal` コンポーネント追加
+  - `PlayerCharacterList` の `onEdit` props実装
+
+#### 9-6. テスト
+- [ ] ユニットテスト実行・全テスト通過確認
+  - RDB: `playerCharacterRepository.test.ts` 更新テスト
+  - GraphDB: `playerCharacterRepository.test.ts` 更新テスト
+- [ ] lint・型チェック実行
+- [ ] BDDテスト追加
+  - `apps/character-sheet/tests/features/player-character.feature` に更新シナリオ追加
+  - `apps/character-sheet/tests/steps/player-character.steps.ts` に更新ステップ定義追加
+- [ ] BDDテスト実行・全シナリオ通過確認
+
+### フェーズ10: テスト（既存・一部完了）
+
+#### 10-1. BDD テスト
+- [x] ~~`apps/character-sheet/tests/features/player-character.feature` 作成~~ ✅ **完了（2025-11-30）**
+  - プレイヤーキャラクター新規作成シナリオ
+  - プレイヤーキャラクター削除シナリオ
+- [x] ~~`apps/character-sheet/tests/steps/player-character.steps.ts` 作成~~ ✅ **完了（2025-11-30）**
+- [x] ~~`apps/character-sheet/tests/steps/common.steps.ts` 作成~~ ✅ **完了（2025-11-30）**
+
+#### 10-2. テスト実行
 - [x] ~~ユニットテスト実行・全テスト通過確認~~ ✅ **完了**
   - `packages/rdb/src/queries/playerCharacterRepository.test.ts` (5 tests passed)
   - `packages/graphdb/src/queries/playerCharacterRepository.test.ts` (5 tests passed)
   - `packages/graphdb/src/queries/battleCommandRepository.test.ts` (7 tests passed)
 - [x] ~~lint・型チェック実行~~ ✅ **完了**
-- [ ] BDDテスト実行・全シナリオ通過確認
+- [x] ~~BDDテスト実行（新規作成・削除シナリオ）~~ ✅ **完了（2025-11-30）**
+  - 2 scenarios (2 passed)
+  - 15 steps (15 passed)
+- [ ] BDDテスト実行・全シナリオ通過確認（更新・バトルコマンド・永続化含む）
 
 ## データフロー
 
@@ -753,6 +811,23 @@ Redux State (playerCharacterSlice)
     3. Redux: playerCharacterSlice.addCharacter(character)
   ↓
 UI: 一覧に新しいキャラクター表示
+```
+
+### キャラクター更新フロー（2025-11-30追加）
+```
+UI (PlayerCharacterUpdateModal)
+  ↓ onUpdate(id, name)
+Redux State (playerCharacterSlice)
+  ↓ updatePlayerCharacterAction(id, name)
+    1. RDB API: playerCharacterRdbApi.update(id, name)
+       → RDB: UPDATE player_characters SET name = ?, updated_at = NOW() WHERE id = ?
+    2. GraphDB API: playerCharacterGraphApi.update(id, name)
+       → GraphDB: MATCH (pc:PlayerCharacter {id: $id}) SET pc.name = $name
+    3. Worker: dbWorkerClient.request('playerCharacter:update', { id, name })
+       → GraphDB永続化（save）
+    4. Redux: playerCharacterSlice.updateCharacter({ id, name })
+  ↓
+UI: 一覧のキャラクター名が更新される
 ```
 
 ### バトルコマンド追加フロー
