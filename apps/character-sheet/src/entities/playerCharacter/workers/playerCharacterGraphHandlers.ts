@@ -27,7 +27,6 @@ export const playerCharacterGraphHandlers = [
     handler: async (payload: unknown) => {
       const { id } = parsePlayerCharacterId(payload);
       const result = await playerCharacterGraphRepository.getBattleCommands(id);
-      console.log('resulet', result);
       const data = parseToGraphDbBattleCommandList(result);
       return { data };
     },

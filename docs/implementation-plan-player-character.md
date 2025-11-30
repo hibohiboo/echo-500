@@ -679,35 +679,62 @@ export const scenarioApi = {
    - バリデーション
 
 ### フェーズ6: Feature層
+✅ **完了済み**
 
 #### 6-1. Feature Hook実装
-- [ ] `apps/rulebook/src/feature/playerCharacterManagement/hooks/usePlayerCharacterManagement.ts` 作成
+- [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/hooks/useBattleCommandManagement.ts` 作成~~ ✅ **完了**
 
-#### 6-2. Feature UI実装
-- [ ] `apps/rulebook/src/feature/playerCharacterManagement/ui/PlayerCharacterTabContent.tsx` 作成
+#### 6-2. Feature Actions実装
+- [x] ~~`apps/character-sheet/src/features/playerCharacterBattleCommandManagement/actions/battleCommandManagementActions.ts` 作成~~ ✅ **完了**
 
 ### フェーズ7: Page層
+✅ **完了済み**
 
 #### 7-1. Page実装
-- [ ] `apps/rulebook/src/pages/player-character/ui/Page.tsx` 作成
+- [x] ~~`apps/character-sheet/src/pages/player-character/ui/Page.tsx` 作成~~ ✅ **完了**
 
 #### 7-2. ルーティング追加
-- [ ] `apps/rulebook/src/app/router.tsx` に `/content/player-character` ルート追加
+- [x] ~~`apps/character-sheet/src/app/Router.tsx` に `/player-character` ルート追加~~ ✅ **完了**
 
 #### 7-3. Redux Store設定
-- [ ] `apps/rulebook/src/app/store/index.ts` 作成
-- [ ] `apps/rulebook/src/app/store/rootReducer.ts` 作成
-- [ ] `apps/rulebook/src/index.tsx` に Provider追加
+- [x] ~~`apps/character-sheet/src/app/store/index.ts` にreducers追加~~ ✅ **完了**
+  - `playerCharacter` reducer
+  - `battleCommand` reducer
 
-### フェーズ8: テスト
+### フェーズ8: GraphDB永続化対応
+✅ **完了済み（2025-11-30）**
 
-#### 8-1. BDD テスト
-- [ ] `apps/rulebook/tests/features/player-character.feature` 作成
-- [ ] `apps/rulebook/tests/steps/player-character.steps.ts` 作成
+#### 8-1. KuzuDBのnull問題対応
+- [x] ~~`packages/schema/src/battleCommand.ts` 修正~~ ✅ **完了**
+  - `GraphDbBattleCommandRawSchema`で`OptionalToStringSchema`を使用
+  - KuzuDBが空文字列をnullとして復元する問題に対応
 
-#### 8-2. テスト実行
-- [ ] ユニットテスト実行・全テスト通過確認
-- [ ] lint・型チェック実行
+#### 8-2. save/load機能実装
+- [x] ~~`apps/character-sheet/src/workers/dbWorkerClient.ts` 実装~~ ✅ **完了**
+  - `save()` / `load()` メソッド追加
+  - `saveNode()` / `saveEdge()` / `loadTable()` 実装
+- [x] ~~`apps/character-sheet/src/workers/db.worker.ts` 実装~~ ✅ **完了**
+  - `graphdb:save` / `graphdb:load` ハンドラー追加
+  - GraphDB変更操作後の自動save実装
+
+#### 8-3. 初期化時のデータロード
+- [x] ~~`dbWorkerClient.onInitialize()` でload実行~~ ✅ **完了**
+
+#### 8-4. 動作確認
+- [x] ~~バトルコマンド追加後のF5でデータが永続化されることを確認~~ ✅ **完了**
+
+### フェーズ9: テスト（未実施）
+
+#### 9-1. BDD テスト
+- [ ] `apps/character-sheet/tests/features/player-character.feature` 作成
+- [ ] `apps/character-sheet/tests/steps/player-character.steps.ts` 作成
+
+#### 9-2. テスト実行
+- [x] ~~ユニットテスト実行・全テスト通過確認~~ ✅ **完了**
+  - `packages/rdb/src/queries/playerCharacterRepository.test.ts` (5 tests passed)
+  - `packages/graphdb/src/queries/playerCharacterRepository.test.ts` (5 tests passed)
+  - `packages/graphdb/src/queries/battleCommandRepository.test.ts` (7 tests passed)
+- [x] ~~lint・型チェック実行~~ ✅ **完了**
 - [ ] BDDテスト実行・全シナリオ通過確認
 
 ## データフロー
@@ -788,17 +815,23 @@ UI: コマンドリストに新しいコマンド表示
 ## 完了基準
 
 ### 必須項目
-- [ ] 全ユニットテスト通過
-- [ ] 全BDDテスト通過
-- [ ] lint・型チェックエラーなし
-- [ ] ビルドエラーなし
+- [x] ~~全ユニットテスト通過~~ ✅ **完了**
+  - RDB: `playerCharacterRepository.test.ts` (5 tests)
+  - GraphDB: `playerCharacterRepository.test.ts` (5 tests)
+  - GraphDB: `battleCommandRepository.test.ts` (7 tests)
+- [ ] 全BDDテスト通過（未実施）
+- [x] ~~lint・型チェックエラーなし~~ ✅ **完了**
+- [x] ~~ビルドエラーなし~~ ✅ **完了**
 
 ### 機能確認
-- [ ] プレイヤーキャラクターのCRUD操作が正常動作
-- [ ] バトルコマンドの追加・削除が正常動作
-- [ ] **バトルコマンド重複チェックが正常動作**（同じコマンドを2回追加できないこと）
-- [ ] データの永続化が正常動作（ページリロード後も保持）
-- [ ] GraphDBとRDBの整合性が保たれている
+- [x] ~~プレイヤーキャラクターのCRUD操作が正常動作~~ ✅ **完了**
+- [x] ~~バトルコマンドの追加・削除が正常動作~~ ✅ **完了**
+- [x] ~~**バトルコマンド重複チェックが正常動作**（同じコマンドを2回追加できないこと）~~ ✅ **完了**
+- [x] ~~データの永続化が正常動作（ページリロード後も保持）~~ ✅ **完了**
+  - GraphDBデータのIndexedDB永続化実装完了
+  - F5後もバトルコマンドが保持されることを確認
+- [x] ~~GraphDBとRDBの整合性が保たれている~~ ✅ **完了**
+  - 同一IDをRDB/GraphDBで使用する設計に修正完了
 
 ## 参考資料
 
