@@ -16,7 +16,6 @@ export default defineConfig({
       },
     }),
     tailwindcss(),
-    ,
   ],
   optimizeDeps: {
     exclude: ['@electric-sql/pglite', '@kuzu/kuzu-wasm'],

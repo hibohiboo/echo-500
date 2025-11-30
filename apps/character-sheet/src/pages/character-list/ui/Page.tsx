@@ -13,7 +13,7 @@ export default function CharacterListPage() {
   return (
     <CharacterListView
       characters={characters}
-      onCreateNew={() => navigate('/new')}
+      onCreateNew={() => navigate('/create')}
       onViewDetail={(id) => navigate(`/character/${id}`)}
       onEdit={(id) => navigate(`/edit/${id}`)}
       onDelete={async (id) => {
