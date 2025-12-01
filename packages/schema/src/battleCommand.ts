@@ -1,11 +1,11 @@
 import * as v from 'valibot';
-import { OptionalToStringSchema } from './common';
+import { OptionalToStringSchema, StringToNumberSchema } from './common';
 
 /**
  * バトルコマンドスキーマ
  * ルールブックで使用されるバトルコマンドカードのデータ構造
  */
-export const BattleCommandSchema = v.object({
+const BattleCommandSchema = v.object({
   /** クラス名（職業など） */
   class: v.string(),
   /** コマンド名 */
@@ -34,7 +34,7 @@ export const BattleCommandSchema = v.object({
  * グラフDB用のバトルコマンドノード（ID付き、sortOrderなし）
  * BattleCommandSchemaを拡張してidを追加
  */
-export const GraphDbBattleCommandNodeOnlySchema = v.object({
+const GraphDbBattleCommandNodeOnlySchema = v.object({
   ...BattleCommandSchema.entries,
   /** バトルコマンドID */
   id: v.string(),
@@ -44,7 +44,7 @@ export const GraphDbBattleCommandNodeOnlySchema = v.object({
  * グラフDB用のプレイヤーキャラクターのバトルコマンド（並び順付き）
  * GraphDbBattleCommandNodeOnlySchemaを拡張してsortOrderを追加
  */
-export const GraphDbBattleCommandSchema = v.object({
+const GraphDbBattleCommandSchema = v.object({
   ...GraphDbBattleCommandNodeOnlySchema.entries,
   /** 並び順 */
   sortOrder: v.number(),
@@ -54,16 +54,15 @@ export const GraphDbBattleCommandSchema = v.object({
  * プレイヤーキャラクターのバトルコマンド（並び順付き）
  * GraphDbBattleCommandSchemaと同じ
  */
-export const PlayerCharacterBattleCommandSchema = GraphDbBattleCommandSchema;
+const PlayerCharacterBattleCommandSchema = GraphDbBattleCommandSchema;
 
 /**
  * バトルコマンド作成・更新用の入力データスキーマ
  * BattleCommandSchemaからidを除外
  */
-export const BattleCommandFormDataSchema = v.omit(
-  PlayerCharacterBattleCommandSchema,
-  ['id'],
-);
+const BattleCommandFormDataSchema = v.omit(PlayerCharacterBattleCommandSchema, [
+  'id',
+]);
 
 /**
  * ルールブック用のバトルコマンドの型
@@ -209,7 +208,9 @@ export const parseUpdateBattleCommandSortOrderPayload = (data: unknown) => {
 /**
  * バトルコマンドフォームデータをパース
  */
-export const parseBattleCommandFormData = (data: unknown): BattleCommandFormData => {
+export const parseBattleCommandFormData = (
+  data: unknown,
+): BattleCommandFormData => {
   return v.parse(BattleCommandFormDataSchema, data);
 };
 
@@ -223,7 +224,9 @@ export const parseBattleCommandId = (data: unknown): { id: string } => {
 /**
  * 重複チェックペイロードをパース
  */
-export const parseCheckDuplicateBattleCommandPayload = (data: unknown): { characterId: string; className: string; commandName: string } => {
+export const parseCheckDuplicateBattleCommandPayload = (
+  data: unknown,
+): { characterId: string; className: string; commandName: string } => {
   const schema = v.object({
     characterId: v.string(),
     className: v.string(),
@@ -235,39 +238,18 @@ export const parseCheckDuplicateBattleCommandPayload = (data: unknown): { charac
 /**
  * sortOrder更新ペイロードをパース
  */
-export const parseUpdateSortOrderPayload = (data: unknown): { characterId: string; commandId: string; sortOrder: number } => {
+export const parseUpdateSortOrderPayload = (
+  data: unknown,
+): { characterId: string; commandId: string; sortOrder: number } => {
   return v.parse(UpdateBattleCommandSortOrderPayloadSchema, data);
 };
 
-// === GraphDB Parse Functions ===
+// === Parse Functions ===
 
-/**
- * GraphDBから取得したバトルコマンドノード（tagsがJSON文字列、sortOrderなし）のスキーマ
- */
-export const GraphDbBattleCommandNodeSchema = v.object({
-  id: v.string(),
-  class: v.string(),
-  name: v.string(),
-  cp: v.number(),
-  timing: v.string(),
-  cost: v.string(),
-  range: v.string(),
-  effect: v.string(),
-  target: v.string(),
-  flavor: v.string(),
-  tags: v.string(), // JSON文字列
-  details: v.string(),
-});
-
-/**
- * GraphDBから取得したバトルコマンド（tagsがJSON文字列、sortOrder付き）のスキーマ
- * KuzuDBは空文字列をnullとして復元するため、OptionalToStringSchemaを使用
- */
-export const GraphDbBattleCommandRawSchema = v.object({
-  id: OptionalToStringSchema,
+const ExternalBattleCommandRawSchema = v.object({
   class: OptionalToStringSchema,
   name: OptionalToStringSchema,
-  cp: v.number(),
+  cp: StringToNumberSchema,
   timing: OptionalToStringSchema,
   cost: OptionalToStringSchema,
   range: OptionalToStringSchema,
@@ -276,21 +258,17 @@ export const GraphDbBattleCommandRawSchema = v.object({
   flavor: OptionalToStringSchema,
   tags: OptionalToStringSchema, // JSON文字列
   details: OptionalToStringSchema,
-  sortOrder: v.number(),
 });
 
 /**
- * GraphDBのバトルコマンドノードリストをパース（tagsをJSON.parseで配列に変換、sortOrderなし）
+ * GraphDBから取得したバトルコマンド（tagsがJSON文字列、sortOrder付き）のスキーマ
+ * KuzuDBは空文字列をnullとして復元するため、OptionalToStringSchemaを使用
  */
-export const parseToGraphDbBattleCommandNodeList = (
-  data: unknown,
-): GraphDbBattleCommandNode[] => {
-  const rawList = v.parse(v.array(GraphDbBattleCommandNodeSchema), data);
-  return rawList.map((item) => ({
-    ...item,
-    tags: JSON.parse(item.tags) as string[],
-  }));
-};
+const GraphDbBattleCommandRawSchema = v.object({
+  ...ExternalBattleCommandRawSchema.entries,
+  id: OptionalToStringSchema,
+  sortOrder: StringToNumberSchema,
+});
 
 /**
  * GraphDBのバトルコマンドリストをパース（tagsをJSON.parseで配列に変換、sortOrder付き）
@@ -299,19 +277,21 @@ export const parseToGraphDbBattleCommandList = (
   data: unknown,
 ): PlayerCharacterBattleCommand[] => {
   const rawList = v.parse(v.array(GraphDbBattleCommandRawSchema), data);
-  return rawList.map((item) => ({
-    id: item.id ?? '',
-    class: item.class ?? '',
-    name: item.name ?? '',
-    cp: item.cp,
-    timing: item.timing ?? '',
-    cost: item.cost ?? '',
-    range: item.range ?? '',
-    effect: item.effect ?? '',
-    target: item.target ?? '',
-    flavor: item.flavor ?? '',
-    tags: JSON.parse(item.tags ?? '[]') as string[],
-    details: item.details ?? '',
-    sortOrder: item.sortOrder,
-  }));
+  return rawList.map((item) =>
+    parseToPlayerCharacterBattleCommand({
+      ...item,
+      tags: JSON.parse(item.tags ?? '[]') as string[],
+    }),
+  );
+};
+
+/**
+ * SpreadSheetのバトルコマンドリストをパース（tagsをJSON.parseで配列に変換、sortOrder付き）
+ */
+export const parseToExternalBattleCommand = (data: unknown): BattleCommand => {
+  const raw = v.parse(ExternalBattleCommandRawSchema, data);
+  return parseToBattleCommand({
+    ...raw,
+    tags: raw.tags?.split(','),
+  });
 };

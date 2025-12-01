@@ -8,6 +8,7 @@ import {
   setIsSubmitting,
   resetForm,
 } from '../model/characterCreateSlice';
+import { useBattleCommands } from './useBattleCommands';
 import { useMemorySlots } from './useMemorySlots';
 import type { FormEventHandler } from 'react';
 
@@ -24,6 +25,7 @@ export const useCharacterForm = () => {
       id: generateUUID(),
     })),
   });
+  const battleCommandModel = useBattleCommands();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -55,5 +57,6 @@ export const useCharacterForm = () => {
     onCancel,
     handleNameChange,
     ...memoryModel,
+    ...battleCommandModel,
   };
 };

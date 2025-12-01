@@ -2,6 +2,7 @@ import { MemoryForm } from '@echo-500/ui';
 import { AppContainer } from '@/shared/ui/atoms/AppContainer';
 import { AppHeader } from '@/shared/ui/atoms/AppHeader';
 import { useCharacterForm } from '../hook/useCharacterForm';
+import { BattleCommandItem } from './BattleCommandItem';
 import { InputForm } from './InputForm';
 
 export default function CharacterCreatePage() {
@@ -17,6 +18,7 @@ export default function CharacterCreatePage() {
     addTag,
     deleteMemorySlot,
     addMemorySlot,
+    availableCommands,
   } = useCharacterForm();
   return (
     <AppContainer>
@@ -61,6 +63,29 @@ export default function CharacterCreatePage() {
             >
               + 記憶スロットを追加
             </button>
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              <span className="mr-1">💾</span>
+              戦闘モジュール
+            </label>
+            <p className="text-[0.85rem] text-(--text-tertiary) mb-4">
+              初期CP: 100点
+            </p>
+            {availableCommands &&
+              availableCommands.map((cmd) => {
+                const isSelected = false; // battleCommands.includes(cmd.name);
+                return (
+                  <BattleCommandItem
+                    key={`${cmd.class}-${cmd.name}`}
+                    cmd={cmd}
+                    isSelected={isSelected}
+                    toggleBattleCommand={() => {
+                      // todo
+                    }}
+                  />
+                );
+              })}
           </div>
           <div className="flex gap-4">
             <button

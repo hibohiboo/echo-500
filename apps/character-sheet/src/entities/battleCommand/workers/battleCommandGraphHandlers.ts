@@ -5,7 +5,7 @@ import {
   parseCheckDuplicateBattleCommandPayload,
   parseLinkBattleCommandPayload,
   parseUpdateSortOrderPayload,
-  parseToGraphDbBattleCommandNodeList,
+  parseToGraphDbBattleCommandList,
 } from '@echo-500/schema';
 import { generateUUID } from '@echo-500/utility';
 
@@ -22,7 +22,7 @@ export const battleCommandGraphHandlers = [
       const result = await battleCommandGraphRepository.create({ id, ...data });
       console.log('[BattleCommand Worker] Repository result:', result);
 
-      const commands = parseToGraphDbBattleCommandNodeList(result);
+      const commands = parseToGraphDbBattleCommandList(result);
       console.log('[BattleCommand Worker] Parsed commands:', commands);
 
       if (!commands || commands.length === 0) {
