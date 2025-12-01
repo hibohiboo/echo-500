@@ -1,13 +1,17 @@
 import { generateUUID } from '@echo-500/utility';
 import { createSlice } from '@reduxjs/toolkit';
 import { createInitialMemorySlots } from '@/entities/character';
-import type { GraphDbMemoryNode } from '@echo-500/schema';
+import type {
+  GraphDbMemoryNode,
+  PlayerCharacterBattleCommand,
+} from '@echo-500/schema';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface CharacterCreateState {
   name: string;
   isSubmitting: boolean;
   memorySlots: GraphDbMemoryNode[];
+  selectedBattleCommands: PlayerCharacterBattleCommand[];
 }
 
 const initialState: CharacterCreateState = {
@@ -17,6 +21,7 @@ const initialState: CharacterCreateState = {
     ...slot,
     id: generateUUID(),
   })),
+  selectedBattleCommands: [],
 };
 
 export const characterCreateSlice = createSlice({
@@ -33,6 +38,7 @@ export const characterCreateSlice = createSlice({
       state.name = '';
       state.isSubmitting = false;
       state.memorySlots = initialState.memorySlots;
+      state.selectedBattleCommands = [];
     },
 
     // Memory Slots 操作（id基準）
@@ -88,6 +94,25 @@ export const characterCreateSlice = createSlice({
         tags: [],
       });
     },
+
+    // Battle Commands 操作
+    toggleBattleCommand: (
+      state,
+      action: PayloadAction<PlayerCharacterBattleCommand>,
+    ) => {
+      const command = action.payload;
+      const index = state.selectedBattleCommands.findIndex(
+        (c) => c.name === command.name,
+      );
+
+      if (index >= 0) {
+        // 既に選択されている場合は削除
+        state.selectedBattleCommands.splice(index, 1);
+      } else {
+        // 選択されていない場合は追加
+        state.selectedBattleCommands.push(command);
+      }
+    },
   },
 });
 
@@ -100,6 +125,7 @@ export const {
   removeTag,
   deleteMemorySlot,
   addMemorySlot,
+  toggleBattleCommand,
 } = characterCreateSlice.actions;
 
 export default characterCreateSlice.reducer;

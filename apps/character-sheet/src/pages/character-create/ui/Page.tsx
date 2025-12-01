@@ -19,6 +19,8 @@ export default function CharacterCreatePage() {
     deleteMemorySlot,
     addMemorySlot,
     availableCommands,
+    selectedBattleCommands,
+    toggleBattleCommand,
   } = useCharacterForm();
   return (
     <AppContainer>
@@ -74,14 +76,20 @@ export default function CharacterCreatePage() {
             </p>
             {availableCommands &&
               availableCommands.map((cmd) => {
-                const isSelected = false; // battleCommands.includes(cmd.name);
+                const isSelected = selectedBattleCommands.some(
+                  (selected) => selected.name === cmd.name,
+                );
                 return (
                   <BattleCommandItem
                     key={`${cmd.class}-${cmd.name}`}
                     cmd={cmd}
                     isSelected={isSelected}
                     toggleBattleCommand={() => {
-                      // todo
+                      toggleBattleCommand({
+                        ...cmd,
+                        id: '',
+                        sortOrder: selectedBattleCommands.length,
+                      });
                     }}
                   />
                 );
