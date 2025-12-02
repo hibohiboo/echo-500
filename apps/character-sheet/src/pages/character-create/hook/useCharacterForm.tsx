@@ -1,7 +1,9 @@
 import { generateUUID } from '@echo-500/utility';
 import { useNavigate } from 'react-router';
 import { createInitialMemorySlots } from '@/entities/character';
-import { useCreatePlayerCharacter } from '@/entities/playerCharacter';
+import { createMemoryNode } from '@/entities/memory';
+import { createPlayerCharacter } from '@/entities/playerCharacter';
+import { createAndLinkBattleCommand } from '@/features/playerCharacterBattleCommandManagement';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import {
   setName,
@@ -18,7 +20,6 @@ export const useCharacterForm = () => {
   const { name, isSubmitting } = useAppSelector(
     (state) => state.characterCreate,
   );
-  const createCharacterHook = useCreatePlayerCharacter();
   const memoryModel = useMemorySlots({
     initialSlots: createInitialMemorySlots().map((s) => ({
       ...s,
@@ -33,7 +34,23 @@ export const useCharacterForm = () => {
 
     dispatch(setIsSubmitting(true));
     try {
-      await createCharacterHook.submit(name);
+      const id = await dispatch(createPlayerCharacter(name));
+      await Promise.all([
+        ...battleCommandModel.selectedBattleCommands.map((command, i) => {
+          const sortOrder = i + 1;
+          return dispatch(
+            createAndLinkBattleCommand(
+              id,
+              { ...command, sortOrder },
+              sortOrder,
+            ),
+          );
+        }),
+        ...memoryModel.memorySlots.map(async (memory, i) => {
+          const sortOrder = i + 1;
+          await dispatch(createMemoryNode(memory));
+        }),
+      ]);
       dispatch(resetForm());
       navigate('/');
     } finally {

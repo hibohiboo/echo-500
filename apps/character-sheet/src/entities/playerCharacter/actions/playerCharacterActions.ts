@@ -53,6 +53,7 @@ export const createPlayerCharacter =
       // 4. Reduxステートを更新
       dispatch(addCharacter(character));
       dispatch(closeCreateModal());
+      return id;
     } catch (error) {
       console.error('Failed to create player character:', error);
       throw error;
