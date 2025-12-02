@@ -104,6 +104,9 @@ export const parseToBattleCommand = (data: unknown): BattleCommand => {
   return v.parse(BattleCommandSchema, data);
 };
 
+export const parseGraphDbBattleCommandNodeOnlyListSchema = (data: unknown) => {
+  return v.parse(v.array(GraphDbBattleCommandNodeOnlySchema), data);
+};
 /**
  * バトルコマンドリストをパース
  */
@@ -117,6 +120,7 @@ export const parseToBattleCommandList = (data: unknown): BattleCommand[] => {
 export const parseToPlayerCharacterBattleCommand = (
   data: unknown,
 ): PlayerCharacterBattleCommand => {
+  console.log('dat', data);
   return v.parse(PlayerCharacterBattleCommandSchema, data);
 };
 
@@ -259,6 +263,9 @@ const ExternalBattleCommandRawSchema = v.object({
   tags: OptionalToStringSchema, // JSON文字列
   details: OptionalToStringSchema,
 });
+export type ExternalBattleCommandRaw = v.InferOutput<
+  typeof ExternalBattleCommandRawSchema
+>;
 
 /**
  * GraphDBから取得したバトルコマンド（tagsがJSON文字列、sortOrder付き）のスキーマ

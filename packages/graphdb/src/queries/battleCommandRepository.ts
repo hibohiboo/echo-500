@@ -1,4 +1,7 @@
-import { parseToCheckDuplicateBattleCommand } from '@echo-500/schema';
+import {
+  parseToCheckDuplicateBattleCommand,
+  type ExternalBattleCommandRaw,
+} from '@echo-500/schema';
 import { executeQuery } from '../db';
 import { escapeCypherString } from '../utils/escapeCypherString';
 
@@ -37,7 +40,7 @@ export const battleCommandGraphRepository = {
     const escapedDetails = escapeCypherString(params.details);
     const escapedTags = escapeCypherString(JSON.stringify(params.tags));
 
-    return executeQuery(`
+    const results = (await executeQuery(`
       CREATE (bc:BattleCommand {
         id: '${params.id}',
         class: '${escapedClass}',
@@ -65,7 +68,11 @@ export const battleCommandGraphRepository = {
         bc.flavor AS flavor,
         bc.tags AS tags,
         bc.details AS details
-    `);
+    `)) as ExternalBattleCommandRaw[];
+    return results.map((d) => ({
+      ...d,
+      tags: JSON.parse(d.tags ?? '[]'),
+    }));
   },
 
   /**

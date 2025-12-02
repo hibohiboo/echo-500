@@ -25,7 +25,7 @@
     "react-router": "catalog:"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^12.2.0",
+    "@cucumber/cucumber": "^12.3.0",
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
     "@playwright/test": "^1.57.0",
@@ -35,6 +35,6 @@
     "eslint": "catalog:testing",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "vite": "npm:rolldown-vite@7.2.8"
+    "vite": "npm:rolldown-vite@7.2.9"
   }
 }
