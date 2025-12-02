@@ -1,4 +1,4 @@
-import { deleteCharacter } from '@/entities/character';
+import { useDeletePlayerCharacter } from '@/entities/playerCharacter';
 import type { CharacterListItem } from '@/feature/characterManagement/ui/CharacterListView';
 
 interface UseCharacterListProps {
@@ -6,14 +6,7 @@ interface UseCharacterListProps {
 }
 
 export function useCharacterList({ characters }: UseCharacterListProps) {
-  const handleDelete = (id: string) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this character?',
-    );
-    if (confirmed) {
-      deleteCharacter(id);
-    }
-  };
+  const { handleDelete } = useDeletePlayerCharacter();
 
   return {
     characters,

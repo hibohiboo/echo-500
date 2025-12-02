@@ -1,6 +1,9 @@
 import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
-import { deletePlayerCharacter } from '../actions/playerCharacterActions';
+import {
+  deletePlayerCharacter,
+  fetchPlayerCharacters,
+} from '../actions/playerCharacterActions';
 import {
   openDeleteModal,
   closeDeleteModal,
@@ -43,7 +46,12 @@ export const useDeletePlayerCharacter = () => {
     },
     [dispatch, deletingCharacter],
   );
-
+  const handleDelete = async (id: string) => {
+    const confirmed = window.confirm('削除してよいですか?');
+    if (!confirmed) return;
+    await dispatch(deletePlayerCharacter(id));
+    await dispatch(fetchPlayerCharacters());
+  };
   return {
     isOpen,
     deletingCharacter,
@@ -51,5 +59,6 @@ export const useDeletePlayerCharacter = () => {
     open,
     close,
     submit,
+    handleDelete,
   };
 };

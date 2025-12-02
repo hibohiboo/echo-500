@@ -21,11 +21,23 @@ When(
 // 編集操作
 When(
   'キャラクター {string} の {string} ボタンをクリックする',
-  async function (this: CustomWorld, characterName: string, buttonText: string) {
+  async function (
+    this: CustomWorld,
+    characterName: string,
+    buttonText: string,
+  ) {
     // キャラクター名を持つボタンを探し、その親要素から指定のボタンを取得
-    const characterButton = this.page.getByRole('button', { name: characterName });
-    const characterRow = characterButton.locator('xpath=ancestor::div[contains(@class, "character-item")]');
-    const actionButton = characterRow.getByRole('button', { name: buttonText, exact: true });
+    const characterButton = this.page.getByRole('button', {
+      name: characterName,
+    });
+    const characterRow = characterButton.locator(
+      'xpath=ancestor::div[contains(@class, "character-item")]',
+    );
+    const actionButton = characterRow.getByRole('button', {
+      name: buttonText,
+      exact: true,
+    });
+    console.log(actionButton);
     await actionButton.click();
   },
 );
@@ -37,6 +49,17 @@ When(
     const input = this.page.getByLabel('CHARACTER NAME');
     await input.clear();
     await input.fill(name);
+  },
+);
+
+// 削除操作
+When(
+  '削除確認ダイアログで {string} を選択する準備をする',
+  async function (this: CustomWorld, _action: string) {
+    // dialogイベントをlistenして自動的に受け入れる
+    this.page.on('dialog', async (dialog) => {
+      await dialog.accept();
+    });
   },
 );
 
@@ -53,6 +76,8 @@ Then(
 Then(
   'キャラクター一覧に {string} が表示されない',
   async function (this: CustomWorld, characterName: string) {
+    // 削除後、Redux stateの更新を待つ
+    await this.page.waitForTimeout(1000);
     // キャラクター一覧に指定の名前が表示されないことを確認
     const characterListItem = this.page.getByText(characterName);
     await expect(characterListItem).not.toBeVisible();
