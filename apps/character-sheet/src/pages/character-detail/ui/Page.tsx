@@ -8,10 +8,9 @@ import {
 
 export default function CharacterDetailPage() {
   const navigate = useNavigate();
-  const deleteCharacterHook = useDeletePlayerCharacter();
   const character = useLoaderData<Character>();
-
   const detailState = useCharacterDetail({ character });
+  const deleteCharacterHook = useDeletePlayerCharacter();
 
   return (
     <CharacterDetailView
