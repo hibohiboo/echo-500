@@ -1,11 +1,13 @@
 import { createBrowserRouter } from 'react-router';
-import CharacterFormPage from '@/page/character-form/Page';
-import { characterFormLoader } from '@/page/character-form/loader';
 import { CharacterCreatePage } from '@/pages/character-create';
 import {
   createCharacterDetailLoader,
   CharacterDetailPage,
 } from '@/pages/character-detail';
+import {
+  createCharacterEditLoader,
+  CharacterEditPage,
+} from '@/pages/character-edit';
 import { CharacterListPage } from '@/pages/character-list';
 import { createCharacterListLoader } from '@/pages/character-list/loader';
 import { PlayerCharacterPage } from '@/pages/player-character';
@@ -23,14 +25,14 @@ export const createRouter = ({ dispatch }: { dispatch: AppDispatch }) =>
         element: <CharacterCreatePage />,
       },
       {
-        path: '/edit/:id',
-        element: <CharacterFormPage />,
-        loader: characterFormLoader,
-      },
-      {
         path: '/character/:id',
         element: <CharacterDetailPage />,
         loader: createCharacterDetailLoader(dispatch),
+      },
+      {
+        path: '/edit/:id',
+        element: <CharacterEditPage />,
+        loader: createCharacterEditLoader(dispatch),
       },
       {
         path: '/player-character',

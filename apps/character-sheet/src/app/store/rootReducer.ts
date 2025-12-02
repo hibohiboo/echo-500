@@ -3,12 +3,14 @@ import { battleCommandSlice } from '@/entities/battleCommand';
 import { playerCharacterSlice } from '@/entities/playerCharacter';
 import { memorySlice } from '@/features/playerCharacterMemoryManagement';
 import { characterCreateSlice } from '@/pages/character-create';
+import { characterEditSlice } from '@/pages/character-edit';
 
 const combinedReducer = combineReducers({
   [playerCharacterSlice.reducerPath]: playerCharacterSlice.reducer,
   [battleCommandSlice.reducerPath]: battleCommandSlice.reducer,
   [memorySlice.reducerPath]: memorySlice.reducer,
   [characterCreateSlice.reducerPath]: characterCreateSlice.reducer,
+  [characterEditSlice.reducerPath]: characterEditSlice.reducer,
 });
 
 type CombinedState = ReturnType<typeof combinedReducer>;

@@ -22,3 +22,6 @@ export {
   updateBattleCommandSortOrder,
   deleteBattleCommandNode,
 } from './actions/battleCommandActions';
+
+// UI
+export { BattleCommandItem } from './ui/BattleCommandItem';

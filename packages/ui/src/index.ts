@@ -102,6 +102,7 @@ export { Tabs } from './shared/tabs';
 export type { Tab, TabsProps } from './shared/tabs';
 export { Navigation } from './shared/navigation';
 export type { NavigationItem, NavigationProps } from './shared/navigation';
+export { InputForm } from './shared/form/InputForm';
 
 // Entities層（新構造）
 export { ImageInput } from './entities/image';

@@ -1,10 +1,13 @@
 import { MemoryForm, InputForm } from '@echo-500/ui';
+import { useLoaderData } from 'react-router';
 import { BattleCommandItem } from '@/entities/battleCommand';
+import type { Character } from '@/entities/character';
 import { AppContainer } from '@/shared/ui/atoms/AppContainer';
 import { AppHeader } from '@/shared/ui/atoms/AppHeader';
-import { useCharacterForm } from '../hook/useCharacterForm';
+import { useCharacterEditForm } from '../hook/useCharacterEditForm';
 
-export default function CharacterCreatePage() {
+export default function CharacterEditPage() {
+  useLoaderData<Character>();
   const {
     name,
     isSubmitting,
@@ -20,10 +23,11 @@ export default function CharacterCreatePage() {
     availableCommands,
     selectedBattleCommands,
     toggleBattleCommand,
-  } = useCharacterForm();
+  } = useCharacterEditForm();
+
   return (
     <AppContainer>
-      <AppHeader>Create new chracater</AppHeader>
+      <AppHeader>Edit Character</AppHeader>
       <div className="card">
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -100,7 +104,7 @@ export default function CharacterCreatePage() {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Creating...' : 'Create'}
+              {isSubmitting ? 'Updating...' : 'Update'}
             </button>
             <button
               type="button"
