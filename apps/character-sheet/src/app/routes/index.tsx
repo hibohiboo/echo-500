@@ -10,7 +10,6 @@ import {
 } from '@/pages/character-edit';
 import { CharacterListPage } from '@/pages/character-list';
 import { createCharacterListLoader } from '@/pages/character-list/loader';
-import { PlayerCharacterPage } from '@/pages/player-character';
 
 export const createRouter = ({ dispatch }: { dispatch: AppDispatch }) =>
   createBrowserRouter(
@@ -33,10 +32,6 @@ export const createRouter = ({ dispatch }: { dispatch: AppDispatch }) =>
         path: '/edit/:id',
         element: <CharacterEditPage />,
         loader: createCharacterEditLoader(dispatch),
-      },
-      {
-        path: '/player-character',
-        element: <PlayerCharacterPage />,
       },
     ],
     { basename: BASE_PATH },

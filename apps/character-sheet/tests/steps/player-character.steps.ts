@@ -3,62 +3,40 @@ import { expect } from '@playwright/test';
 import type { CustomWorld } from './common.steps';
 
 // ページ遷移
-When('プレイヤーキャラクターページを開く', async function (this: CustomWorld) {
-  await this.page.goto(
-    'http://localhost:5173/character-sheet/player-character',
-  );
+When('キャラクター一覧ページを開く', async function (this: CustomWorld) {
+  await this.page.goto('http://localhost:5173/character-sheet/');
   await this.page.waitForLoadState('networkidle');
 });
 
-// モーダル操作
+// 新規作成ページ
 When(
-  'モーダルで名前 {string} を入力する',
+  'キャラクター作成ページで名前 {string} を入力する',
   async function (this: CustomWorld, name: string) {
-    const input = this.page.getByLabel(/キャラクター名/);
-    await input.fill(name);
-  },
-);
-
-When(
-  'モーダルで名前を {string} に変更する',
-  async function (this: CustomWorld, name: string) {
-    const input = this.page.getByLabel(/キャラクター名/);
-    await input.clear();
+    // CHARACTER NAMEラベルの入力フィールドに名前を入力
+    const input = this.page.getByLabel('CHARACTER NAME');
     await input.fill(name);
   },
 );
 
 // 編集操作
 When(
-  'キャラクター {string} の編集ボタンをクリックする',
-  async function (this: CustomWorld, characterName: string) {
-    // キャラクター名を含む見出しを探し、その親要素のdivから編集ボタンを取得
-    const characterHeading = this.page.getByRole('heading', { name: characterName });
-    const characterRow = characterHeading.locator('xpath=ancestor::div[contains(@class, "flex") and contains(@class, "items-center")]');
-    const editButton = characterRow.getByRole('button', { name: '編集', exact: true });
-    await editButton.click();
-  },
-);
-
-// 削除操作
-When(
-  '削除確認ダイアログで {string} を選択する準備をする',
-  async function (this: CustomWorld, _action: string) {
-    // window.confirmを自動的にOKにする
-    await this.page.evaluate(() => {
-      window.confirm = () => true;
-    });
+  'キャラクター {string} の {string} ボタンをクリックする',
+  async function (this: CustomWorld, characterName: string, buttonText: string) {
+    // キャラクター名を持つボタンを探し、その親要素から指定のボタンを取得
+    const characterButton = this.page.getByRole('button', { name: characterName });
+    const characterRow = characterButton.locator('xpath=ancestor::div[contains(@class, "character-item")]');
+    const actionButton = characterRow.getByRole('button', { name: buttonText, exact: true });
+    await actionButton.click();
   },
 );
 
 When(
-  'キャラクター {string} の削除ボタンをクリックする',
-  async function (this: CustomWorld, characterName: string) {
-    // キャラクター名を含む見出しを探し、その親要素のdivから削除ボタンを取得
-    const characterHeading = this.page.getByRole('heading', { name: characterName });
-    const characterRow = characterHeading.locator('xpath=ancestor::div[contains(@class, "flex") and contains(@class, "items-center")]');
-    const deleteButton = characterRow.getByRole('button', { name: '削除', exact: true });
-    await deleteButton.click();
+  'キャラクター編集ページで名前を {string} に変更する',
+  async function (this: CustomWorld, name: string) {
+    // CHARACTER NAMEラベルの入力フィールドをクリアして新しい名前を入力
+    const input = this.page.getByLabel('CHARACTER NAME');
+    await input.clear();
+    await input.fill(name);
   },
 );
 
