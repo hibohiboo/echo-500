@@ -12,7 +12,7 @@ export const OptionalToStringSchema = v.pipe(
   v.optional(v.nullable(v.string())),
   v.transform((value) => value ?? ''),
 );
-export const StringToNumberSchema = v.pipe(
-  v.optional(v.nullable(v.string())),
+export const NumberOrStringToNumberSchema = v.pipe(
+  v.optional(v.nullable(v.union([v.string(), v.number()]))),
   v.transform((value) => Number(value)),
 );

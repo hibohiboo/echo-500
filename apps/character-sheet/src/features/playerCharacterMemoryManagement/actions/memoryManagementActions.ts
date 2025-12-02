@@ -1,4 +1,4 @@
-import type { AppDispatch } from '@/app/store';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   createMemoryNode,
   updateMemoryNode,
@@ -6,89 +6,86 @@ import {
   linkMemoryToCharacter,
   unlinkMemoryFromCharacter,
   updateMemorySortOrder as updateSortOrderApi,
-  updateMemorySortOrder as updateSortOrderState,
 } from '@/entities/memory';
 import { fetchPlayerCharacterMemories } from '@/entities/playerCharacter/actions/playerCharacterMemoryActions';
-import type { GraphDbMemoryNode } from '@echo-500/schema';
+import type {
+  GraphDbMemoryNode,
+  PlayerCharacterMemory,
+} from '@echo-500/schema';
+
+/**
+ * プレイヤーキャラクターのメモリー一覧を取得
+ */
+export const fetchMemories = createAsyncThunk<
+  { characterId: string; memories: PlayerCharacterMemory[] },
+  { characterId: string }
+>('memory/fetchMemories', async ({ characterId }) => {
+  const memories = await fetchPlayerCharacterMemories(characterId);
+  return { characterId, memories };
+});
 
 /**
  * メモリーを作成してキャラクターにリンク
  */
-export const createAndLinkMemory =
-  (characterId: string, data: GraphDbMemoryNode, sortOrder: number) =>
-  async () => {
-    try {
-      // 1. Memoryノードを作成
-      await createMemoryNode(data);
+export const createAndLinkMemory = createAsyncThunk<
+  { characterId: string; memories: PlayerCharacterMemory[] },
+  { characterId: string; data: GraphDbMemoryNode; sortOrder: number }
+>('memory/createAndLink', async ({ characterId, data, sortOrder }) => {
+  // 1. Memoryノードを作成
+  await createMemoryNode(data);
 
-      // 2. キャラクターにリンク
-      await linkMemoryToCharacter(characterId, data.id, sortOrder);
+  // 2. キャラクターにリンク
+  await linkMemoryToCharacter(characterId, data.id, sortOrder);
 
-      // 3. Reduxステートを更新（再取得して最新状態に）
-      const memories = await fetchPlayerCharacterMemories(characterId);
-      return memories;
-    } catch (error) {
-      console.error('Failed to create memory:', error);
-      throw error;
-    }
-  };
+  // 3. 最新のメモリー一覧を取得
+  const memories = await fetchPlayerCharacterMemories(characterId);
+  return { characterId, memories };
+});
 
 /**
  * メモリーを更新
  */
-export const updateMemory =
-  (characterId: string, data: GraphDbMemoryNode) =>
-  async (dispatch: AppDispatch) => {
-    try {
-      // 1. Memoryノードを更新
-      await updateMemoryNode(data);
+export const updateMemory = createAsyncThunk<
+  { characterId: string; memories: PlayerCharacterMemory[] },
+  { characterId: string; data: GraphDbMemoryNode }
+>('memory/update', async ({ characterId, data }) => {
+  // 1. Memoryノードを更新
+  await updateMemoryNode(data);
 
-      // 2. Reduxステートを更新（再取得して最新状態に）
-      await fetchPlayerCharacterMemories(characterId);
-    } catch (error) {
-      console.error('Failed to update memory:', error);
-      throw error;
-    }
-  };
+  // 2. 最新のメモリー一覧を取得
+  const memories = await fetchPlayerCharacterMemories(characterId);
+  return { characterId, memories };
+});
 
 /**
  * メモリーのリンクを解除
  */
-export const unlinkMemory =
-  (characterId: string, memoryId: string) => async (dispatch: AppDispatch) => {
-    try {
-      await unlinkMemoryFromCharacter(characterId, memoryId);
-    } catch (error) {
-      console.error('Failed to unlink memory:', error);
-      throw error;
-    }
-  };
+export const unlinkMemory = createAsyncThunk<
+  { characterId: string; memoryId: string },
+  { characterId: string; memoryId: string }
+>('memory/unlink', async ({ characterId, memoryId }) => {
+  await unlinkMemoryFromCharacter(characterId, memoryId);
+  return { characterId, memoryId };
+});
 
 /**
  * メモリーを削除（ノード自体を削除）
  */
-export const deleteMemory =
-  (characterId: string, memoryId: string) => async (dispatch: AppDispatch) => {
-    try {
-      await deleteMemoryNode(memoryId);
-      dispatch(removeMemory({ characterId, memoryId }));
-    } catch (error) {
-      console.error('Failed to delete memory:', error);
-      throw error;
-    }
-  };
+export const deleteMemory = createAsyncThunk<
+  { characterId: string; memoryId: string },
+  { characterId: string; memoryId: string }
+>('memory/delete', async ({ characterId, memoryId }) => {
+  await deleteMemoryNode(memoryId);
+  return { characterId, memoryId };
+});
 
 /**
  * メモリーの並び順を更新
  */
-export const updateMemorySortOrder =
-  (characterId: string, memoryId: string, sortOrder: number) =>
-  async (dispatch: AppDispatch) => {
-    try {
-      await updateSortOrderApi(characterId, memoryId, sortOrder);
-      dispatch(updateSortOrderState({ characterId, memoryId, sortOrder }));
-    } catch (error) {
-      console.error('Failed to update sort order:', error);
-      throw error;
-    }
-  };
+export const updateMemorySortOrder = createAsyncThunk<
+  { characterId: string; memoryId: string; sortOrder: number },
+  { characterId: string; memoryId: string; sortOrder: number }
+>('memory/updateSortOrder', async ({ characterId, memoryId, sortOrder }) => {
+  await updateSortOrderApi(characterId, memoryId, sortOrder);
+  return { characterId, memoryId, sortOrder };
+});

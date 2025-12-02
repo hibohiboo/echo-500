@@ -1,9 +1,9 @@
 import { generateUUID } from '@echo-500/utility';
 import { useNavigate } from 'react-router';
 import { createInitialMemorySlots } from '@/entities/character';
-import { createMemoryNode } from '@/entities/memory';
 import { createPlayerCharacter } from '@/entities/playerCharacter';
 import { createAndLinkBattleCommand } from '@/features/playerCharacterBattleCommandManagement';
+import { createAndLinkMemory } from '@/features/playerCharacterMemoryManagement/actions/memoryManagementActions';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store';
 import {
   setName,
@@ -48,7 +48,13 @@ export const useCharacterForm = () => {
         }),
         ...memoryModel.memorySlots.map(async (memory, i) => {
           const sortOrder = i + 1;
-          await dispatch(createMemoryNode(memory));
+          await dispatch(
+            createAndLinkMemory({
+              characterId: id,
+              data: { ...memory },
+              sortOrder,
+            }),
+          );
         }),
       ]);
       dispatch(resetForm());

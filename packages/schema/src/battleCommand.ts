@@ -1,5 +1,5 @@
 import * as v from 'valibot';
-import { OptionalToStringSchema, StringToNumberSchema } from './common';
+import { OptionalToStringSchema, NumberOrStringToNumberSchema } from './common';
 
 /**
  * バトルコマンドスキーマ
@@ -249,7 +249,7 @@ export const parseUpdateSortOrderPayload = (
 const ExternalBattleCommandRawSchema = v.object({
   class: OptionalToStringSchema,
   name: OptionalToStringSchema,
-  cp: StringToNumberSchema,
+  cp: NumberOrStringToNumberSchema,
   timing: OptionalToStringSchema,
   cost: OptionalToStringSchema,
   range: OptionalToStringSchema,
@@ -267,7 +267,7 @@ const ExternalBattleCommandRawSchema = v.object({
 const GraphDbBattleCommandRawSchema = v.object({
   ...ExternalBattleCommandRawSchema.entries,
   id: OptionalToStringSchema,
-  sortOrder: StringToNumberSchema,
+  sortOrder: NumberOrStringToNumberSchema,
 });
 
 /**
