@@ -19,10 +19,6 @@ export const createRouter = ({ dispatch }: { dispatch: AppDispatch }) =>
         loader: createCharacterListLoader(dispatch),
       },
       {
-        path: '/new',
-        element: <CharacterFormPage />,
-      },
-      {
         path: '/create',
         element: <CharacterCreatePage />,
       },
