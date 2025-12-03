@@ -1,12 +1,10 @@
 import { useLoaderData, useNavigate } from 'react-router';
-import type { Character } from '@/entities/character';
 import { useDeletePlayerCharacter } from '@/entities/playerCharacter';
-import { useCharacterDetail } from '@/feature/characterManagement';
+import type { CharacterDetailData } from '../loader';
 
 export const useDetailPage = () => {
   const navigate = useNavigate();
-  const character = useLoaderData<Character>();
-  const detailState = useCharacterDetail({ character });
+  const character = useLoaderData() as CharacterDetailData;
   const { handleDelete } = useDeletePlayerCharacter();
   const onEdit = () => navigate(`/edit/${character.id}`);
   const onDelete = async () => {
@@ -18,6 +16,6 @@ export const useDetailPage = () => {
     onEdit,
     onDelete,
     onBack,
-    detailState,
+    character,
   };
 };
