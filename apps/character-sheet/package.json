@@ -7,22 +7,34 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --fix && tsc -b ",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ncu": "ncu -u",
+    "test:bdd": "cucumber-js --config cucumber.mjs"
   },
   "dependencies": {
     "@echo-500/frontend-common": "workspace:*",
     "@echo-500/schema": "workspace:*",
+    "@echo-500/graphdb": "workspace:*",
+    "@echo-500/rdb": "workspace:*",
+    "@echo-500/ui": "workspace:*",
+    "@echo-500/utility": "workspace:*",
+    "@reduxjs/toolkit": "^2.11.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-redux": "^9.2.0",
     "react-router": "catalog:"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^12.3.0",
     "@echo-500/eslint-config-custom": "workspace:*",
     "@echo-500/tsconfig": "workspace:*",
+    "@playwright/test": "^1.57.0",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/node": "catalog:",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "catalog:testing",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "vite": "^6.0.0",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "catalog:testing"
+    "vite": "npm:rolldown-vite@7.2.9"
   }
 }

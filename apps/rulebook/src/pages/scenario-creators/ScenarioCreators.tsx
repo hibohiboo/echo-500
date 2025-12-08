@@ -9,17 +9,6 @@ export function ScenarioCreatorsPage() {
           <div className="header-divider"></div>
         </section>
 
-        <section className="intro-section">
-          <div className="intro-card">
-            <h2 className="section-title">製作者の負担を軽減する設計</h2>
-            <p>
-              Echo:500は、シナリオ製作者の負担をできるだけ少なくするための工夫を施している。
-              タグ駆動のイベントシステムとモジュール構造により、シナリオの骨格を素早く構築でき、
-              細部の調整に集中できる仕組みとなっている。
-            </p>
-          </div>
-        </section>
-
         <section className="methods-section">
           <div className="method-card">
             <h2 className="section-title">

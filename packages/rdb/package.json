@@ -8,7 +8,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . && tsc -b",
     "ncu": "ncu -u",
     "generate": "drizzle-kit generate",
     "compile": "bun run compile-migrations.mts",

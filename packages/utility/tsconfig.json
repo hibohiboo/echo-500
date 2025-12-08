@@ -1,5 +1,5 @@
 {
-  "extends": "@trpg-scenario-maker/tsconfig/tsconfig.base.json",
+  "extends": "@echo-500/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"

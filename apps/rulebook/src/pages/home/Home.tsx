@@ -35,11 +35,22 @@ export function HomePage() {
               <h2 className="section-title">
                 <span className="title-icon">▶</span> The World
               </h2>
-              <p>——そして、停止していたあなたは目覚めた。</p>
-              <p>荒れた大地。歪んだ生命。緑に沈む都市の亡骸。</p>
-              <p>守るべき人類は残響に痕跡を残すのみ。</p>
-              <p>壊れたメモリ。己が造られた意味は遠い過去に。</p>
-              <p>人のいない世界で、人に造られたものたちが紡ぐ物語。</p>
+              <p>——長い停止の果てに、あなたは目覚めた。</p>
+              <p>荒れた大地。歪んだ生命。</p>
+              <p>緑に沈んだ都市の亡骸。</p>
+              <p>
+                壊れた記憶領域。
+                <br />
+                造られた目的は遠い過去へと失われた。
+              </p>
+              <p>守るべき人類は残響として痕跡を残すのみ。</p>
+              <p>
+                終わった世界で
+                <br />
+                人に造られたものたちが
+                <br />
+                新たな物語を紡ぎ始める
+              </p>
             </div>
 
             <div className="intro-card">
@@ -47,9 +58,9 @@ export function HomePage() {
                 <span className="title-icon">▶</span> About This Rulebook
               </h2>
               <p>
-                本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームだ。
-                プレイヤーの分身であるキャラクター（以下、PC）は、
-                破損した目的を取り戻すため、終わった世界をめぐることになる。
+                本ゲームは、文明崩壊後の世界で再稼働した人造人間を演じるゲームである。
+                <br />
+                永い眠りから目覚めたあなたは、破損した目的を取り戻すため、終わった世界で旅をする。
               </p>
               <ul className="feature-list">
                 <li>
@@ -76,7 +87,10 @@ export function HomePage() {
                 <span className="title-icon">▶</span> Getting Started
               </h2>
               <div className="quick-links">
-                <a className="quick-link" href={`/${basePath}/content/tutorial`}>
+                <a
+                  className="quick-link"
+                  href={`/${basePath}/content/tutorial`}
+                >
                   <span className="link-icon">›</span>
                   <span className="link-text">チュートリアル</span>
                 </a>
@@ -87,7 +101,10 @@ export function HomePage() {
                   <span className="link-icon">›</span>
                   <span className="link-text">シナリオ製作者向け</span>
                 </a>
-                <a className="quick-link" href={`/${basePath}/content/game-master`}>
+                <a
+                  className="quick-link"
+                  href={`/${basePath}/content/game-master`}
+                >
                   <span className="link-icon">›</span>
                   <span className="link-text">ゲームマスター向け</span>
                 </a>

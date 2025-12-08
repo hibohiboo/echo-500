@@ -1,6 +1,6 @@
-import { PGlite } from '@electric-sql/pglite';
 import { parseRDBData } from '@echo-500/schema';
 import { generateUUID } from '@echo-500/utility';
+import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
 

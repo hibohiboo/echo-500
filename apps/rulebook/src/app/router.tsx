@@ -1,5 +1,5 @@
-import { RulebookLayout } from '@echo-500/ui';
-import { createBrowserRouter } from 'react-router';
+import { RulebookLayout, RulebookNavigation } from '@echo-500/ui';
+import { createBrowserRouter, Outlet } from 'react-router';
 import { BattleCommandsPage } from '@/pages/battle-commands/BattleCommands';
 import { BattleRulesPage } from '@/pages/battle-rules/BattleRules';
 import { SimpleBattleRulePage } from '@/pages/battle-rules/SimpleBattleRulePage';
@@ -19,13 +19,24 @@ export const router = createBrowserRouter(
       element: <HomePage />,
     },
     {
+      path: '/content/tutorial',
+      element: (
+        <RulebookLayout basePath={BASE_PATH}>
+          <TutorialPage />
+        </RulebookLayout>
+      ),
+    },
+    {
       path: '/content',
-      element: <RulebookLayout basePath={BASE_PATH} />,
+      element: (
+        <RulebookLayout
+          basePath={BASE_PATH}
+          navigation={<RulebookNavigation basePath={BASE_PATH} />}
+        >
+          <Outlet />
+        </RulebookLayout>
+      ),
       children: [
-        {
-          path: 'tutorial',
-          element: <TutorialPage />,
-        },
         {
           path: 'glossary',
           element: <GlossaryPage />,

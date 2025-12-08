@@ -12,7 +12,8 @@
     "lint": "eslint . --fix && tsc -b"
   },
   "dependencies": {
-    "@echo-500/schema": "workspace:*"
+    "@echo-500/schema": "workspace:*",
+    "swr": "^2.3.7"
   },
   "devDependencies": {
     "@echo-500/eslint-config-custom": "workspace:*",
