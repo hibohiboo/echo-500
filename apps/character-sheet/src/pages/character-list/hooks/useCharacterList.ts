@@ -1,5 +1,5 @@
 import { useDeletePlayerCharacter } from '@/entities/playerCharacter';
-import type { CharacterListItem } from '@/feature/characterManagement/ui/CharacterListView';
+import type { CharacterListItem } from '../ui/ListView';
 
 interface UseCharacterListProps {
   characters: CharacterListItem[];

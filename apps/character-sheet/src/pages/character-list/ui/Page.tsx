@@ -1,7 +1,7 @@
 import { useNavigate, useLoaderData, useRevalidator } from 'react-router';
-import { CharacterListView } from '@/feature/characterManagement';
-import type { CharacterListItem } from '@/feature/characterManagement/ui/CharacterListView';
 import { useCharacterList } from '../hooks/useCharacterList';
+import CharacterListView from './ListView';
+import type { CharacterListItem } from './ListView';
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
