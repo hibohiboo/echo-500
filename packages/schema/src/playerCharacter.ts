@@ -167,6 +167,33 @@ export const parsePlayerCharacterIdPayload = (data: unknown) => {
   return v.parse(PlayerCharacterIdPayloadSchema, data);
 };
 
+// === Worker Handler Parse Functions ===
+
+/**
+ * フォームデータをパース
+ */
+export const parsePlayerCharacterFormData = (data: unknown): PlayerCharacterFormData => {
+  return v.parse(PlayerCharacterFormDataSchema, data);
+};
+
+/**
+ * 更新データをパース（id + name）
+ */
+export const parseUpdatePlayerCharacterData = (data: unknown): { id: string; name: string } => {
+  const schema = v.object({
+    id: v.string(),
+    name: v.string(),
+  });
+  return v.parse(schema, data);
+};
+
+/**
+ * IDペイロードをパース
+ */
+export const parsePlayerCharacterId = (data: unknown): { id: string } => {
+  return v.parse(PlayerCharacterIdPayloadSchema, data);
+};
+
 // === Response Parse Functions ===
 
 /**

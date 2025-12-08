@@ -1,4 +1,4 @@
-import { parseToGraphDbBattleCommandNodeList } from '@echo-500/schema';
+import { parseGraphDbBattleCommandNodeOnlyListSchema } from '@echo-500/schema';
 import { generateUUID } from '@echo-500/utility';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { initializeDatabase, closeDatabase, executeQuery } from '../db';
@@ -45,7 +45,7 @@ describe('battleCommandGraphRepository', () => {
       const result = await battleCommandGraphRepository.create(commandData);
 
       // Assert（検証）
-      const commands = parseToGraphDbBattleCommandNodeList(result);
+      const commands = parseGraphDbBattleCommandNodeOnlyListSchema(result);
       expect(commands).toHaveLength(1);
       expect(commands[0].id).toBe(commandId);
       expect(commands[0].class).toBe('戦士');

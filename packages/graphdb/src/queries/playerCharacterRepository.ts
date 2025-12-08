@@ -59,4 +59,20 @@ export const playerCharacterGraphRepository = {
       ORDER BY r.sortOrder
     `);
   },
+
+  /**
+   * PlayerCharacterのメモリーを取得（sortOrder順）
+   */
+  async getMemories(characterId: string) {
+    return executeQuery(`
+      MATCH (pc:PlayerCharacter {id: '${characterId}'})-[r:HAS_MEMORY]->(m:Memory)
+      RETURN
+        m.id AS id,
+        m.title AS title,
+        m.description AS description,
+        m.tags AS tags,
+        r.sortOrder AS sortOrder
+      ORDER BY r.sortOrder
+    `);
+  },
 } as const;

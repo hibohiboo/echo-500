@@ -357,15 +357,33 @@ shared/
 ### 各層の責務
 
 #### Entity層
-- **責務**: ドメインモデルのCRUD操作、API通信、Redux状態管理
-- **含めるもの**: 単一エンティティに特化したhooks、API、Redux slices
-- **例**: `useCharacterList()`, `characterGraphApi.create()`
+- **責務**: **単一エンティティの純粋なCRUD操作のみ**
+- **含めるもの**:
+  - API通信（GraphDB/RDB）
+  - Redux状態管理（Slice）
+  - 単一エンティティのhooks（モーダル操作、フォーム状態など）
+  - **純粋なAPI操作のactions**（Redux操作を含まない）
+- **禁止事項**:
+  - ❌ **Entity層同士の直接インポート**（例: `playerCharacter` → `battleCommand`）
+  - ❌ 複数エンティティを組み合わせたビジネスロジック
+  - ❌ Redux操作を含むactions（Feature層で実施）
+- **例**:
+  - `characterGraphApi.create()` - API呼び出しのみ
+  - `useCreatePlayerCharacter()` - モーダル操作、フォーム状態管理
+  - `createBattleCommandNode()` - BattleCommandノード作成（Redux操作なし）
 
 #### Feature層
-- **責務**: ビジネスロジックの統合、基本的なUI構造
-- **含めるもの**: 複数のentity hooksを組み合わせたカスタムフック、基本的なリスト/フォーム/モーダルUI
+- **責務**: **複数のentityを組み合わせたビジネスロジック + Redux操作**
+- **含めるもの**:
+  - 複数のentity API操作を組み合わせたactions（Redux更新を含む）
+  - 複数のentity hooksを統合したカスタムフック
+  - 基本的なリスト/フォーム/モーダルUI
 - **依存可能**: entities のみ（widgetは使えない）
-- **例**: `useCharacterManagement()` - キャラクターCRUD + 関係性管理を統合
+- **例**:
+  - `playerCharacterBattleCommandManagement` feature
+    - `fetchBattleCommands()` - playerCharacter API + battleCommand Redux更新
+    - `createAndLinkBattleCommand()` - battleCommand作成 + リンク + Redux更新
+    - `useBattleCommandManagement()` - 両entityを統合したhook
 
 #### Widget層
 - **責務**: 複雑なUI、複数のfeatureの組み合わせ、高度なビジュアライゼーション
