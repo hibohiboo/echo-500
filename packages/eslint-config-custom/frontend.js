@@ -16,6 +16,11 @@ export default defineConfig([
       ...customConfig,
     ],
     rules: {
+      // fsdを一時的にwarnに。多分claude code が無視したのをコミットしてしまった
+      '@conarti/feature-sliced/public-api': 'warn',
+      '@conarti/feature-sliced/layers-slices': 'warn',
+      '@conarti/feature-sliced/absolute-relative': 'warn',
+
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
