@@ -15,9 +15,9 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
-    "eslint-plugin-sonarjs": "^3.0.7",
+    "eslint-plugin-sonarjs": "^4.0.2",
     "eslint-plugin-unused-imports": "^4.4.1",
-    "globals": "^16.5.0",
+    "globals": "^17.0.4",
     "typescript-eslint": "^8.57.1"
   },
   "scripts": {
