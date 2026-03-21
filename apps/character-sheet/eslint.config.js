@@ -6,5 +6,10 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     extends: [...customConfig],
+    rules: {
+      '@conarti/feature-sliced/public-api': 'warn',
+      '@conarti/feature-sliced/layers-slices': 'warn',
+      '@conarti/feature-sliced/absolute-relative': 'warn',
+    },
   },
 ]);
